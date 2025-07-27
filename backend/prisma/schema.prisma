@@ -1,0 +1,58 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DIRECT_URL")
+}
+
+model User {
+  id       String   @id @default(dbgenerated())
+  email    String   @unique
+  username String   @unique
+  xp       Int      @default(0)
+  streak   Int      @default(0)
+  matches1 Match[]  @relation("User1")
+  matches2 Match[]  @relation("User2")
+  soloSessions  SoloSession[]
+}
+
+model Question {
+  id       String @id @default(uuid())
+  text     String
+  type     QuestionType  // MCQ or PredictOutput or FillBlank etc.
+  category String
+  options  String[]   // for MCQs
+  answer   String
+  matches  Match[]
+
+  createdAt  DateTime @default(now())
+}
+
+enum QuestionType {
+  MCQ
+  FILL_BLANK
+  PREDICT_OUTPUT
+}
+
+model Match {
+  id         String   @id @default(uuid())
+  user1      User     @relation("User1", fields: [user1Id], references: [id])
+  user1Id    String
+  user2      User     @relation("User2", fields: [user2Id], references: [id])
+  user2Id    String
+  question   Question @relation(fields: [questionId], references: [id])
+  questionId String
+  winnerId   String?
+  createdAt  DateTime @default(now())
+}
+
+model SoloSession {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  score     Int
+  startedAt DateTime @default(now())
+  endedAt   DateTime?
+}
