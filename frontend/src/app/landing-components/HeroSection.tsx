@@ -1,7 +1,7 @@
 "use client";
 import {useRouter} from 'next/navigation';
 import { Button } from "@/components/ui/button";
-import { Swords, ArrowRight, Github } from "lucide-react";
+import { Swords, ArrowRight, Github, Brain } from "lucide-react";
 import { Space_Grotesk } from "next/font/google";
 import FaultyTerminal from "@/components/FaultyTerminal/FaultyTerminal";
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"] });
@@ -68,8 +68,8 @@ const HeroSection = () => {
           size="lg"
           className="border-lime-400 active:scale-95   text-white hover:text-white hover:cursor-pointer hover:bg-lime-400/20 px-8 py-6 text-lg bg-transparent"
         >
-          <Github className="w-5 h-5 mr-2" />
-          View on GitHub
+          <Brain className="w-5 h-5 mr-2" />
+          Solo Grind
         </Button>
       </div>
     </div>
