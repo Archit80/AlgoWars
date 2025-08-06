@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabaseClient";
+import { UserProvider } from "@/contexts/userContext";
 
 export default function ClientProvider({ children }: { children: React.ReactNode }) {
   const router = useRouter();
@@ -22,5 +23,9 @@ export default function ClientProvider({ children }: { children: React.ReactNode
       });
     }
   }, [router]);
-  return <>{children}</>;
+  return (
+    <UserProvider>
+      {children}
+    </UserProvider>
+  );
 }

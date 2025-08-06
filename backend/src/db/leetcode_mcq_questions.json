@@ -1,0 +1,3900 @@
+[
+  {
+    "text": "Given this Two Sum algorithm:\n\n```\nARRAY = [2, 7, 11, 15]\nTARGET = 9\nMAP = empty hash table\n\nfor i = 0 to length(ARRAY) - 1:\n    needed = TARGET - ARRAY[i]\n    if needed exists in MAP:\n        return [MAP[needed], i]\n    MAP[ARRAY[i]] = i\nreturn \"No solution\"\n```\n\nWhat is the value of 'needed' when i = 1?",
+    "type": "MCQ",
+    "categories": [
+      "Arrays",
+      "HashMaps"
+    ],
+    "options": [
+      "2",
+      "7",
+      "9",
+      "11"
+    ],
+    "answer": "2",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "What will this Two Sum algorithm return?\n\n```\nARRAY = [3, 2, 4]\nTARGET = 6\nMAP = empty hash table\n\nfor i = 0 to length(ARRAY) - 1:\n    needed = TARGET - ARRAY[i]\n    if needed exists in MAP:\n        return [MAP[needed], i]\n    MAP[ARRAY[i]] = i\nreturn \"No solution\"\n```",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Arrays",
+      "HashMaps"
+    ],
+    "options": [
+      "[0, 2]",
+      "[1, 2]",
+      "[2, 1]",
+      "\"No solution\""
+    ],
+    "answer": "[1, 2]",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "In the Two Sum approach using hash map, what is the time complexity?",
+    "type": "MCQ",
+    "categories": [
+      "Arrays",
+      "HashMaps"
+    ],
+    "options": [
+      "O(n²)",
+      "O(n log n)",
+      "O(n)",
+      "O(1)"
+    ],
+    "answer": "O(n)",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Complete the missing line in this Two Sum implementation:\n\n```\nARRAY = [2, 7, 11, 15]\nTARGET = 9\nMAP = empty hash table\n\nfor i = 0 to length(ARRAY) - 1:\n    needed = TARGET - ARRAY[i]\n    if needed exists in MAP:\n        return [MAP[needed], i]\n    _______________\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "Arrays",
+      "HashMaps"
+    ],
+    "options": [
+      "MAP[i] = ARRAY[i]",
+      "MAP[ARRAY[i]] = i",
+      "MAP[needed] = i",
+      "MAP[TARGET] = i"
+    ],
+    "answer": "MAP[ARRAY[i]] = i",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this reverse integer algorithm:\n\n```\nNUM = 123\nresult = 0\n\nwhile NUM > 0:\n    digit = NUM % 10\n    result = result * 10 + digit\n    NUM = NUM // 10\n\nreturn result\n```\n\nWhat is the value of 'result' after the first iteration?",
+    "type": "MCQ",
+    "categories": [
+      "Arrays"
+    ],
+    "options": [
+      "3",
+      "12",
+      "123",
+      "0"
+    ],
+    "answer": "3",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "What will this reverse integer algorithm return for NUM = -123?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Arrays"
+    ],
+    "options": [
+      "-321",
+      "321",
+      "123",
+      "0"
+    ],
+    "answer": "-321",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "For integer overflow checking in reverse integer, which condition should be checked?",
+    "type": "MCQ",
+    "categories": [
+      "Arrays"
+    ],
+    "options": [
+      "result > 2³¹ - 1",
+      "result < -2³¹",
+      "Both A and B",
+      "NUM < 0"
+    ],
+    "answer": "Both A and B",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Given this palindrome check:\n\n```\nNUM = 121\noriginal = NUM\nreversed = 0\n\nwhile NUM > 0:\n    reversed = reversed * 10 + NUM % 10\n    NUM = NUM // 10\n\nreturn original == reversed\n```\n\nWhat is 'reversed' after processing all digits?",
+    "type": "MCQ",
+    "categories": [
+      "Arrays"
+    ],
+    "options": [
+      "121",
+      "12",
+      "1",
+      "0"
+    ],
+    "answer": "121",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Why do negative numbers always return false for palindrome check?",
+    "type": "MCQ",
+    "categories": [
+      "Arrays"
+    ],
+    "options": [
+      "They can't be reversed",
+      "The negative sign makes them non-palindromic",
+      "Negative numbers are invalid input",
+      "They cause integer overflow"
+    ],
+    "answer": "The negative sign makes them non-palindromic",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this Roman to Integer conversion:\n\n```\nSTRING = \"IV\"\nMAP = {I: 1, V: 5, X: 10, L: 50, C: 100, D: 500, M: 1000}\nresult = 0\ni = 0\n\nwhile i < length(STRING):\n    if i < length(STRING) - 1 and MAP[STRING[i]] < MAP[STRING[i+1]]:\n        result = result + MAP[STRING[i+1]] - MAP[STRING[i]]\n        i = i + 2\n    else:\n        result = result + MAP[STRING[i]]\n        i = i + 1\n```\n\nWhat is the final value of 'result'?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Strings",
+      "HashMaps"
+    ],
+    "options": [
+      "4",
+      "6",
+      "5",
+      "1"
+    ],
+    "answer": "4",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "In Roman numeral \"MCMXC\", which part represents subtraction?",
+    "type": "MCQ",
+    "categories": [
+      "Strings"
+    ],
+    "options": [
+      "MC",
+      "CM",
+      "MX",
+      "XC"
+    ],
+    "answer": "CM",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Complete the Roman to Integer conversion logic:\n\n```\nSTRING = \"IX\"\nMAP = {I: 1, V: 5, X: 10}\nresult = 0\ni = 0\n\nwhile i < length(STRING):\n    if i < length(STRING) - 1 and _______________:\n        result = result + MAP[STRING[i+1]] - MAP[STRING[i]]\n        i = i + 2\n    else:\n        result = result + MAP[STRING[i]]\n        i = i + 1\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "Strings",
+      "HashMaps"
+    ],
+    "options": [
+      "MAP[STRING[i]] < MAP[STRING[i+1]]",
+      "MAP[STRING[i]] > MAP[STRING[i+1]]",
+      "STRING[i] == 'I'",
+      "STRING[i+1] == 'X'"
+    ],
+    "answer": "MAP[STRING[i]] < MAP[STRING[i+1]]",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Given this longest common prefix algorithm:\n\n```\nSTRINGS = [\"flower\", \"flow\", \"flight\"]\nif length(STRINGS) == 0:\n    return \"\"\n\nprefix = STRINGS[0]\nfor i = 1 to length(STRINGS) - 1:\n    while not STRINGS[i].startsWith(prefix):\n        prefix = prefix[0:length(prefix)-1]\n        if prefix is empty:\n            return \"\"\nreturn prefix\n```\n\nAfter processing \"flow\", what is the value of 'prefix'?",
+    "type": "MCQ",
+    "categories": [
+      "Strings"
+    ],
+    "options": [
+      "\"flower\"",
+      "\"flow\"",
+      "\"fl\"",
+      "\"f\""
+    ],
+    "answer": "\"flow\"",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "What is the final result of the longest common prefix for [\"dog\", \"racecar\", \"car\"]?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Strings"
+    ],
+    "options": [
+      "\"\"",
+      "\"d\"",
+      "\"do\"",
+      "\"car\""
+    ],
+    "answer": "\"\"",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Given this valid parentheses checker:\n\n```\nSTRING = \"([)]\" \nSTACK = empty STACK\nMAP = {')': '(', '}': '{', ']': '['}\n\nfor each char in STRING:\n    if char in MAP:\n        if STACK is empty or STACK.top() != MAP[char]:\n            return false\n        STACK.pop()\n    else:\n        STACK.add(char)\n\nreturn STACK is empty\n```\n\nWhat happens when processing ']'?",
+    "type": "MCQ",
+    "categories": [
+      "Stacks",
+      "Strings"
+    ],
+    "options": [
+      "Returns false immediately",
+      "Pops '(' from stack",
+      "Pushes ']' to stack",
+      "Continues to next character"
+    ],
+    "answer": "Returns false immediately",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "For the string \"(())\", what is the final state of the STACK?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Stacks",
+      "Strings"
+    ],
+    "options": [
+      "Empty",
+      "Contains '('",
+      "Contains ')'",
+      "Contains \"()\""
+    ],
+    "answer": "Empty",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "In valid parentheses checking, why do we use a STACK data structure?",
+    "type": "MCQ",
+    "categories": [
+      "Stacks"
+    ],
+    "options": [
+      "To store all characters",
+      "To match most recent opening bracket",
+      "To count brackets",
+      "To reverse the string"
+    ],
+    "answer": "To match most recent opening bracket",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Complete the valid parentheses checker:\n\n```\nSTRING = \"()[]{}\"\nSTACK = empty STACK\n\nfor each char in STRING:\n    if char == '(' or char == '[' or char == '{':\n        STACK.add(char)\n    else:\n        if STACK is empty:\n            return false\n        top = STACK.pop()\n        if _______________:\n            return false\n\nreturn STACK is empty\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "Stacks",
+      "Strings"
+    ],
+    "options": [
+      "char != top",
+      "(char == ')' and top != '(') or (char == ']' and top != '[') or (char == '}' and top != '{')",
+      "top == char",
+      "char == top"
+    ],
+    "answer": "(char == ')' and top != '(') or (char == ']' and top != '[') or (char == '}' and top != '{')",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Given this merge two sorted lists algorithm:\n\n```\nLIST1 = [1, 2, 4]\nLIST2 = [1, 3, 4]\nresult = empty ARRAY\ni = 0, j = 0\n\nwhile i < length(LIST1) and j < length(LIST2):\n    if LIST1[i] <= LIST2[j]:\n        result.add(LIST1[i])\n        i = i + 1\n    else:\n        result.add(LIST2[j])\n        j = j + 1\n```\n\nAfter the first three iterations, what is 'result'?",
+    "type": "MCQ",
+    "categories": [
+      "Arrays",
+      "TwoPointers"
+    ],
+    "options": [
+      "[1, 1, 2]",
+      "[1, 2, 3]",
+      "[1, 1, 3]",
+      "[1, 2, 4]"
+    ],
+    "answer": "[1, 1, 2]",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "What is the time complexity of merging two sorted arrays of size m and n?",
+    "type": "MCQ",
+    "categories": [
+      "Arrays"
+    ],
+    "options": [
+      "O(m + n)",
+      "O(m * n)",
+      "O(max(m, n))",
+      "O(min(m, n))"
+    ],
+    "answer": "O(m + n)",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "What will this remove duplicates algorithm return?\n\n```\nARRAY = [0, 0, 1, 1, 1, 2, 2, 3, 3, 4]\nwrite_index = 0\n\nfor read_index = 1 to length(ARRAY) - 1:\n    if ARRAY[read_index] != ARRAY[write_index]:\n        write_index = write_index + 1\n        ARRAY[write_index] = ARRAY[read_index]\n\nreturn write_index + 1\n```",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Arrays",
+      "TwoPointers"
+    ],
+    "options": [
+      "4",
+      "5",
+      "3",
+      "6"
+    ],
+    "answer": "5",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "After processing the array [1,1,2], what does the modified array look like?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Arrays",
+      "TwoPointers"
+    ],
+    "options": [
+      "[1, 2, 2]",
+      "[1, 1, 2]",
+      "[1, 2, _]",
+      "[2, 1, 1]"
+    ],
+    "answer": "[1, 2, 2]",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Complete the two-pointer remove duplicates approach:\n\n```\nARRAY = [1, 1, 2]\nwrite_index = 0\n\nfor read_index = 1 to length(ARRAY) - 1:\n    if _______________:\n        write_index = write_index + 1\n        ARRAY[write_index] = ARRAY[read_index]\n\nreturn write_index + 1\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "Arrays",
+      "TwoPointers"
+    ],
+    "options": [
+      "ARRAY[read_index] != ARRAY[write_index]",
+      "ARRAY[read_index] == ARRAY[write_index]",
+      "read_index != write_index",
+      "ARRAY[read_index] > ARRAY[write_index]"
+    ],
+    "answer": "ARRAY[read_index] != ARRAY[write_index]",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this remove element algorithm:\n\n```\nARRAY = [3, 2, 2, 3]\nVAL = 3\nwrite_index = 0\n\nfor read_index = 0 to length(ARRAY) - 1:\n    if ARRAY[read_index] != VAL:\n        ARRAY[write_index] = ARRAY[read_index]\n        write_index = write_index + 1\n\nreturn write_index\n```\n\nHow many elements remain after removal?",
+    "type": "MCQ",
+    "categories": [
+      "Arrays",
+      "TwoPointers"
+    ],
+    "options": [
+      "2",
+      "3",
+      "1",
+      "4"
+    ],
+    "answer": "2",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Given this binary search for insert position:\n\n```\nARRAY = [1, 3, 5, 6]\nTARGET = 5\nleft = 0\nright = length(ARRAY) - 1\n\nwhile left <= right:\n    mid = (left + right) // 2\n    if ARRAY[mid] == TARGET:\n        return mid\n    elif ARRAY[mid] < TARGET:\n        left = mid + 1\n    else:\n        right = mid - 1\n\nreturn left\n```\n\nWhat is returned when TARGET = 5?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "BinarySearch",
+      "Arrays"
+    ],
+    "options": [
+      "2",
+      "1",
+      "3",
+      "5"
+    ],
+    "answer": "2",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "For TARGET = 2 in array [1, 3, 5, 6], what insertion position is returned?",
+    "type": "MCQ",
+    "categories": [
+      "BinarySearch",
+      "Arrays"
+    ],
+    "options": [
+      "0",
+      "1",
+      "2",
+      "3"
+    ],
+    "answer": "1",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Given this maximum subarray (Kadane's algorithm):\n\n```\nARRAY = [-2, 1, -3, 4, -1, 2, 1, -5, 4]\nmax_sum = ARRAY[0]\ncurrent_sum = ARRAY[0]\n\nfor i = 1 to length(ARRAY) - 1:\n    current_sum = max(ARRAY[i], current_sum + ARRAY[i])\n    max_sum = max(max_sum, current_sum)\n\nreturn max_sum\n```\n\nWhat is 'current_sum' after processing index 3 (value 4)?",
+    "type": "MCQ",
+    "categories": [
+      "DynamicProgramming",
+      "Arrays"
+    ],
+    "options": [
+      "4",
+      "2",
+      "-2",
+      "1"
+    ],
+    "answer": "4",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "What is the final maximum subarray sum for [-2, 1, -3, 4, -1, 2, 1, -5, 4]?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "DynamicProgramming",
+      "Arrays"
+    ],
+    "options": [
+      "6",
+      "4",
+      "7",
+      "1"
+    ],
+    "answer": "6",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Why does Kadane's algorithm work for maximum subarray?",
+    "type": "MCQ",
+    "categories": [
+      "DynamicProgramming"
+    ],
+    "options": [
+      "It tries all possible subarrays",
+      "It uses divide and conquer",
+      "It maintains optimal subproblem solutions",
+      "It sorts the array first"
+    ],
+    "answer": "It maintains optimal subproblem solutions",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this climbing stairs dynamic programming:\n\n```\nN = 5\nif N <= 2:\n    return N\n\nfirst = 1\nsecond = 2\n\nfor i = 3 to N:\n    current = first + second\n    first = second\n    second = current\n\nreturn second\n```\n\nWhat is the value of 'current' when i = 4?",
+    "type": "MCQ",
+    "categories": [
+      "DynamicProgramming"
+    ],
+    "options": [
+      "5",
+      "3",
+      "8",
+      "2"
+    ],
+    "answer": "5",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "How many ways are there to climb 4 stairs?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "DynamicProgramming"
+    ],
+    "options": [
+      "5",
+      "8",
+      "3",
+      "4"
+    ],
+    "answer": "5",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "The climbing stairs problem follows which mathematical sequence?",
+    "type": "MCQ",
+    "categories": [
+      "DynamicProgramming",
+      "Arrays"
+    ],
+    "options": [
+      "Arithmetic sequence",
+      "Geometric sequence",
+      "Fibonacci sequence",
+      "Prime sequence"
+    ],
+    "answer": "Fibonacci sequence",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this binary tree inorder traversal:\n\n```\nfunction inorderTraversal(node):\n    if node is null:\n        return\n    \n    inorderTraversal(node.left)\n    visit(node.value)\n    inorderTraversal(node.right)\n```\n\nFor tree [1, null, 2, 3], what is the traversal order?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Trees"
+    ],
+    "options": [
+      "[1, 2, 3]",
+      "[1, 3, 2]",
+      "[2, 1, 3]",
+      "[3, 2, 1]"
+    ],
+    "answer": "[1, 3, 2]",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "In inorder traversal, when is the root node visited?",
+    "type": "MCQ",
+    "categories": [
+      "Trees"
+    ],
+    "options": [
+      "Before left subtree",
+      "After left subtree, before right subtree",
+      "After right subtree",
+      "First always"
+    ],
+    "answer": "After left subtree, before right subtree",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this same tree comparison:\n\n```\nfunction isSameTree(p, q):\n    if p is null and q is null:\n        return true\n    if p is null or q is null:\n        return false\n    if p.value != q.value:\n        return false\n    \n    return isSameTree(p.left, q.left) and isSameTree(p.right, q.right)\n```\n\nWhat happens when comparing [1, 2] and [1, null, 2]?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Trees"
+    ],
+    "options": [
+      "Returns true",
+      "Returns false",
+      "Throws error",
+      "Infinite recursion"
+    ],
+    "answer": "Returns false",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this symmetric tree check:\n\n```\nfunction isSymmetric(root):\n    return isMirror(root.left, root.right)\n\nfunction isMirror(left, right):\n    if left is null and right is null:\n        return true\n    if left is null or right is null:\n        return false\n    \n    return (left.value == right.value) and \n           isMirror(left.left, right.right) and \n           isMirror(left.right, right.left)\n```\n\nFor tree [1, 2, 2, 3, 4, 4, 3], what does isMirror check first?",
+    "type": "MCQ",
+    "categories": [
+      "Trees"
+    ],
+    "options": [
+      "left.value == right.value",
+      "Both nodes are non-null",
+      "left.left with right.right",
+      "Subtree structure"
+    ],
+    "answer": "Both nodes are non-null",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this maximum depth calculation:\n\n```\nfunction maxDepth(node):\n    if node is null:\n        return 0\n    \n    left_depth = maxDepth(node.left)\n    right_depth = maxDepth(node.right)\n    \n    return 1 + max(left_depth, right_depth)\n```\n\nFor tree [3, 9, 20, null, null, 15, 7], what is the maximum depth?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Trees"
+    ],
+    "options": [
+      "2",
+      "3",
+      "4",
+      "1"
+    ],
+    "answer": "3",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this balanced tree check:\n\n```\nfunction isBalanced(node):\n    if node is null:\n        return true\n    \n    left_height = getHeight(node.left)\n    right_height = getHeight(node.right)\n    \n    if abs(left_height - right_height) > 1:\n        return false\n    \n    return isBalanced(node.left) and isBalanced(node.right)\n```\n\nWhat makes a tree unbalanced?",
+    "type": "MCQ",
+    "categories": [
+      "Trees"
+    ],
+    "options": [
+      "Different number of nodes",
+      "Height difference > 1",
+      "Null nodes present",
+      "Unequal values"
+    ],
+    "answer": "Height difference > 1",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this linked ARRAY cycle detection:\n\n```\nfunction hasCycle(head):\n    if head is null:\n        return false\n    \n    slow = head\n    fast = head\n    \n    while fast != null and fast.next != null:\n        slow = slow.next\n        fast = fast.next.next\n        \n        if slow == fast:\n            return true\n    \n    return false\n```\n\nWhy do we use two pointers with different speeds?",
+    "type": "MCQ",
+    "categories": [
+      "Arrays",
+      "TwoPointers"
+    ],
+    "options": [
+      "To traverse faster",
+      "To detect cycles efficiently",
+      "To count nodes",
+      "To find middle element"
+    ],
+    "answer": "To detect cycles efficiently",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "In Floyd's cycle detection, when do the pointers meet?",
+    "type": "MCQ",
+    "categories": [
+      "Arrays",
+      "TwoPointers"
+    ],
+    "options": [
+      "At the start of cycle",
+      "Somewhere in the cycle",
+      "At the end of list",
+      "Never if no cycle"
+    ],
+    "answer": "Somewhere in the cycle",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this reverse linked ARRAY:\n\n```\nfunction reverseList(head):\n    prev = null\n    current = head\n    \n    while current != null:\n        next_temp = current.next\n        current.next = prev\n        prev = current\n        current = next_temp\n    \n    return prev\n```\n\nFor ARRAY [1, 2, 3], what is 'prev' after first iteration?",
+    "type": "MCQ",
+    "categories": [
+      "Arrays"
+    ],
+    "options": [
+      "null",
+      "Node(1)",
+      "Node(2)",
+      "Node(3)"
+    ],
+    "answer": "Node(1)",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this min STACK implementation:\n\n```\nclass MinStack:\n    function __init__():\n        self.STACK = []\n        self.min_stack = []\n    \n    function push(val):\n        self.STACK.add(val)\n        if not self.min_stack or val <= self.min_stack[-1]:\n            self.min_stack.add(val)\n    \n    function pop():\n        val = self.STACK.pop()\n        if val == self.min_stack[-1]:\n            self.min_stack.pop()\n    \n    function getMin():\n        return self.min_stack[-1]\n```\n\nAfter pushing [-2, 0, -3], what does min_stack contain?",
+    "type": "MCQ",
+    "categories": [
+      "Stacks"
+    ],
+    "options": [
+      "[-2, -3]",
+      "[-3]",
+      "[-2, 0, -3]",
+      "[-3, -2]"
+    ],
+    "answer": "[-2, -3]",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this stock profit calculation:\n\n```\nPRICES = [7, 1, 5, 3, 6, 4]\nmin_price = PRICES[0]\nmax_profit = 0\n\nfor i = 1 to length(PRICES) - 1:\n    if PRICES[i] < min_price:\n        min_price = PRICES[i]\n    else:\n        profit = PRICES[i] - min_price\n        max_profit = max(max_profit, profit)\n\nreturn max_profit\n```\n\nWhat is 'min_price' after processing index 1?",
+    "type": "MCQ",
+    "categories": [
+      "Arrays",
+      "DynamicProgramming"
+    ],
+    "options": [
+      "7",
+      "1",
+      "5",
+      "0"
+    ],
+    "answer": "1",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "What is the maximum profit for prices [7, 1, 5, 3, 6, 4]?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Arrays",
+      "DynamicProgramming"
+    ],
+    "options": [
+      "5",
+      "4",
+      "6",
+      "3"
+    ],
+    "answer": "5",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Given this valid palindrome check:\n\n```\nSTRING = \"A man, a plan, a canal: Panama\"\nleft = 0\nright = length(STRING) - 1\n\nwhile left < right:\n    while left < right and not isAlphaNumeric(STRING[left]):\n        left = left + 1\n    while left < right and not isAlphaNumeric(STRING[right]):\n        right = right - 1\n    \n    if toLowerCase(STRING[left]) != toLowerCase(STRING[right]):\n        return false\n    \n    left = left + 1\n    right = right - 1\n\nreturn true\n```\n\nWhat characters are ignored in palindrome checking?",
+    "type": "MCQ",
+    "categories": [
+      "Strings",
+      "TwoPointers"
+    ],
+    "options": [
+      "Spaces only",
+      "Punctuation only",
+      "Non-alphanumeric characters",
+      "Uppercase letters"
+    ],
+    "answer": "Non-alphanumeric characters",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this single number XOR solution:\n\n```\nARRAY = [2, 2, 1]\nresult = 0\n\nfor each num in ARRAY:\n    result = result XOR num\n\nreturn result\n```\n\nWhat is the final value of 'result'?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Arrays"
+    ],
+    "options": [
+      "1",
+      "2",
+      "0",
+      "3"
+    ],
+    "answer": "1",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Why does XOR work for finding the single number?",
+    "type": "MCQ",
+    "categories": [
+      "Arrays"
+    ],
+    "options": [
+      "XOR is commutative",
+      "a XOR a = 0",
+      "a XOR 0 = a",
+      "All of the above"
+    ],
+    "answer": "All of the above",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this majority element (Boyer-Moore voting):\n\n```\nARRAY = [3, 2, 3]\ncandidate = null\ncount = 0\n\nfor each num in ARRAY:\n    if count == 0:\n        candidate = num\n    count = count + (1 if num == candidate else -1)\n\nreturn candidate\n```\n\nWhat is 'count' after processing all elements?",
+    "type": "MCQ",
+    "categories": [
+      "Arrays"
+    ],
+    "options": [
+      "1",
+      "2",
+      "3",
+      "0"
+    ],
+    "answer": "1",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Given this happy number check:\n\n```\nfunction isHappy(n):\n    seen = empty set\n    \n    while n != 1 and n not in seen:\n        seen.add(n)\n        n = getSumOfSquares(n)\n    \n    return n == 1\n\nfunction getSumOfSquares(n):\n    sum = 0\n    while n > 0:\n        digit = n % 10\n        sum = sum + digit * digit\n        n = n // 10\n    return sum\n```\n\nFor n = 19, what is getSumOfSquares(19)?",
+    "type": "MCQ",
+    "categories": [
+      "Arrays"
+    ],
+    "options": [
+      "82",
+      "100",
+      "1",
+      "64"
+    ],
+    "answer": "82",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Given this count primes (Sieve of Eratosthenes):\n\n```\nN = 10\nif N < 2:\n    return 0\n\nis_prime = array of size N, all true\nis_prime[0] = is_prime[1] = false\n\nfor i = 2 to sqrt(N):\n    if is_prime[i]:\n        for j = i*i to N-1 step i:\n            is_prime[j] = false\n\ncount = 0\nfor i = 2 to N-1:\n    if is_prime[i]:\n        count = count + 1\n\nreturn count\n```\n\nHow many primes are less than 10?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Arrays"
+    ],
+    "options": [
+      "3",
+      "4",
+      "5",
+      "2"
+    ],
+    "answer": "4",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "In the Sieve of Eratosthenes, why do we start marking multiples from i*i?",
+    "type": "MCQ",
+    "categories": [
+      "Arrays"
+    ],
+    "options": [
+      "To save time",
+      "Smaller multiples already marked",
+      "i*i is always prime",
+      "To avoid overflow"
+    ],
+    "answer": "Smaller multiples already marked",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this isomorphic strings check:\n\n```\nS = \"egg\"\nT = \"add\"\nmap_s_to_t = empty map\nmap_t_to_s = empty map\n\nfor i = 0 to length(S) - 1:\n    char_s = S[i]\n    char_t = T[i]\n    \n    if char_s in map_s_to_t:\n        if map_s_to_t[char_s] != char_t:\n            return false\n    else:\n        map_s_to_t[char_s] = char_t\n    \n    if char_t in map_t_to_s:\n        if map_t_to_s[char_t] != char_s:\n            return false\n    else:\n        map_t_to_s[char_t] = char_s\n\nreturn true\n```\n\nWhy do we need two maps instead of one?",
+    "type": "MCQ",
+    "categories": [
+      "Strings",
+      "HashMaps"
+    ],
+    "options": [
+      "To save memory",
+      "To ensure bijective mapping",
+      "To handle duplicates",
+      "To improve performance"
+    ],
+    "answer": "To ensure bijective mapping",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this contains duplicate check:\n\n```\nARRAY = [1, 2, 3, 1]\nSET = empty set\n\nfor each num in ARRAY:\n    if num in SET:\n        return true\n    SET.add(num)\n\nreturn false\n```\n\nWhat is the space complexity of this approach?",
+    "type": "MCQ",
+    "categories": [
+      "Arrays",
+      "HashMaps"
+    ],
+    "options": [
+      "O(1)",
+      "O(log n)",
+      "O(n)",
+      "O(n²)"
+    ],
+    "answer": "O(n)",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Given this intersection of linked lists:\n\n```\nfunction getIntersection(headA, headB):\n    if headA is null or headB is null:\n        return null\n    \n    pointerA = headA\n    pointerB = headB\n    \n    while pointerA != pointerB:\n        pointerA = (pointerA is null) ? headB : pointerA.next\n        pointerB = (pointerB is null) ? headA : pointerB.next\n    \n    return pointerA\n```\n\nWhy do we switch to the other ARRAY when reaching the end?",
+    "type": "MCQ",
+    "categories": [
+      "Arrays",
+      "TwoPointers"
+    ],
+    "options": [
+      "To find the longer list",
+      "To equalize path lengths",
+      "To avoid infinite loop",
+      "To count nodes"
+    ],
+    "answer": "To equalize path lengths",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this Excel column number conversion:\n\n```\nCOLUMN = \"AB\"\nresult = 0\n\nfor each char in COLUMN:\n    result = result * 26 + (char - 'A' + 1)\n\nreturn result\n```\n\nWhat is the final result for \"AB\"?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Strings"
+    ],
+    "options": [
+      "28",
+      "27",
+      "26",
+      "29"
+    ],
+    "answer": "28",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Excel column numbering is similar to which number system?",
+    "type": "MCQ",
+    "categories": [
+      "Arrays"
+    ],
+    "options": [
+      "Binary",
+      "Decimal",
+      "Base-26",
+      "Hexadecimal"
+    ],
+    "answer": "Base-26",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Given this factorial trailing zeroes:\n\n```\nN = 100\ncount = 0\n\nfor i = 5; N // i > 0; i = i * 5:\n    count = count + N // i\n\nreturn count\n```\n\nWhy do we divide by powers of 5?",
+    "type": "MCQ",
+    "categories": [
+      "Recursion"
+    ],
+    "options": [
+      "5 is prime",
+      "Trailing zeroes come from 10 = 2×5",
+      "There are more 2s than 5s in factorial",
+      "Both B and C"
+    ],
+    "answer": "Both B and C",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "How many trailing zeroes does 25! have?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Arrays"
+    ],
+    "options": [
+      "5",
+      "6",
+      "7",
+      "4"
+    ],
+    "answer": "6",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Given this reverse bits:\n\n```\nN = 43261596  // binary: 00000010100101000001111010011100\nresult = 0\n\nfor i = 0 to 31:\n    result = (result << 1) | (N & 1)\n    N = N >> 1\n\nreturn result\n```\n\nWhat does the operation '(N & 1)' extract?",
+    "type": "MCQ",
+    "categories": [
+      "Arrays"
+    ],
+    "options": [
+      "Leftmost bit",
+      "Rightmost bit",
+      "Middle bit",
+      "All bits"
+    ],
+    "answer": "Rightmost bit",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Given this count 1 bits:\n\n```\nN = 11  // binary: 1011\ncount = 0\n\nwhile N != 0:\n    count = count + 1\n    N = N & (N - 1)\n\nreturn count\n```\n\nHow many iterations does this take for N = 11?",
+    "type": "MCQ",
+    "categories": [
+      "Arrays"
+    ],
+    "options": [
+      "2",
+      "3",
+      "4",
+      "11"
+    ],
+    "answer": "3",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "What does the operation 'N & (N-1)' accomplish?",
+    "type": "MCQ",
+    "categories": [
+      "Arrays"
+    ],
+    "options": [
+      "Doubles N",
+      "Removes rightmost 1 bit",
+      "Adds 1 to N",
+      "Reverses bits"
+    ],
+    "answer": "Removes rightmost 1 bit",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Given this Pascal's triangle generation:\n\n```\nNUM_ROWS = 5\nresult = []\n\nfor i = 0 to NUM_ROWS - 1:\n    row = [1]\n    for j = 1 to i - 1:\n        row.add(result[i-1][j-1] + result[i-1][j])\n    if i > 0:\n        row.add(1)\n    result.add(row)\n\nreturn result\n```\n\nWhat is the 3rd row (index 2) of Pascal's triangle?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Arrays",
+      "DynamicProgramming"
+    ],
+    "options": [
+      "[1, 1]",
+      "[1, 2, 1]",
+      "[1, 3, 3, 1]",
+      "[1, 4, 6, 4, 1]"
+    ],
+    "answer": "[1, 2, 1]",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "In Pascal's triangle, each element equals:",
+    "type": "MCQ",
+    "categories": [
+      "Arrays"
+    ],
+    "options": [
+      "Sum of two elements above",
+      "Product of indices",
+      "Row number",
+      "Fibonacci number"
+    ],
+    "answer": "Sum of two elements above",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Given this binary search tree validation:\n\n```\nfunction isValidBST(node, min_val, max_val):\n    if node is null:\n        return true\n    \n    if node.val <= min_val or node.val >= max_val:\n        return false\n    \n    return isValidBST(node.left, min_val, node.val) and \n           isValidBST(node.right, node.val, max_val)\n```\n\nFor the right subtree, what becomes the new minimum value?",
+    "type": "MCQ",
+    "categories": [
+      "Trees"
+    ],
+    "options": [
+      "min_val",
+      "max_val",
+      "node.val",
+      "null"
+    ],
+    "answer": "node.val",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this convert sorted array to BST:\n\n```\nfunction sortedArrayToBST(nums):\n    if length(nums) == 0:\n        return null\n    \n    mid = length(nums) // 2\n    root = new TreeNode(nums[mid])\n    \n    root.left = sortedArrayToBST(nums[0:mid])\n    root.right = sortedArrayToBST(nums[mid+1:end])\n    \n    return root\n```\n\nFor array [-10, -3, 0, 5, 9], what is the root value?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Trees",
+      "Recursion"
+    ],
+    "options": [
+      "0",
+      "-3",
+      "5",
+      "-10"
+    ],
+    "answer": "0",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Why do we choose the middle element as root in BST construction?",
+    "type": "MCQ",
+    "categories": [
+      "Trees"
+    ],
+    "options": [
+      "To minimize height",
+      "To ensure balance",
+      "To maintain BST property",
+      "All of the above"
+    ],
+    "answer": "All of the above",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this path sum check:\n\n```\nfunction hasPathSum(node, targetSum):\n    if node is null:\n        return false\n    \n    if node.left is null and node.right is null:\n        return node.val == targetSum\n    \n    return hasPathSum(node.left, targetSum - node.val) or \n           hasPathSum(node.right, targetSum - node.val)\n```\n\nWhat happens to targetSum as we traverse down?",
+    "type": "MCQ",
+    "categories": [
+      "Trees"
+    ],
+    "options": [
+      "Increases by node value",
+      "Decreases by node value",
+      "Remains constant",
+      "Resets to original"
+    ],
+    "answer": "Decreases by node value",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this implement QUEUE using stacks:\n\n```\nclass Queue:\n    function __init__():\n        self.input_stack = []\n        self.output_stack = []\n    \n    function enqueue(x):\n        self.input_stack.add(x)\n    \n    function dequeue():\n        if not self.output_stack:\n            while self.input_stack:\n                self.output_stack.add(self.input_stack.pop())\n        return self.output_stack.pop()\n```\n\nWhat is the amortized time complexity of dequeue?",
+    "type": "MCQ",
+    "categories": [
+      "Stacks"
+    ],
+    "options": [
+      "O(1)",
+      "O(n)",
+      "O(log n)",
+      "O(n²)"
+    ],
+    "answer": "O(1)",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Given this merge sorted array in-place:\n\n```\nNUMS1 = [1, 2, 3, 0, 0, 0]  // m = 3\nNUMS2 = [2, 5, 6]            // n = 3\ni = m - 1  // 2\nj = n - 1  // 2\nk = m + n - 1  // 5\n\nwhile i >= 0 and j >= 0:\n    if NUMS1[i] > NUMS2[j]:\n        NUMS1[k] = NUMS1[i]\n        i = i - 1\n    else:\n        NUMS1[k] = NUMS2[j]\n        j = j - 1\n    k = k - 1\n```\n\nWhy do we fill from the end of NUMS1?",
+    "type": "MCQ",
+    "categories": [
+      "Arrays",
+      "TwoPointers"
+    ],
+    "options": [
+      "To avoid overwriting",
+      "To maintain sorted order",
+      "To use extra space",
+      "To reverse the array"
+    ],
+    "answer": "To avoid overwriting",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Complete the missing condition for valid parentheses:\n\n```\nSTRING = \"()[]{}\"\nSTACK = empty STACK\n\nfor each char in STRING:\n    if char == '(' or char == '[' or char == '{':\n        STACK.add(char)\n    else:\n        if STACK is empty:\n            return false\n        top = STACK.pop()\n        if _______________:\n            return false\n\nreturn STACK is empty\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "Stacks",
+      "Strings"
+    ],
+    "options": [
+      "char != top",
+      "(char == ')' and top != '(') or (char == ']' and top != '[') or (char == '}' and top != '{')",
+      "top == char",
+      "char == top"
+    ],
+    "answer": "(char == ')' and top != '(') or (char == ']' and top != '[') or (char == '}' and top != '{')",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Complete the binary search template:\n\n```\nARRAY = [1, 3, 5, 6]\nTARGET = 5\nleft = 0\nright = length(ARRAY) - 1\n\nwhile left <= right:\n    mid = _______________\n    if ARRAY[mid] == TARGET:\n        return mid\n    elif ARRAY[mid] < TARGET:\n        left = mid + 1\n    else:\n        right = mid - 1\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "BinarySearch"
+    ],
+    "options": [
+      "(left + right) / 2",
+      "(left + right) // 2",
+      "left + (right - left) // 2",
+      "Both B and C"
+    ],
+    "answer": "Both B and C",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Complete the linked ARRAY reversal:\n\n```\nfunction reverseList(head):\n    prev = null\n    current = head\n    \n    while current != null:\n        next_temp = current.next\n        _______________\n        prev = current\n        current = next_temp\n    \n    return prev\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "Arrays"
+    ],
+    "options": [
+      "current.next = next_temp",
+      "current.next = prev",
+      "current = prev",
+      "prev.next = current"
+    ],
+    "answer": "current.next = prev",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Complete the Fibonacci-based climbing stairs:\n\n```\nN = 5\nif N <= 2:\n    return N\n\nfirst = 1\nsecond = 2\n\nfor i = 3 to N:\n    _______________\n    first = second\n    second = current\n\nreturn second\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "DynamicProgramming"
+    ],
+    "options": [
+      "current = first + second",
+      "current = first * second",
+      "current = second - first",
+      "current = first"
+    ],
+    "answer": "current = first + second",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "What is the space complexity of the recursive tree traversal algorithms?",
+    "type": "MCQ",
+    "categories": [
+      "Trees"
+    ],
+    "options": [
+      "O(1)",
+      "O(log n) for balanced trees",
+      "O(n) for skewed trees",
+      "Both B and C"
+    ],
+    "answer": "Both B and C",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "In a hash table with good distribution, what is the average time complexity for search?",
+    "type": "MCQ",
+    "categories": [
+      "HashMaps"
+    ],
+    "options": [
+      "O(1)",
+      "O(log n)",
+      "O(n)",
+      "O(n log n)"
+    ],
+    "answer": "O(1)",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Which data structure is most suitable for implementing undo functionality?",
+    "type": "MCQ",
+    "categories": [
+      "Stacks"
+    ],
+    "options": [
+      "Queue",
+      "Stack",
+      "Array",
+      "LinkedList"
+    ],
+    "answer": "Stack",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "What is the worst-case time complexity of binary search?",
+    "type": "MCQ",
+    "categories": [
+      "BinarySearch"
+    ],
+    "options": [
+      "O(1)",
+      "O(log n)",
+      "O(n)",
+      "O(n log n)"
+    ],
+    "answer": "O(log n)",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "In dynamic programming, what does 'optimal substructure' mean?",
+    "type": "MCQ",
+    "categories": [
+      "DynamicProgramming"
+    ],
+    "options": [
+      "Problems can be broken into subproblems",
+      "Optimal solution contains optimal solutions to subproblems",
+      "Subproblems overlap",
+      "All of the above"
+    ],
+    "answer": "Optimal solution contains optimal solutions to subproblems",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Which algorithm pattern is best for finding pairs in an array?",
+    "type": "MCQ",
+    "categories": [
+      "TwoPointers",
+      "Arrays"
+    ],
+    "options": [
+      "Binary Search",
+      "Two Pointers",
+      "Sliding Window",
+      "Divide and Conquer"
+    ],
+    "answer": "Two Pointers",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "What is the key insight behind the sliding window technique?",
+    "type": "MCQ",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "options": [
+      "Divide problem into smaller parts",
+      "Maintain a window of fixed/variable size",
+      "Use recursion",
+      "Sort the array first"
+    ],
+    "answer": "Maintain a window of fixed/variable size",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "In backtracking, when do we 'backtrack'?",
+    "type": "MCQ",
+    "categories": [
+      "Recursion"
+    ],
+    "options": [
+      "When we find a solution",
+      "When current path cannot lead to solution",
+      "After exploring all paths",
+      "At the beginning"
+    ],
+    "answer": "When current path cannot lead to solution",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "What makes the greedy approach work for certain problems?",
+    "type": "MCQ",
+    "categories": [
+      "DynamicProgramming"
+    ],
+    "options": [
+      "It's always optimal",
+      "Local optimal choices lead to global optimum",
+      "It's the fastest approach",
+      "It uses least memory"
+    ],
+    "answer": "Local optimal choices lead to global optimum",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "In divide and conquer, the 'conquer' step involves:",
+    "type": "MCQ",
+    "categories": [
+      "Recursion"
+    ],
+    "options": [
+      "Dividing the problem",
+      "Solving subproblems",
+      "Combining solutions",
+      "Base case handling"
+    ],
+    "answer": "Solving subproblems",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "What is the primary advantage of using a heap for priority operations?",
+    "type": "MCQ",
+    "categories": [
+      "Trees"
+    ],
+    "options": [
+      "O(1) insertion",
+      "O(log n) for insert/delete min/max",
+      "O(1) space",
+      "Maintains sorted order"
+    ],
+    "answer": "O(log n) for insert/delete min/max",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "In graph algorithms, what does BFS guarantee that DFS doesn't?",
+    "type": "MCQ",
+    "categories": [
+      "Graphs"
+    ],
+    "options": [
+      "Visits all nodes",
+      "Finds connected components",
+      "Shortest path in unweighted graphs",
+      "Uses less memory"
+    ],
+    "answer": "Shortest path in unweighted graphs",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "What is the space-time tradeoff in dynamic programming?",
+    "type": "MCQ",
+    "categories": [
+      "DynamicProgramming"
+    ],
+    "options": [
+      "More time, less space",
+      "More space, less time",
+      "Same time and space",
+      "Depends on problem"
+    ],
+    "answer": "More space, less time",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Why is binary search more efficient than linear search?",
+    "type": "MCQ",
+    "categories": [
+      "BinarySearch"
+    ],
+    "options": [
+      "It uses less memory",
+      "It eliminates half the search space each iteration",
+      "It's easier to implement",
+      "It works on unsorted arrays"
+    ],
+    "answer": "It eliminates half the search space each iteration",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "What is the main benefit of using two pointers technique?",
+    "type": "MCQ",
+    "categories": [
+      "TwoPointers"
+    ],
+    "options": [
+      "Reduces time complexity from O(n²) to O(n)",
+      "Uses less memory",
+      "Easier to implement",
+      "Works on all problems"
+    ],
+    "answer": "Reduces time complexity from O(n²) to O(n)",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "In tree problems, when should you consider using recursion?",
+    "type": "MCQ",
+    "categories": [
+      "Trees"
+    ],
+    "options": [
+      "Always",
+      "When the problem has a recursive structure",
+      "When iterative solution is complex",
+      "Both B and C"
+    ],
+    "answer": "Both B and C",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "What makes a problem suitable for dynamic programming?",
+    "type": "MCQ",
+    "categories": [
+      "DynamicProgramming"
+    ],
+    "options": [
+      "Optimal substructure",
+      "Overlapping subproblems",
+      "Both A and B",
+      "Neither A nor B"
+    ],
+    "answer": "Both A and B",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "When is it beneficial to use a hash map over an array?",
+    "type": "MCQ",
+    "categories": [
+      "HashMaps",
+      "Arrays"
+    ],
+    "options": [
+      "When you need O(1) lookups with non-integer keys",
+      "When memory is limited",
+      "When you need sorted access",
+      "When implementing stacks"
+    ],
+    "answer": "When you need O(1) lookups with non-integer keys",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "What is the key difference between BFS and DFS in trees?",
+    "type": "MCQ",
+    "categories": [
+      "Trees"
+    ],
+    "options": [
+      "BFS uses queue, DFS uses stack",
+      "BFS explores level by level, DFS goes deep first",
+      "BFS uses more memory for wide trees",
+      "All of the above"
+    ],
+    "answer": "All of the above",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "In linked ARRAY problems, what's the advantage of the dummy node technique?",
+    "type": "MCQ",
+    "categories": [
+      "Arrays"
+    ],
+    "options": [
+      "Simplifies edge case handling",
+      "Reduces memory usage",
+      "Improves time complexity",
+      "Makes traversal faster"
+    ],
+    "answer": "Simplifies edge case handling",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this sliding window maximum:\n\n```\nARRAY = [1, 3, -1, -3, 5, 3, 6, 7]\nWINDOW_SIZE = 3\nresult = []\ndeque = empty deque\n\nfor i = 0 to length(ARRAY) - 1:\n    // Remove elements outside window\n    while not deque.isEmpty() and deque.front() <= i - WINDOW_SIZE:\n        deque.removeFront()\n    \n    // Remove smaller elements\n    while not deque.isEmpty() and ARRAY[deque.back()] <= ARRAY[i]:\n        deque.removeBack()\n    \n    deque.addBack(i)\n    \n    if i >= WINDOW_SIZE - 1:\n        result.add(ARRAY[deque.front()])\n```\n\nWhat is the maximum in the first window [1, 3, -1]?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "SlidingWindow",
+      "Stacks"
+    ],
+    "options": [
+      "1",
+      "3",
+      "-1",
+      "2"
+    ],
+    "answer": "3",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Complete this graph DFS traversal:\n\n```\nGRAPH = {0: [1, 2], 1: [0, 3], 2: [0, 4], 3: [1], 4: [2]}\nvisited = empty set\nresult = []\n\nfunction dfs(node):\n    if node in visited:\n        return\n    \n    _______________\n    result.add(node)\n    \n    for neighbor in GRAPH[node]:\n        dfs(neighbor)\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "Graphs"
+    ],
+    "options": [
+      "visited.add(node)",
+      "visited.remove(node)",
+      "result.append(node)",
+      "GRAPH[node].visited = true"
+    ],
+    "answer": "visited.add(node)",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this BFS level order traversal:\n\n```\ntree = [3, 9, 20, null, null, 15, 7]\nQUEUE = [root]\nresult = []\n\nwhile not QUEUE.isEmpty():\n    level_size = QUEUE.size()\n    current_level = []\n    \n    for i = 0 to level_size - 1:\n        node = QUEUE.dequeue()\n        current_level.add(node.val)\n        \n        if node.left:\n            QUEUE.enqueue(node.left)\n        if node.right:\n            QUEUE.enqueue(node.right)\n    \n    result.add(current_level)\n```\n\nWhat is the second level in the result?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Trees",
+      "Graphs"
+    ],
+    "options": [
+      "[9, 20]",
+      "[15, 7]",
+      "[3]",
+      "[9, 20, 15, 7]"
+    ],
+    "answer": "[9, 20]",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "In a Trie data structure, what is the primary advantage?",
+    "type": "MCQ",
+    "categories": [
+      "Trees"
+    ],
+    "options": [
+      "O(1) search time",
+      "O(m) search time where m is key length",
+      "Uses less memory than hash table",
+      "Supports only string keys"
+    ],
+    "answer": "O(m) search time where m is key length",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Complete this Union-Find implementation:\n\n```\nclass UnionFind:\n    function __init__(size):\n        self.parent = [i for i in range(size)]\n        self.rank = [0] * size\n    \n    function find(x):\n        if self.parent[x] != x:\n            _______________\n        return self.parent[x]\n    \n    function union(x, y):\n        px, py = self.find(x), self.find(y)\n        if px == py:\n            return\n        if self.rank[px] < self.rank[py]:\n            self.parent[px] = py\n        elif self.rank[px] > self.rank[py]:\n            self.parent[py] = px\n        else:\n            self.parent[py] = px\n            self.rank[px] += 1\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "Graphs"
+    ],
+    "options": [
+      "self.parent[x] = self.find(self.parent[x])",
+      "self.parent[x] = x",
+      "return self.parent[x]",
+      "self.rank[x] += 1"
+    ],
+    "answer": "self.parent[x] = self.find(self.parent[x])",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Given this Dijkstra's algorithm:\n\n```\nGRAPH = {0: [(1, 4), (2, 1)], 1: [(3, 1)], 2: [(1, 2), (3, 5)], 3: []}\nSTART = 0\ndistances = [infinity] * 4\ndistances[START] = 0\npq = [(0, START)]\n\nwhile pq:\n    current_dist, u = pq.extractMin()\n    \n    if current_dist > distances[u]:\n        continue\n    \n    for v, weight in GRAPH[u]:\n        distance = current_dist + weight\n        if distance < distances[v]:\n            distances[v] = distance\n            pq.insert((distance, v))\n```\n\nWhat is the shortest distance from 0 to 3?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Graphs"
+    ],
+    "options": [
+      "5",
+      "3",
+      "6",
+      "4"
+    ],
+    "answer": "5",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "In topological sorting, what condition must the graph satisfy?",
+    "type": "MCQ",
+    "categories": [
+      "Graphs"
+    ],
+    "options": [
+      "Must be connected",
+      "Must be acyclic",
+      "Must be weighted",
+      "Must be undirected"
+    ],
+    "answer": "Must be acyclic",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this knapsack DP:\n\n```\nWEIGHTS = [1, 3, 4, 5]\nVALUES = [1, 4, 5, 7]\nCAPACITY = 7\nn = length(WEIGHTS)\ndp = 2D array of size (n+1) x (CAPACITY+1), all zeros\n\nfor i = 1 to n:\n    for w = 1 to CAPACITY:\n        if WEIGHTS[i-1] <= w:\n            dp[i][w] = max(VALUES[i-1] + dp[i-1][w-WEIGHTS[i-1]], dp[i-1][w])\n        else:\n            dp[i][w] = dp[i-1][w]\n```\n\nWhat is dp[2][4] (considering first 2 items with capacity 4)?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "DynamicProgramming"
+    ],
+    "options": [
+      "4",
+      "5",
+      "1",
+      "0"
+    ],
+    "answer": "5",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Complete this LRU Cache implementation:\n\n```\nclass LRUCache:\n    function __init__(capacity):\n        self.capacity = capacity\n        self.cache = {}\n        self.order = DoublyLinkedList()\n    \n    function get(key):\n        if key not in self.cache:\n            return -1\n        \n        node = self.cache[key]\n        _______________\n        self.order.moveToFront(node)\n        return node.value\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "HashMaps",
+      "Arrays"
+    ],
+    "options": [
+      "self.order.remove(node)",
+      "value = node.value",
+      "self.cache[key] = node",
+      "node.visited = true"
+    ],
+    "answer": "value = node.value",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "In a min heap, what is the relationship between parent and children?",
+    "type": "MCQ",
+    "categories": [
+      "Trees"
+    ],
+    "options": [
+      "Parent ≥ Children",
+      "Parent ≤ Children",
+      "Parent = Children",
+      "No relationship"
+    ],
+    "answer": "Parent ≤ Children",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Given this heap sort algorithm:\n\n```\nARRAY = [4, 10, 3, 5, 1]\n\nfunction heapify(ARRAY, n, i):\n    largest = i\n    left = 2 * i + 1\n    right = 2 * i + 2\n    \n    if left < n and ARRAY[left] > ARRAY[largest]:\n        largest = left\n    if right < n and ARRAY[right] > ARRAY[largest]:\n        largest = right\n    \n    if largest != i:\n        swap(ARRAY[i], ARRAY[largest])\n        heapify(ARRAY, n, largest)\n\nfunction heapSort(ARRAY):\n    n = length(ARRAY)\n    \n    // Build max heap\n    for i = n//2 - 1 down to 0:\n        heapify(ARRAY, n, i)\n    \n    // Extract elements\n    for i = n-1 down to 1:\n        swap(ARRAY[0], ARRAY[i])\n        heapify(ARRAY, i, 0)\n```\n\nAfter building the max heap, what is ARRAY[0]?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Trees",
+      "Sorting"
+    ],
+    "options": [
+      "10",
+      "4",
+      "5",
+      "1"
+    ],
+    "answer": "10",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "What is the time complexity of building a heap from an unsorted array?",
+    "type": "MCQ",
+    "categories": [
+      "Trees"
+    ],
+    "options": [
+      "O(n log n)",
+      "O(n)",
+      "O(log n)",
+      "O(n²)"
+    ],
+    "answer": "O(n)",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Given this quicksort partition:\n\n```\nARRAY = [3, 6, 8, 10, 1, 2, 1]\nPIVOT = ARRAY[length(ARRAY) - 1]  // Last element\ni = -1\n\nfor j = 0 to length(ARRAY) - 2:\n    if ARRAY[j] <= PIVOT:\n        i = i + 1\n        swap(ARRAY[i], ARRAY[j])\n\nswap(ARRAY[i + 1], ARRAY[length(ARRAY) - 1])\nreturn i + 1\n```\n\nWhat is the final position of the pivot?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Sorting",
+      "Recursion"
+    ],
+    "options": [
+      "3",
+      "2",
+      "4",
+      "1"
+    ],
+    "answer": "3",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Complete this merge sort implementation:\n\n```\nfunction mergeSort(ARRAY, left, right):\n    if left < right:\n        mid = (left + right) // 2\n        _______________\n        mergeSort(ARRAY, mid + 1, right)\n        merge(ARRAY, left, mid, right)\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "Sorting",
+      "Recursion"
+    ],
+    "options": [
+      "mergeSort(arr, left, mid)",
+      "mergeSort(arr, left, right)",
+      "merge(arr, left, mid)",
+      "sort(arr, left, mid)"
+    ],
+    "answer": "mergeSort(arr, left, mid)",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "What is the space complexity of merge sort?",
+    "type": "MCQ",
+    "categories": [
+      "Sorting"
+    ],
+    "options": [
+      "O(1)",
+      "O(log n)",
+      "O(n)",
+      "O(n log n)"
+    ],
+    "answer": "O(n)",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this backtracking N-Queens solution:\n\n```\nN = 4\nboard = N x N matrix, all zeros\nsolutions = []\n\nfunction isValid(board, row, col):\n    // Check column\n    for i = 0 to row - 1:\n        if board[i][col] == 1:\n            return false\n    \n    // Check diagonals\n    for i = row - 1, j = col - 1; i >= 0 and j >= 0; i--, j--:\n        if board[i][j] == 1:\n            return false\n    \n    for i = row - 1, j = col + 1; i >= 0 and j < N; i--, j++:\n        if board[i][j] == 1:\n            return false\n    \n    return true\n\nfunction solve(board, row):\n    if row == N:\n        solutions.add(copy(board))\n        return\n    \n    for col = 0 to N - 1:\n        if isValid(board, row, col):\n            board[row][col] = 1\n            solve(board, row + 1)\n            board[row][col] = 0\n```\n\nHow many solutions exist for N = 4?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Recursion"
+    ],
+    "options": [
+      "2",
+      "1",
+      "4",
+      "0"
+    ],
+    "answer": "2",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "In backtracking, what does the 'pruning' step accomplish?",
+    "type": "MCQ",
+    "categories": [
+      "Recursion"
+    ],
+    "options": [
+      "Removes invalid branches early",
+      "Sorts the solution space",
+      "Finds optimal solution",
+      "Reduces memory usage"
+    ],
+    "answer": "Removes invalid branches early",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this interval merging:\n\n```\nINTERVALS = [[1,3], [2,6], [8,10], [15,18]]\nsort(INTERVALS by start time)\nmerged = []\n\nfor interval in INTERVALS:\n    if merged is empty or merged[-1][1] < interval[0]:\n        merged.add(interval)\n    else:\n        merged[-1][1] = max(merged[-1][1], interval[1])\n```\n\nWhat is the final merged result?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Arrays"
+    ],
+    "options": [
+      "[[1,6], [8,10], [15,18]]",
+      "[[1,3], [2,6], [8,10], [15,18]]",
+      "[[1,18]]",
+      "[[1,6], [8,18]]"
+    ],
+    "answer": "[[1,6], [8,10], [15,18]]",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Complete this segment tree query:\n\n```\nclass SegmentTree:\n    function __init__(ARRAY):\n        self.n = length(ARRAY)\n        self.tree = [0] * (4 * self.n)\n        self.build(ARRAY, 0, 0, self.n - 1)\n    \n    function query(node, start, end, l, r):\n        if r < start or end < l:\n            return 0\n        if l <= start and end <= r:\n            return self.tree[node]\n        \n        mid = (start + end) // 2\n        left_sum = self.query(2*node+1, start, mid, l, r)\n        right_sum = _______________\n        return left_sum + right_sum\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "Trees"
+    ],
+    "options": [
+      "self.query(2*node+2, mid+1, end, l, r)",
+      "self.query(2*node+1, mid+1, end, l, r)",
+      "self.query(node+1, mid+1, end, l, r)",
+      "self.query(2*node, mid+1, end, l, r)"
+    ],
+    "answer": "self.query(2*node+2, mid+1, end, l, r)",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "What is the primary use case for a segment tree?",
+    "type": "MCQ",
+    "categories": [
+      "Trees"
+    ],
+    "options": [
+      "Fast insertion and deletion",
+      "Range queries and updates",
+      "Finding shortest paths",
+      "Storing key-value pairs"
+    ],
+    "answer": "Range queries and updates",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this bit manipulation for finding single number:\n\n```\nNUMS = [2, 2, 1]\nresult = 0\n\nfor num in NUMS:\n    result = result XOR num\n```\n\nWhat is the final value of result?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Arrays"
+    ],
+    "options": [
+      "1",
+      "2",
+      "0",
+      "3"
+    ],
+    "answer": "1",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Complete this bit manipulation to count set bits:\n\n```\nfunction countSetBits(n):\n    count = 0\n    while n:\n        count += 1\n        _______________\n    return count\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "Arrays"
+    ],
+    "options": [
+      "n = n & (n - 1)",
+      "n = n >> 1",
+      "n = n | (n + 1)",
+      "n = n + 1"
+    ],
+    "answer": "n = n & (n - 1)",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "What does the expression `x & (-x)` return?",
+    "type": "MCQ",
+    "categories": [
+      "Arrays"
+    ],
+    "options": [
+      "The rightmost set bit",
+      "The leftmost set bit",
+      "All set bits",
+      "The complement of x"
+    ],
+    "answer": "The rightmost set bit",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Given this matrix spiral traversal:\n\n```\nMATRIX = [[1,2,3],[4,5,6],[7,8,9]]\ntop, bottom = 0, 2\nleft, right = 0, 2\nresult = []\n\nwhile top <= bottom and left <= right:\n    // Right\n    for col in range(left, right + 1):\n        result.add(MATRIX[top][col])\n    top += 1\n    \n    // Down\n    for row in range(top, bottom + 1):\n        result.add(MATRIX[row][right])\n    right -= 1\n    \n    // Left\n    if top <= bottom:\n        for col in range(right, left - 1, -1):\n            result.add(MATRIX[bottom][col])\n        bottom -= 1\n    \n    // Up\n    if left <= right:\n        for row in range(bottom, top - 1, -1):\n            result.add(MATRIX[row][left])\n        left += 1\n```\n\nWhat is the complete spiral order?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Arrays"
+    ],
+    "options": [
+      "[1,2,3,6,9,8,7,4,5]",
+      "[1,4,7,8,9,6,3,2,5]",
+      "[1,2,3,4,5,6,7,8,9]",
+      "[5,4,7,8,9,6,3,2,1]"
+    ],
+    "answer": "[1,2,3,6,9,8,7,4,5]",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "In a suffix array, what does each element represent?",
+    "type": "MCQ",
+    "categories": [
+      "Strings"
+    ],
+    "options": [
+      "Starting position of sorted suffixes",
+      "Length of each suffix",
+      "Lexicographic rank",
+      "Hash value of suffix"
+    ],
+    "answer": "Starting position of sorted suffixes",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Given this KMP pattern matching:\n\n```\nTEXT = \"ABABCABABA\"\nPATTERN = \"ABABA\"\nlps = [0, 0, 1, 2, 0]  // Longest proper prefix suffix\ni = 0  // Text pointer\nj = 0  // Pattern pointer\nmatches = []\n\nwhile i < length(TEXT):\n    if PATTERN[j] == TEXT[i]:\n        i += 1\n        j += 1\n    \n    if j == length(PATTERN):\n        matches.add(i - j)\n        j = lps[j - 1]\n    elif i < length(TEXT) and PATTERN[j] != TEXT[i]:\n        if j != 0:\n            j = lps[j - 1]\n        else:\n            i += 1\n```\n\nAt what position is the first match found?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Strings"
+    ],
+    "options": [
+      "5",
+      "0",
+      "6",
+      "No match"
+    ],
+    "answer": "5",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Complete this manacher's algorithm for palindromes:\n\n```\nfunction manacher(s):\n    // Transform string\n    T = '#'.join('^{}$'.format(s))\n    n = length(T)\n    P = [0] * n\n    center = right = 0\n    \n    for i in range(1, n - 1):\n        mirror = 2 * center - i\n        \n        if i < right:\n            _______________\n        \n        // Try to expand palindrome\n        while T[i + (1 + P[i])] == T[i - (1 + P[i])]:\n            P[i] += 1\n        \n        // Update center and right boundary\n        if i + P[i] > right:\n            center, right = i, i + P[i]\n    \n    return P\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "Strings"
+    ],
+    "options": [
+      "P[i] = min(right - i, P[mirror])",
+      "P[i] = P[mirror]",
+      "P[i] = right - i",
+      "P[i] = max(right - i, P[mirror])"
+    ],
+    "answer": "P[i] = min(right - i, P[mirror])",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "What is the time complexity of the Rabin-Karp string matching algorithm?",
+    "type": "MCQ",
+    "categories": [
+      "Strings",
+      "HashMaps"
+    ],
+    "options": [
+      "O(nm) worst case, O(n+m) average",
+      "O(n+m) always",
+      "O(nm) always",
+      "O(n log m)"
+    ],
+    "answer": "O(nm) worst case, O(n+m) average",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this Floyd-Warshall algorithm:\n\n```\nGRAPH = [[0, 5, INF, 10],\n         [INF, 0, 3, INF],\n         [INF, INF, 0, 1],\n         [INF, INF, INF, 0]]\nn = 4\ndist = copy(GRAPH)\n\nfor k in range(n):\n    for i in range(n):\n        for j in range(n):\n            dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j])\n```\n\nWhat is the shortest path from vertex 0 to vertex 3?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Graphs"
+    ],
+    "options": [
+      "9",
+      "10",
+      "8",
+      "INF"
+    ],
+    "answer": "9",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "In the Bellman-Ford algorithm, why do we run V-1 iterations?",
+    "type": "MCQ",
+    "categories": [
+      "Graphs"
+    ],
+    "options": [
+      "To handle negative cycles",
+      "Maximum path length is V-1 edges",
+      "To optimize performance",
+      "To ensure convergence"
+    ],
+    "answer": "Maximum path length is V-1 edges",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Complete this A* search implementation:\n\n```\nfunction aStar(start, goal, heuristic):\n    openSet = PriorityQueue()\n    openSet.put((0, start))\n    cameFrom = {}\n    gScore = {start: 0}\n    fScore = {start: heuristic(start, goal)}\n    \n    while not openSet.empty():\n        current = openSet.get()[1]\n        \n        if current == goal:\n            return reconstructPath(cameFrom, current)\n        \n        for neighbor in neighbors(current):\n            tentative_gScore = gScore[current] + distance(current, neighbor)\n            \n            if tentative_gScore < gScore.get(neighbor, infinity):\n                cameFrom[neighbor] = current\n                gScore[neighbor] = tentative_gScore\n                _______________\n                if neighbor not in openSet:\n                    openSet.put((fScore[neighbor], neighbor))\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "Graphs"
+    ],
+    "options": [
+      "fScore[neighbor] = gScore[neighbor] + heuristic(neighbor, goal)",
+      "fScore[neighbor] = heuristic(neighbor, goal)",
+      "fScore[neighbor] = gScore[neighbor]",
+      "fScore[neighbor] = tentative_gScore"
+    ],
+    "answer": "fScore[neighbor] = gScore[neighbor] + heuristic(neighbor, goal)",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "What must be true about the heuristic function in A* for it to find optimal paths?",
+    "type": "MCQ",
+    "categories": [
+      "Graphs"
+    ],
+    "options": [
+      "It must be admissible (never overestimate)",
+      "It must be consistent",
+      "Both admissible and consistent",
+      "It must be exact"
+    ],
+    "answer": "Both admissible and consistent",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Given this matrix chain multiplication DP:\n\n```\nDIMENSIONS = [1, 2, 3, 4, 5]  // Matrix sizes: 1x2, 2x3, 3x4, 4x5\nn = length(DIMENSIONS)\ndp = 2D array (n x n), all zeros\n\nfor length in range(2, n):\n    for i in range(1, n - length + 1):\n        j = i + length - 1\n        dp[i][j] = infinity\n        \n        for k in range(i, j):\n            cost = dp[i][k] + dp[k+1][j] + DIMENSIONS[i-1] * DIMENSIONS[k] * DIMENSIONS[j]\n            dp[i][j] = min(dp[i][j], cost)\n```\n\nWhat is dp[1][4] (minimum cost to multiply matrices 1 to 4)?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "DynamicProgramming"
+    ],
+    "options": [
+      "30",
+      "54",
+      "40",
+      "48"
+    ],
+    "answer": "30",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "In the coin change problem, what does the recurrence relation represent?",
+    "type": "MCQ",
+    "categories": [
+      "DynamicProgramming"
+    ],
+    "options": [
+      "dp[i] = min(dp[i], dp[i-coin] + 1) for each coin",
+      "dp[i] = dp[i-1] + dp[i-2]",
+      "dp[i] = max(dp[i-1], dp[i-2] + coins[i])",
+      "dp[i] = dp[i-1] + coins[i]"
+    ],
+    "answer": "dp[i] = min(dp[i], dp[i-coin] + 1) for each coin",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Complete this edit distance (Levenshtein) DP:\n\n```\nfunction editDistance(str1, str2):\n    m, n = length(str1), length(str2)\n    dp = 2D array (m+1 x n+1)\n    \n    // Initialize base cases\n    for i in range(m + 1):\n        dp[i][0] = i\n    for j in range(n + 1):\n        dp[0][j] = j\n    \n    for i in range(1, m + 1):\n        for j in range(1, n + 1):\n            if str1[i-1] == str2[j-1]:\n                dp[i][j] = dp[i-1][j-1]\n            else:\n                _______________\n    \n    return dp[m][n]\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "DynamicProgramming",
+      "Strings"
+    ],
+    "options": [
+      "dp[i][j] = 1 + min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1])",
+      "dp[i][j] = 1 + dp[i-1][j-1]",
+      "dp[i][j] = min(dp[i-1][j], dp[i][j-1])",
+      "dp[i][j] = dp[i-1][j] + dp[i][j-1]"
+    ],
+    "answer": "dp[i][j] = 1 + min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1])",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "What is the optimal substructure property in dynamic programming?",
+    "type": "MCQ",
+    "categories": [
+      "DynamicProgramming"
+    ],
+    "options": [
+      "Optimal solution contains optimal solutions to subproblems",
+      "Problem can be divided into subproblems",
+      "Subproblems overlap",
+      "Solution uses memoization"
+    ],
+    "answer": "Optimal solution contains optimal solutions to subproblems",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this Kadane's algorithm for maximum subarray:\n\n```\nARRAY = [-2, 1, -3, 4, -1, 2, 1, -5, 4]\nmax_ending_here = 0\nmax_so_far = -infinity\n\nfor i in range(length(ARRAY)):\n    max_ending_here = max_ending_here + ARRAY[i]\n    if max_so_far < max_ending_here:\n        max_so_far = max_ending_here\n    if max_ending_here < 0:\n        max_ending_here = 0\n```\n\nWhat is the maximum subarray sum?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "DynamicProgramming",
+      "Arrays"
+    ],
+    "options": [
+      "6",
+      "4",
+      "7",
+      "5"
+    ],
+    "answer": "6",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Complete this longest common subsequence DP:\n\n```\nfunction LCS(X, Y):\n    m, n = length(X), length(Y)\n    dp = 2D array (m+1 x n+1), all zeros\n    \n    for i in range(1, m + 1):\n        for j in range(1, n + 1):\n            if X[i-1] == Y[j-1]:\n                _______________\n            else:\n                dp[i][j] = max(dp[i-1][j], dp[i][j-1])\n    \n    return dp[m][n]\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "DynamicProgramming",
+      "Strings"
+    ],
+    "options": [
+      "dp[i][j] = dp[i-1][j-1] + 1",
+      "dp[i][j] = dp[i-1][j-1]",
+      "dp[i][j] = 1",
+      "dp[i][j] = max(dp[i-1][j], dp[i][j-1]) + 1"
+    ],
+    "answer": "dp[i][j] = dp[i-1][j-1] + 1",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "In the rod cutting problem, what does dp[i] represent?",
+    "type": "MCQ",
+    "categories": [
+      "DynamicProgramming"
+    ],
+    "options": [
+      "Maximum revenue from rod of length i",
+      "Number of cuts for rod of length i",
+      "Cost of cutting rod of length i",
+      "Minimum pieces for rod of length i"
+    ],
+    "answer": "Maximum revenue from rod of length i",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Given this binary indexed tree (Fenwick tree) update:\n\n```\nclass BIT:\n    function __init__(size):\n        self.size = size\n        self.tree = [0] * (size + 1)\n    \n    function update(i, delta):\n        while i <= self.size:\n            self.tree[i] += delta\n            i += i & (-i)\n    \n    function query(i):\n        sum = 0\n        while i > 0:\n            sum += self.tree[i]\n            _______________\n        return sum\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "Trees"
+    ],
+    "options": [
+      "i -= i & (-i)",
+      "i -= 1",
+      "i >>= 1",
+      "i &= (i - 1)"
+    ],
+    "answer": "i -= i & (-i)",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "What is the time complexity of range sum queries in a Binary Indexed Tree?",
+    "type": "MCQ",
+    "categories": [
+      "Trees"
+    ],
+    "options": [
+      "O(log n)",
+      "O(n)",
+      "O(1)",
+      "O(sqrt(n))"
+    ],
+    "answer": "O(log n)",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this Mo's algorithm for range queries:\n\n```\nQUERIES = [(0, 2), (1, 3), (0, 3)]  // (left, right) pairs\nBLOCK_SIZE = sqrt(n)\n\n// Sort queries by (left // BLOCK_SIZE, right)\nsorted_queries = sorted(QUERIES, key=lambda q: (q[0] // BLOCK_SIZE, q[1]))\n\ncurrent_left = 0\ncurrent_right = -1\ncurrent_answer = 0\n\nfor left, right in sorted_queries:\n    while current_right < right:\n        current_right += 1\n        add(ARRAY[current_right])\n    \n    while current_right > right:\n        remove(ARRAY[current_right])\n        current_right -= 1\n    \n    while current_left < left:\n        remove(ARRAY[current_left])\n        current_left += 1\n    \n    while current_left > left:\n        current_left -= 1\n        add(ARRAY[current_left])\n    \n    answers[query_index] = current_answer\n```\n\nWhat is the time complexity of Mo's algorithm?",
+    "type": "MCQ",
+    "categories": [
+      "Arrays"
+    ],
+    "options": [
+      "O(n * sqrt(n))",
+      "O(n log n)",
+      "O(n²)",
+      "O(sqrt(n))"
+    ],
+    "answer": "O(n * sqrt(n))",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Complete this square root decomposition for range minimum query:\n\n```\nclass SqrtDecomposition:\n    function __init__(ARRAY):\n        self.n = length(ARRAY)\n        self.block_size = int(sqrt(self.n))\n        self.blocks = [infinity] * ((self.n + self.block_size - 1) // self.block_size)\n        \n        for i in range(self.n):\n            self.blocks[i // self.block_size] = min(self.blocks[i // self.block_size], ARRAY[i])\n    \n    function query(left, right):\n        result = infinity\n        \n        while left <= right and left % self.block_size != 0:\n            result = min(result, self.ARRAY[left])\n            left += 1\n        \n        while left + self.block_size - 1 <= right:\n            _______________\n            left += self.block_size\n        \n        while left <= right:\n            result = min(result, self.ARRAY[left])\n            left += 1\n        \n        return result\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "Arrays"
+    ],
+    "options": [
+      "result = min(result, self.blocks[left // self.block_size])",
+      "result = min(result, self.arr[left])",
+      "result = min(result, self.blocks[left])",
+      "left = left + self.block_size"
+    ],
+    "answer": "result = min(result, self.blocks[left // self.block_size])",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "What is the main advantage of square root decomposition?",
+    "type": "MCQ",
+    "categories": [
+      "Arrays"
+    ],
+    "options": [
+      "Simple to implement",
+      "O(1) query time",
+      "O(log n) space",
+      "Handles all types of queries"
+    ],
+    "answer": "Simple to implement",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this heavy-light decomposition concept, what is the maximum number of heavy edges on any path?",
+    "type": "MCQ",
+    "categories": [
+      "Trees"
+    ],
+    "options": [
+      "O(log n)",
+      "O(n)",
+      "O(sqrt(n))",
+      "O(1)"
+    ],
+    "answer": "O(log n)",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "In a centroid decomposition, what property does the centroid have?",
+    "type": "MCQ",
+    "categories": [
+      "Trees"
+    ],
+    "options": [
+      "Removing it creates subtrees of size ≤ n/2",
+      "It's the root of the tree",
+      "It has maximum degree",
+      "It's at the geometric center"
+    ],
+    "answer": "Removing it creates subtrees of size ≤ n/2",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Complete this persistent segment tree update:\n\n```\nclass PersistentSegTree:\n    function update(node, start, end, idx, val, version):\n        if start == end:\n            new_node = Node(val)\n            return new_node\n        \n        mid = (start + end) // 2\n        new_node = Node()\n        \n        if idx <= mid:\n            new_node.left = self.update(node.left, start, mid, idx, val, version)\n            _______________\n        else:\n            new_node.left = node.left\n            new_node.right = self.update(node.right, mid+1, end, idx, val, version)\n        \n        new_node.val = new_node.left.val + new_node.right.val\n        return new_node\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "Trees"
+    ],
+    "options": [
+      "new_node.right = node.right",
+      "new_node.right = self.update(node.right, mid+1, end, idx, val, version)",
+      "new_node.right = Node(val)",
+      "new_node.right = None"
+    ],
+    "answer": "new_node.right = node.right",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "What is the space complexity of a persistent segment tree after m updates?",
+    "type": "MCQ",
+    "categories": [
+      "Trees"
+    ],
+    "options": [
+      "O(m log n)",
+      "O(m * n)",
+      "O(n log m)",
+      "O(m + n)"
+    ],
+    "answer": "O(m log n)",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Given this suffix tree construction concept, what is the time complexity of Ukkonen's algorithm?",
+    "type": "MCQ",
+    "categories": [
+      "Trees"
+    ],
+    "options": [
+      "O(n)",
+      "O(n log n)",
+      "O(n²)",
+      "O(n log² n)"
+    ],
+    "answer": "O(n)",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "In a link-cut tree, what operation allows querying paths?",
+    "type": "MCQ",
+    "categories": [
+      "Trees"
+    ],
+    "options": [
+      "link(u, v)",
+      "cut(u, v)",
+      "path(u, v)",
+      "expose(v)"
+    ],
+    "answer": "expose(v)",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "What is the amortized time complexity of operations in a link-cut tree?",
+    "type": "MCQ",
+    "categories": [
+      "Trees"
+    ],
+    "options": [
+      "O(log n)",
+      "O(1)",
+      "O(sqrt(n))",
+      "O(n)"
+    ],
+    "answer": "O(log n)",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Given this convex hull using Graham scan:\n\n```\nPOINTS = [(0,3), (1,1), (2,2), (4,4), (0,0), (1,2), (3,1), (3,3)]\n\n// Find bottom-most point (or leftmost if tie)\nstart = min(POINTS, key=lambda p: (p[1], p[0]))\n\n// Sort by polar angle with respect to start\nsorted_points = sorted(POINTS, key=lambda p: atan2(p[1] - start[1], p[0] - start[0]))\n\nSTACK = []\nfor point in sorted_points:\n    while LENGTH(STACK) > 1 and cross_product(STACK[-2], STACK[-1], point) <= 0:\n        STACK.pop()\n    STACK.add(point)\n```\n\nWhat is the first point to be removed from the STACK?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Arrays"
+    ],
+    "options": [
+      "(1,1)",
+      "(2,2)",
+      "(1,2)",
+      "No point removed"
+    ],
+    "answer": "(1,1)",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "What is the time complexity of Graham scan for convex hull?",
+    "type": "MCQ",
+    "categories": [
+      "Arrays"
+    ],
+    "options": [
+      "O(n log n)",
+      "O(n²)",
+      "O(n)",
+      "O(n log² n)"
+    ],
+    "answer": "O(n log n)",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Complete this line intersection check:\n\n```\nfunction lineIntersection(p1, q1, p2, q2):\n    function orientation(p, q, r):\n        val = (q[1] - p[1]) * (r[0] - q[0]) - (q[0] - p[0]) * (r[1] - q[1])\n        if val == 0:\n            return 0  // collinear\n        return 1 if val > 0 else 2  // clockwise or counterclockwise\n    \n    o1 = orientation(p1, q1, p2)\n    o2 = orientation(p1, q1, q2)\n    o3 = orientation(p2, q2, p1)\n    o4 = orientation(p2, q2, q1)\n    \n    // General case\n    if o1 != o2 and o3 != o4:\n        return True\n    \n    // Special cases for collinear points\n    return _______________\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "Arrays"
+    ],
+    "options": [
+      "onSegment(p1, p2, q1) or onSegment(p1, q2, q1) or onSegment(p2, p1, q2) or onSegment(p2, q1, q2)",
+      "False",
+      "True",
+      "o1 == 0 or o2 == 0 or o3 == 0 or o4 == 0"
+    ],
+    "answer": "onSegment(p1, p2, q1) or onSegment(p1, q2, q1) or onSegment(p2, p1, q2) or onSegment(p2, q1, q2)",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "In computational geometry, what does the cross product of two 2D vectors represent?",
+    "type": "MCQ",
+    "categories": [
+      "Arrays"
+    ],
+    "options": [
+      "Signed area of parallelogram",
+      "Distance between points",
+      "Angle between vectors",
+      "Dot product"
+    ],
+    "answer": "Signed area of parallelogram",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this closest pair of points divide and conquer:\n\n```\nfunction closestPair(points):\n    if length(points) <= 3:\n        return bruteForce(points)\n    \n    mid = length(points) // 2\n    midpoint = points[mid]\n    \n    left_points = points[0:mid]\n    right_points = points[mid:]\n    \n    left_min = closestPair(left_points)\n    right_min = closestPair(right_points)\n    \n    min_dist = min(left_min, right_min)\n    \n    // Find points in strip\n    strip = []\n    for point in points:\n        if abs(point[0] - midpoint[0]) < min_dist:\n            strip.add(point)\n    \n    // Sort strip by y-coordinate\n    strip.sort(key=lambda p: p[1])\n    \n    // Check points in strip\n    for i in range(length(strip)):\n        j = i + 1\n        while j < length(strip) and (strip[j][1] - strip[i][1]) < min_dist:\n            min_dist = min(min_dist, distance(strip[i], strip[j]))\n            j += 1\n    \n    return min_dist\n```\n\nWhat is the time complexity of this algorithm?",
+    "type": "MCQ",
+    "categories": [
+      "Arrays",
+      "Recursion"
+    ],
+    "options": [
+      "O(n log n)",
+      "O(n²)",
+      "O(n log² n)",
+      "O(n)"
+    ],
+    "answer": "O(n log n)",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "What geometric property is used to optimize the strip checking in closest pair algorithm?",
+    "type": "MCQ",
+    "categories": [
+      "Arrays"
+    ],
+    "options": [
+      "At most 7 points need to be checked",
+      "Points are sorted by y-coordinate",
+      "Strip width is 2*min_dist",
+      "All points are in the strip"
+    ],
+    "answer": "At most 7 points need to be checked",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Complete this network flow Ford-Fulkerson implementation:\n\n```\nfunction maxFlow(graph, source, sink):\n    max_flow_value = 0\n    \n    while True:\n        parent = bfs(graph, source, sink)\n        if parent[sink] == -1:\n            break\n        \n        // Find minimum capacity along the path\n        path_flow = infinity\n        s = sink\n        while s != source:\n            path_flow = min(path_flow, graph[parent[s]][s])\n            s = parent[s]\n        \n        // Add path flow to overall flow\n        max_flow_value += path_flow\n        \n        // Update residual capacities\n        v = sink\n        while v != source:\n            u = parent[v]\n            graph[u][v] -= path_flow\n            _______________\n            v = parent[v]\n    \n    return max_flow_value\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "Graphs"
+    ],
+    "options": [
+      "graph[v][u] += path_flow",
+      "graph[v][u] -= path_flow",
+      "graph[u][v] += path_flow",
+      "graph[v][u] = path_flow"
+    ],
+    "answer": "graph[v][u] += path_flow",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "What is the time complexity of Ford-Fulkerson algorithm with BFS (Edmonds-Karp)?",
+    "type": "MCQ",
+    "categories": [
+      "Graphs"
+    ],
+    "options": [
+      "O(VE²)",
+      "O(V²E)",
+      "O(VE)",
+      "O(V³)"
+    ],
+    "answer": "O(VE²)",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "In the min-cost max-flow problem, what additional constraint is added?",
+    "type": "MCQ",
+    "categories": [
+      "Graphs"
+    ],
+    "options": [
+      "Minimize cost among all maximum flows",
+      "Minimize flow value",
+      "Maximize cost",
+      "Find any feasible flow"
+    ],
+    "answer": "Minimize cost among all maximum flows",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "What does the max-flow min-cut theorem state?",
+    "type": "MCQ",
+    "categories": [
+      "Graphs"
+    ],
+    "options": [
+      "Maximum flow value equals minimum cut capacity",
+      "Maximum flow is always equal to number of edges",
+      "Minimum cut always goes through source",
+      "Maximum flow is exponential in network size"
+    ],
+    "answer": "Maximum flow value equals minimum cut capacity",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this bipartite matching using network flow:\n\n```\nLEFT_SET = [0, 1, 2]  // Left vertices\nRIGHT_SET = [3, 4, 5]  // Right vertices\nEDGES = [(0,3), (0,4), (1,4), (1,5), (2,5)]  // Bipartite edges\n\n// Create flow network\n// Add source connected to all left vertices (capacity 1)\n// Add all right vertices connected to sink (capacity 1)\n// Add bipartite edges (capacity 1)\n\nmax_matching = maxFlow(flow_network, source, sink)\n```\n\nWhat is the maximum matching size?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Graphs"
+    ],
+    "options": [
+      "3",
+      "2",
+      "5",
+      "1"
+    ],
+    "answer": "3",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "In Hungarian algorithm for assignment problem, what does the alternating path do?",
+    "type": "MCQ",
+    "categories": [
+      "Graphs"
+    ],
+    "options": [
+      "Increases matching size by 1",
+      "Decreases total cost",
+      "Finds minimum weight matching",
+      "Creates augmenting path"
+    ],
+    "answer": "Increases matching size by 1",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Complete this matrix exponentiation for Fibonacci:\n\n```\nfunction matrixPower(matrix, n):\n    if n == 0:\n        return identity_matrix\n    if n == 1:\n        return matrix\n    \n    if n % 2 == 0:\n        half = matrixPower(matrix, n // 2)\n        return multiply(half, half)\n    else:\n        _______________\n\nfunction fibonacci(n):\n    if n <= 1:\n        return n\n    \n    base_matrix = [[1, 1], [1, 0]]\n    result_matrix = matrixPower(base_matrix, n - 1)\n    return result_matrix[0][0]\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "Recursion"
+    ],
+    "options": [
+      "return multiply(matrix, matrixPower(matrix, n - 1))",
+      "return matrixPower(matrix, n - 1)",
+      "return multiply(matrix, matrix)",
+      "return identity_matrix"
+    ],
+    "answer": "return multiply(matrix, matrixPower(matrix, n - 1))",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "What is the time complexity of computing the nth Fibonacci number using matrix exponentiation?",
+    "type": "MCQ",
+    "categories": [
+      "Recursion"
+    ],
+    "options": [
+      "O(log n)",
+      "O(n)",
+      "O(n log n)",
+      "O(1)"
+    ],
+    "answer": "O(log n)",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "In fast matrix exponentiation, why do we use the binary representation of the exponent?",
+    "type": "MCQ",
+    "categories": [
+      "Arrays"
+    ],
+    "options": [
+      "To reduce multiplications from O(n) to O(log n)",
+      "To save memory",
+      "To handle negative exponents",
+      "To avoid overflow"
+    ],
+    "answer": "To reduce multiplications from O(n) to O(log n)",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this linear recurrence solved by matrix exponentiation:\n\n```\nRECURRENCE: f(n) = 2*f(n-1) + 3*f(n-2)\nBASE: f(0) = 1, f(1) = 1\n\nTRANSITION_MATRIX = [[2, 3], [1, 0]]\nINITIAL_VECTOR = [f(1), f(0)] = [1, 1]\n\n// To find f(n):\n// [f(n), f(n-1)] = TRANSITION_MATRIX^(n-1) * INITIAL_VECTOR\n```\n\nWhat is f(3)?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Arrays"
+    ],
+    "options": [
+      "11",
+      "8",
+      "5",
+      "7"
+    ],
+    "answer": "11",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "What is the time complexity of inserting an element at the end of a dynamic array (like ArrayList)?",
+    "type": "MCQ",
+    "categories": [
+      "Arrays"
+    ],
+    "options": [
+      "O(1) amortized",
+      "O(n) always",
+      "O(log n)",
+      "O(1) always"
+    ],
+    "answer": "O(1) amortized",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Complete this simple hash table implementation:\n\n```\nclass HashTable:\n    function __init__(size):\n        self.size = size\n        self.table = [[] for _ in range(size)]\n    \n    function hash(key):\n        return sum(ord(c) for c in key) % self.size\n    \n    function put(key, value):\n        index = self.hash(key)\n        bucket = self.table[index]\n        \n        for i, (k, v) in enumerate(bucket):\n            if k == key:\n                _______________\n                return\n        \n        bucket.add((key, value))\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "HashMaps"
+    ],
+    "options": [
+      "bucket[i] = (key, value)",
+      "bucket[i] = value",
+      "bucket.remove((k, v))",
+      "bucket.insert(i, value)"
+    ],
+    "answer": "bucket[i] = (key, value)",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "In a balanced binary search tree, what is the height?",
+    "type": "MCQ",
+    "categories": [
+      "Trees"
+    ],
+    "options": [
+      "O(log n)",
+      "O(n)",
+      "O(sqrt(n))",
+      "O(1)"
+    ],
+    "answer": "O(log n)",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Given this simple recursive factorial:\n\n```\nfunction factorial(n):\n    if n <= 1:\n        return 1\n    return n * factorial(n - 1)\n```\n\nWhat is factorial(5)?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Recursion"
+    ],
+    "options": [
+      "120",
+      "24",
+      "60",
+      "100"
+    ],
+    "answer": "120",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "What data structure is typically used to implement function call management?",
+    "type": "MCQ",
+    "categories": [
+      "Stacks"
+    ],
+    "options": [
+      "Stack",
+      "Queue",
+      "Heap",
+      "Hash Table"
+    ],
+    "answer": "Stack",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Complete this QUEUE implementation using two stacks:\n\n```\nclass Queue:\n    function __init__():\n        self.stack1 = []\n        self.stack2 = []\n    \n    function enqueue(item):\n        self.stack1.add(item)\n    \n    function dequeue():\n        if not self.stack2:\n            while self.stack1:\n                _______________\n        \n        if self.stack2:\n            return self.stack2.pop()\n        return None\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "Stacks"
+    ],
+    "options": [
+      "self.stack2.append(self.stack1.pop())",
+      "self.stack2.append(self.stack1[0])",
+      "self.stack1.append(self.stack2.pop())",
+      "self.stack2 = self.stack1"
+    ],
+    "answer": "self.stack2.append(self.stack1.pop())",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "What is the main advantage of a circular buffer?",
+    "type": "MCQ",
+    "categories": [
+      "Arrays"
+    ],
+    "options": [
+      "Fixed memory usage",
+      "Faster insertion",
+      "Better cache locality",
+      "Thread safety"
+    ],
+    "answer": "Fixed memory usage",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this prime checking algorithm:\n\n```\nfunction isPrime(n):\n    if n <= 1:\n        return False\n    if n <= 3:\n        return True\n    if n % 2 == 0 or n % 3 == 0:\n        return False\n    \n    i = 5\n    while i * i <= n:\n        if n % i == 0 or n % (i + 2) == 0:\n            return False\n        i += 6\n    \n    return True\n```\n\nIs 17 prime according to this algorithm?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Arrays"
+    ],
+    "options": [
+      "True",
+      "False",
+      "Error",
+      "Undefined"
+    ],
+    "answer": "True",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "What is the time complexity of the Sieve of Eratosthenes?",
+    "type": "MCQ",
+    "categories": [
+      "Arrays"
+    ],
+    "options": [
+      "O(n log log n)",
+      "O(n log n)",
+      "O(n²)",
+      "O(n)"
+    ],
+    "answer": "O(n log log n)",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Complete this GCD implementation:\n\n```\nfunction gcd(a, b):\n    while b != 0:\n        temp = b\n        b = _______________\n        a = temp\n    return a\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "Arrays"
+    ],
+    "options": [
+      "a % b",
+      "a - b",
+      "a / b",
+      "a + b"
+    ],
+    "answer": "a % b",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "In modular arithmetic, what is (a * b) mod m equivalent to?",
+    "type": "MCQ",
+    "categories": [
+      "Arrays"
+    ],
+    "options": [
+      "((a mod m) * (b mod m)) mod m",
+      "a * b mod m",
+      "Both are equivalent",
+      "Neither is correct"
+    ],
+    "answer": "Both are equivalent",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this power function with modular arithmetic:\n\n```\nfunction power(base, exp, mod):\n    result = 1\n    base = base % mod\n    \n    while exp > 0:\n        if exp % 2 == 1:\n            result = (result * base) % mod\n        \n        exp = exp >> 1\n        base = (base * base) % mod\n    \n    return result\n```\n\nWhat is power(2, 10, 1000)?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Arrays"
+    ],
+    "options": [
+      "24",
+      "1024",
+      "24",
+      "1000"
+    ],
+    "answer": "24",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "What is the space complexity of an in-place sorting algorithm?",
+    "type": "MCQ",
+    "categories": [
+      "Sorting"
+    ],
+    "options": [
+      "O(1)",
+      "O(log n)",
+      "O(n)",
+      "O(n log n)"
+    ],
+    "answer": "O(1)",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Which sorting algorithm is stable by default?",
+    "type": "MCQ",
+    "categories": [
+      "Sorting"
+    ],
+    "options": [
+      "Merge Sort",
+      "Quick Sort",
+      "Heap Sort",
+      "Selection Sort"
+    ],
+    "answer": "Merge Sort",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Complete this counting sort implementation:\n\n```\nfunction countingSort(ARRAY, max_val):\n    count = [0] * (max_val + 1)\n    output = [0] * length(ARRAY)\n    \n    // Count occurrences\n    for num in ARRAY:\n        count[num] += 1\n    \n    // Modify count array\n    for i in range(1, max_val + 1):\n        _______________\n    \n    // Build output array\n    for i in range(length(ARRAY) - 1, -1, -1):\n        output[count[ARRAY[i]] - 1] = ARRAY[i]\n        count[ARRAY[i]] -= 1\n    \n    return output\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "Sorting"
+    ],
+    "options": [
+      "count[i] += count[i - 1]",
+      "count[i] = count[i - 1]",
+      "count[i] -= count[i - 1]",
+      "count[i] *= count[i - 1]"
+    ],
+    "answer": "count[i] += count[i - 1]",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "What is the time complexity of radix sort?",
+    "type": "MCQ",
+    "categories": [
+      "Sorting"
+    ],
+    "options": [
+      "O(d * (n + k)) where d is digits, k is range",
+      "O(n log n)",
+      "O(n²)",
+      "O(n)"
+    ],
+    "answer": "O(d * (n + k)) where d is digits, k is range",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Given this simple graph representation:\n\n```\nGRAPH = {\n    'A': ['B', 'C'],\n    'B': ['A', 'D', 'E'],\n    'C': ['A', 'F'],\n    'D': ['B'],\n    'E': ['B', 'F'],\n    'F': ['C', 'E']\n}\n```\n\nHow many edges does this undirected graph have?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Graphs"
+    ],
+    "options": [
+      "6",
+      "12",
+      "5",
+      "10"
+    ],
+    "answer": "6",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "What is the space complexity of adjacency matrix representation for a graph?",
+    "type": "MCQ",
+    "categories": [
+      "Graphs"
+    ],
+    "options": [
+      "O(V²)",
+      "O(V + E)",
+      "O(E)",
+      "O(V)"
+    ],
+    "answer": "O(V²)",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Complete this simple cycle detection in undirected graph:\n\n```\nfunction hasCycle(graph, node, visited, parent):\n    visited[node] = True\n    \n    for neighbor in graph[node]:\n        if not visited[neighbor]:\n            if hasCycle(graph, neighbor, visited, node):\n                return True\n        elif _______________:\n            return True\n    \n    return False\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "Graphs"
+    ],
+    "options": [
+      "neighbor != parent",
+      "neighbor == parent",
+      "visited[neighbor]",
+      "neighbor in visited"
+    ],
+    "answer": "neighbor != parent",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "What is the main difference between Prim's and Kruskal's algorithms?",
+    "type": "MCQ",
+    "categories": [
+      "Graphs"
+    ],
+    "options": [
+      "Prim's grows tree, Kruskal's sorts edges",
+      "Prim's is faster",
+      "Kruskal's handles disconnected graphs",
+      "No significant difference"
+    ],
+    "answer": "Prim's grows tree, Kruskal's sorts edges",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this simple string matching:\n\n```\nTEXT = \"ABABCABABA\"\nPATTERN = \"ABA\"\nmatches = []\n\nfor i in range(length(TEXT) - length(PATTERN) + 1):\n    if TEXT[i:i+length(PATTERN)] == PATTERN:\n        matches.add(i)\n```\n\nHow many matches are found?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Strings"
+    ],
+    "options": [
+      "3",
+      "2",
+      "4",
+      "1"
+    ],
+    "answer": "3",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "What is the worst-case time complexity of naive string matching?",
+    "type": "MCQ",
+    "categories": [
+      "Strings"
+    ],
+    "options": [
+      "O(nm) where n=text length, m=pattern length",
+      "O(n + m)",
+      "O(n log m)",
+      "O(m)"
+    ],
+    "answer": "O(nm) where n=text length, m=pattern length",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Complete this simple anagram check:\n\n```\nfunction isAnagram(s1, s2):\n    if length(s1) != length(s2):\n        return False\n    \n    char_count = {}\n    \n    for char in s1:\n        char_count[char] = char_count.get(char, 0) + 1\n    \n    for char in s2:\n        if char not in char_count:\n            return False\n        char_count[char] -= 1\n        if _______________:\n            return False\n    \n    return True\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "Strings",
+      "HashMaps"
+    ],
+    "options": [
+      "char_count[char] < 0",
+      "char_count[char] == 0",
+      "char_count[char] > 0",
+      "char not in char_count"
+    ],
+    "answer": "char_count[char] < 0",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "What is the time complexity of building a trie for n strings of average length m?",
+    "type": "MCQ",
+    "categories": [
+      "Trees",
+      "Strings"
+    ],
+    "options": [
+      "O(nm)",
+      "O(n log n)",
+      "O(m log m)",
+      "O(n + m)"
+    ],
+    "answer": "O(nm)",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this simple LRU implementation:\n\n```\nclass LRU:\n    function __init__(capacity):\n        self.capacity = capacity\n        self.cache = OrderedDict()\n    \n    function get(key):\n        if key not in self.cache:\n            return -1\n        \n        # Move to end (most recent)\n        value = self.cache.pop(key)\n        self.cache[key] = value\n        return value\n    \n    function put(key, value):\n        if key in self.cache:\n            self.cache.pop(key)\n        elif length(self.cache) >= self.capacity:\n            self.cache.popitem(last=False)  # Remove oldest\n        \n        self.cache[key] = value\n```\n\nWith capacity=2, after operations: put(1,1), put(2,2), get(1), put(3,3), what keys remain?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "HashMaps"
+    ],
+    "options": [
+      "[1, 3]",
+      "[2, 3]",
+      "[1, 2]",
+      "[3]"
+    ],
+    "answer": "[1, 3]",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "What is the space complexity of the call STACK for a recursive function with depth d?",
+    "type": "MCQ",
+    "categories": [
+      "Stacks"
+    ],
+    "options": [
+      "O(d)",
+      "O(1)",
+      "O(2^d)",
+      "O(d²)"
+    ],
+    "answer": "O(d)",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Complete this simple recursive binary search:\n\n```\nfunction binarySearch(ARRAY, target, left, right):\n    if left > right:\n        return -1\n    \n    mid = (left + right) // 2\n    \n    if ARRAY[mid] == target:\n        return mid\n    elif ARRAY[mid] > target:\n        _______________\n    else:\n        return binarySearch(ARRAY, target, mid + 1, right)\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "BinarySearch"
+    ],
+    "options": [
+      "return binarySearch(arr, target, left, mid - 1)",
+      "return binarySearch(arr, target, left, mid)",
+      "return binarySearch(arr, target, mid, right)",
+      "return -1"
+    ],
+    "answer": "return binarySearch(arr, target, left, mid - 1)",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "What is the maximum number of comparisons needed in binary search for an array of size n?",
+    "type": "MCQ",
+    "categories": [
+      "BinarySearch"
+    ],
+    "options": [
+      "⌈log₂(n)⌉",
+      "n",
+      "n/2",
+      "√n"
+    ],
+    "answer": "⌈log₂(n)⌉",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this simple greedy coin change:\n\n```\nCOINS = [25, 10, 5, 1]  // quarters, dimes, nickels, pennies\nAMOUNT = 67\nresult = []\n\nfor coin in COINS:\n    while AMOUNT >= coin:\n        result.add(coin)\n        AMOUNT -= coin\n```\n\nHow many coins are used?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "DynamicProgramming"
+    ],
+    "options": [
+      "6",
+      "7",
+      "5",
+      "8"
+    ],
+    "answer": "6",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Why doesn't greedy coin change always work for arbitrary coin systems?",
+    "type": "MCQ",
+    "categories": [
+      "DynamicProgramming"
+    ],
+    "options": [
+      "Greedy choice doesn't lead to globally optimal solution",
+      "Too slow",
+      "Uses too much memory",
+      "Only works for sorted coins"
+    ],
+    "answer": "Greedy choice doesn't lead to globally optimal solution",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Complete this activity selection greedy algorithm:\n\n```\nACTIVITIES = [(1, 4), (3, 5), (0, 6), (5, 7), (3, 9), (5, 9), (6, 10), (8, 11), (8, 12), (2, 14), (12, 16)]\n# (start_time, end_time) pairs\n\n# Sort by end time\nACTIVITIES.sort(key=lambda x: x[1])\n\nselected = []\nlast_end_time = -1\n\nfor start, end in ACTIVITIES:\n    if _______________:\n        selected.add((start, end))\n        last_end_time = end\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "DynamicProgramming"
+    ],
+    "options": [
+      "start >= last_end_time",
+      "start > last_end_time",
+      "end > last_end_time",
+      "start < last_end_time"
+    ],
+    "answer": "start >= last_end_time",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "What property must a problem have to be solved optimally by a greedy algorithm?",
+    "type": "MCQ",
+    "categories": [
+      "DynamicProgramming"
+    ],
+    "options": [
+      "Greedy choice property",
+      "Optimal substructure",
+      "Both greedy choice and optimal substructure",
+      "Overlapping subproblems"
+    ],
+    "answer": "Both greedy choice and optimal substructure",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Given this simple Fibonacci with memoization:\n\n```\nmemo = {}\n\nfunction fib(n):\n    if n in memo:\n        return memo[n]\n    \n    if n <= 1:\n        result = n\n    else:\n        result = fib(n-1) + fib(n-2)\n    \n    memo[n] = result\n    return result\n```\n\nWhat is the time complexity after memoization?",
+    "type": "MCQ",
+    "categories": [
+      "DynamicProgramming"
+    ],
+    "options": [
+      "O(n)",
+      "O(2^n)",
+      "O(n²)",
+      "O(log n)"
+    ],
+    "answer": "O(n)",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Complete this simple subset sum DP:\n\n```\nfunction canPartition(nums, target):\n    dp = 2D array (length(nums)+1 x target+1), all False\n    \n    # Base case: sum 0 is always possible\n    for i in range(length(nums) + 1):\n        dp[i][0] = True\n    \n    for i in range(1, length(nums) + 1):\n        for j in range(1, target + 1):\n            # Don't include current number\n            dp[i][j] = dp[i-1][j]\n            \n            # Include current number if possible\n            if j >= nums[i-1]:\n                _______________\n    \n    return dp[length(nums)][target]\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "DynamicProgramming"
+    ],
+    "options": [
+      "dp[i][j] = dp[i][j] or dp[i-1][j-nums[i-1]]",
+      "dp[i][j] = dp[i-1][j-nums[i-1]]",
+      "dp[i][j] = True",
+      "dp[i][j] = dp[i][j] and dp[i-1][j-nums[i-1]]"
+    ],
+    "answer": "dp[i][j] = dp[i][j] or dp[i-1][j-nums[i-1]]",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "What is the difference between memoization and tabulation in DP?",
+    "type": "MCQ",
+    "categories": [
+      "DynamicProgramming"
+    ],
+    "options": [
+      "Memoization is top-down, tabulation is bottom-up",
+      "Memoization is faster",
+      "Tabulation uses more memory",
+      "No significant difference"
+    ],
+    "answer": "Memoization is top-down, tabulation is bottom-up",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this simple breadth-first search:\n\n```\nGRAPH = {'A': ['B', 'C'], 'B': ['D'], 'C': ['E'], 'D': [], 'E': []}\nSTART = 'A'\n\nQUEUE = [START]\nvisited = set([START])\norder = []\n\nwhile QUEUE:\n    node = QUEUE.pop(0)\n    order.add(node)\n    \n    for neighbor in GRAPH[node]:\n        if neighbor not in visited:\n            visited.add(neighbor)\n            QUEUE.add(neighbor)\n```\n\nWhat is the BFS traversal order?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Graphs"
+    ],
+    "options": [
+      "['A', 'B', 'C', 'D', 'E']",
+      "['A', 'C', 'B', 'E', 'D']",
+      "['A', 'B', 'D', 'C', 'E']",
+      "['A', 'C', 'E', 'B', 'D']"
+    ],
+    "answer": "['A', 'B', 'C', 'D', 'E']",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "What data structure is typically used to implement BFS?",
+    "type": "MCQ",
+    "categories": [
+      "Graphs"
+    ],
+    "options": [
+      "Queue",
+      "Stack",
+      "Heap",
+      "Hash Table"
+    ],
+    "answer": "Queue",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Complete this DFS implementation:\n\n```\nfunction dfs(graph, node, visited, result):\n    _______________\n    result.add(node)\n    \n    for neighbor in graph[node]:\n        if neighbor not in visited:\n            dfs(graph, neighbor, visited, result)\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "Graphs"
+    ],
+    "options": [
+      "visited.add(node)",
+      "visited.remove(node)",
+      "result.append(node)",
+      "graph[node].visited = True"
+    ],
+    "answer": "visited.add(node)",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "What is the space complexity of DFS in the worst case?",
+    "type": "MCQ",
+    "categories": [
+      "Graphs"
+    ],
+    "options": [
+      "O(V) for visited set + O(V) for recursion stack",
+      "O(1)",
+      "O(E)",
+      "O(V²)"
+    ],
+    "answer": "O(V) for visited set + O(V) for recursion stack",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this simple tree height calculation:\n\n```\nfunction height(root):\n    if root is None:\n        return 0\n    \n    left_height = height(root.left)\n    right_height = height(root.right)\n    \n    return 1 + max(left_height, right_height)\n```\n\nFor a tree with nodes [1, 2, 3, 4, 5] where 1 is root, 2,3 are children of 1, and 4,5 are children of 2, what is the height?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Trees"
+    ],
+    "options": [
+      "3",
+      "2",
+      "4",
+      "5"
+    ],
+    "answer": "3",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "What is the time complexity of searching in a balanced BST?",
+    "type": "MCQ",
+    "categories": [
+      "Trees"
+    ],
+    "options": [
+      "O(log n)",
+      "O(n)",
+      "O(1)",
+      "O(sqrt(n))"
+    ],
+    "answer": "O(log n)",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Given this array rotation algorithm:\n\n```\nARRAY = [1, 2, 3, 4, 5, 6, 7]\nK = 3\nn = length(ARRAY)\nK = K mod n\n\nREVERSE(ARRAY, 0, n - 1)      // Reverse entire array\nREVERSE(ARRAY, 0, K - 1)      // Reverse first K elements  \nREVERSE(ARRAY, K, n - 1)      // Reverse remaining elements\n\nfunction REVERSE(ARRAY, start, end):\n    while start < end:\n        SWAP(ARRAY[start], ARRAY[end])\n        start = start + 1\n        end = end - 1\n```\n\nWhat is the array after the first REVERSE operation?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Arrays"
+    ],
+    "options": [
+      "[7, 6, 5, 4, 3, 2, 1]",
+      "[1, 2, 3, 4, 5, 6, 7]",
+      "[5, 6, 7, 1, 2, 3, 4]",
+      "[4, 5, 6, 7, 1, 2, 3]"
+    ],
+    "answer": "[7, 6, 5, 4, 3, 2, 1]",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Complete this array partition algorithm:\n\n```\nARRAY = [3, 1, 4, 1, 5, 9, 2, 6]\nTARGET = 4\ni = 0\nj = 0\n\nwhile j < length(ARRAY):\n    if ARRAY[j] <= TARGET:\n        SWAP(ARRAY[i], ARRAY[j])\n        _______________\n    j = j + 1\n\nreturn i\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "Arrays"
+    ],
+    "options": [
+      "i = i + 1",
+      "j = j + 1",
+      "i = j",
+      "j = i"
+    ],
+    "answer": "i = i + 1",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Given this palindrome check algorithm:\n\n```\nSTRING = \"racecar\"\nleft = 0\nright = length(STRING) - 1\n\nwhile left < right:\n    if STRING[left] ≠ STRING[right]:\n        return FALSE\n    left = left + 1\n    right = right - 1\n\nreturn TRUE\n```\n\nHow many character comparisons are made?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Strings"
+    ],
+    "options": [
+      "3",
+      "4",
+      "7",
+      "6"
+    ],
+    "answer": "3",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Complete this string reversal algorithm:\n\n```\nSTRING = ['h', 'e', 'l', 'l', 'o']\nleft = 0\nright = length(STRING) - 1\n\nwhile left < right:\n    _______________\n    left = left + 1\n    right = right - 1\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "Strings"
+    ],
+    "options": [
+      "SWAP(STRING[left], STRING[right])",
+      "STRING[left] = STRING[right]",
+      "left = right",
+      "STRING = REVERSE(STRING)"
+    ],
+    "answer": "SWAP(STRING[left], STRING[right])",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Given this binary tree traversal:\n\n```\nTREE:\n       1\n      / \\\n     2   3\n    / \\\n   4   5\n\nfunction INORDER(node):\n    if node ≠ NULL:\n        INORDER(node.left)\n        PRINT(node.data)\n        INORDER(node.right)\n\nINORDER(root)\n```\n\nWhat is the output sequence?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Trees"
+    ],
+    "options": [
+      "4, 2, 5, 1, 3",
+      "1, 2, 4, 5, 3",
+      "4, 5, 2, 3, 1",
+      "1, 2, 3, 4, 5"
+    ],
+    "answer": "4, 2, 5, 1, 3",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Complete this binary search tree insertion:\n\n```\nfunction INSERT(node, key):\n    if node = NULL:\n        return CREATE_NODE(key)\n    \n    if key < node.data:\n        node.left = INSERT(node.left, key)\n    else:\n        _______________\n    \n    return node\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "Trees"
+    ],
+    "options": [
+      "node.right = INSERT(node.right, key)",
+      "node.left = INSERT(node.left, key)",
+      "return node",
+      "node.data = key"
+    ],
+    "answer": "node.right = INSERT(node.right, key)",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Given this DFS algorithm:\n\n```\nGRAPH = {A: [B, C], B: [D], C: [E], D: [], E: []}\nVISITED = empty set\nRESULT = []\n\nfunction DFS(node):\n    if node in VISITED:\n        return\n    VISITED.add(node)\n    RESULT.add(node)\n    for neighbor in GRAPH[node]:\n        DFS(neighbor)\n\nDFS('A')\n```\n\nWhat is the final RESULT array?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Graphs"
+    ],
+    "options": [
+      "[A, B, D, C, E]",
+      "[A, B, C, D, E]",
+      "[A, C, E, B, D]",
+      "[D, B, E, C, A]"
+    ],
+    "answer": "[A, B, D, C, E]",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Complete this BFS algorithm:\n\n```\nGRAPH = {A: [B, C], B: [D], C: [E], D: [], E: []}\nQUEUE = [A]\nVISITED = {A}\nRESULT = []\n\nwhile QUEUE is not empty:\n    node = QUEUE.dequeue()\n    RESULT.add(node)\n    for neighbor in GRAPH[node]:\n        if neighbor not in VISITED:\n            _______________\n            QUEUE.enqueue(neighbor)\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "Graphs"
+    ],
+    "options": [
+      "VISITED.add(neighbor)",
+      "RESULT.append(neighbor)",
+      "QUEUE.enqueue(neighbor)",
+      "DFS(neighbor)"
+    ],
+    "answer": "VISITED.add(neighbor)",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Given this balanced parentheses checker:\n\n```\nSTRING = \"({[]})\"\nSTACK = empty STACK\nOPENING = {'(', '{', '['}\nCLOSING = {')', '}', ']'}\nPAIRS = {')': '(', '}': '{', ']': '['}\n\nfor char in STRING:\n    if char in OPENING:\n        STACK.add(char)\n    elif char in CLOSING:\n        if STACK.is_empty() or STACK.top() ≠ PAIRS[char]:\n            return FALSE\n        STACK.pop()\n\nreturn STACK.is_empty()\n```\n\nWhat does this algorithm return?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Stacks"
+    ],
+    "options": [
+      "TRUE",
+      "FALSE",
+      "Error",
+      "Empty Stack"
+    ],
+    "answer": "TRUE",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Complete this STACK-based expression evaluator:\n\n```\nEXPRESSION = \"2 3 + 4 *\"  // Postfix notation\nSTACK = empty STACK\n\nfor token in EXPRESSION.split():\n    if token is operand:\n        STACK.add(INTEGER(token))\n    else:\n        b = STACK.pop()\n        a = STACK.pop()\n        _______________\n        STACK.add(result)\n\nreturn STACK.top()\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "Stacks"
+    ],
+    "options": [
+      "result = EVALUATE(a, token, b)",
+      "result = a + b",
+      "result = token(a, b)",
+      "STACK.push(a + b)"
+    ],
+    "answer": "result = EVALUATE(a, token, b)",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this hash table collision resolution:\n\n```\nTABLE_SIZE = 7\nKEYS = [10, 22, 31, 4, 15, 28, 17]\nTABLE = array of size 7, all NULL\n\nfunction HASH(key):\n    return key mod TABLE_SIZE\n\nfunction INSERT(key):\n    index = HASH(key)\n    while TABLE[index] ≠ NULL:\n        index = (index + 1) mod TABLE_SIZE\n    TABLE[index] = key\n\nfor key in KEYS:\n    INSERT(key)\n```\n\nWhere is key 15 stored?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "HashMaps"
+    ],
+    "options": [
+      "index 1",
+      "index 2",
+      "index 3",
+      "index 4"
+    ],
+    "answer": "index 2",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Complete this hash map implementation with chaining:\n\n```\nclass HASH_MAP:\n    TABLE_SIZE = 10\n    table = array of empty lists, size TABLE_SIZE\n    \n    function PUT(key, value):\n        index = HASH(key)\n        bucket = table[index]\n        for i = 0 to length(bucket) - 1:\n            if bucket[i].key = key:\n                bucket[i].value = value\n                return\n        _______________\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "HashMaps"
+    ],
+    "options": [
+      "bucket.append({key, value})",
+      "table[index] = {key, value}",
+      "bucket[0] = {key, value}",
+      "table.append({key, value})"
+    ],
+    "answer": "bucket.append({key, value})",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this sliding window maximum algorithm:\n\n```\nARRAY = [1, 3, -1, -3, 5, 3, 6, 7]\nWINDOW_SIZE = 3\nRESULT = []\nDEQUE = empty deque\n\nfor i = 0 to length(ARRAY) - 1:\n    // Remove elements outside window\n    while DEQUE not empty and DEQUE.front() ≤ i - WINDOW_SIZE:\n        DEQUE.remove_front()\n    \n    // Remove smaller elements\n    while DEQUE not empty and ARRAY[DEQUE.back()] ≤ ARRAY[i]:\n        DEQUE.remove_back()\n    \n    DEQUE.add_back(i)\n    \n    if i ≥ WINDOW_SIZE - 1:\n        RESULT.add(ARRAY[DEQUE.front()])\n```\n\nWhat is RESULT after processing index 4?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "options": [
+      "[3, 3, 5]",
+      "[3, 3]",
+      "[1, 3, 5]",
+      "[3, 5]"
+    ],
+    "answer": "[3, 3, 5]",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Complete this sliding window algorithm for substring:\n\n```\nSTRING = \"abcabcbb\"\nWINDOW = empty set\nleft = 0\nmax_length = 0\n\nfor right = 0 to length(STRING) - 1:\n    while STRING[right] in WINDOW:\n        WINDOW.remove(STRING[left])\n        _______________\n    WINDOW.add(STRING[right])\n    max_length = MAX(max_length, right - left + 1)\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "options": [
+      "left = left + 1",
+      "right = right + 1",
+      "left = right",
+      "right = left + 1"
+    ],
+    "answer": "left = left + 1",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this Fibonacci DP algorithm:\n\n```\nn = 5\nDP = array of size n + 1\nDP[0] = 0\nDP[1] = 1\n\nfor i = 2 to n:\n    DP[i] = DP[i-1] + DP[i-2]\n\nreturn DP[n]\n```\n\nWhat is the value of DP[4]?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "DynamicProgramming"
+    ],
+    "options": [
+      "3",
+      "5",
+      "8",
+      "2"
+    ],
+    "answer": "3",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Complete this coin change DP algorithm:\n\n```\nCOINS = [1, 3, 4]\nAMOUNT = 6\nDP = array of size AMOUNT + 1, all infinity\nDP[0] = 0\n\nfor i = 1 to AMOUNT:\n    for coin in COINS:\n        if coin ≤ i:\n            _______________\n\nreturn DP[AMOUNT]\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "DynamicProgramming"
+    ],
+    "options": [
+      "DP[i] = MIN(DP[i], DP[i - coin] + 1)",
+      "DP[i] = DP[i - coin] + 1",
+      "DP[i] = coin",
+      "DP[coin] = i"
+    ],
+    "answer": "DP[i] = MIN(DP[i], DP[i - coin] + 1)",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this two-pointer array sum algorithm:\n\n```\nARRAY = [1, 2, 3, 4, 6]\nTARGET = 6\nleft = 0\nright = length(ARRAY) - 1\n\nwhile left < right:\n    current_sum = ARRAY[left] + ARRAY[right]\n    if current_sum = TARGET:\n        return [left, right]\n    elif current_sum < TARGET:\n        left = left + 1\n    else:\n        right = right - 1\n\nreturn \"No solution\"\n```\n\nWhat does this algorithm return?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "TwoPointers"
+    ],
+    "options": [
+      "[1, 3]",
+      "[0, 4]",
+      "[2, 3]",
+      "\"No solution\""
+    ],
+    "answer": "[1, 3]",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Complete this palindrome check using two pointers:\n\n```\nSTRING = \"A man a plan a canal Panama\"\nSTRING = REMOVE_NON_ALPHANUMERIC(LOWERCASE(STRING))\nleft = 0\nright = length(STRING) - 1\n\nwhile left < right:\n    if STRING[left] ≠ STRING[right]:\n        return FALSE\n    _______________\n    right = right - 1\n\nreturn TRUE\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "TwoPointers"
+    ],
+    "options": [
+      "left = left + 1",
+      "left = right",
+      "left = left + 2",
+      "right = left"
+    ],
+    "answer": "left = left + 1",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Given this binary search algorithm:\n\n```\nARRAY = [1, 3, 5, 7, 9, 11, 13]\nTARGET = 7\nleft = 0\nright = length(ARRAY) - 1\n\nwhile left ≤ right:\n    mid = left + (right - left) / 2\n    if ARRAY[mid] = TARGET:\n        return mid\n    elif ARRAY[mid] < TARGET:\n        left = mid + 1\n    else:\n        right = mid - 1\n\nreturn -1\n```\n\nHow many iterations does this take?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "BinarySearch"
+    ],
+    "options": [
+      "2",
+      "3",
+      "1",
+      "4"
+    ],
+    "answer": "2",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Complete this binary search for insertion point:\n\n```\nARRAY = [1, 3, 5, 7, 9]\nTARGET = 6\nleft = 0\nright = length(ARRAY)\n\nwhile left < right:\n    mid = left + (right - left) / 2\n    if ARRAY[mid] < TARGET:\n        _______________\n    else:\n        right = mid\n\nreturn left\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "BinarySearch"
+    ],
+    "options": [
+      "left = mid + 1",
+      "left = mid",
+      "right = mid + 1",
+      "left = right"
+    ],
+    "answer": "left = mid + 1",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this bubble sort algorithm:\n\n```\nARRAY = [64, 34, 25, 12, 22, 11, 90]\nn = length(ARRAY)\n\nfor i = 0 to n - 2:\n    for j = 0 to n - 2 - i:\n        if ARRAY[j] > ARRAY[j + 1]:\n            SWAP(ARRAY[j], ARRAY[j + 1])\n```\n\nAfter the first complete pass (i=0), what is ARRAY[6]?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Sorting"
+    ],
+    "options": [
+      "90",
+      "64",
+      "11",
+      "25"
+    ],
+    "answer": "90",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Complete this merge sort merge function:\n\n```\nfunction MERGE(ARRAY, left, mid, right):\n    left_arr = COPY(ARRAY[left...mid])\n    right_arr = COPY(ARRAY[mid+1...right])\n    \n    i = 0, j = 0, k = left\n    \n    while i < length(left_arr) and j < length(right_arr):\n        if left_arr[i] ≤ right_arr[j]:\n            ARRAY[k] = left_arr[i]\n            i = i + 1\n        else:\n            _______________\n            j = j + 1\n        k = k + 1\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "Sorting"
+    ],
+    "options": [
+      "arr[k] = right_arr[j]",
+      "arr[k] = left_arr[i]",
+      "arr[j] = right_arr[k]",
+      "k = j"
+    ],
+    "answer": "arr[k] = right_arr[j]",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this recursive factorial algorithm:\n\n```\nfunction FACTORIAL(n):\n    if n ≤ 1:\n        return 1\n    return n * FACTORIAL(n - 1)\n\nresult = FACTORIAL(4)\n```\n\nHow many recursive calls are made (including the initial call)?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Recursion"
+    ],
+    "options": [
+      "4",
+      "5",
+      "3",
+      "6"
+    ],
+    "answer": "5",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Complete this recursive binary tree height calculation:\n\n```\nfunction HEIGHT(node):\n    if node = NULL:\n        return 0\n    \n    left_height = HEIGHT(node.left)\n    right_height = HEIGHT(node.right)\n    \n    _______________\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "Recursion",
+      "Trees"
+    ],
+    "options": [
+      "return 1 + MAX(left_height, right_height)",
+      "return left_height + right_height",
+      "return MAX(left_height, right_height)",
+      "return 1 + left_height + right_height"
+    ],
+    "answer": "return 1 + MAX(left_height, right_height)",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Given this advanced two-pointer technique:\n\n```\nARRAY = [1, 1, 2, 2, 2, 3, 3]\nwrite_index = 0\n\nfor read_index = 0 to length(ARRAY) - 1:\n    if read_index = 0 or ARRAY[read_index] ≠ ARRAY[read_index - 1]:\n        ARRAY[write_index] = ARRAY[read_index]\n        write_index = write_index + 1\n\nreturn write_index\n```\n\nWhat does this algorithm return?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "TwoPointers",
+      "Arrays"
+    ],
+    "options": [
+      "3",
+      "4",
+      "7",
+      "2"
+    ],
+    "answer": "3",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this trie insertion algorithm:\n\n```\nclass TRIE_NODE:\n    children = array of 26 NULL pointers\n    is_end_word = FALSE\n\nWORDS = [\"cat\", \"car\", \"card\"]\nROOT = new TRIE_NODE()\n\nfunction INSERT(word):\n    current = ROOT\n    for char in word:\n        index = char - 'a'\n        if current.children[index] = NULL:\n            current.children[index] = new TRIE_NODE()\n        current = current.children[index]\n    current.is_end_word = TRUE\n\nfor word in WORDS:\n    INSERT(word)\n```\n\nAfter inserting all words, how many nodes have is_end_word = TRUE?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Strings",
+      "Trees"
+    ],
+    "options": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "answer": "3",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Complete this heap insertion algorithm:\n\n```\nHEAP = [10, 8, 9, 4, 7, 5, 3, 1, 2]\nNEW_ELEMENT = 15\n\n// Insert at end\nHEAP.add(NEW_ELEMENT)\nindex = length(HEAP) - 1\n\n// Bubble up\nwhile index > 0:\n    parent = (index - 1) / 2\n    if HEAP[index] ≤ HEAP[parent]:\n        break\n    _______________\n    index = parent\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "Trees"
+    ],
+    "options": [
+      "SWAP(HEAP[index], HEAP[parent])",
+      "HEAP[index] = HEAP[parent]",
+      "HEAP[parent] = NEW_ELEMENT",
+      "index = 0"
+    ],
+    "answer": "SWAP(HEAP[index], HEAP[parent])",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this sliding window algorithm for minimum window substring:\n\n```\nSTRING = \"ADOBECODEBANC\"\nTARGET = \"ABC\"\nWINDOW_COUNT = empty map\nTARGET_COUNT = {'A': 1, 'B': 1, 'C': 1}\nleft = 0\nmin_length = infinity\nformed = 0\nrequired = 3\n\nfor right = 0 to length(STRING) - 1:\n    char = STRING[right]\n    WINDOW_COUNT[char] = WINDOW_COUNT.get(char, 0) + 1\n    \n    if char in TARGET_COUNT and WINDOW_COUNT[char] = TARGET_COUNT[char]:\n        formed = formed + 1\n    \n    while left ≤ right and formed = required:\n        if right - left + 1 < min_length:\n            min_length = right - left + 1\n        \n        char = STRING[left]\n        WINDOW_COUNT[char] = WINDOW_COUNT[char] - 1\n        if char in TARGET_COUNT and WINDOW_COUNT[char] < TARGET_COUNT[char]:\n            formed = formed - 1\n        left = left + 1\n```\n\nWhat is the minimum window length found?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "SlidingWindow",
+      "Strings"
+    ],
+    "options": [
+      "4",
+      "5",
+      "6",
+      "3"
+    ],
+    "answer": "4",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Complete this sliding window for fixed-size maximum:\n\n```\nARRAY = [1, 12, -5, -6, 50, 3]\nWINDOW_SIZE = 4\nRESULT = []\n\nfor i = 0 to length(ARRAY) - WINDOW_SIZE:\n    window_max = -infinity\n    for j = i to i + WINDOW_SIZE - 1:\n        _______________\n    RESULT.add(window_max)\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "SlidingWindow",
+      "Arrays"
+    ],
+    "options": [
+      "window_max = MAX(window_max, ARRAY[j])",
+      "window_max = ARRAY[j]",
+      "window_max = MIN(window_max, ARRAY[j])",
+      "RESULT.append(ARRAY[j])"
+    ],
+    "answer": "window_max = MAX(window_max, ARRAY[j])",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Given this hash map with quadratic probing:\n\n```\nTABLE_SIZE = 11\nKEYS = [23, 34, 15, 26]\nTABLE = array of size 11, all NULL\n\nfunction HASH(key):\n    return key mod TABLE_SIZE\n\nfunction INSERT(key):\n    index = HASH(key)\n    i = 0\n    while TABLE[index] ≠ NULL:\n        i = i + 1\n        index = (HASH(key) + i * i) mod TABLE_SIZE\n    TABLE[index] = key\n\nfor key in KEYS:\n    INSERT(key)\n```\n\nWhere is key 26 stored after all insertions?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "HashMaps"
+    ],
+    "options": [
+      "index 4",
+      "index 5",
+      "index 8",
+      "index 3"
+    ],
+    "answer": "index 5",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Complete this hash map resizing algorithm:\n\n```\nclass HASH_MAP:\n    table = array of size 4\n    size = 0\n    capacity = 4\n    \n    function RESIZE():\n        old_table = table\n        capacity = capacity * 2\n        table = array of size capacity\n        size = 0\n        \n        for bucket in old_table:\n            for entry in bucket:\n                _______________\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "HashMaps"
+    ],
+    "options": [
+      "PUT(entry.key, entry.value)",
+      "table.append(entry)",
+      "size = size + 1",
+      "bucket.append(entry)"
+    ],
+    "answer": "PUT(entry.key, entry.value)",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this STACK-based next greater element algorithm:\n\n```\nARRAY = [4, 5, 2, 25]\nSTACK = empty STACK\nRESULT = array of size length(ARRAY), all -1\n\nfor i = length(ARRAY) - 1 down to 0:\n    while STACK not empty and STACK.top() ≤ ARRAY[i]:\n        STACK.pop()\n    \n    if STACK not empty:\n        RESULT[i] = STACK.top()\n    \n    STACK.add(ARRAY[i])\n```\n\nWhat is RESULT after processing all elements?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Stacks",
+      "Arrays"
+    ],
+    "options": [
+      "[5, 25, 25, -1]",
+      "[5, -1, 25, -1]",
+      "[-1, 25, 25, -1]",
+      "[4, 5, 2, -1]"
+    ],
+    "answer": "[5, 25, 25, -1]",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Complete this monotonic STACK for largest rectangle:\n\n```\nHEIGHTS = [2, 1, 5, 6, 2, 3]\nSTACK = empty STACK\nmax_area = 0\n\nfor i = 0 to length(HEIGHTS):\n    while STACK not empty and (i = length(HEIGHTS) or HEIGHTS[STACK.top()] > HEIGHTS[i]):\n        height = HEIGHTS[STACK.pop()]\n        width = i if STACK.empty() else i - STACK.top() - 1\n        _______________\n    \n    if i < length(HEIGHTS):\n        STACK.add(i)\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "Stacks"
+    ],
+    "options": [
+      "max_area = MAX(max_area, height * width)",
+      "max_area = height * width",
+      "max_area = max_area + height * width",
+      "width = height * max_area"
+    ],
+    "answer": "max_area = MAX(max_area, height * width)",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Given this binary search on rotated array:\n\n```\nARRAY = [4, 5, 6, 7, 0, 1, 2]\nTARGET = 0\nleft = 0\nright = length(ARRAY) - 1\n\nwhile left ≤ right:\n    mid = left + (right - left) / 2\n    \n    if ARRAY[mid] = TARGET:\n        return mid\n    \n    if ARRAY[left] ≤ ARRAY[mid]:  // Left half is sorted\n        if TARGET ≥ ARRAY[left] and TARGET < ARRAY[mid]:\n            right = mid - 1\n        else:\n            left = mid + 1\n    else:  // Right half is sorted\n        if TARGET > ARRAY[mid] and TARGET ≤ ARRAY[right]:\n            left = mid + 1\n        else:\n            right = mid - 1\n\nreturn -1\n```\n\nWhat index does this algorithm return?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "BinarySearch",
+      "Arrays"
+    ],
+    "options": [
+      "4",
+      "0",
+      "-1",
+      "5"
+    ],
+    "answer": "4",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Complete this binary search for peak element:\n\n```\nARRAY = [1, 2, 3, 1]\nleft = 0\nright = length(ARRAY) - 1\n\nwhile left < right:\n    mid = left + (right - left) / 2\n    \n    if ARRAY[mid] > ARRAY[mid + 1]:\n        _______________\n    else:\n        left = mid + 1\n\nreturn left\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "BinarySearch"
+    ],
+    "options": [
+      "right = mid",
+      "right = mid - 1",
+      "left = mid",
+      "return mid"
+    ],
+    "answer": "right = mid",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this quick sort partition algorithm:\n\n```\nARRAY = [10, 80, 30, 90, 40, 50, 70]\nlow = 0\nhigh = 6\npivot = ARRAY[high]  // 70\ni = low - 1\n\nfor j = low to high - 1:\n    if ARRAY[j] ≤ pivot:\n        i = i + 1\n        SWAP(ARRAY[i], ARRAY[j])\n\nSWAP(ARRAY[i + 1], ARRAY[high])\nreturn i + 1\n```\n\nWhat is the final position of the pivot element?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Sorting"
+    ],
+    "options": [
+      "5",
+      "4",
+      "6",
+      "3"
+    ],
+    "answer": "5",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Complete this heap sort heapify operation:\n\n```\nARRAY = [4, 10, 3, 5, 1]\nn = 5\ni = 1  // Index to heapify from\n\nfunction HEAPIFY(ARRAY, n, i):\n    largest = i\n    left = 2 * i + 1\n    right = 2 * i + 2\n    \n    if left < n and ARRAY[left] > ARRAY[largest]:\n        largest = left\n    \n    if right < n and ARRAY[right] > ARRAY[largest]:\n        largest = right\n    \n    if largest ≠ i:\n        _______________\n        HEAPIFY(ARRAY, n, largest)\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "Sorting",
+      "Trees"
+    ],
+    "options": [
+      "SWAP(arr[i], arr[largest])",
+      "arr[i] = arr[largest]",
+      "largest = i",
+      "return largest"
+    ],
+    "answer": "SWAP(arr[i], arr[largest])",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this recursive Tower of Hanoi algorithm:\n\n```\nfunction HANOI(n, source, destination, auxiliary):\n    if n = 1:\n        PRINT(\"Move disk 1 from \" + source + \" to \" + destination)\n        return\n    \n    HANOI(n - 1, source, auxiliary, destination)\n    PRINT(\"Move disk \" + n + \" from \" + source + \" to \" + destination)\n    HANOI(n - 1, auxiliary, destination, source)\n\nHANOI(3, \"A\", \"C\", \"B\")\n```\n\nHow many total moves are printed for n=3?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Recursion"
+    ],
+    "options": [
+      "7",
+      "6",
+      "8",
+      "5"
+    ],
+    "answer": "7",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Complete this recursive permutation generator:\n\n```\nARRAY = [1, 2, 3]\nRESULT = []\n\nfunction PERMUTE(ARRAY, start, end):\n    if start = end:\n        RESULT.add(COPY(ARRAY))\n        return\n    \n    for i = start to end:\n        SWAP(ARRAY[start], ARRAY[i])\n        _______________\n        SWAP(ARRAY[start], ARRAY[i])  // Backtrack\n\nPERMUTE(ARRAY, 0, 2)\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "Recursion"
+    ],
+    "options": [
+      "PERMUTE(arr, start + 1, end)",
+      "PERMUTE(arr, start, end - 1)",
+      "PERMUTE(arr, i, end)",
+      "RESULT.append(arr)"
+    ],
+    "answer": "PERMUTE(arr, start + 1, end)",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this AVL tree rotation algorithm:\n\n```\nfunction RIGHT_ROTATE(y):\n    x = y.left\n    T2 = x.right\n    \n    // Perform rotation\n    x.right = y\n    y.left = T2\n    \n    // Update heights\n    y.height = MAX(HEIGHT(y.left), HEIGHT(y.right)) + 1\n    x.height = MAX(HEIGHT(x.left), HEIGHT(x.right)) + 1\n    \n    return x\n\nBefore rotation: y(height=3) with left child x(height=2)\nAfter RIGHT_ROTATE(y):\n```\n\nWhat is the new root of this subtree?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Trees"
+    ],
+    "options": [
+      "x",
+      "y",
+      "T2",
+      "NULL"
+    ],
+    "answer": "x",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Complete this binary tree level-order traversal:\n\n```\nfunction LEVEL_ORDER(root):\n    if root = NULL:\n        return []\n    \n    QUEUE = [root]\n    RESULT = []\n    \n    while QUEUE not empty:\n        level_size = length(QUEUE)\n        current_level = []\n        \n        for i = 0 to level_size - 1:\n            node = QUEUE.dequeue()\n            current_level.add(node.data)\n            \n            if node.left ≠ NULL:\n                _______________\n            if node.right ≠ NULL:\n                QUEUE.enqueue(node.right)\n        \n        RESULT.add(current_level)\n    \n    return RESULT\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "Trees"
+    ],
+    "options": [
+      "QUEUE.enqueue(node.left)",
+      "current_level.append(node.left)",
+      "RESULT.append(node.left)",
+      "node.left = QUEUE.dequeue()"
+    ],
+    "answer": "QUEUE.enqueue(node.left)",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Given this Dijkstra's shortest path algorithm:\n\n```\nGRAPH = {\n    0: [(1, 4), (2, 1)],\n    1: [(3, 1)],\n    2: [(1, 2), (3, 5)],\n    3: []\n}\nSOURCE = 0\nDISTANCE = [0, infinity, infinity, infinity]\nVISITED = [FALSE, FALSE, FALSE, FALSE]\nPRIORITY_QUEUE = [(0, 0)]  // (distance, vertex)\n\nwhile PRIORITY_QUEUE not empty:\n    current_dist, u = PRIORITY_QUEUE.extract_min()\n    \n    if VISITED[u]:\n        continue\n    VISITED[u] = TRUE\n    \n    for neighbor, weight in GRAPH[u]:\n        if DISTANCE[u] + weight < DISTANCE[neighbor]:\n            DISTANCE[neighbor] = DISTANCE[u] + weight\n            PRIORITY_QUEUE.insert((DISTANCE[neighbor], neighbor))\n```\n\nWhat is DISTANCE[3] after algorithm completion?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Graphs"
+    ],
+    "options": [
+      "3",
+      "5",
+      "6",
+      "4"
+    ],
+    "answer": "5",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Complete this topological sort using DFS:\n\n```\nGRAPH = {0: [1, 2], 1: [3], 2: [3], 3: []}\nVISITED = [FALSE, FALSE, FALSE, FALSE]\nSTACK = empty STACK\n\nfunction TOPOLOGICAL_SORT_DFS(node):\n    VISITED[node] = TRUE\n    \n    for neighbor in GRAPH[node]:\n        if not VISITED[neighbor]:\n            TOPOLOGICAL_SORT_DFS(neighbor)\n    \n    _______________\n\nfor vertex = 0 to 3:\n    if not VISITED[vertex]:\n        TOPOLOGICAL_SORT_DFS(vertex)\n\nwhile STACK not empty:\n    PRINT(STACK.pop())\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "Graphs"
+    ],
+    "options": [
+      "STACK.push(node)",
+      "STACK.push(neighbor)",
+      "PRINT(node)",
+      "VISITED[node] = FALSE"
+    ],
+    "answer": "STACK.push(node)",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this longest increasing subsequence DP:\n\n```\nARRAY = [10, 9, 2, 5, 3, 7, 101, 18]\nn = length(ARRAY)\nDP = array of size n, all 1\n\nfor i = 1 to n - 1:\n    for j = 0 to i - 1:\n        if ARRAY[j] < ARRAY[i]:\n            DP[i] = MAX(DP[i], DP[j] + 1)\n\nreturn MAX(DP)\n```\n\nWhat is the length of the longest increasing subsequence?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "DynamicProgramming"
+    ],
+    "options": [
+      "4",
+      "5",
+      "3",
+      "6"
+    ],
+    "answer": "4",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Complete this knapsack 0/1 DP algorithm:\n\n```\nWEIGHTS = [1, 3, 4, 5]\nVALUES = [1, 4, 5, 7]\nCAPACITY = 7\nn = length(WEIGHTS)\nDP = 2D array of size (n+1) x (CAPACITY+1), all 0\n\nfor i = 1 to n:\n    for w = 1 to CAPACITY:\n        if WEIGHTS[i-1] ≤ w:\n            _______________\n        else:\n            DP[i][w] = DP[i-1][w]\n\nreturn DP[n][CAPACITY]\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "DynamicProgramming"
+    ],
+    "options": [
+      "DP[i][w] = MAX(VALUES[i-1] + DP[i-1][w-WEIGHTS[i-1]], DP[i-1][w])",
+      "DP[i][w] = VALUES[i-1] + DP[i-1][w-WEIGHTS[i-1]]",
+      "DP[i][w] = DP[i-1][w] + VALUES[i-1]",
+      "DP[i][w] = MAX(DP[i-1][w], VALUES[i-1])"
+    ],
+    "answer": "DP[i][w] = MAX(VALUES[i-1] + DP[i-1][w-WEIGHTS[i-1]], DP[i-1][w])",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this three-sum algorithm:\n\n```\nARRAY = [-1, 0, 1, 2, -1, -4]\nSORT(ARRAY)  // [-4, -1, -1, 0, 1, 2]\nRESULT = []\n\nfor i = 0 to length(ARRAY) - 3:\n    if i > 0 and ARRAY[i] = ARRAY[i-1]:\n        continue\n    \n    left = i + 1\n    right = length(ARRAY) - 1\n    \n    while left < right:\n        sum = ARRAY[i] + ARRAY[left] + ARRAY[right]\n        if sum = 0:\n            RESULT.add([ARRAY[i], ARRAY[left], ARRAY[right]])\n            while left < right and ARRAY[left] = ARRAY[left + 1]:\n                left = left + 1\n            while left < right and ARRAY[right] = ARRAY[right - 1]:\n                right = right - 1\n            left = left + 1\n            right = right - 1\n        elif sum < 0:\n            left = left + 1\n        else:\n            right = right - 1\n```\n\nHow many unique triplets sum to zero?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "TwoPointers",
+      "Arrays"
+    ],
+    "options": [
+      "2",
+      "1",
+      "3",
+      "0"
+    ],
+    "answer": "2",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Complete this container with most water algorithm:\n\n```\nHEIGHT = [1, 8, 6, 2, 5, 4, 8, 3, 7]\nleft = 0\nright = length(HEIGHT) - 1\nmax_area = 0\n\nwhile left < right:\n    width = right - left\n    height = MIN(HEIGHT[left], HEIGHT[right])\n    max_area = MAX(max_area, width * height)\n    \n    if HEIGHT[left] < HEIGHT[right]:\n        _______________\n    else:\n        right = right - 1\n\nreturn max_area\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "TwoPointers"
+    ],
+    "options": [
+      "left = left + 1",
+      "right = right - 1",
+      "left = right",
+      "max_area = width * height"
+    ],
+    "answer": "left = left + 1",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given this advanced tree serialization:\n\n```\nTREE:\n       1\n      / \\\n     2   3\n        / \\\n       4   5\n\nfunction SERIALIZE(node):\n    if node = NULL:\n        return \"#\"\n    \n    result = STRING(node.data)\n    result += \",\" + SERIALIZE(node.left)\n    result += \",\" + SERIALIZE(node.right)\n    return result\n\nresult = SERIALIZE(root)\n```\n\nWhat is the serialized string?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Trees",
+      "Strings"
+    ],
+    "options": [
+      "\"1,2,#,#,3,4,#,#,5,#,#\"",
+      "\"1,2,3,4,5\"",
+      "\"2,#,#,1,4,#,#,3,5,#,#\"",
+      "\"1,2,3,#,#,4,5,#,#\""
+    ],
+    "answer": "\"1,2,#,#,3,4,#,#,5,#,#\"",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Given this union-find with path compression:\n\n```\nPARENT = [0, 1, 2, 3, 4]\nRANK = [0, 0, 0, 0, 0]\n\nfunction FIND(x):\n    if PARENT[x] ≠ x:\n        PARENT[x] = FIND(PARENT[x])  // Path compression\n    return PARENT[x]\n\nfunction UNION(x, y):\n    root_x = FIND(x)\n    root_y = FIND(y)\n    \n    if root_x ≠ root_y:\n        if RANK[root_x] < RANK[root_y]:\n            PARENT[root_x] = root_y\n        elif RANK[root_x] > RANK[root_y]:\n            PARENT[root_y] = root_x\n        else:\n            PARENT[root_y] = root_x\n            RANK[root_x] = RANK[root_x] + 1\n\nUNION(1, 3)\nUNION(2, 4)\nUNION(1, 2)\n```\n\nAfter these operations, what is PARENT[4] after calling FIND(4)?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Graphs"
+    ],
+    "options": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "answer": "1",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Given this sliding window for longest substring without repeating characters:\n\n```\nSTRING = \"abcabcbb\"\nMAP = empty hash map\nleft = 0\nmax_length = 0\n\nfor right = 0 to LENGTH(STRING) - 1:\n    if STRING[right] in MAP and MAP[STRING[right]] ≥ left:\n        left = MAP[STRING[right]] + 1\n    \n    MAP[STRING[right]] = right\n    max_length = MAX(max_length, right - left + 1)\n\nreturn max_length\n```\n\nWhat is the maximum length found?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "SlidingWindow",
+      "Strings"
+    ],
+    "options": [
+      "3",
+      "4",
+      "2",
+      "1"
+    ],
+    "answer": "3",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Complete this sliding window minimum algorithm:\n\n```\nARRAY = [1, 3, -1, -3, 5, 3, 6, 7]\nWINDOW_SIZE = 3\nDEQUE = empty deque\nRESULT = []\n\nfor i = 0 to LENGTH(ARRAY) - 1:\n    // Remove elements outside window\n    while DEQUE not empty and DEQUE.front() ≤ i - WINDOW_SIZE:\n        DEQUE.remove_front()\n    \n    // Remove larger elements (for minimum)\n    while DEQUE not empty and ARRAY[DEQUE.back()] _______________:\n        DEQUE.remove_back()\n    \n    DEQUE.add_back(i)\n    \n    if i ≥ WINDOW_SIZE - 1:\n        RESULT.add(ARRAY[DEQUE.front()])\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "options": [
+      "≥ ARRAY[i]",
+      "≤ ARRAY[i]",
+      "= ARRAY[i]",
+      "≠ ARRAY[i]"
+    ],
+    "answer": "≥ ARRAY[i]",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Given this insertion sort algorithm:\n\n```\nARRAY = [5, 2, 4, 6, 1, 3]\n\nfor i = 1 to LENGTH(ARRAY) - 1:\n    key = ARRAY[i]\n    j = i - 1\n    \n    while j ≥ 0 and ARRAY[j] > key:\n        ARRAY[j + 1] = ARRAY[j]\n        j = j - 1\n    \n    ARRAY[j + 1] = key\n```\n\nAfter processing i=2 (key=4), what is the ARRAY?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "Sorting"
+    ],
+    "options": [
+      "[2, 4, 5, 6, 1, 3]",
+      "[2, 5, 4, 6, 1, 3]",
+      "[5, 2, 4, 6, 1, 3]",
+      "[4, 2, 5, 6, 1, 3]"
+    ],
+    "answer": "[2, 4, 5, 6, 1, 3]",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Complete this selection sort algorithm:\n\n```\nARRAY = [64, 25, 12, 22, 11]\n\nfor i = 0 to LENGTH(ARRAY) - 2:\n    min_index = i\n    \n    for j = i + 1 to LENGTH(ARRAY) - 1:\n        if ARRAY[j] < ARRAY[min_index]:\n            _______________\n    \n    if min_index ≠ i:\n        SWAP(ARRAY[i], ARRAY[min_index])\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "Sorting"
+    ],
+    "options": [
+      "min_index = j",
+      "min_index = i",
+      "SWAP(ARRAY[i], ARRAY[j])",
+      "j = min_index"
+    ],
+    "answer": "min_index = j",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Given this binary search for first occurrence:\n\n```\nARRAY = [1, 2, 2, 2, 3, 4, 5]\nTARGET = 2\nleft = 0\nright = LENGTH(ARRAY) - 1\nresult = -1\n\nwhile left ≤ right:\n    mid = left + (right - left) / 2\n    \n    if ARRAY[mid] = TARGET:\n        result = mid\n        right = mid - 1  // Continue searching left\n    elif ARRAY[mid] < TARGET:\n        left = mid + 1\n    else:\n        right = mid - 1\n\nreturn result\n```\n\nWhat index does this return?",
+    "type": "PREDICT_OUTPUT",
+    "categories": [
+      "BinarySearch"
+    ],
+    "options": [
+      "1",
+      "2",
+      "3",
+      "-1"
+    ],
+    "answer": "1",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Complete this binary search in 2D matrix:\n\n```\nMATRIX = [[1,  4,  7,  11],\n          [2,  5,  8,  12],\n          [3,  6,  9,  16],\n          [10, 13, 14, 17]]\nTARGET = 5\nROWS = 4\nCOLS = 4\nrow = 0\ncol = COLS - 1\n\nwhile row < ROWS and col ≥ 0:\n    if MATRIX[row][col] = TARGET:\n        return TRUE\n    elif MATRIX[row][col] > TARGET:\n        _______________\n    else:\n        row = row + 1\n\nreturn FALSE\n```",
+    "type": "FILL_BLANK",
+    "categories": [
+      "BinarySearch",
+      "Arrays"
+    ],
+    "options": [
+      "col = col - 1",
+      "row = row + 1",
+      "col = col + 1",
+      "row = row - 1"
+    ],
+    "answer": "col = col - 1",
+    "difficulty": "MEDIUM"
+  }
+]

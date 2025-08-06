@@ -109,7 +109,7 @@ export default function LoginPage() {
                     rel="noopener noreferrer"
                     className="underline text-green-400 hover:text-green-300 hover:cursor-pointer"
                   >
-                    inbox.
+                    inbox
                   </a>
                   !
                 </>

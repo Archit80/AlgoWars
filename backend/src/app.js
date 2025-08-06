@@ -1,6 +1,8 @@
 import express from 'express';
 import cors from 'cors';
-import leaderboardRoutes from './routes/leaderboardRoutes.js';
+import leaderboardRoutes from './routes/leaderboard.routes.js';
+import questionsRoutes from './routes/questions.routes.js';
+import userRoutes from './routes/user.routes.js';
 
 const app = express();
 
@@ -13,5 +15,9 @@ app.get('/test', (req, res) => {
 });
 
 app.use('/api/leaderboard', leaderboardRoutes);
+
+app.use ('/api/questions', questionsRoutes);
+
+app.use('/api/user', userRoutes);
 
 export default app;

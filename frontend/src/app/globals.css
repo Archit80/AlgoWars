@@ -122,3 +122,96 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Custom syntax highlighting theme for CodeClash */
+.token.keyword {
+  color: #ff6b6b !important; /* Red for keywords like if, for, function */
+  font-weight: bold;
+}
+
+.token.function {
+  color: #4ecdc4 !important; /* Teal for function names */
+  font-weight: bold;
+}
+
+.token.class-name {
+  color: #45b7d1 !important; /* Blue for data structure names */
+  font-weight: bold;
+}
+
+.token.variable {
+  color: #96ceb4 !important; /* Light green for variables */
+}
+
+.token.number {
+  color: #feca57 !important; /* Yellow for numbers */
+}
+
+.token.string {
+  color: #ff9ff3 !important; /* Pink for strings */
+}
+
+.token.operator {
+  color: #ff6348 !important; /* Orange for operators */
+}
+
+.token.comment {
+  color: #6c7b7f !important; /* Gray for comments */
+  font-style: italic;
+}
+
+/* Enhanced code block styling */
+pre[class*="language-"] {
+  background: #1a1a1a !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 1rem !important;
+  margin: 0 !important;
+  overflow-x: auto;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+code[class*="language-"] {
+  background: transparent !important;
+  color: #e2e8f0 !important;
+  font-family: 'Space Grotesk', 'Consolas', monospace;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  text-shadow: none !important;
+}
+
+/* Line numbers (optional) */
+.line-numbers .line-numbers-rows {
+  border-right: 1px solid #374151;
+  margin-right: 1rem;
+  padding-right: 1rem;
+}
+
+.line-numbers-rows > span:before {
+  color: #6b7280;
+}
+
+/* Glass panel effect for profile pages */
+.glass-panel {
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Lime glow effects */
+.lime-glow {
+  box-shadow: 0 0 10px rgba(132, 204, 22, 0.3);
+}
+
+.lime-glow-strong {
+  box-shadow: 0 0 20px rgba(132, 204, 22, 0.5);
+}
+
+/* Code font class */
+.code-font {
+  font-family: 'Space Grotesk', monospace;
+}
