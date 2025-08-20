@@ -9,11 +9,26 @@ const api = axios.create({
   },
 });
 
+export interface LeaderboardUser {
+  id: string;
+  username: string;
+  xp: number;
+  level: number;
+  streak: number;
+  totalMatches: number;
+  matchesWon: number;
+  matchesLost: number;
+  correctAnswers: number;
+  totalAnswers: number;
+  winRate: number;
+  accuracy: number;
+}
+
 const LeaderboardService = {
 
-  getLeaderboard: async () => {
+  getLeaderboard: async (): Promise<LeaderboardUser[]> => {
     const response = await api.get(`/leaderboard`);
-    return response.data;
+    return response.data.data;
   },
 
 };

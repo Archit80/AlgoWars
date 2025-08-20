@@ -45,7 +45,7 @@ export default function LoginPage() {
     if (error) setError(error.message);
     else
       setMessage(
-        "Signup successful! Check for confirmation link in your inbox"
+        "Signup successful! Check confirmation link in your inbox"
       );
     setLoading(false);
   };

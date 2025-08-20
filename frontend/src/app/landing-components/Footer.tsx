@@ -16,7 +16,7 @@ const Footer = () => (
               {/* <Code2 className="h-6 w-6 text-black" /> */}
               <Image
                 src="/logo.png"
-                alt="CodeClash Logo"
+                alt="AlgoWars Logo"
                 width={72}
                 height={72}
                 className="rounded-lg"
@@ -25,7 +25,7 @@ const Footer = () => (
             <span
               className={`text-2xl font-bold text-white ${spaceGrotesk.className}`}
             >
-              CodeClash
+              AlgoWars
             </span>
           </div>
           <div className="grid grid-cols-2 gap-8 mb-8">
@@ -72,7 +72,7 @@ const Footer = () => (
           </div>
           <div className="pt-8 border-t border-gray-800">
             <p className="text-gray-500 text-sm">
-              © 2024 CodeClash. Built for developers worldwide.
+              © 2024 AlgoWars. Built for developers worldwide.
             </p>
           </div>
         </div>

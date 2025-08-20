@@ -15,15 +15,11 @@ const HeroSection = () => {
 
   const handleLogin = () => {
     router.push("/login");
-     if (supabaseUser) {
+    if (supabaseUser) {
       router.push("/dashboard");
       return null; // Prevent rendering while redirecting
     }
   };
-
-  // useEffect(() => {
-   
-  // }, [supabaseUser, router]);
 
   return (
     <section className="relative px-4 pb-16 pt-48 h-full  text-center">
@@ -68,9 +64,9 @@ const HeroSection = () => {
           <span className="text-white">Code. Compete. Conquer.</span>
         </h1>
         <p className="text-xl lg:text-2xl font-medium text-white mb-8 max-w-2xl mx-auto">
-          Enter the ultimate coding battleground where developers clash in
-          real-time. Level up your skills, dominate the leaderboard, and become
-          a coding legend.
+          Welcome to the ultimate battleground of algorithms.
+          <br /> 
+          Hone your strategies, climb the ranks, and forge your legacy as an Algo Wars champion.
         </p>
         <div className="flex flex-col sm:flex-row gap-2 justify-center items-center">
           <Button

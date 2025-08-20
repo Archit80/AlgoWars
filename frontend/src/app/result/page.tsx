@@ -1,13 +1,26 @@
-import React from 'react';
+"use client";
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Home, Swords, Target, Clock, Zap, TrendingUp, Award } from 'lucide-react';
 import { useUserStore } from '@/stores/userStore';
+import { useUser } from '@/contexts/userContext';
+import SavedQuestionsService from '@/services/savedQuestionsService';
 import { Space_Grotesk } from 'next/font/google';
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
   variable: '--font-space',
 });
+interface QuestionResult {
+  id: string;
+  text: string;
+  options: string[];
+  correctAnswer: string;
+  userAnswer: string | null;
+  userCorrect: boolean;
+}
+
 type ResultProps = {
   correctAnswers?: number;
   totalQuestions?: number;
@@ -16,13 +29,23 @@ type ResultProps = {
   endedAt?: string;
   mistakes?: Array<{ question: string; concept: string; topic: string }>;
   streak?: number;
+  questionResults?: QuestionResult[];
   // fallback props for legacy usage
   score?: number;
   total?: number;
 };
 
 const Result: React.FC<ResultProps> = (props) => {
+  const { supabaseUser } = useUser();
+  const router = useRouter();
   const updateXP = useUserStore((state) => state.updateXP);
+
+  // Route protection
+  useEffect(() => {
+    if (!supabaseUser) {
+      router.push("/login");
+    }
+  }, [supabaseUser, router]);
 
   // Prefer backend stats, fallback to mock/legacy
   const correctAnswers = props.correctAnswers ?? props.score ?? 0;
@@ -31,6 +54,7 @@ const Result: React.FC<ResultProps> = (props) => {
   const xpEarned = props.xpEarned ?? 0;
   // const streak = props.streak ?? 0;
   const mistakes = props.mistakes ?? [];
+  const questionResults = props.questionResults ?? [];
   // Calculate accuracy
   const accuracy = totalQuestions > 0 ? Math.round((correctAnswers / totalQuestions) * 100) : 0;
   // Use duration as totalTime (seconds)
@@ -58,7 +82,12 @@ const Result: React.FC<ResultProps> = (props) => {
 
   React.useEffect(() => {
     updateXP(sessionData.xpEarned);
-  }, []);
+  }, [sessionData.xpEarned, updateXP]);
+
+  // Show nothing while redirecting to login
+  if (!supabaseUser) {
+    return null;
+  }
 
   return (
     <div className="min-h-screen p-6 dark bg-[#0E0E0E] text-white">
@@ -79,7 +108,7 @@ const Result: React.FC<ResultProps> = (props) => {
 
         {/* Stats Grid */}
         <motion.div
-          className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8"
+          className="grid grid-cols-2 md:grid-cols-3   gap-6 mb-8"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
@@ -168,15 +197,103 @@ const Result: React.FC<ResultProps> = (props) => {
           </motion.div>
         )}
 
+        {/* Question Review */}
+        {questionResults.length > 0 && (
+          <motion.div
+            className="glass-panel p-8 rounded-2xl mb-8"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            <h2 className="text-2xl font-bold text-lime-500 mb-6">Question Review</h2>
+            <div className="space-y-6">
+              {questionResults.map((q, index) => {
+                const [isSaved, setIsSaved] = useState(false);
+                const [loading, setLoading] = useState(false);
+
+                const handleToggleSave = async () => {
+                  setLoading(true);
+                  try {
+                    // You may need to pass userId and other info, adjust as needed
+                    const result = await SavedQuestionsService.toggleSave({ questionId: q.id, userId: "" });
+                    setIsSaved(result?.saved ?? !isSaved);
+                  } catch (err) {
+                    // Optionally show error toast
+                    console.log("Error saving question:", err);
+                  }
+                  setLoading(false);
+                };
+
+                return (
+                  <div key={q.id} className="bg-neutral-900/50 border border-neutral-800 p-6 rounded-2xl">
+                    <h3 className="text-lg font-semibold mb-4">
+                      Question {index + 1}
+                    </h3>
+                    <div className="mb-4 text-gray-300">
+                      {q.text}
+                    </div>
+                    <div className="space-y-3 mb-4">
+                      {q.options.map((option, idx) => {
+                        const isCorrect = option === q.correctAnswer;
+                        const isUserChoice = option === q.userAnswer;
+                        return (
+                          <div
+                            key={idx}
+                            className={`p-3 rounded-lg border-2 ${
+                              isCorrect
+                                ? 'border-lime-500 bg-lime-500/20'
+                                : isUserChoice && !isCorrect
+                                ? 'border-red-500 bg-red-500/20'
+                                : 'border-neutral-600'
+                            }`}
+                          >
+                            <div className="flex items-center justify-between">
+                              <div className="flex items-center gap-3">
+                                <span className="font-mono text-sm">
+                                  {String.fromCharCode(65 + idx)}
+                                </span>
+                                <span>{option}</span>
+                              </div>
+                              <div className="flex gap-2">
+                                {isCorrect && (
+                                  <span className="text-lime-400 text-sm">✓ Correct</span>
+                                )}
+                                {isUserChoice && (
+                                  <span className="text-blue-400 text-sm">Your Answer</span>
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                    <button
+                      className={`px-4 py-2 rounded-lg font-semibold transition-all ${
+                        isSaved
+                          ? 'bg-lime-500 text-black hover:bg-lime-400'
+                          : 'bg-gray-700 text-white hover:bg-gray-600'
+                      } ${loading ? 'opacity-60 cursor-not-allowed' : ''}`}
+                      onClick={handleToggleSave}
+                      disabled={loading}
+                    >
+                      {isSaved ? 'Saved' : 'Save Question'}
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+          </motion.div>
+        )}
+
         {/* Action Buttons */}
         <motion.div
           className="flex flex-col md:flex-row gap-4 justify-center"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
         >
           <Link
-            href="/match"
+            href="/battle"
             className="flex items-center justify-center gap-3 px-8 py-4 bg-lime-500 hover:bg-lime-400 text-black rounded-xl font-bold transition-all lime-glow-strong"
           >
             <Swords className="w-6 h-6" />

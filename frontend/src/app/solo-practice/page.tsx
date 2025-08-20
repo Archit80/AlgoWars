@@ -1,5 +1,7 @@
 "use client";
 import React, { useEffect, useState, useCallback } from "react";
+import { useRouter } from "next/navigation";
+import { useUser } from "@/contexts/userContext";
 import Result from "../result/page";
 import QuestionsService from "@/services/questionsService";
 import { motion } from "framer-motion";
@@ -22,11 +24,20 @@ const spaceGrotesk = Space_Grotesk({
 // import Link from "next/link"; // Use next/link for Next.js navigation
 
 const SoloPractice = () => {
-  const { questions, currentIndex, submitAnswer, nextQuestion, soloSessionId, mode } = usePracticeStore();
+  const { supabaseUser } = useUser();
+  const router = useRouter();
+  const { questions, currentIndex, submitAnswer, nextQuestion, soloSessionId, mode, userAnswers } = usePracticeStore();
   const currentQuestion = questions[currentIndex];
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [score, setScore] = useState(0);
   const [timeLeft, setTimeLeft] = useState(60);
+
+  // Route protection
+  useEffect(() => {
+    if (!supabaseUser) {
+      router.push("/login");
+    }
+  }, [supabaseUser, router]);
 
   // If all questions are done, show result
   const [isQuizComplete, setIsQuizComplete] = useState(false);
@@ -195,13 +206,32 @@ const SoloPractice = () => {
         // Simple: Total time since session started
         const totalDurationInSeconds = Math.floor((Date.now() - sessionStartTime) / 1000);
 
+        // Build question results for the result page
+        const questionResults = questions.map(question => {
+          const userAnswer = userAnswers.find(ua => ua.questionId === question.id);
+          return {
+            id: question.id,
+            text: question.text,
+            options: question.options,
+            correctAnswer: question.answer,
+            userAnswer: userAnswer?.selectedOption || null,
+            userCorrect: userAnswer?.isCorrect || false
+          };
+        });
+
         const res = await QuestionsService.endSoloSession({
           soloSessionId,
           score,
           total: questions.length,
-          duration: totalDurationInSeconds, 
+          duration: totalDurationInSeconds,
+          questionResults
+        } as any);
+        
+        // Add questionResults to the session stats for the result page
+        setSessionStats({
+          ...res,
+          questionResults
         });
-        setSessionStats(res);
       } catch (err) {
         console.error("Failed to end solo session:", err);
       }
@@ -213,7 +243,7 @@ const SoloPractice = () => {
       }
       nextQuestion();
     }
-  }, [currentIndex, questions.length, sessionStartTime, soloSessionId, score, nextQuestion, mode]);
+  }, [currentIndex, questions, sessionStartTime, soloSessionId, score, nextQuestion, mode, userAnswers]);
 
   useEffect(() => {
     if (mode === "timed" && timeLeft > 0) {
@@ -241,7 +271,7 @@ const SoloPractice = () => {
 
 
   if (questions.length === 0) {
-    return <div className="text-white p-8">No questions available.</div>;
+    return <div className="text-white p-8">404 <br /> The Page <span className="font-mono">/404</span> Not Found</div>;
   }
 
   if (isQuizComplete || currentIndex >= questions.length) {
@@ -261,6 +291,11 @@ const SoloPractice = () => {
     console.log("score", score);
     handleNext();
   };
+
+  // Show nothing while redirecting to login
+  if (!supabaseUser) {
+    return null;
+  }
   
   return (
     <div className="min-h-screen p-6 bg-[#0E0E0E]">

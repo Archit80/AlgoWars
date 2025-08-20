@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 async function main() {
   const userId = randomUUID();
 
-  const email = `user${Math.floor(Math.random() * 10000)}@codeclash.io`;
+  const email = `user${Math.floor(Math.random() * 10000)}@algowars.io`;
   const username = `user_${Math.floor(Math.random() * 10000)}`;
   const xp = Math.floor(Math.random() * 1000);
   const streak = Math.floor(Math.random() * 30);

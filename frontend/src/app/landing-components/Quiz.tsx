@@ -14,48 +14,56 @@ const Quiz = () => {
     {
       type: "output",
       title: "What's the Output?",
-      code: `let x = 5;
-let y = "5";
-console.log(x == y);
-console.log(x === y);`,
+      code: `function binarySearch(arr, target) {
+  let l = 0, r = arr.length - 1;
+  while (l <= r) {
+    const m = Math.floor((l + r) / 2);
+    if (arr[m] === target) return m;
+    if (arr[m] < target) l = m + 1;
+    else r = m - 1;
+  }
+  return -1;
+}
+
+console.log(binarySearch([1, 3, 5, 7, 9], 7));`,
       question: "What will be logged to the console?",
-      options: ["true, true", "true, false", "false, true", "false, false"],
-      correct: 1,
+      options: ["0", "2", "3", "-1"],
+      correct: 2,
       explanation:
-        "== does type coercion (5 == '5' is true), but === checks type and value (5 === '5' is false)",
+        "Binary search returns the index of 7 in the sorted array [1,3,5,7,9]. Zero-based index of 7 is 3.",
     },
-    
+
     {
       type: "logic",
       title: "Logic Challenge",
-      code: `let count = 0;
-for (let i = 0; i < 3; i++) {
-  for (let j = 0; j < 2; j++) {
-    count++;
-  }
-}
-console.log(count);`,
-      question: "What's the final value of count?",
-      options: ["3", "5", "6", "2"],
-      correct: 2,
-      explanation:
-        "Nested loops: outer runs 3 times, inner runs 2 times each = 3 × 2 = 6!",
-    },
-        {
-      type: "output",
-      title: "Tricky Output",
-      code: `console.log(0.1 + 0.2);
-console.log(0.1 + 0.2 === 0.3);`,
-      question: "What gets printed?",
-      options: [
-        "0.3, true",
-        "0.30000000000000004, false",
-        "0.3, false",
-        "Error",
-      ],
+      code: `const stack = [];
+stack.push(1);
+stack.push(2);
+stack.pop();
+stack.push(3);
+console.log(stack.length);`,
+      question: "What's the final stack size?",
+      options: ["1", "2", "3", "0"],
       correct: 1,
       explanation:
-        "JavaScript floating point precision! 0.1 + 0.2 = 0.30000000000000004",
+        "Push 1, push 2 (size 2), pop (size 1), push 3 → final size 2.",
+    },
+
+    {
+      type: "output",
+      title: "Tricky Output",
+      code: `let i = 1;
+let count = 0;
+while (i <= 16) {
+  count++;
+  i *= 2;
+}
+console.log(count);`,
+      question: "What gets printed?",
+      options: ["4", "5", "16", "log n"],
+      correct: 1,
+      explanation:
+        "A doubling loop visits i = 1,2,4,8,16 → 5 iterations, so count = 5 (≈ log2(n)+1).",
     },
   ];
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -100,7 +108,7 @@ console.log(0.1 + 0.2 === 0.3);`,
           <h2
             className={`text-4xl lg:text-5xl font-bold mb-2 ${spaceGrotesk.className}`}
           >
-            <span className="bg-gradient-to-r from-lime-400 to-green-500 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-b from-lime-400 to-green-500 bg-clip-text text-transparent">
               Quick Fire Challenges
             </span>
           </h2>
@@ -332,8 +340,8 @@ console.log(0.1 + 0.2 === 0.3);`,
             <p className="text-gray-300 mb-6 leading-relaxed  ">Train your brain. Rise through ranks. Earn your glory.</p>
 
             <div className="space-y-3">
-              <Button className="w-full bg-gradient-to-r from-lime-500 to-green-600 hover:from-lime-600 hover:to-green-700 text-white font-bold transform hover:scale-102 transition-all duration-200 hover:cursor-pointer">
-                <Swords className="w-5 h-5 mr-2" />
+              <Button className="w-full bg-gradient-to-r py-6 text-lg from-lime-500 to-green-600 hover:from-lime-600 hover:to-green-700 text-white font-bold transform hover:scale-98 transition-all duration-200 hover:cursor-pointer">
+                <Swords className="w-10 h-10 mr-2" />
                 Enter the Arena
               </Button>
 

@@ -10,13 +10,13 @@ const Header = () => (
     <Link href="/" className="flex items-center space-x-2">
       <Image
         src="/logo.png"
-        alt="CodeClash Logo"
+  alt="AlgoWars Logo"
         width={48}
         height={48}
         className="rounded-lg"
       />
       <span className={`text-2xl font-bold bg-gradient-to-r from-lime-400 to-green-500 bg-clip-text text-transparent ${spaceGrotesk.className}`}>
-        CodeClash
+        AlgoWars
       </span>
     </Link>
     <nav className={`ml-auto  gap-6 hidden md:flex ${spaceGrotesk.className}`}>

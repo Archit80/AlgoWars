@@ -15,7 +15,7 @@ const jetBrainsMono = JetBrainsMono({
 })
 
 export const metadata: Metadata = {
-  title: "CodeClash - Clash with Code. Rise through the ranks.",
+  title: "AlgoWars - Clash with Code. Rise through the ranks.",
   description: "Gamified coding platform for competitive programming",
 }
 

@@ -9,7 +9,7 @@ const FeaturesSection = () => (
     <div className="max-w-6xl mx-auto">
       <div className="text-center mb-16">
         <h2 className={`text-4xl lg:text-5xl font-bold mb-4 ${spaceGrotesk.className}`}>
-          <span className="bg-gradient-to-r from-lime-400 to-green-500 bg-clip-text text-transparent">Game-Changing Features</span>
+          <span className="bg-gradient-to-b from-lime-400 to-green-500 bg-clip-text text-transparent">Game-Changing Features</span>
         </h2>
         <p className="text-xl text-gray-400 max-w-2xl mx-auto">Everything you need to dominate the coding arena and level up your programming skills</p>
       </div>

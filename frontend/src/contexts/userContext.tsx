@@ -12,7 +12,8 @@ interface UserStats {
 }
 
 interface UserContextType {
-  supabaseUser: any;
+  supabaseUser: unknown;
+  initialized: boolean;
   userStats: UserStats;
   updateXP: (xp: number) => void;
   updateStreak: (streak: number) => void;
@@ -24,7 +25,8 @@ interface UserContextType {
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [supabaseUser, setSupabaseUser] = useState<any>(null);
+  const [supabaseUser, setSupabaseUser] = useState<unknown | null>(null);
+  const [initialized, setInitialized] = useState(false);
   const [userStats, setUserStats] = useState<UserStats>({
     xp: 1250,
     level: 7,
@@ -43,14 +45,27 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   useEffect(() => {
-    refreshUser();
-    // Listen for auth state changes
-    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+    // Fetch current session/user immediately so page reloads restore state
+    (async () => {
+      const { data: sessionData } = await supabase.auth.getSession();
+      setSupabaseUser(sessionData?.session?.user || null);
+      setInitialized(true);
+    })();
+
+    // Listen for auth state changes and clean up properly
+    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
       setSupabaseUser(session?.user || null);
-      // Optionally: fetch stats from backend here
     });
+
     return () => {
-      listener?.subscription?.unsubscribe();
+      // authListener is a { subscription } object in older libs; handle both shapes
+      /* eslint-disable @typescript-eslint/no-explicit-any */
+      if (authListener && (authListener as any).subscription) {
+        (authListener as any).subscription.unsubscribe();
+      } else if (authListener && typeof (authListener as any).unsubscribe === 'function') {
+        (authListener as any).unsubscribe();
+      }
+      /* eslint-enable @typescript-eslint/no-explicit-any */
     };
   }, []);
 
@@ -79,8 +94,8 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     setUserStats(prev => ({ ...prev, accuracy }));
   };
 
-  return (
-    <UserContext.Provider value={{ supabaseUser, userStats, updateXP, updateStreak, addBattleResult, updateAccuracy, refreshUser }}>
+    return (
+    <UserContext.Provider value={{ supabaseUser, initialized, userStats, updateXP, updateStreak, addBattleResult, updateAccuracy, refreshUser }}>
       {children}
     </UserContext.Provider>
   );

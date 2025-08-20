@@ -10,6 +10,17 @@ const api = axios.create({
 });
 
 // Types based on the backend User schema
+export interface RecentBattle {
+  winnerId?: string;
+  user1Id: string;
+  user2Id: string;
+  user1?: { username: string };
+  user2?: { username: string };
+  user1Score: number;
+  user2Score: number;
+  createdAt: string;
+}
+
 interface SoloSession {
   id: number;
   totalQuestions: number;
@@ -43,25 +54,92 @@ interface UserAchievement {
 
 export interface UserData {
   id: string;
-  email: string;
+  email?: string;
   username: string | null;
-  xp: number;
-  streak: number;
-  soloSessions: SoloSession[];
-  userAchievements: UserAchievement[];
-  // Calculated fields from backend
-  level: number;
+  profilePic?: string;
+  isOnboarded: boolean;
+  xp?: number;
   currentXP: number;
-  xpToNext: number;
-  totalXP: number;
-  accuracy: number;
-  battlesWon: number;
-  totalBattles: number;
-  stats: {
+  streak: number;
+  longestStreak: number;
+  level: number;
+  tier?: number;
+  tierName?: string;
+  tierColor?: string;
+  tierEmoji?: string;
+  isAtMilestone?: boolean;
+  soloSessions?: SoloSession[];
+  userAchievements?: UserAchievement[];
+  recentBattles?: RecentBattle[];
+  totalMatches?: number;
+  matchesWon?: number;
+  matchesLost?: number;
+  correctAnswers?: number;
+  totalAnswers?: number;
+  lastMatchAt?: string;
+  currentLevelXP?: number;
+  xpToNext?: number;
+  totalXPForNextLevel?: number;
+  xpRequiredForCurrentLevel?: number;
+  progress?: number;
+  savedQuestions?: any[];
+  totalXP?: number;
+  accuracy?: number;
+  battlesWon?: number;
+  totalBattles?: number;
+  stats?: {
     totalSoloSessions: number;
     totalCorrectAnswers: number;
     totalQuestions: number;
     winRate: number;
+  };
+}
+
+// New interface for fast stats endpoint
+export interface UserStats {
+  id: string;
+  username: string | null;
+  xp: number;
+  streak: number;
+  totalMatches: number;
+  matchesWon: number;
+  matchesLost: number;
+  correctAnswers: number;
+  totalAnswers: number;
+  lastMatchAt?: string;
+  // Derived stats
+  winRate: number;
+  accuracy: number;
+  matchesDrawn: number;
+}
+
+// New interface for detailed level info endpoint
+export interface UserLevelInfo {
+  userId: string;
+  username: string;
+  totalXP: number;
+  // Current level info
+  level: number;
+  currentLevelXP: number;
+  xpRequiredForCurrentLevel: number;
+  progress: number; // 0-100 percentage
+  // Next level info
+  xpToNext: number;
+  totalXPForNextLevel: number;
+  // Tier information
+  tier: {
+    level: number;
+    name: string;
+    color: string;
+    emoji: string;
+  };
+  // Special status
+  isAtMilestone: boolean;
+  // Time estimates
+  timeToNextLevel: {
+    days: number;
+    weeks: number;
+    months: number;
   };
 }
 
@@ -72,6 +150,59 @@ const UserService = {
       return response.data.data;
     } catch (error) {
       console.error('Error fetching user data:', error);
+      throw error;
+    }
+  },
+
+  getUserDataByUsername: async (username: string): Promise<UserData> => {
+    try {
+      const response = await api.get(`/user/username/${username}`);
+      return response.data.data;
+    } catch (error) {
+      console.error('Error fetching user data by username:', error);
+      throw error;
+    }
+  },
+
+  // PATCH onboarding info
+  updateOnboarding: async (userId: string, data: { username: string; profilePic: string }) => {
+    try {
+      const response = await api.patch(`/user/${userId}/onboarding`, data);
+      return response.data.data;
+    } catch (error) {
+      console.error('Error updating onboarding:', error);
+      throw error;
+    }
+  },
+
+  // New fast stats endpoint using explicit counters
+  getUserStats: async (userId: string): Promise<UserStats> => {
+    try {
+      const response = await api.get(`/user/${userId}/stats`);
+      return response.data.stats;
+    } catch (error) {
+      console.error('Error fetching user stats:', error);
+      throw error;
+    }
+  },
+
+  getUserStatsByUsername: async (username: string): Promise<UserStats> => {
+    try {
+      const response = await api.get(`/user/username/${username}/stats`);
+      return response.data.stats;
+    } catch (error) {
+      console.error('Error fetching user stats by username:', error);
+      throw error;
+    }
+  },
+
+  // New detailed level info endpoint
+  getUserLevelInfo: async (userId: string): Promise<UserLevelInfo> => {
+    try {
+      const response = await api.get(`/user/${userId}/level`);
+      return response.data.data;
+    } catch (error) {
+      console.error('Error fetching user level info:', error);
       throw error;
     }
   },

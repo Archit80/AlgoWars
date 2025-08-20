@@ -1,24 +1,15 @@
+"use client";
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Crown, Trophy, Medal } from "lucide-react"
-
-interface LeaderboardEntry {
-  rank: number
-  username: string
-  xp: number
-  level: number
-  wins: number
-}
-
-const mockLeaderboard: LeaderboardEntry[] = [
-  { rank: 1, username: "CodeNinja42", xp: 25680, level: 47, wins: 156 },
-  { rank: 2, username: "AlgoMaster", xp: 23450, level: 44, wins: 142 },
-  { rank: 3, username: "ByteWarrior", xp: 22890, level: 43, wins: 138 },
-  { rank: 4, username: "LogicLord", xp: 21340, level: 41, wins: 127 },
-  { rank: 5, username: "SyntaxSlayer", xp: 20100, level: 39, wins: 119 },
-]
+import { useQuery } from "@tanstack/react-query";
+import LeaderboardService, { LeaderboardUser } from "@/services/leaderboardService";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 export function Leaderboard() {
+  const [queryClient] = useState(() => new QueryClient());
+  // rank icon helper in outer scope so it can be used by the inner renderer
   const getRankIcon = (rank: number) => {
     switch (rank) {
       case 1:
@@ -32,35 +23,61 @@ export function Leaderboard() {
     }
   }
 
-  return (
-    <Card className="md:max-w-5xl mx-auto bg-neutral-900 border-2 border-neutral-800">
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-lg ml-1 -mb-2 text-white">
-          <Trophy className="w-6 h-6 text-lime-400" />
-          Global Leaderboard
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-3">
-        {mockLeaderboard.map((entry) => (
-          <div
-            key={entry.rank}
-            className="flex items-center justify-between py-3 px-6 rounded-lg bg-neutral-800/60 transition-colors"
-          >
-            <div className="flex items-center gap-4 ">
-              {getRankIcon(entry.rank)}
-              <div>
-                <p className="font-semibold text-white">{entry.username}</p>
-                <p className="text-sm text-muted-foreground">
-                  Level {entry.level} • {entry.wins} wins
-                </p>
+  // Move useQuery into a child so it runs inside the QueryClientProvider
+  function LeaderboardContent() {
+    const { data, isLoading, error } = useQuery({
+      queryKey: ["leaderboard"],
+      queryFn: async () => {
+        const res = await LeaderboardService.getLeaderboard();
+        return res;
+      },
+    });
+
+    // Keep rendering the same UI; if loading, show placeholders
+    const leaderboard = data ?? [] as LeaderboardUser[];
+
+    return (
+      <Card className="md:max-w-5xl mx-auto bg-neutral-900 border-2 border-neutral-800 z-20">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-lg ml-1 -mb-2 text-white">
+            <Trophy className="w-6 h-6 text-lime-400" />
+            Global Leaderboard
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-3">
+          {isLoading && (
+            <div className="text-gray-400">Loading leaderboard...</div>
+          )}
+          {error && (
+            <div className="text-red-400">Failed to load leaderboard</div>
+          )}
+          {!isLoading && !error && leaderboard.map((player, idx) => (
+            <div
+              key={player.id}
+              className="flex items-center justify-between py-3 px-6 rounded-lg bg-neutral-800/60 transition-colors"
+            >
+              <div className="flex items-center gap-4 ">
+                {getRankIcon(idx + 1)}
+                <div>
+                  <p className="font-semibold text-white">{player.username}</p>
+                  <p className="text-sm text-muted-foreground">
+                    Level {player.level ?? 0}
+                  </p>
+                </div>
               </div>
+              <Badge className={idx === 0 ? "bg-lime-400 font-semibold shadow-lime-300 shadow-sm text-black" : "bg-neutral-700 text-white"}>
+                {(player.xp ?? 0).toLocaleString()} XP
+              </Badge>
             </div>
-            <Badge className={entry.rank === 1 ? "bg-lime-400 font-semibold shadow-lime-300 shadow-sm text-black" : "bg-neutral-700 text-white"}>
-              {entry.xp.toLocaleString()} XP
-            </Badge>
-          </div>
-        ))}
-      </CardContent>
-    </Card>
+          ))}
+        </CardContent>
+      </Card>
+    )
+  }
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <LeaderboardContent />
+    </QueryClientProvider>
   )
 }

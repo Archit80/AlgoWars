@@ -23,7 +23,7 @@ export interface UserStore {
 }
 
 
-export const useUserStore = create<UserStore>((set, get) => {
+export const useUserStore = create<UserStore>((set) => {
   // Initial state
   const initialState = {
     supabaseUser: null,

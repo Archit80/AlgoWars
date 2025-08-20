@@ -11,7 +11,7 @@ const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-space",
 });
-const Header = ({ streak, player }: { streak: number; player: { name: string; avatar: string; id: string } }) => {
+const Header = ({ streak, player }: { streak: number; player: { name: string; profilePic: string; id: string; username?: string } }) => {
   return (
     <header className={`${spaceGrotesk.className} border-b top-0 sticky border-gray-800 bg-black/50 backdrop-blur-sm`}>
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
@@ -21,12 +21,12 @@ const Header = ({ streak, player }: { streak: number; player: { name: string; av
             width={96}
             height={96}
             src="/logo.png"
-            alt="CodeClash"
+            alt="AlgoWars"
             className="h-12 w-12 "
           />
 
           <h1 className="text-2xl font-bold font-space text-[#84CC16]">
-            CodeClash
+            AlgoWars
           </h1>
         </div>
         <div className="flex items-center space-x-4 text-sm">
@@ -34,10 +34,10 @@ const Header = ({ streak, player }: { streak: number; player: { name: string; av
             <Flame className="!h-4 !w-4 " />
             {streak} day streak
           </Badge>
-          <Link href={`/profile/${player.id}`} className="flex items-center space-x-2">
+          <Link href={`/profile/${player.username || player.id}`} className="flex items-center space-x-2">
           <Button variant="ghost"  className=" rounded-full bg-lime-400 h-10 w-10 hover:bg-lime-500 hover:cursor-pointer">
             <Avatar className="h-9 w-9">
-              <AvatarImage src={player.avatar || "/placeholder.svg"} />
+              <AvatarImage src={player.profilePic || "/placeholder.svg"} />
               <AvatarFallback>{player.name }</AvatarFallback>
             </Avatar>
           </Button>

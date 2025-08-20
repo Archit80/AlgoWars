@@ -2,7 +2,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Trophy } from "lucide-react";
 import { Space_Grotesk } from "next/font/google";
 import { useQuery } from "@tanstack/react-query";
-import  LeaderboardService  from "@/services/leaderboardService";
+import  LeaderboardService, { LeaderboardUser }  from "@/services/leaderboardService";
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"] });
 
 // const leaderboardData = [
@@ -19,11 +19,8 @@ const LeaderboardSection = () => {
     queryKey: ["leaderboard"],
     queryFn: async () => {
       const response = await LeaderboardService.getLeaderboard();
-      console.log(response) ;
-      if (!response.success) {
-        throw new Error("Network response was not ok");
-      }
-      return response.data;
+      console.log(response);
+      return response;
     },
   });
 
@@ -40,7 +37,7 @@ const LeaderboardSection = () => {
           <h2
             className={`text-4xl lg:text-5xl font-bold mb-4 ${spaceGrotesk.className}`}
           >
-            <span className="bg-gradient-to-r from-lime-400 to-green-500 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-b from-lime-400 to-green-500 bg-clip-text text-transparent">
               Hall of Fame
             </span>
           </h2>
@@ -59,7 +56,7 @@ const LeaderboardSection = () => {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {data?.map((player: { id: string; username: string; xp: number; streak: number }, index: number) => {
+              {data?.map((player: LeaderboardUser, index: number) => {
                 let badge = "⭐";
                 if (index === 0) badge = "🥇";
                 else if (index === 1) badge = "🥈";
@@ -74,12 +71,13 @@ const LeaderboardSection = () => {
                       <div>
                         <p className="font-semibold text-white">{player.username}</p>
                         <p className="text-sm text-gray-400">
-                          Rank #{index + 1}
+                          Rank #{index + 1} • {player.totalMatches} battles • {player.winRate}% win rate
                         </p>
                       </div>
                     </div>
                     <div className="text-right">
-                      <p className="font-bold text-lime-400">{player.xp}</p>
+                      <p className="font-bold text-lime-400">{player.xp} XP</p>
+                      <p className="text-sm text-gray-400">{player.accuracy}% accuracy</p>
                     </div>
                   </div>
                 );

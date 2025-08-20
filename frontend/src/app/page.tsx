@@ -12,7 +12,7 @@ import { Loader2, Code2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-export default function CodeClashLanding() {
+export default function AlgoWarsLanding() {
   const queryClient = new QueryClient();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -32,7 +32,7 @@ export default function CodeClashLanding() {
           <div className="flex items-center gap-2 text-lime-400">
             <Loader2 className="w-4 h-4 animate-spin" />
             <span className={`text-lg ${spaceGrotesk.className}`}>
-              Loading CodeClash...
+              Loading AlgoWars...
             </span>
           </div>
         </div>

@@ -13,8 +13,7 @@ $questionStarted = $false
 
 for ($i = 0; $i -lt $lines.Length; $i++) {
     $line = $lines[$i]
-    
-    # Check if this line contains a question number
+        # Check if this line contains a question number
     if ($line -match "^(\d+)\. [A-Z]") {
         # If we were in a question, add it to output if it's in our list
         if ($inQuestion -and $questionStarted -and $questionNumbers -contains $questionNumber) {

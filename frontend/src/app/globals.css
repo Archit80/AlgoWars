@@ -123,7 +123,7 @@
   }
 }
 
-/* Custom syntax highlighting theme for CodeClash */
+/* Custom syntax highlighting theme for AlgoWars */
 .token.keyword {
   color: #ff6b6b !important; /* Red for keywords like if, for, function */
   font-weight: bold;

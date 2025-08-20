@@ -1,8 +1,9 @@
 import prisma from '../db/prismaClient.js';
+import AchievementService from '../services/achievementService.js';
 
 export const endSoloSession = async (req, res) => {
   try {
-    const { soloSessionId, score, total, duration, mode } = req.body;
+    const { soloSessionId, score, total, duration, mode, questionResults } = req.body;
     if (!soloSessionId || score == null || total == null) {
       return res.status(400).json({ error: 'soloSessionId, score, and total are required' });
     }
@@ -17,7 +18,7 @@ export const endSoloSession = async (req, res) => {
       else if (diff === 'hard') difficultyMultiplier = 2.0;
     }
     let baseXP = score * 20 * difficultyMultiplier;
-    let xpMultiplier = mode === 'timed' ? 1.5 : 1.0; // 50% bonus for timed mode
+    let xpMultiplier = mode === 'timed' ? 1.25 : 1.0; // 25% bonus for timed mode
     const xpEarned = Math.floor(baseXP * xpMultiplier);
 
     // Update the SoloSession
@@ -31,15 +32,21 @@ export const endSoloSession = async (req, res) => {
       },
     });
 
-    // Update user's XP
+    // Update user's XP and explicit counters
     const user = await prisma.user.update({
       where: { id: updatedSession.userId },
       data: {
         xp: { increment: xpEarned }, // Increment user's XP
+        correctAnswers: { increment: score }, // Update explicit counter
+        totalAnswers: { increment: total }, // Update explicit counter
       }
     });
 
-    // Return session stats
+    // Update streak and check achievements after solo session completion
+    await AchievementService.updateUserStreak(updatedSession.userId);
+    await AchievementService.checkAchievements(updatedSession.userId);
+
+    // Return session stats with question results
     res.status(200).json({
       success: true,
       soloSessionId,
@@ -51,6 +58,7 @@ export const endSoloSession = async (req, res) => {
       difficulty: updatedSession.difficulty,
       categories: updatedSession.categories,
       endedAt: updatedSession.endedAt,
+      questionResults: questionResults || [], // Include question-by-question results
     });
   } catch (error) {
     console.error('Error ending solo session:', error);

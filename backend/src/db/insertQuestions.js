@@ -141,7 +141,7 @@ async function insertQuestionsToDatabase() {
     });
 
     console.log('\n✅ Questions successfully pushed to database!');
-    console.log('🚀 Your CodeClash platform is ready with comprehensive DSA questions!');
+  console.log('🚀 Your AlgoWars platform is ready with comprehensive DSA questions!');
 
   } catch (error) {
     console.error('💥 Database insertion failed:', error);

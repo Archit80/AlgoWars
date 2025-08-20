@@ -35,7 +35,7 @@ const HowItWorksSection = () => (
     <div className="max-w-6xl mx-auto">
       <div className="text-center mb-16">
         <h2 className={`text-4xl lg:text-5xl font-bold mb-4 ${spaceGrotesk.className}`}>
-          <span className="bg-gradient-to-r from-lime-400 to-green-500 bg-clip-text text-transparent">How It Works</span>
+          <span className="bg-gradient-to-b from-lime-400 to-green-500 bg-clip-text text-transparent">How It Works</span>
         </h2>
         <p className="text-xl text-gray-400 max-w-2xl mx-auto">Get started in minutes and begin your journey to coding mastery</p>
       </div>

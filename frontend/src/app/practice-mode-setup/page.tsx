@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -82,6 +82,7 @@ const modes = [
 ];
 
 const PracticeModeSetup: React.FC = () => {
+  const router = useRouter();
   const setQuestions = usePracticeStore((state: PracticeStore) => state.setQuestions);
   const setMode = usePracticeStore((s: PracticeStore) => s.setMode);
   const setCategory = usePracticeStore((s: PracticeStore) => s.setCategory);
@@ -90,9 +91,14 @@ const PracticeModeSetup: React.FC = () => {
   const [selectedDifficulty, setSelectedDifficulty] = useState<string>("");
   const [selectedQuestionCount, setSelectedQuestionCount] = useState<number>(10);
   const [selectedMode, setSelectedMode] = useState<string>("");
-
-  const router = useRouter();
   const supabaseUser = useUserStore((state) => state.supabaseUser);
+
+  // Route protection
+  useEffect(() => {
+    if (!supabaseUser) {
+      router.push("/login");
+    }
+  }, [supabaseUser, router]);
 
   const toggleTopic = (topicId: string) => {
     setSelectedTopics(prev => {
@@ -140,6 +146,11 @@ const PracticeModeSetup: React.FC = () => {
       alert("Something went wrong: " + errorMessage);
     }
   };
+
+  // Show nothing while redirecting to login
+  if (!supabaseUser) {
+    return null;
+  }
 
   return (
     <div className="min-h-screen p-6 bg-[#0E0E0E]">

@@ -30,15 +30,30 @@ const QuestionsService = {
       throw error;
     }
   },
-  endSoloSession: async ({ soloSessionId, score, total, duration, mode }: { soloSessionId: number, score: number, total: number, duration?: number, mode?: string }) => {
+  endSoloSession: async ({ soloSessionId, score, total, duration, mode, questionResults }: { 
+    soloSessionId: number, 
+    score: number, 
+    total: number, 
+    duration?: number, 
+    mode?: string,
+    questionResults?: Array<{
+      id: string;
+      text: string;
+      options: string[];
+      correctAnswer: string;
+      userAnswer: string | null;
+      userCorrect: boolean;
+    }>
+  }) => {
     try {
-      console.log("[API] Ending solo session", { soloSessionId, score, total, duration, mode });
+      console.log("[API] Ending solo session", { soloSessionId, score, total, duration, mode, questionResults });
       const response = await api.post("/questions/end-solo-session", {
         soloSessionId,
         score,
         total,
         duration,
         mode,
+        questionResults,
       });
       console.log("[API] Ended solo session response:", response.data);
       return response.data;
