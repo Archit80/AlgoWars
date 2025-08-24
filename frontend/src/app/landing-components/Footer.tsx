@@ -9,8 +9,9 @@ const spaceGrotesk = Space_Grotesk({ subsets: ["latin"] });
 const Footer = () => (
   <footer className="relative px-4 py-8 bg-gray-950 border-t border-gray-800">
     <div className="relative z-10 max-w-6xl mx-auto">
-      <div className="flex flex-col lg:flex-row gap-12">
-        <div className="flex-1">
+      <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
+        {/* Main Footer Content */}
+        <div className="flex-1 order-2 lg:order-1">
           <div className="flex items-center space-x-3 mb-8">
             <div className="w-fit h-fit flex items-center justify-center">
               {/* <Code2 className="h-6 w-6 text-black" /> */}
@@ -76,21 +77,27 @@ const Footer = () => (
             </p>
           </div>
         </div>
-        <ProfileCard
-          avatarUrl="/avatar.png"
-          miniAvatarUrl="/mini-avatar.png"
-          showBehindGradient={false}
-          enableMobileTilt={true}
-          name="Archit Taneja"
-          title="Full Stack Developer"
-          handle="archit80"
-          contactText="Github"
-          showUserInfo={true}
-          onContactClick={() =>
-            window.open("https://github.com/archit80", "_blank")
-          }
-          iconUrl="https://cdn-icons-png.flaticon.com/512/25/25231.png"
-        />
+
+        {/* Profile Card - Now with explicit mobile visibility */}
+        <div className="w-full lg:w-auto order-1 lg:order-2 flex justify-center lg:justify-end">
+          <div className="w-full max-w-sm lg:max-w-none">
+            <ProfileCard
+              avatarUrl="/avatar.png"
+              miniAvatarUrl="/mini-avatar.png"
+              showBehindGradient={false}
+              enableMobileTilt={true}
+              name="Archit Taneja"
+              title="Full Stack Developer"
+              handle="archit80"
+              contactText="Github"
+              showUserInfo={true}
+              onContactClick={() =>
+                window.open("https://github.com/archit80", "_blank")
+              }
+              iconUrl="https://cdn-icons-png.flaticon.com/512/25/25231.png"
+            />
+          </div>
+        </div>
       </div>
     </div>
   </footer>
