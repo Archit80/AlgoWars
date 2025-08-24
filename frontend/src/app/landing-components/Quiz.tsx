@@ -3,7 +3,7 @@ import React, { useState } from "react";
 // import { useState } from "react";
 import {Button} from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Brain, Bug, Code2, Target, CheckCircle, Trophy, Badge, Swords } from "lucide-react";
+import { Brain, CheckCircle, Trophy, Badge, Swords } from "lucide-react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism";
   import { Space_Grotesk } from "next/font/google";
@@ -14,35 +14,50 @@ const Quiz = () => {
     {
       type: "output",
       title: "What's the Output?",
-      code: `function binarySearch(arr, target) {
-  let l = 0, r = arr.length - 1;
+      code: `#include <bits/stdc++.h>
+using namespace std;
+
+int binarySearch(const vector<int>& arr, int target) {
+  int l = 0, r = (int)arr.size() - 1;
   while (l <= r) {
-    const m = Math.floor((l + r) / 2);
-    if (arr[m] === target) return m;
+    int m = l + (r - l) / 2;
+    if (arr[m] == target) return m;
     if (arr[m] < target) l = m + 1;
     else r = m - 1;
   }
   return -1;
 }
 
-console.log(binarySearch([1, 3, 5, 7, 9], 7));`,
-      question: "What will be logged to the console?",
+int main() {
+  vector<int> a = {1, 3, 5, 7, 9};
+  cout << binarySearch(a, 7) << endl;
+  return 0;
+}
+`,
+      question: "What will be printed to stdout?",
       options: ["0", "2", "3", "-1"],
       correct: 2,
       explanation:
-        "Binary search returns the index of 7 in the sorted array [1,3,5,7,9]. Zero-based index of 7 is 3.",
+        "Binary search returns the index of 7 in the sorted vector {1,3,5,7,9}. Zero-based index of 7 is 3.",
     },
 
     {
       type: "logic",
       title: "Logic Challenge",
-      code: `const stack = [];
-stack.push(1);
-stack.push(2);
-stack.pop();
-stack.push(3);
-console.log(stack.length);`,
-      question: "What's the final stack size?",
+      code: `#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+  vector<int> st;
+  st.push_back(1);
+  st.push_back(2);
+  st.pop_back();
+  st.push_back(3);
+  cout << st.size() << endl;
+  return 0;
+}
+`,
+      question: "What's the final stack size printed?",
       options: ["1", "2", "3", "0"],
       correct: 1,
       explanation:
@@ -52,13 +67,20 @@ console.log(stack.length);`,
     {
       type: "output",
       title: "Tricky Output",
-      code: `let i = 1;
-let count = 0;
-while (i <= 16) {
-  count++;
-  i *= 2;
+      code: `#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+  int i = 1;
+  int count = 0;
+  while (i <= 16) {
+    count++;
+    i *= 2;
+  }
+  cout << count << endl;
+  return 0;
 }
-console.log(count);`,
+`,
       question: "What gets printed?",
       options: ["4", "5", "16", "log n"],
       correct: 1,
@@ -102,7 +124,7 @@ console.log(count);`,
   };
 
   return (  
-    <section className="px-4 py-16 bg-gradient-to-b from-gray-900/50 to-transparent">
+  <section className="px-4 py-12 sm:py-16 bg-gradient-to-b from-gray-900/50 to-transparent">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-8">
           <h2
@@ -117,7 +139,7 @@ console.log(count);`,
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 items-start">
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
           {/* Quiz Stats & Info */}
           <div className="space-y-6">
             {/* Current Stats */}
@@ -158,7 +180,7 @@ console.log(count);`,
               {mcqQuestions.map((_, index) => (
                 <div
                   key={index}
-                  className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-200 ${
+                  className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-200 ${
                     currentQuestion === index
                       ? "bg-lime-400 text-black"
                       : index < currentQuestion
@@ -171,26 +193,7 @@ console.log(count);`,
               ))}
             </div>
 
-            {/* Challenge Types */}
-            <div className="grid grid-cols-2 gap-3">
-              {[
-                { icon: Bug, label: "Debug", count: "2.1k" },
-                { icon: Brain, label: "Logic", count: "1.8k" },
-                { icon: Code2, label: "Syntax", count: "3.2k" },
-                { icon: Target, label: "Output", count: "2.7k" },
-              ].map((type) => (
-                <div
-                  key={type.label}
-                  className="bg-gray-800/50 rounded-lg p-3 text-center"
-                >
-                  <type.icon className="w-5 h-5 text-lime-400 mx-auto mb-1" />
-                  <div className="text-xs text-gray-400">{type.label}</div>
-                  <div className="text-sm font-bold text-white">
-                    {type.count}
-                  </div>
-                </div>
-              ))}
-            </div>
+          
           </div>
 
           {/* Quiz Interface */}
@@ -205,7 +208,7 @@ console.log(count);`,
                       <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                     </div>
                     <span className="text-sm text-gray-400 ml-2">
-                      challenge.js
+                      challenge.cpp
                     </span>
                   </div>
                   <div className="flex items-center gap-2 text-xs text-gray-500">
@@ -219,16 +222,16 @@ console.log(count);`,
 
               <CardContent className="p-0">
                 {/* Code Block */}
-                <div className="bg-gray-950 p-4 border-b border-gray-800">
+        <div className="bg-gray-950 p-3 sm:p-4 border-b border-gray-800 overflow-auto max-h-60 sm:max-h-[500px]">
                   <SyntaxHighlighter
-                    language="javascript"
+                    language="cpp"
                     style={tomorrow}
                     customStyle={{
                       margin: 0,
-                      padding: 0,
-                      background: "transparent",
-                      fontSize: "14px",
-                      lineHeight: "1.4",
+          padding: 0,
+          background: "transparent",
+          fontSize: "13px",
+          lineHeight: "1.45",
                     }}
                     showLineNumbers={true}
                     lineNumberStyle={{
@@ -258,7 +261,7 @@ console.log(count);`,
                         key={index}
                         onClick={() => handleAnswerClick(index)}
                         disabled={showResult}
-                        className={`w-full text-left p-3 hover:cursor-pointer rounded-lg border transition-all duration-200 transform hover:scale-102 ${
+                        className={`w-full text-left p-3 md:p-4 text-sm md:text-base hover:cursor-pointer rounded-lg border transition-all duration-200 transform hover:scale-102 ${
                           showResult
                             ? index === mcqQuestions[currentQuestion].correct
                               ? "bg-green-500/20 border-green-500 text-green-400"
@@ -272,7 +275,7 @@ console.log(count);`,
                       >
                         <div className="flex items-center gap-3">
                           <div
-                            className={`w-6 h-6 rounded-full border-2 flex items-center justify-center text-xs font-bold ${
+                            className={`w-5 h-5 md:w-6 md:h-6 rounded-full border-2 flex items-center justify-center text-xs font-bold ${
                               showResult &&
                               index === mcqQuestions[currentQuestion].correct
                                 ? "border-green-500 bg-green-500 text-black"
