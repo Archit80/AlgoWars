@@ -10,15 +10,16 @@ import { Space_Grotesk } from "next/font/google";
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"] });
 import { Loader2, Code2 } from "lucide-react";
 import { useEffect, useState } from "react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { createOptimizedQueryClient } from "@/lib/optimizedQueryClient";
 
 export default function AlgoWarsLanding() {
-  const queryClient = new QueryClient();
+  const queryClient = createOptimizedQueryClient(); // Use optimized client
   const [isLoading, setIsLoading] = useState(true);
 
-  // Optimize loading - reduce artificial delay
+  // Reduce artificial loading delay further
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 300); // Reduced from 1000ms
+    const timer = setTimeout(() => setIsLoading(false), 150); // Reduced from 300ms
     return () => clearTimeout(timer);
   }, []);
 
@@ -26,7 +27,7 @@ export default function AlgoWarsLanding() {
     return (
       <div className="min-h-screen bg-black flex items-center justify-center">
         <div className="text-center">
-          <div className="w-16 h-16 bg-lime-400 rounded-lg flex items-center justify-center mb-4 mx-auto animate-pulse">
+          <div className="w-16 h-16 bg-lime-400 rounded-lg flex items-center justify-center mb-4 mx-auto">
             <Code2 className="h-8 w-8 text-black" />
           </div>
           <div className="flex items-center gap-2 text-lime-400">

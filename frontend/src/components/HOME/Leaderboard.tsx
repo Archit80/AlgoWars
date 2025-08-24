@@ -5,12 +5,13 @@ import { Badge } from "@/components/ui/badge"
 import { Crown, Trophy, Medal } from "lucide-react"
 import { useQuery } from "@tanstack/react-query";
 import LeaderboardService, { LeaderboardUser } from "@/services/leaderboardService";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClientProvider } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
+import { createOptimizedQueryClient, queryOptions } from "@/lib/optimizedQueryClient";
 
 export function Leaderboard() {
-  const [queryClient] = useState(() => new QueryClient());
+  const [queryClient] = useState(() => createOptimizedQueryClient()); // Use optimized client
   // rank icon helper in outer scope so it can be used by the inner renderer
   const getRankIcon = (rank: number) => {
     switch (rank) {
@@ -33,6 +34,7 @@ export function Leaderboard() {
         const res = await LeaderboardService.getLeaderboard();
         return res;
       },
+      ...queryOptions.realtime, // Use optimized realtime options
     });
 
     // Keep rendering the same UI; if loading, show placeholders

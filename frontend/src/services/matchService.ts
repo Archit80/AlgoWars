@@ -3,10 +3,27 @@ import { supabase } from "@/lib/supabaseClient";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
 
+// Simple in-memory cache for match data (shorter TTL since it's more dynamic)
+const matchCache = new Map<string, { data: any; timestamp: number }>();
+const CACHE_TTL = 10000; // 10 seconds for match data
+
 const api = axios.create({
   baseURL: API_BASE_URL,
   headers: { "Content-Type": "application/json" },
 });
+
+// Cache helper functions
+const getCached = (key: string) => {
+  const cached = matchCache.get(key);
+  if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
+    return cached.data;
+  }
+  return null;
+};
+
+const setCache = (key: string, data: any) => {
+  matchCache.set(key, { data, timestamp: Date.now() });
+};
 
 // Add auth interceptor to include Supabase JWT token
 api.interceptors.request.use(async (config) => {
@@ -39,11 +56,21 @@ const MatchService = {
     return res.data;
   },
   getStatus: async (matchId: string) => {
+    const cacheKey = `match_status_${matchId}`;
+    const cached = getCached(cacheKey);
+    if (cached) return cached;
+
     const res = await api.get(`/match/${matchId}/status`);
+    setCache(cacheKey, res.data);
     return res.data;
   },
   getQuestions: async (matchId: string) => {
+    const cacheKey = `match_questions_${matchId}`;
+    const cached = getCached(cacheKey);
+    if (cached) return cached;
+
     const res = await api.get(`/match/${matchId}/questions`);
+    setCache(cacheKey, res.data);
     return res.data;
   },
   submitAnswer: async (matchId: string, payload: { userId: string; questionId: string; answer: string }) => {

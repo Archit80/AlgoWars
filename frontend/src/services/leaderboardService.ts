@@ -1,13 +1,4 @@
-import axios from "axios";
-
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
-
-const api = axios.create({
-  baseURL: API_BASE_URL,
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
+import { createOptimizedService } from "./optimizedService";
 
 export interface LeaderboardUser {
   id: string;
@@ -25,13 +16,19 @@ export interface LeaderboardUser {
   profilePic?: string;
 }
 
+// Use optimized service with caching
+const leaderboardService = createOptimizedService<LeaderboardUser[]>({
+  baseEndpoint: "/leaderboard",
+  cacheTTL: 30000, // 30 seconds cache for leaderboard
+  useMemoryCache: true,
+});
+
 const LeaderboardService = {
-
   getLeaderboard: async (): Promise<LeaderboardUser[]> => {
-    const response = await api.get(`/leaderboard`);
-    return response.data.data;
+    const res = await leaderboardService.get("");
+    // Handle both wrapped and unwrapped responses safely
+    return Array.isArray(res) ? res : (res as any)?.data || [];
   },
-
 };
 
 export default LeaderboardService;

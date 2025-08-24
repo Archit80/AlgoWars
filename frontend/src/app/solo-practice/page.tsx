@@ -6,7 +6,7 @@ import Result from "../result/page";
 import QuestionsService from "@/services/questionsService";
 import { motion } from "framer-motion";
 import { usePracticeStore } from "@/stores/practiceStore";
-import { ArrowLeft, Clock} from "lucide-react";
+import { ArrowLeft, Clock, Loader2 } from "lucide-react";
 import { Space_Grotesk } from "next/font/google";
 
 // Import Prism.js for syntax highlighting
@@ -27,7 +27,16 @@ const SoloPractice = () => {
   const { supabaseUser } = useUser();
   const router = useRouter();
   const { questions, currentIndex, submitAnswer, nextQuestion, soloSessionId, mode, userAnswers } = usePracticeStore();
-  const currentQuestion = questions[currentIndex];
+  
+  // If questions are not loaded, redirect to setup page
+  useEffect(() => {
+    if (!questions || questions.length === 0) {
+      console.warn("No questions found in store, redirecting to setup.");
+      router.push('/practice-mode-setup');
+    }
+  }, [questions, router]);
+
+  const currentQuestion = questions?.[currentIndex];
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [score, setScore] = useState(0);
   const [timeLeft, setTimeLeft] = useState(60);
@@ -196,9 +205,10 @@ const SoloPractice = () => {
 
   useEffect(() => {
     if (questions.length === 0) {
+      // This is now handled by the redirect, but we can keep a log
       console.warn("No questions available for solo practice.");
     }
-  }, [questions, currentIndex, nextQuestion]);
+  }, [questions]);
 
   const handleNext = useCallback(async () => {
     if (currentIndex === questions.length - 1) {
@@ -270,8 +280,17 @@ const SoloPractice = () => {
   }, [currentIndex, mode]);
 
 
-  if (questions.length === 0) {
-    return <div className="text-white p-8">404 <br /> The Page <span className="font-mono">/404</span> Not Found</div>;
+  if (!questions || questions.length === 0 || !currentQuestion) {
+    return (
+      <div className="min-h-screen bg-black flex items-center justify-center">
+        <div className="text-center">
+          <div className="flex items-center gap-2 text-lime-400">
+            <Loader2 className="w-8 h-8 animate-spin" />
+            <span className="text-xl">Loading Practice Session...</span>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   if (isQuizComplete || currentIndex >= questions.length) {

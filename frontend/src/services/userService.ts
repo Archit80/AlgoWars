@@ -2,12 +2,29 @@ import axios from "axios";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
 
+// Simple in-memory cache for user data
+const userCache = new Map<string, { data: any; timestamp: number }>();
+const CACHE_TTL = 60000; // 1 minute
+
 const api = axios.create({
   baseURL: API_BASE_URL,
   headers: {
     "Content-Type": "application/json",
   },
 });
+
+// Cache helper functions
+const getCached = (key: string) => {
+  const cached = userCache.get(key);
+  if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
+    return cached.data;
+  }
+  return null;
+};
+
+const setCache = (key: string, data: any) => {
+  userCache.set(key, { data, timestamp: Date.now() });
+};
 
 // Types based on the backend User schema
 export interface RecentBattle {
@@ -145,9 +162,15 @@ export interface UserLevelInfo {
 
 const UserService = {
   getUserData: async (userId: string): Promise<UserData> => {
+    const cacheKey = `user_${userId}`;
+    const cached = getCached(cacheKey);
+    if (cached) return cached;
+
     try {
       const response = await api.get(`/user/${userId}`);
-      return response.data.data;
+      const userData = response.data.data;
+      setCache(cacheKey, userData);
+      return userData;
     } catch (error) {
       console.error('Error fetching user data:', error);
       throw error;
@@ -155,9 +178,15 @@ const UserService = {
   },
 
   getUserDataByUsername: async (username: string): Promise<UserData> => {
+    const cacheKey = `user_username_${username}`;
+    const cached = getCached(cacheKey);
+    if (cached) return cached;
+
     try {
       const response = await api.get(`/user/username/${username}`);
-      return response.data.data;
+      const userData = response.data.data;
+      setCache(cacheKey, userData);
+      return userData;
     } catch (error) {
       console.error('Error fetching user data by username:', error);
       throw error;
@@ -177,9 +206,15 @@ const UserService = {
 
   // New fast stats endpoint using explicit counters
   getUserStats: async (userId: string): Promise<UserStats> => {
+    const cacheKey = `user_stats_${userId}`;
+    const cached = getCached(cacheKey);
+    if (cached) return cached;
+
     try {
       const response = await api.get(`/user/${userId}/stats`);
-      return response.data.stats;
+      const userStats = response.data.stats;
+      setCache(cacheKey, userStats);
+      return userStats;
     } catch (error) {
       console.error('Error fetching user stats:', error);
       throw error;
@@ -187,9 +222,15 @@ const UserService = {
   },
 
   getUserStatsByUsername: async (username: string): Promise<UserStats> => {
+    const cacheKey = `user_stats_username_${username}`;
+    const cached = getCached(cacheKey);
+    if (cached) return cached;
+
     try {
       const response = await api.get(`/user/username/${username}/stats`);
-      return response.data.stats;
+      const userStats = response.data.stats;
+      setCache(cacheKey, userStats);
+      return userStats;
     } catch (error) {
       console.error('Error fetching user stats by username:', error);
       throw error;
