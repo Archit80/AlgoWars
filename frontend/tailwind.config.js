@@ -78,6 +78,8 @@ module.exports = {
       fontFamily: {
         space: ["var(--font-space)"],
         mono: ["var(--font-mono)"],
+        sans: ["var(--font-dm-sans)", "system-ui", "sans-serif"],
+        "dm-sans": ["var(--font-dm-sans)", "system-ui", "sans-serif"],
       },
     },
   },

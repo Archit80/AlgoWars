@@ -1,91 +1,79 @@
 "use client";
 import React, { useState } from "react";
 // import { useState } from "react";
-import {Button} from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Brain, CheckCircle, Trophy, Badge, Swords } from "lucide-react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism";
-  import { Space_Grotesk } from "next/font/google";
-  const spaceGrotesk = Space_Grotesk({ subsets: ["latin"] });
-  
+import { Space_Grotesk } from "next/font/google";
+const spaceGrotesk = Space_Grotesk({ subsets: ["latin"] });
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+
 const Quiz = () => {
   const mcqQuestions = [
     {
-      type: "output",
-      title: "What's the Output?",
-      code: `#include <bits/stdc++.h>
-using namespace std;
-
-int binarySearch(const vector<int>& arr, int target) {
-  int l = 0, r = (int)arr.size() - 1;
-  while (l <= r) {
-    int m = l + (r - l) / 2;
-    if (arr[m] == target) return m;
-    if (arr[m] < target) l = m + 1;
-    else r = m - 1;
-  }
-  return -1;
-}
-
-int main() {
-  vector<int> a = {1, 3, 5, 7, 9};
-  cout << binarySearch(a, 7) << endl;
-  return 0;
-}
-`,
-      question: "What will be printed to stdout?",
-      options: ["0", "2", "3", "-1"],
+      type: "logic",
+      title: "Pointer Add",
+      code: `int add() {
+  int a = 4;
+  int *p = &a;
+  *p += 3;
+  return a;
+}`,
+      question: "What value does add() return?",
+      options: ["3", "4", "7", "error"],
       correct: 2,
-      explanation:
-        "Binary search returns the index of 7 in the sorted vector {1,3,5,7,9}. Zero-based index of 7 is 3.",
+      explanation: "Pointer p references a; *p += 3 increments a from 4 to 7.",
     },
 
     {
       type: "logic",
-      title: "Logic Challenge",
-      code: `#include <bits/stdc++.h>
-using namespace std;
-
-int main() {
-  vector<int> st;
-  st.push_back(1);
-  st.push_back(2);
-  st.pop_back();
-  st.push_back(3);
-  cout << st.size() << endl;
-  return 0;
-}
-`,
-      question: "What's the final stack size printed?",
-      options: ["1", "2", "3", "0"],
+      title: "Bit Trick",
+      code: `unsigned bits() {
+  unsigned x = 5;
+  x <<= 1;
+  x ^= 3;
+  return x;
+}`,
+      question: "What value does bits() return?",
+      options: ["8", "9", "10", "7"],
       correct: 1,
-      explanation:
-        "Push 1, push 2 (size 2), pop (size 1), push 3 → final size 2.",
+      explanation: "5<<1 = 10; 10 ^ 3 = 9.",
     },
 
     {
-      type: "output",
-      title: "Tricky Output",
-      code: `#include <bits/stdc++.h>
-using namespace std;
+      type: "logic",
+      title: "Mini Recursion",
+      code: `int f(int n) {
+  if (n <= 1) return n;
+  return f(n-1) + f(n-2);
+}
 
 int main() {
-  int i = 1;
-  int count = 0;
-  while (i <= 16) {
-    count++;
-    i *= 2;
-  }
-  cout << count << endl;
-  return 0;
-}
-`,
-      question: "What gets printed?",
-      options: ["4", "5", "16", "log n"],
+  return f(5);
+}`,
+      question: "What does main() return?",
+      options: ["3", "5", "8", "2"],
       correct: 1,
-      explanation:
-        "A doubling loop visits i = 1,2,4,8,16 → 5 iterations, so count = 5 (≈ log2(n)+1).",
+      explanation: "f is Fibonacci; f(5) = 5.",
+    },
+
+    {
+      type: "logic",
+      title: "Loop Break",
+      code: `int foo() {
+  int sum = 0;
+  for (int i = 1; i <= 5; i++) {
+    if (i == 4) break;
+    sum += i;
+  }
+  return sum;
+}`,
+      question: "What value does foo() return?",
+      options: ["6", "10", "15", "4"],
+      correct: 0,
+      explanation: "Loop stops at i==4; sum = 1+2+3 = 6.",
     },
   ];
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -93,7 +81,6 @@ int main() {
   const [showResult, setShowResult] = useState(false);
   const [score, setScore] = useState(0);
   const [showCompletionModal, setShowCompletionModal] = useState(false);
-  
 
   const handleAnswerClick = (answerIndex) => {
     if (showResult) return;
@@ -123,8 +110,8 @@ int main() {
     }
   };
 
-  return (  
-  <section className="px-4 py-12 sm:py-16 bg-gradient-to-b from-gray-900/50 to-transparent">
+  return (
+    <section className="px-4 py-12 sm:py-16 bg-gradient-to-b from-gray-900/50 to-transparent">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-8">
           <h2
@@ -139,7 +126,7 @@ int main() {
           </p>
         </div>
 
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
           {/* Quiz Stats & Info */}
           <div className="space-y-6">
             {/* Current Stats */}
@@ -173,6 +160,17 @@ int main() {
                   {Math.round((score / (currentQuestion + 1)) * 100)}% Accuracy
                 </div>
               </Card>
+
+              <div className="p-2 h-full w-full bg-transparent mt-8">
+                <div className="flex items-center justify-center h-40 sm:h-108 w-full rounded-lg">
+                  <DotLottieReact
+                    src="https://lottie.host/2c0b3612-9c65-4a47-9ea1-cae313b51515/WHXB4fDe55.lottie"
+                    loop
+                    autoplay
+                    className="h-80 sm:h-[32rem] w-[28rem]"
+                  />
+                </div>
+              </div>
             </div>
 
             {/* Question Navigation */}
@@ -192,8 +190,6 @@ int main() {
                 </div>
               ))}
             </div>
-
-          
           </div>
 
           {/* Quiz Interface */}
@@ -222,16 +218,16 @@ int main() {
 
               <CardContent className="p-0">
                 {/* Code Block */}
-        <div className="bg-gray-950 p-3 sm:p-4 border-b border-gray-800 overflow-auto max-h-60 sm:max-h-[500px]">
+                <div className="bg-gray-950 p-3 sm:p-4 border-b border-gray-800 overflow-auto max-h-60 sm:max-h-[500px]">
                   <SyntaxHighlighter
                     language="cpp"
                     style={tomorrow}
                     customStyle={{
                       margin: 0,
-          padding: 0,
-          background: "transparent",
-          fontSize: "13px",
-          lineHeight: "1.45",
+                      padding: 0,
+                      background: "transparent",
+                      fontSize: "13px",
+                      lineHeight: "1.45",
                     }}
                     showLineNumbers={true}
                     lineNumberStyle={{
@@ -329,18 +325,23 @@ int main() {
             </div>
           </div>
         </div>
-
       </div>
-       {showCompletionModal && (
+      {showCompletionModal && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-gray-950 border border-gray-900 rounded-2xl p-8 max-w-md w-full text-center transform animate-fade-in-up">
             <div className="w-16 h-16 bg-gradient-to-br from-lime-400 to-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
               <Trophy className="h-8 w-8 text-black" />
             </div>
 
-            <h3 className={`text-2xl font-bold text-white mb-2 ${spaceGrotesk.className}`}>Login to Keep Playing</h3>
+            <h3
+              className={`text-2xl font-bold text-white mb-2 ${spaceGrotesk.className}`}
+            >
+              Login to Keep Playing
+            </h3>
 
-            <p className="text-gray-300 mb-6 leading-relaxed  ">Train your brain. Rise through ranks. Earn your glory.</p>
+            <p className="text-gray-300 mb-6 leading-relaxed  ">
+              Train your brain. Rise through ranks. Earn your glory.
+            </p>
 
             <div className="space-y-3">
               <Button className="w-full bg-gradient-to-r py-6 text-lg from-lime-500 to-green-600 hover:from-lime-600 hover:to-green-700 text-white font-bold transform hover:scale-98 transition-all duration-200 hover:cursor-pointer">
@@ -350,11 +351,11 @@ int main() {
 
               <button
                 onClick={() => {
-                  setShowCompletionModal(false)
-                  setCurrentQuestion(0)
-                  setScore(0)
-                  setSelectedAnswer(null)
-                  setShowResult(false)
+                  setShowCompletionModal(false);
+                  setCurrentQuestion(0);
+                  setScore(0);
+                  setSelectedAnswer(null);
+                  setShowResult(false);
                 }}
                 className="w-full text-gray-400 hover:cursor-pointer hover:text-white transition-colors py-2"
               >
@@ -363,8 +364,7 @@ int main() {
             </div>
           </div>
         </div>
-      )}          
-
+      )}
     </section>
   );
 };

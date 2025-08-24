@@ -1,9 +1,10 @@
 // Remove 'use client' from layout.tsx
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Space_Grotesk } from "next/font/google";
+import { Geist, Geist_Mono, Space_Grotesk, DM_Sans } from "next/font/google";
 import "./globals.css";
 import ClientProvider from "./ClientProvider";
 import AuthGuard from "@/components/AuthGuard";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -17,6 +18,12 @@ const geistMono = Geist_Mono({
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space",
   subsets: ["latin"],
+});
+
+const dmSans = DM_Sans({
+  variable: "--font-dm-sans",
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
 });
 
 export const metadata: Metadata = {
@@ -37,7 +44,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} font-space antialiased bg-neutral-950 selection:bg-lime-600 selection:text-white`}
+        className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} ${dmSans.variable} font-dm-sans antialiased bg-neutral-950 selection:bg-lime-600 selection:text-white`}
       >
         <ClientProvider>
           <AuthGuard>{children}</AuthGuard>

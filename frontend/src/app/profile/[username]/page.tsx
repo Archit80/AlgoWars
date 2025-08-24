@@ -264,7 +264,7 @@ const ProfilePage: React.FC = () => {
   };
 
   const copyProfileLink = () => {
-    const profileUrl = `https://localhost:3000/profile/${profileData.username}`;
+    const profileUrl = `https://algo-wars.vercel.app/profile/${profileData.username}`;
     navigator.clipboard.writeText(profileUrl);
     setShowCopySuccess(true);
     setTimeout(() => setShowCopySuccess(false), 2000);
@@ -331,7 +331,7 @@ const ProfilePage: React.FC = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Left Column - Profile Info */}
-          <div className="lg:col-span-1 space-y-6 sticky top-8 h-fit">
+          <div className="lg:col-span-1 space-y-6 sticky top-8 h-fit z-5">
             {/* Profile Card */}
             <div
               className="p-10 rounded-2xl text-center bg-neutral-900/50 shadow-sm shadow-black"
@@ -430,7 +430,7 @@ const ProfilePage: React.FC = () => {
           </div>
 
           {/* Right Column - Detailed Stats */}
-          <div className="lg:col-span-2 space-y-6">
+          <div className="lg:col-span-2 space-y-6 bg-neutral-950 z-20">
             {/* Badges */}
             <div
               className="p-8 rounded-2xl  bg-neutral-900/50 shadow-sm shadow-black"

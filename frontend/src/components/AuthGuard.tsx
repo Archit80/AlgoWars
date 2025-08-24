@@ -22,9 +22,12 @@ export default function AuthGuard({ children }: { children: React.ReactNode }) {
 
     const currentPath = window.location.pathname;
 
+    // Check if current path is a profile route (publicly accessible)
+    const isProfileRoute = currentPath.startsWith("/profile/");
+
     // Not authenticated
     if (!supabaseUser) {
-      if (currentPath !== "/login" && currentPath !== "/") {
+      if (currentPath !== "/login" && currentPath !== "/" && !isProfileRoute) {
         console.log("Redirecting to login - no user");
         router.replace("/login");
       }

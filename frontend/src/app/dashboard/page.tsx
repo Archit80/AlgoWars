@@ -102,7 +102,7 @@ export default function HomePage() {
         className="inset-0 fixed h-screen w-screen z-1 opacity-25 pointer-events-none"
         aria-hidden
       >
-        <div className="bg-black/50 z-3 w-full h-full">
+        <div className="bg-black/50 z-3 w-full h-full hidden md:block">
           <Prism
             animationType="hover"
             timeScale={1.5}
