@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import LeaderboardService, { LeaderboardUser } from "@/services/leaderboardService";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Image from "next/image";
+import Link from "next/link";
 
 export function Leaderboard() {
   const [queryClient] = useState(() => new QueryClient());
@@ -53,10 +54,16 @@ export function Leaderboard() {
             <div className="text-red-400">Failed to load leaderboard</div>
           )}
           {!isLoading && !error && leaderboard.map((player, idx) => (
-            <div
+            <Link
               key={player.id}
-              className="flex items-center justify-between py-3 px-6 rounded-lg bg-neutral-800/60 transition-colors"
+              href={`/profile/${player.username}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block"
             >
+              <div
+                className="flex items-center justify-between py-3 px-6 rounded-lg bg-neutral-800/60 transition-colors hover:bg-neutral-800 cursor-pointer"
+              >
               <div className="flex items-center gap-4 ">
                 {getRankIcon(idx + 1)}
                 {player.profilePic ? (
@@ -83,6 +90,7 @@ export function Leaderboard() {
                 {(player.xp ?? 0).toLocaleString()} XP
               </Badge>
             </div>
+            </Link>
           ))}
         </CardContent>
       </Card>
