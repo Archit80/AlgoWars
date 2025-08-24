@@ -6,7 +6,9 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon"
+    "dev": "nodemon",
+    "seed:questions": "node scripts/seed-improved-questions.js",
+    "seed:all": "node scripts/seed-improved-questions.js"
   },
   "keywords": [],
   "author": "",

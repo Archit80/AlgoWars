@@ -38,7 +38,7 @@ model User {
 
 model Question {
   id         String       @id @default(uuid())
-  text       String
+  text       String       @unique
   type       QuestionType // MCQ or PredictOutput or FillBlank etc.
   categories String[]
   options    String[] // for MCQs
