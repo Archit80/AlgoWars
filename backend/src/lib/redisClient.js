@@ -1,8 +1,7 @@
-// src/lib/redisClient.js
 import { createClient } from "redis";
 
 const redis = createClient({
-  url: process.env.REDIS_URL || "redis://localhost:6379",
+  url: process.env.REDIS_URL ,
 });
 
 redis.on("error", (err) => console.error("❌ Redis Error:", err));
@@ -11,6 +10,8 @@ redis.on("error", (err) => console.error("❌ Redis Error:", err));
   try {
     await redis.connect();
     console.log("✅ Redis connected");
+    await redis.set('foo','bar');
+    console.log("✅ Redis test write successful");
   } catch (err) {
     console.error("❌ Failed to connect to Redis:", err);
   }
