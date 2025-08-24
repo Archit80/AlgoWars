@@ -16,9 +16,9 @@ export default function AlgoWarsLanding() {
   const queryClient = new QueryClient();
   const [isLoading, setIsLoading] = useState(true);
 
-  // Simulate loading
+  // Optimize loading - reduce artificial delay
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 1000);
+    const timer = setTimeout(() => setIsLoading(false), 300); // Reduced from 1000ms
     return () => clearTimeout(timer);
   }, []);
 

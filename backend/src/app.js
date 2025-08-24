@@ -20,8 +20,23 @@ app.use(cors({
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
+// Performance optimizations
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+
+// Add response caching headers for static-ish data
+app.use((req, res, next) => {
+  // Cache GET requests for leaderboard and questions for 5 minutes
+  if (req.method === 'GET' && (req.path.includes('/leaderboard') || req.path.includes('/questions'))) {
+    res.set('Cache-Control', 'public, max-age=300'); // 5 minutes
+  }
+  // Cache user stats for 2 minutes
+  if (req.method === 'GET' && req.path.includes('/user/') && req.path.includes('/stats')) {
+    res.set('Cache-Control', 'public, max-age=120'); // 2 minutes
+  }
+  next();
+});
 
 // Health check
 app.get('/health', (req, res) => {

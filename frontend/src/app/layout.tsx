@@ -22,6 +22,8 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   title: "AlgoWars",
   description: "Compete in real-time algorithm battles and become a coding legend!",
+  keywords: "programming, coding, algorithms, competition, battle",
+  authors: [{ name: "Archit Taneja" }],
 };
 
 // Move client-side logic to a separate ClientProvider component
