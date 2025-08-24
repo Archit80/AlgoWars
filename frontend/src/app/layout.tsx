@@ -44,7 +44,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} ${dmSans.variable} font-dm-sans antialiased bg-neutral-950 selection:bg-lime-600 selection:text-white`}
+        className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} ${dmSans.variable} ${dmSans.className} antialiased bg-neutral-950 selection:bg-lime-600 selection:text-white`}
       >
         <ClientProvider>
           <AuthGuard>{children}</AuthGuard>

@@ -13,67 +13,68 @@ import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 const Quiz = () => {
   const mcqQuestions = [
     {
-      type: "logic",
-      title: "Pointer Add",
-      code: `int add() {
-  int a = 4;
-  int *p = &a;
-  *p += 3;
-  return a;
-}`,
-      question: "What value does add() return?",
-      options: ["3", "4", "7", "error"],
-      correct: 2,
-      explanation: "Pointer p references a; *p += 3 increments a from 4 to 7.",
-    },
-
-    {
-      type: "logic",
-      title: "Bit Trick",
-      code: `unsigned bits() {
-  unsigned x = 5;
-  x <<= 1;
-  x ^= 3;
-  return x;
-}`,
-      question: "What value does bits() return?",
-      options: ["8", "9", "10", "7"],
-      correct: 1,
-      explanation: "5<<1 = 10; 10 ^ 3 = 9.",
-    },
-
-    {
-      type: "logic",
-      title: "Mini Recursion",
-      code: `int f(int n) {
-  if (n <= 1) return n;
-  return f(n-1) + f(n-2);
-}
-
-int main() {
-  return f(5);
-}`,
-      question: "What does main() return?",
-      options: ["3", "5", "8", "2"],
-      correct: 1,
-      explanation: "f is Fibonacci; f(5) = 5.",
-    },
-
-    {
-      type: "logic",
-      title: "Loop Break",
-      code: `int foo() {
-  int sum = 0;
-  for (int i = 1; i <= 5; i++) {
-    if (i == 4) break;
-    sum += i;
+      type: "arrays",
+      title: "Array Magic",
+      code: `int mystery() {
+  int arr[] = {1, 5, 3, 9, 2};
+  int result = arr[0];
+  
+  for (int i = 1; i < 5; i++) {
+    if (arr[i] > result) {
+      result = arr[i];
+    }
   }
-  return sum;
+  return result;
 }`,
-      question: "What value does foo() return?",
-      options: ["6", "10", "15", "4"],
+      question: "What does mystery() return?",
+      options: ["1", "5", "9", "2"],
+      correct: 2,
+      explanation:
+        "The function finds the maximum element in the array. Starting with arr[0]=1, it compares with each element and updates result to the largest value found, which is 9.",
+    },
+
+    {
+      type: "strings",
+      title: "String Puzzle",
+      code: `bool isPalindrome() {
+  char str[] = "racecar";
+  int len = 7;
+  
+  for (int i = 0; i < len/2; i++) {
+    if (str[i] != str[len-1-i]) {
+      return false;
+    }
+  }
+  return true;
+}`,
+      question: "What does isPalindrome() return?",
+      options: ["true", "false", "error", "undefined"],
       correct: 0,
-      explanation: "Loop stops at i==4; sum = 1+2+3 = 6.",
+      explanation:
+        "The function checks if 'racecar' is a palindrome by comparing characters from both ends. Since 'racecar' reads the same forwards and backwards, it returns true.",
+    },
+
+    {
+      type: "binary_search",
+      title: "Search Detective",
+      code: `int binarySearch() {
+  int arr[] = {2, 4, 6, 8, 10, 12};
+  int target = 8;
+  int left = 0, right = 5;
+  
+  while (left <= right) {
+    int mid = (left + right) / 2;
+    if (arr[mid] == target) return mid;
+    if (arr[mid] < target) left = mid + 1;
+    else right = mid - 1;
+  }
+  return -1;
+}`,
+      question: "What does binarySearch() return?",
+      options: ["2", "3", "8", "-1"],
+      correct: 1,
+      explanation:
+        "Binary search finds target 8 at index 3. First iteration: mid=2, arr[2]=6 < 8, so left=3. Second iteration: mid=3, arr[3]=8 matches target, returns 3.",
     },
   ];
   const [currentQuestion, setCurrentQuestion] = useState(0);
