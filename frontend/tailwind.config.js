@@ -1,8 +1,5 @@
-import type { Config } from "tailwindcss"
-
-// all in fixtures is set to tailwind v3 as interims solutions
-
-const config: Config = {
+/** @type {import('tailwindcss').Config} */
+module.exports = {
   darkMode: ["class"],
   content: [
       "./pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -14,6 +11,8 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
         primary: {
           DEFAULT: "#84CC16",
           foreground: "#0F0F0F",
@@ -42,6 +41,9 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -81,4 +83,3 @@ const config: Config = {
   },
   plugins: [require("tailwindcss-animate")],
 }
-export default config
