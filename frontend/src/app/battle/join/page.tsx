@@ -10,6 +10,7 @@ export default function JoinByCode() {
   const params = useSearchParams();
   const router = useRouter();
   const user = useUserStore((s) => s.supabaseUser);
+  const loading = useUserStore((s) => s.loading);
   const { setMatchData } = useMatchStore();
   const [code, setCode] = useState(params.get("code") || "");
   const [joining, setJoining] = useState(false);
@@ -19,6 +20,13 @@ export default function JoinByCode() {
     if (prefill) setCode(prefill);
   }, [params]);
 
+  // Redirect to /login if user is not authenticated and loading is false
+  useEffect(() => {
+    if (!loading && !user) {
+      router.push("/login");
+    }
+  }, [user, loading, router]);
+
   const handleJoin = async () => {
     if (!code) return;
     setJoining(true);
@@ -26,7 +34,6 @@ export default function JoinByCode() {
       const userId = user?.id || "guest";
       const res = await MatchService.joinByCode({ userId, roomCode: code });
       const match = res.match;
-      
       // Store match data with usernames if available
       if (match) {
         setMatchData({
@@ -41,7 +48,6 @@ export default function JoinByCode() {
           status: match.status || 'WAITING'
         });
       }
-      
       if (match?.status === "ONGOING") router.push(`/battle/play/${match.id}`);
       else router.push(`/battle/waiting/${match.id}`);
     } catch (e) {
@@ -51,7 +57,12 @@ export default function JoinByCode() {
       setJoining(false);
     }
   };
-
+  if (loading) {
+    return <div className="min-h-screen flex items-center justify-center text-white">Loading...</div>;
+  }
+  if (!user) {
+    return <></>;
+  }
   return (
     <div className="min-h-screen p-6 bg-[#0E0E0E] text-white">
       <div className="max-w-md mx-auto">

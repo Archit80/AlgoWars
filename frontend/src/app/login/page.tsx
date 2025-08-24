@@ -7,6 +7,7 @@ import Header from "../landing-components/Header";
 import { Space_Grotesk } from "next/font/google";
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"] });
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -26,11 +27,10 @@ export default function LoginPage() {
       email,
       password,
     });
-    if (error){
+    if (error) {
       setError(error.message);
-       console.log("Login error:", error);
-    } 
-    else {
+      console.log("Login error:", error);
+    } else {
       setMessage("Login successful!");
       router.replace("/dashboard"); // Redirect to dashboard after login
     }
@@ -43,10 +43,7 @@ export default function LoginPage() {
     setError("");
     const { error } = await supabase.auth.signUp({ email, password });
     if (error) setError(error.message);
-    else
-      setMessage(
-        "Signup successful! Check confirmation link in your inbox"
-      );
+    else setMessage("Signup successful! Check confirmation link in your inbox");
     setLoading(false);
   };
 
@@ -59,6 +56,19 @@ export default function LoginPage() {
     });
     if (error) setError(error.message);
     else setMessage("Magic login link sent! Check your inbox");
+    setLoading(false);
+  };
+
+  const handleGoogleLogin = async () => {
+    setLoading(true);
+    setError("");
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: `${window.location.origin}/dashboard`,
+      },
+    });
+    if (error) setError(error.message);
     setLoading(false);
   };
 
@@ -149,6 +159,21 @@ export default function LoginPage() {
             </>
           )}
         </form>
+
+        {/* Google OAuth Button - always visible */}
+        <div className="mt-2">
+          <div className="text-center mb-2">OR</div>
+
+          <button
+            type="button"
+            onClick={handleGoogleLogin}
+            className="w-full py-2 bg-white text-zinc-900 rounded font-semibold flex items-center justify-center gap-2 border border-zinc-700 hover:bg-zinc-300 transition-all duration-200 hover:cursor-pointer hover:scale-98"
+            disabled={loading}
+          >
+            <Image src="/google.svg" alt="Google Logo" width={20} height={20} />
+            Continue with Google
+          </button>
+        </div>
 
         <div className="mt-4 text-sm text-center flex flex-col gap-2">
           {!showForgot && (

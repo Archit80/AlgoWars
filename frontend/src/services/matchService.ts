@@ -1,10 +1,24 @@
 import axios from "axios";
+import { supabase } from "@/lib/supabaseClient";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
 
 const api = axios.create({
   baseURL: API_BASE_URL,
   headers: { "Content-Type": "application/json" },
+});
+
+// Add auth interceptor to include Supabase JWT token
+api.interceptors.request.use(async (config) => {
+  try {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (session?.access_token) {
+      config.headers.Authorization = `Bearer ${session.access_token}`;
+    }
+  } catch (error) {
+    console.error('Error getting auth session:', error);
+  }
+  return config;
 });
 
 export type BattleMode = "friend" | "random";

@@ -6,6 +6,7 @@ import { Crown, Trophy, Medal } from "lucide-react"
 import { useQuery } from "@tanstack/react-query";
 import LeaderboardService, { LeaderboardUser } from "@/services/leaderboardService";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import Image from "next/image";
 
 export function Leaderboard() {
   const [queryClient] = useState(() => new QueryClient());
@@ -58,6 +59,19 @@ export function Leaderboard() {
             >
               <div className="flex items-center gap-4 ">
                 {getRankIcon(idx + 1)}
+                {player.profilePic ? (
+                  <Image
+                    width={40}
+                    height={40}
+                    src={player.profilePic}
+                    alt={player.username + " avatar"}
+                    className="w-10 h-10 rounded-full border border-neutral-700 object-cover"
+                  />
+                ) : (
+                  <div className="w-10 h-10 rounded-full bg-neutral-700 flex items-center justify-center text-white text-lg font-bold">
+                    {player.username?.[0] ?? "?"}
+                  </div>
+                )}
                 <div>
                   <p className="font-semibold text-white">{player.username}</p>
                   <p className="text-sm text-muted-foreground">

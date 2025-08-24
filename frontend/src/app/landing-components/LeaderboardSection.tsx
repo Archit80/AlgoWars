@@ -3,6 +3,7 @@ import { Trophy } from "lucide-react";
 import { Space_Grotesk } from "next/font/google";
 import { useQuery } from "@tanstack/react-query";
 import  LeaderboardService, { LeaderboardUser }  from "@/services/leaderboardService";
+import Image from "next/image";
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"] });
 
 // const leaderboardData = [
@@ -68,6 +69,19 @@ const LeaderboardSection = () => {
                   >
                     <div className="flex items-center space-x-4">
                       <span className="text-2xl">{badge}</span>
+                      {player.profilePic ? (
+                        <Image
+                          width={40}
+                          height={40}
+                          src={player.profilePic}
+                          alt={player.username + " avatar"}
+                          className="w-10 h-10 rounded-full border border-gray-700 object-cover"
+                        />
+                      ) : (
+                        <div className="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center text-white text-lg font-bold">
+                          {player.username?.[0] ?? "?"}
+                        </div>
+                      )}
                       <div>
                         <p className="font-semibold text-white">{player.username}</p>
                         <p className="text-sm text-gray-400">

@@ -1,5 +1,7 @@
 import { create } from 'zustand';
+import { persist, createJSONStorage } from 'zustand/middleware';
 import { supabase } from "@/lib/supabaseClient";
+import userService from "@/services/userService";
 
 export interface UserStats {
   xp: number;
@@ -14,38 +16,87 @@ export interface UserStats {
 export interface UserStore {
   supabaseUser: any;
   userStats: UserStats;
+  isOnboarded: boolean;
+  userDataFetched: boolean;
   updateXP: (xp: number) => void;
   updateStreak: (streak: number) => void;
   addBattleResult: (won: boolean) => void;
   updateAccuracy: (accuracy: number) => void;
   refreshUser: () => Promise<void>;
   setSupabaseUser: (user: any) => void;
+  setIsOnboarded: (onboarded: boolean) => void;
+  clearUserData: () => void;
+  loading: boolean;
 }
 
 
-export const useUserStore = create<UserStore>((set) => {
-  // Initial state
-  const initialState = {
-    supabaseUser: null,
-    userStats: {
-      xp: 1250,
-      level: 7,
-      streak: 5,
-      totalBattles: 23,
-      wins: 15,
-      losses: 8,
-      accuracy: 82,
-    },
-  };
+export const useUserStore = create<UserStore>()(
+  persist(
+    (set) => {
+      const initialState = {
+        supabaseUser: null,
+        isOnboarded: false,
+        userDataFetched: false,
+        userStats: {
+          xp: 0,
+          level: 0,
+          streak: 0,
+          totalBattles: 0,
+          wins: 0,
+          losses: 0,
+          accuracy: 0,
+        },
+        loading: true,
+      };
 
   // Listen for auth state changes (singleton pattern)
-  if (typeof window !== 'undefined' && !(window as any).__userStoreAuthListener) {
-    (window as any).__userStoreAuthListener = true;
-    supabase.auth.getUser().then(({ data }) => {
-      set({ supabaseUser: data?.user || null });
+  // Extend Window type to include __userStoreAuthListener
+  interface WindowWithAuthListener extends Window {
+    __userStoreAuthListener?: boolean;
+  }
+
+  if (typeof window !== 'undefined' && !(window as WindowWithAuthListener).__userStoreAuthListener) {
+    (window as WindowWithAuthListener).__userStoreAuthListener = true;
+    
+    // Initial auth check
+    supabase.auth.getUser().then(async ({ data }) => {
+      const user = data?.user || null;
+      const currentState = useUserStore.getState();
+      
+      set({ supabaseUser: user });
+      
+      // Only fetch user data if not already fetched and persisted
+      if (user?.id && !currentState.userDataFetched) {
+        try {
+          const userData = await userService.getUserData(user.id);
+          set({ isOnboarded: userData.isOnboarded, userDataFetched: true, loading: false });
+        } catch (error) {
+          console.error('Failed to fetch user data:', error);
+          set({ userDataFetched: true, loading: false });
+        }
+      } else {
+        set({ loading: false });
+      }
     });
-    supabase.auth.onAuthStateChange((_event, session) => {
-      set({ supabaseUser: session?.user || null });
+    
+    // Listen for auth state changes
+    supabase.auth.onAuthStateChange(async (_event, session) => {
+      const user = session?.user || null;
+      const { clearUserData } = useUserStore.getState();
+      
+      if (user?.id) {
+        set({ supabaseUser: user });
+        try {
+          const userData = await userService.getUserData(user.id);
+          set({ isOnboarded: userData.isOnboarded, userDataFetched: true, loading: false });
+        } catch (error) {
+          console.error('Failed to fetch user data:', error);
+          set({ userDataFetched: true, loading: false });
+        }
+      } else {
+        // Clear all user data when user logs out
+        clearUserData();
+      }
     });
   }
 
@@ -54,10 +105,37 @@ export const useUserStore = create<UserStore>((set) => {
 
     setSupabaseUser: (user) => set({ supabaseUser: user }),
 
+    setIsOnboarded: (onboarded: boolean) => set({ isOnboarded: onboarded }),
+
+    clearUserData: () => set({
+      supabaseUser: null,
+      isOnboarded: false,
+      userDataFetched: false,
+      userStats: {
+        xp: 0,
+        level: 0,
+        streak: 0,
+        totalBattles: 0,
+        wins: 0,
+        losses: 0,
+        accuracy: 0,
+      },
+      loading: false,
+    }),
+
     refreshUser: async () => {
       const { data } = await supabase.auth.getUser();
-      set({ supabaseUser: data?.user || null });
-      // Optionally: fetch stats from your backend here using data?.user?.id
+      set({ supabaseUser: data?.user || null, loading: false });
+      
+      // Fetch user data from backend to get isOnboarded status
+      if (data?.user?.id) {
+        try {
+          const userData = await userService.getUserData(data.user.id);
+          set({ isOnboarded: userData.isOnboarded, userDataFetched: true });
+        } catch (error) {
+          console.error('Failed to fetch user data:', error);
+        }
+      }
     },
 
     updateXP: (newXP: number) => {
@@ -89,4 +167,17 @@ export const useUserStore = create<UserStore>((set) => {
       set((state) => ({ userStats: { ...state.userStats, accuracy } }));
     },
   };
-});
+},
+{
+  name: 'user-store',
+  storage: createJSONStorage(() => localStorage),
+  partialize: (state) => ({
+    supabaseUser: state.supabaseUser,
+    isOnboarded: state.isOnboarded,
+    userDataFetched: state.userDataFetched,
+    userStats: state.userStats,
+    // Don't persist loading state
+  }),
+}
+)
+);

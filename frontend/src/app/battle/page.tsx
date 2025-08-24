@@ -65,7 +65,7 @@ export default function BattleSetup() {
     if (!mode || selectedTopics.length === 0) return;
     setLoading(true);
     try {
-      const userId = supabaseUser?.id || "guest"; // Adjust if auth is required
+      const userId = (supabaseUser as { id: string } | null)?.id || "guest"; // Adjust if auth is required
       if (mode === "friend") {
         const res = await MatchService.createFriendMatch({ userId, topics: selectedTopics, difficulty });
         const id = res.matchId || res.match?.id;
@@ -141,7 +141,7 @@ export default function BattleSetup() {
           </Link>
           <div>
             <h1 className={`${spaceGrotesk.className} text-4xl font-bold text-lime-500`}>1v1 Battle</h1>
-            <p className="text-neutral-200 font-mono">{"> Pick mode, topics (up to 5), and difficulty"}</p>
+            <p className="text-neutral-200 font-mono">{"> Pick mode, topics (up to 3), and difficulty"}</p>
           </div>
         </motion.div>
 
@@ -200,7 +200,7 @@ export default function BattleSetup() {
         {/* Topic selection */}
         <motion.div className="bg-neutral-900/90 border border-neutral-800 p-6 rounded-2xl mb-6" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}>
           <h2 className={`${spaceGrotesk.className} text-2xl font-bold text-lime-500 mb-2`}>Choose Topics</h2>
-          <p className="text-xs text-neutral-400 mb-4">Select up to 5</p>
+          <p className="text-xs text-neutral-400 mb-4">Select up to 3</p>
           <div className="mb-4">
             <h3 className="text-white font-semibold mb-2 flex items-center gap-2"><Layers className="w-4 h-4 text-lime-500" /> Data Structures</h3>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">

@@ -1,7 +1,8 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useUser } from "../../contexts/userContext";
+import { useUserStore } from "../../stores/userStore";
 import userService from "../../services/userService";
 import { supabase } from "@/lib/supabaseClient";
 import Orb from "@/components/Orb/Orb";
@@ -12,7 +13,16 @@ const spaceGrotesk = Space_Grotesk({ subsets: ["latin"] });
 
 export default function OnboardingPage() {
   const router = useRouter();
-  const { supabaseUser, refreshUser } = useUser();
+  // Define the type for supabaseUser to avoid 'unknown' errors
+  interface SupabaseUser {
+    id: string;
+    [key: string]: any;
+  }
+  const { supabaseUser, refreshUser } = useUser() as {
+    supabaseUser: SupabaseUser | null;
+    refreshUser: () => void;
+  };
+  const { isOnboarded, loading: userLoading, userDataFetched } = useUserStore();
   const [username, setUsername] = useState("");
   const [usernameError, setUsernameError] = useState("");
   const [profilePic, setProfilePic] = useState<File | null>(null);
@@ -22,6 +32,16 @@ export default function OnboardingPage() {
 
   const [dragActive, setDragActive] = useState(false);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+
+  // Redirect to dashboard if user is already onboarded
+  useEffect(() => {
+    if (userDataFetched && isOnboarded) {
+      router.push("/dashboard");
+    }
+    else if (!userDataFetched) {
+      router.push("/login");
+    }
+  }, [isOnboarded, userDataFetched, router]);
 
   const validateUsername = (name: string) => {
     if (!name) {
@@ -79,7 +99,7 @@ export default function OnboardingPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateUsername(username)) {
       setError("Please fix the errors before submitting.");
       return;
@@ -89,24 +109,24 @@ export default function OnboardingPage() {
     setError("");
     try {
       let profilePicUrl = "";
-      
+
       if (profilePic) {
-        const fileExt = profilePic.name.split('.').pop();
+        const fileExt = profilePic.name.split(".").pop();
         const fileName = `${supabaseUser?.id || Date.now()}.${fileExt}`;
         const filePath = `PFPs/${fileName}`;
 
         const { error: uploadError } = await supabase.storage
-          .from('PFPs')
-          .upload(filePath, profilePic);
+          .from("PFPs")
+          .upload(filePath, profilePic,{
+            upsert: true
+          });
 
         if (uploadError) {
           throw new Error(`Upload failed: ${uploadError.message}`);
         }
 
-        const { data } = supabase.storage
-          .from('PFPs')
-          .getPublicUrl(filePath);
-        
+        const { data } = supabase.storage.from("PFPs").getPublicUrl(filePath);
+
         profilePicUrl = data.publicUrl;
       }
 
@@ -114,7 +134,7 @@ export default function OnboardingPage() {
         username: username.toLowerCase(),
         profilePic: profilePicUrl,
       });
-      
+
       refreshUser();
       setMessage("Profile updated!");
       router.push("/dashboard");
@@ -125,7 +145,9 @@ export default function OnboardingPage() {
     }
   };
 
-  return (
+  return userLoading || !userDataFetched || isOnboarded ? (
+    <></>
+  ) : (
     <div className="h-screen bg-zinc-950 flex items-center justify-center text-white px-4 overflow-x-hidden w-screen">
       <Header />
       <div className="absolute h-full overflow-hidden pt-6 inset-0 z-0">
@@ -139,7 +161,12 @@ export default function OnboardingPage() {
         </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="username" className="block mb-1 text-sm font-medium">Forge Your Identity</label>
+            <label
+              htmlFor="username"
+              className="block mb-1 text-sm font-medium"
+            >
+              Forge Your Identity
+            </label>
             <input
               type="text"
               id="username"
@@ -151,12 +178,12 @@ export default function OnboardingPage() {
               onChange={handleUsernameChange}
               required
             />
-            {usernameError && <p className="text-red-500 text-xs mt-1">{usernameError}</p>}
+            {usernameError && (
+              <p className="text-red-500 text-xs mt-1">{usernameError}</p>
+            )}
           </div>
-         
-        <p>
-            Upload Your Avatar
-        </p>
+
+          <p>Upload Your Avatar</p>
           <div
             className={`w-full h-36 border-2 border-dashed rounded-lg -mt-4 flex flex-col items-center justify-center bg-zinc-950/20 text-gray-400 relative transition-all duration-200 ${
               dragActive ? "border-lime-500 bg-lime-900/20" : "border-zinc-700"

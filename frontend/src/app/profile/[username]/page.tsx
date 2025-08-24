@@ -14,7 +14,10 @@ import {
   Trash2,
 } from "lucide-react";
 import { useUserStore } from "@/stores/userStore";
-import UserService, { UserData, UserStats } from "../../../services/userService";
+import UserService, {
+  UserData,
+  UserStats,
+} from "../../../services/userService";
 import QuestionPreviewModal from "@/components/QuestionPreviewModal";
 import { Space_Grotesk } from "next/font/google";
 import { Avatar } from "@/components/ui/avatar";
@@ -25,7 +28,6 @@ const spaceGrotesk = Space_Grotesk({
   variable: "--font-space",
 });
 const ProfilePage: React.FC = () => {
-
   const { username: usernameParam } = useParams();
   const router = useRouter();
   console.log("Profile Username:", usernameParam);
@@ -36,7 +38,7 @@ const ProfilePage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<"practice" | "battles" | "saved">(
     "battles"
   );
- 
+
   const [showCopySuccess, setShowCopySuccess] = useState(false);
   const [userData, setUserData] = useState<UserData | null>(null);
   const [userStats, setUserStats] = useState<UserStats | null>(null);
@@ -68,15 +70,17 @@ const ProfilePage: React.FC = () => {
       try {
         setLoading(true);
         setError(null);
-        const username = Array.isArray(usernameParam) ? usernameParam[0] : usernameParam;
-        
+        const username = Array.isArray(usernameParam)
+          ? usernameParam[0]
+          : usernameParam;
+
         // Fetch both user data and stats using username
         const [data, stats] = await Promise.all([
           UserService.getUserDataByUsername(username),
-          UserService.getUserStatsByUsername(username)
+          UserService.getUserStatsByUsername(username),
         ]);
         console.log("Fetched user data by username:", data);
-        
+
         // Check if this is the current user's profile using the actual user ID
         const isCurrentUserProfile = data.id === supabaseUser?.id;
         setIsOwnProfile(isCurrentUserProfile);
@@ -88,19 +92,23 @@ const ProfilePage: React.FC = () => {
             const savedRes = await res.default.getSavedQuestions(data.id); // Use the actual user ID
             savedQuestions = (savedRes.savedQuestions || []).map((sq: any) => ({
               id: sq.question.id,
-              title: sq.question.text.substring(0, 60) + (sq.question.text.length > 60 ? "..." : ""),
+              title:
+                sq.question.text.substring(0, 60) +
+                (sq.question.text.length > 60 ? "..." : ""),
               fullText: sq.question.text,
               options: sq.question.options || [],
-              correctAnswer: sq.correctAnswer ?? sq.question.correctAnswer ?? null,
+              correctAnswer:
+                sq.correctAnswer ?? sq.question.correctAnswer ?? null,
               userAnswer: sq.userAnswer ?? null,
               difficulty: sq.question.difficulty,
               category: sq.question.categories.join(", "),
-              saved: sq.createdAt ? new Date(sq.createdAt).toLocaleDateString() : "",
+              saved: sq.createdAt
+                ? new Date(sq.createdAt).toLocaleDateString()
+                : "",
             }));
             console.log("Saved Questions:", savedQuestions);
-
           } catch (err) {
-              console.log("Error fetching saved questions:", err);
+            console.log("Error fetching saved questions:", err);
           }
         }
         setUserData({ ...data, savedQuestions });
@@ -165,16 +173,19 @@ const ProfilePage: React.FC = () => {
     (sum, session) => sum + session.totalQuestions,
     0
   );
-  
+
   // Use fast database stats when available, fallback to calculated stats
-  const accuracy = userStats && userStats.totalAnswers > 0
-    ? Math.round((userStats.correctAnswers / userStats.totalAnswers) * 100)
-    : totalQuestions > 0
-    ? Math.round((totalCorrectAnswers / totalQuestions) * 100)
-    : 0;
-    
+  const accuracy =
+    userStats && userStats.totalAnswers > 0
+      ? Math.round((userStats.correctAnswers / userStats.totalAnswers) * 100)
+      : totalQuestions > 0
+      ? Math.round((totalCorrectAnswers / totalQuestions) * 100)
+      : 0;
+
   // Use the new level system data from backend
-  const userCreatedAt: string | undefined = (userData as unknown as { createdAt?: string })?.createdAt;
+  const userCreatedAt: string | undefined = (
+    userData as unknown as { createdAt?: string }
+  )?.createdAt;
 
   const profileData = {
     username: userData.username || "Anonymous User",
@@ -189,11 +200,12 @@ const ProfilePage: React.FC = () => {
     isAtMilestone: userData.isAtMilestone,
     totalBattles: userStats?.totalMatches || 0,
     wins: userStats?.matchesWon || 0,
-    winRate: userStats && userStats.totalMatches > 0 
-      ? Math.round((userStats.matchesWon / userStats.totalMatches) * 100) 
-      : 0,
+    winRate:
+      userStats && userStats.totalMatches > 0
+        ? Math.round((userStats.matchesWon / userStats.totalMatches) * 100)
+        : 0,
     accuracy: accuracy,
-  joinDate: userCreatedAt
+    joinDate: userCreatedAt
       ? `${formatFriendlyDate(userCreatedAt)}`
       : supabaseUser?.created_at
       ? `${formatFriendlyDate(supabaseUser.created_at)}`
@@ -222,43 +234,49 @@ const ProfilePage: React.FC = () => {
       // Determine if user won, lost, or drew
       let result = "draw";
       if (battle.winnerId === userData.id) result = "win";
-      else if (battle.winnerId && battle.winnerId !== userData.id) result = "loss";
+      else if (battle.winnerId && battle.winnerId !== userData.id)
+        result = "loss";
 
       // Find opponent username
-      let opponent = battle.user1Id === userData.id ? battle.user2?.username : battle.user1?.username;
+      let opponent =
+        battle.user1Id === userData.id
+          ? battle.user2?.username
+          : battle.user1?.username;
       if (!opponent) opponent = "Unknown";
 
       // Calculate score
-      const score = battle.user1Id === userData.id ? battle.user1Score : battle.user2Score;
-      const xp = battle.user1Id === userData.id ? battle.user1Score * 27 + 50 + (result === "win" ? 100 : 0) : battle.user2Score * 27 + 50 + (result === "win" ? 100 : 0);
+      const score =
+        battle.user1Id === userData.id ? battle.user1Score : battle.user2Score;
+      const xp =
+        battle.user1Id === userData.id
+          ? battle.user1Score * 27 + 50 + (result === "win" ? 100 : 0)
+          : battle.user2Score * 27 + 50 + (result === "win" ? 100 : 0);
 
       return {
         opponent,
         result,
         date: new Date(battle.createdAt).toLocaleDateString(),
         xp,
-        score
+        score,
       };
     }),
-  savedQuestions: userData.savedQuestions ?? [],
+    savedQuestions: userData.savedQuestions ?? [],
   };
 
   const copyProfileLink = () => {
-  const profileUrl = `https://localhost:3000/profile/${profileData.username}`;
+    const profileUrl = `https://localhost:3000/profile/${profileData.username}`;
     navigator.clipboard.writeText(profileUrl);
     setShowCopySuccess(true);
     setTimeout(() => setShowCopySuccess(false), 2000);
   };
 
   const handleLogout = () => {
-    import('@/lib/supabaseClient').then(({ supabase }) => {
+    import("@/lib/supabaseClient").then(({ supabase }) => {
       supabase.auth.signOut().then(() => {
-        router.push('/');
+        router.push("/");
       });
     });
   };
-
-  
 
   return (
     <div className="min-h-screen p-6 bg-neutral-950">
@@ -292,7 +310,6 @@ const ProfilePage: React.FC = () => {
           </div>
 
           <div className="flex items-center gap-3">
-          
             <button
               onClick={copyProfileLink}
               className="flex items-center gap-2 px-4 py-2 bg-gray-600 hover:cursor-pointer hover:bg-gray-500 rounded-lg font-semibold transition-all text-white"
@@ -332,22 +349,21 @@ const ProfilePage: React.FC = () => {
                     height={400}
                   />
                 </Avatar>
-
               </div>
               <h2
                 className={`text-2xl font-bold mb-2 text-white ${spaceGrotesk.className}`}
               >
                 @{profileData.username}
               </h2>
-              
+
               {/* Tier Badge */}
               {profileData.tierName && (
-                <div 
+                <div
                   className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-semibold mb-4"
-                  style={{ 
+                  style={{
                     backgroundColor: `${profileData.tierColor}20`,
                     border: `1px solid ${profileData.tierColor}50`,
-                    color: profileData.tierColor 
+                    color: profileData.tierColor,
                   }}
                 >
                   <span>{profileData.tierEmoji}</span>
@@ -357,7 +373,6 @@ const ProfilePage: React.FC = () => {
                   )}
                 </div>
               )}
-
 
               <div className="flex items-center justify-center gap-8 mt-6 pt-6 border-t border-neutral-700 ">
                 <div className="text-center">
@@ -382,9 +397,7 @@ const ProfilePage: React.FC = () => {
             </div>
 
             {/* Quick Stats */}
-            <div
-              className="px-6 py-8 rounded-2xl  bg-neutral-900/50 shadow-sm shadow-black"
-              initial={{ opacity: 0, x: -30 }}>
+            <div className="px-6 py-8 rounded-2xl  bg-neutral-900/50 shadow-sm shadow-black">
               <h3 className="text-lg font-bold mb-4 text-white">Quick Stats</h3>
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
@@ -414,8 +427,6 @@ const ProfilePage: React.FC = () => {
                 </div>
               </div>
             </div>
-
-           
           </div>
 
           {/* Right Column - Detailed Stats */}
@@ -542,7 +553,10 @@ const ProfilePage: React.FC = () => {
                       profileData.recentBattles.map((battle, index) => {
                         const accuracy = Math.round((battle.score / 5) * 100);
                         return (
-                          <div key={index} className="p-4 bg-black/30 rounded-lg">
+                          <div
+                            key={index}
+                            className="p-4 bg-black/30 rounded-lg"
+                          >
                             <div className="flex items-center justify-between mb-2">
                               <div className="flex items-center gap-3">
                                 <div
@@ -617,7 +631,8 @@ const ProfilePage: React.FC = () => {
                             Score: {session.score}/{session.total}
                           </span>
                           <span className="text-gray-300">
-                            Accuracy: {Math.round((session.score / session.total) * 100)}%
+                            Accuracy:{" "}
+                            {Math.round((session.score / session.total) * 100)}%
                           </span>
                         </div>
                       </div>
@@ -639,27 +654,47 @@ const ProfilePage: React.FC = () => {
                           onClick={async (e) => {
                             e.stopPropagation();
                             // Call unsave API
-                            const res = await import("@/services/savedQuestionsService");
+                            const res = await import(
+                              "@/services/savedQuestionsService"
+                            );
                             await res.default.toggleSave({
                               userId: supabaseUser?.id,
                               questionId: question.id,
                             });
                             // Remove from UI
-                            setUserData((prev) => prev && {
-                              ...prev,
-                              savedQuestions: prev.savedQuestions?.filter(q => q.id !== question.id)
-                            });
+                            setUserData(
+                              (prev) =>
+                                prev && {
+                                  ...prev,
+                                  savedQuestions: prev.savedQuestions?.filter(
+                                    (q) => q.id !== question.id
+                                  ),
+                                }
+                            );
                           }}
                         >
                           <Trash2 className="w-5 h-5" />
                         </button>
                         <div className="mb-2 text-gray-300 font-semibold">
-                          {question.title?.split('\n')[0]}
+                          {question.title?.split("\n")[0]}
                         </div>
                         <div className="mt-2 text-xs text-gray-400">
-                          Difficulty: <span className={`font-semibold ${question.difficulty === "Easy" ? "text-green-400" : question.difficulty === "Medium" ? "text-yellow-400" : "text-red-400"}`}>{question.difficulty}</span>
+                          Difficulty:{" "}
+                          <span
+                            className={`font-semibold ${
+                              question.difficulty === "Easy"
+                                ? "text-green-400"
+                                : question.difficulty === "Medium"
+                                ? "text-yellow-400"
+                                : "text-red-400"
+                            }`}
+                          >
+                            {question.difficulty}
+                          </span>
                         </div>
-                        <div className="mt-2 text-xs text-gray-400">Category: {question.category}</div>
+                        <div className="mt-2 text-xs text-gray-400">
+                          Category: {question.category}
+                        </div>
                       </div>
                     ))}
                   </>
@@ -688,18 +723,14 @@ const ProfilePage: React.FC = () => {
         )}
       </div>
 
-      
       {/* Question Preview Modal */}
       <QuestionPreviewModal
         isOpen={previewModalOpen}
         question={previewQuestion}
         onClose={closePreview}
       />
-      
-      
     </div>
   );
 };
 
 export default ProfilePage;
-

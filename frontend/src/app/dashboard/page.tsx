@@ -144,7 +144,7 @@ export default function HomePage() {
         {/* Hero Section */}
         <div className="text-center mb-12 z-20">
           <h2
-            className={`text-5xl font-bold mb-2 py-2 bg-gradient-to-r from-lime-400/90 to-lime-500 bg-clip-text text-transparent ${spaceGrotesk.className}`}
+            className={`text-5xl font-bold mb-2 py-2 bg-gradient-to-b from-lime-400 to-lime-500 bg-clip-text text-transparent ${spaceGrotesk.className}`}
           >
             Clash with Code. Rise through the ranks.
           </h2>

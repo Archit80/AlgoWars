@@ -1,9 +1,9 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Home, Swords, Target, Clock, Zap, TrendingUp, Award } from 'lucide-react';
+import { Home, Swords, Target, Clock, Zap, TrendingUp, Award, Bookmark } from 'lucide-react';
 import { useUserStore } from '@/stores/userStore';
 import { useUser } from '@/contexts/userContext';
 import SavedQuestionsService from '@/services/savedQuestionsService';
@@ -39,13 +39,11 @@ const Result: React.FC<ResultProps> = (props) => {
   const { supabaseUser } = useUser();
   const router = useRouter();
   const updateXP = useUserStore((state) => state.updateXP);
-
-  // Route protection
-  useEffect(() => {
-    if (!supabaseUser) {
-      router.push("/login");
-    }
-  }, [supabaseUser, router]);
+  const userId = useUserStore((state) => state.supabaseUser?.id);
+  
+  // State for saved questions
+  const [savedQuestions, setSavedQuestions] = useState<Record<string, boolean>>({});
+  const [saving, setSaving] = useState<Record<string, boolean>>({});
 
   // Prefer backend stats, fallback to mock/legacy
   const correctAnswers = props.correctAnswers ?? props.score ?? 0;
@@ -54,15 +52,11 @@ const Result: React.FC<ResultProps> = (props) => {
   const xpEarned = props.xpEarned ?? 0;
   // const streak = props.streak ?? 0;
   const mistakes = props.mistakes ?? [];
-  const questionResults = props.questionResults ?? [];
+  const questionResults = useMemo(() => props.questionResults ?? [], [props.questionResults]);
   // Calculate accuracy
   const accuracy = totalQuestions > 0 ? Math.round((correctAnswers / totalQuestions) * 100) : 0;
   // Use duration as totalTime (seconds)
   const totalTime = duration;
-
-  React.useEffect(() => {
-    if (xpEarned > 0) updateXP(xpEarned);
-  }, [xpEarned, updateXP]);
 
   const sessionData = {
     questionsAnswered: totalQuestions,
@@ -79,6 +73,53 @@ const Result: React.FC<ResultProps> = (props) => {
     const secs = seconds % 60;
     return `${mins}:${secs.toString().padStart(2, '0')}`;
   };
+
+  // Handle saving/unsaving questions
+  const handleToggleSave = async (questionId: string, q: QuestionResult) => {
+    if (!userId) return;
+    setSaving(prev => ({ ...prev, [questionId]: true }));
+    try {
+      const payload = {
+        userId,
+        questionId,
+        savedFrom: 'SOLO_RESULT',
+        userAnswer: q.userAnswer,
+        wasCorrect: q.userCorrect,
+      } as const;
+      const res = await SavedQuestionsService.toggleSave(payload);
+      setSavedQuestions(prev => ({ ...prev, [questionId]: res.isSaved }));
+    } catch (error) {
+      console.error('Error saving question:', error);
+    } finally {
+      setSaving(prev => ({ ...prev, [questionId]: false }));
+    }
+  };
+
+  // Route protection
+  useEffect(() => {
+    if (!supabaseUser) {
+      router.push("/login");
+    }
+  }, [supabaseUser, router]);
+
+  React.useEffect(() => {
+    if (xpEarned > 0) updateXP(xpEarned);
+  }, [xpEarned, updateXP]);
+
+  // Check which questions are already saved
+  useEffect(() => {
+    async function checkSavedQuestions() {
+      if (!userId || !questionResults.length) return;
+      try {
+        const ids = questionResults.map(q => q.id);
+        const res = await SavedQuestionsService.checkMultipleSaved(userId, ids);
+        setSavedQuestions(res.savedMap || {});
+      } catch (error) {
+        console.error('Failed to check saved questions:', error);
+      }
+    }
+    checkSavedQuestions();
+  }, [userId, questionResults, setSavedQuestions]);
 
   React.useEffect(() => {
     updateXP(sessionData.xpEarned);
@@ -207,80 +248,65 @@ const Result: React.FC<ResultProps> = (props) => {
           >
             <h2 className="text-2xl font-bold text-lime-500 mb-6">Question Review</h2>
             <div className="space-y-6">
-              {questionResults.map((q, index) => {
-                const [isSaved, setIsSaved] = useState(false);
-                const [loading, setLoading] = useState(false);
-
-                const handleToggleSave = async () => {
-                  setLoading(true);
-                  try {
-                    // You may need to pass userId and other info, adjust as needed
-                    const result = await SavedQuestionsService.toggleSave({ questionId: q.id, userId: "" });
-                    setIsSaved(result?.saved ?? !isSaved);
-                  } catch (err) {
-                    // Optionally show error toast
-                    console.log("Error saving question:", err);
-                  }
-                  setLoading(false);
-                };
-
-                return (
-                  <div key={q.id} className="bg-neutral-900/50 border border-neutral-800 p-6 rounded-2xl">
-                    <h3 className="text-lg font-semibold mb-4">
+              {questionResults.map((q, index) => (
+                <div key={q.id} className="bg-neutral-900/50 border border-neutral-800 p-6 rounded-2xl">
+                  <div className="flex justify-between items-center mb-2">
+                    <h3 className="text-lg font-semibold">
                       Question {index + 1}
                     </h3>
-                    <div className="mb-4 text-gray-300">
-                      {q.text}
-                    </div>
-                    <div className="space-y-3 mb-4">
-                      {q.options.map((option, idx) => {
-                        const isCorrect = option === q.correctAnswer;
-                        const isUserChoice = option === q.userAnswer;
-                        return (
-                          <div
-                            key={idx}
-                            className={`p-3 rounded-lg border-2 ${
-                              isCorrect
-                                ? 'border-lime-500 bg-lime-500/20'
-                                : isUserChoice && !isCorrect
-                                ? 'border-red-500 bg-red-500/20'
-                                : 'border-neutral-600'
-                            }`}
-                          >
-                            <div className="flex items-center justify-between">
-                              <div className="flex items-center gap-3">
-                                <span className="font-mono text-sm">
-                                  {String.fromCharCode(65 + idx)}
-                                </span>
-                                <span>{option}</span>
-                              </div>
-                              <div className="flex gap-2">
-                                {isCorrect && (
-                                  <span className="text-lime-400 text-sm">✓ Correct</span>
-                                )}
-                                {isUserChoice && (
-                                  <span className="text-blue-400 text-sm">Your Answer</span>
-                                )}
-                              </div>
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
                     <button
-                      className={`px-4 py-2 rounded-lg font-semibold transition-all ${
-                        isSaved
-                          ? 'bg-lime-500 text-black hover:bg-lime-400'
-                          : 'bg-gray-700 text-white hover:bg-gray-600'
-                      } ${loading ? 'opacity-60 cursor-not-allowed' : ''}`}
-                      onClick={handleToggleSave}
-                      disabled={loading}
+                      className="ml-2 p-2 rounded-lg transition-all group hover:cursor-pointer hover:bg-lime-400/10"
+                      onClick={() => handleToggleSave(q.id, q)}
+                      disabled={saving[q.id]}
+                      aria-label={savedQuestions[q.id] ? 'Unsave' : 'Save'}
                     >
-                      {isSaved ? 'Saved' : 'Save Question'}
+                      <Bookmark className={`w-5 h-5 transition-all duration-200 ${
+                        savedQuestions[q.id] 
+                          ? 'text-lime-500 fill-lime-400' 
+                          : 'text-white group-hover:text-lime-600'
+                      }`} />
                     </button>
                   </div>
-                );
-              })}
+                  <div className="mb-4 text-gray-300">
+                    {q.text}
+                  </div>
+                  <div className="space-y-3 mb-4">
+                    {q.options.map((option, idx) => {
+                      const isCorrect = option === q.correctAnswer;
+                      const isUserChoice = option === q.userAnswer;
+                      return (
+                        <div
+                          key={idx}
+                          className={`p-3 rounded-lg border-2 ${
+                            isCorrect
+                              ? 'border-lime-500 bg-lime-500/20'
+                              : isUserChoice && !isCorrect
+                              ? 'border-red-500 bg-red-500/20'
+                              : 'border-neutral-600'
+                          }`}
+                        >
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-3">
+                              <span className="font-mono text-sm">
+                                {String.fromCharCode(65 + idx)}
+                              </span>
+                              <span>{option}</span>
+                            </div>
+                            <div className="flex gap-2">
+                              {isCorrect && (
+                                <span className="text-lime-400 text-sm">✓ Correct</span>
+                              )}
+                              {isUserChoice && (
+                                <span className="text-blue-400 text-sm">Your Answer</span>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
             </div>
           </motion.div>
         )}

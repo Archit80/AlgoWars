@@ -18,6 +18,7 @@ export const getLeaderboard = async (req, res) => {
         matchesLost: true,
         correctAnswers: true,
         totalAnswers: true,
+        profilePic: true,
       },
     });
 
@@ -37,6 +38,7 @@ export const getLeaderboard = async (req, res) => {
         matchesLost: user.matchesLost,
         correctAnswers: user.correctAnswers,
         totalAnswers: user.totalAnswers,
+        profilePic: user.profilePic,
         rank: index + 1,
         level: levelInfo.level,
         tier: tierInfo.tier,

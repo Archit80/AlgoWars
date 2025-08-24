@@ -22,6 +22,7 @@ export interface LeaderboardUser {
   totalAnswers: number;
   winRate: number;
   accuracy: number;
+  profilePic?: string;
 }
 
 const LeaderboardService = {
