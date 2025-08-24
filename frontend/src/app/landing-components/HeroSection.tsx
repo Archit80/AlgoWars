@@ -24,14 +24,14 @@ const HeroSection = () => {
   return (
     <section className="relative px-4 pb-16 pt-48 h-full  text-center">
       <div
-        className="absolute inset-0 h-full blur-[2px] bg-black/10"
+        className="absolute inset-0 h-full blur-[2px] bg-black/10 hidden md:block"
         style={{ position: "absolute", inset: 0 }}
       >
         <FaultyTerminal
-          scale={1.8}
-          digitSize={1.6}
+          scale={0.8}
+          digitSize={1}
           timeScale={0.6}
-          scanlineIntensity={0.85}
+          scanlineIntensity={0.5}
           brightness={0.6}
           curvature={0.1}
           mouseReact={false}
