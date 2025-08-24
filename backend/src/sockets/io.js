@@ -104,7 +104,11 @@ export function getIO() {
 
 export function initIO(httpServer, corsOrigin = "*") {
   io = new Server(httpServer, {
-    cors: { origin: corsOrigin, methods: ["GET", "POST"] },
+    cors: { 
+      origin: Array.isArray(corsOrigin) ? corsOrigin : corsOrigin, 
+      methods: ["GET", "POST"],
+      credentials: true
+    },
     path: "/api/socket.io", 
   });
 
