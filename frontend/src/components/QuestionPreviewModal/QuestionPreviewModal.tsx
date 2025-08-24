@@ -1,7 +1,6 @@
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
 import { X } from "lucide-react";
-import { createPortal } from "react-dom";
 import Prism from "prismjs";
 import "prismjs/themes/prism-dark.css";
 import "prismjs/components/prism-javascript";
@@ -78,7 +77,8 @@ const QuestionPreviewModal: React.FC<QuestionPreviewModalProps> = ({
     ];
   };
 
-  // Portal helper
+  // Portal helper (removed unused ModalPortal)
+  /*
   const ModalPortal: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const hostRef = React.useRef<HTMLElement | null>(null);
 
@@ -98,6 +98,7 @@ const QuestionPreviewModal: React.FC<QuestionPreviewModalProps> = ({
     if (!hostRef.current) return null;
     return createPortal(children, hostRef.current);
   };
+  */
 
   if (!isOpen || !question) {
     console.log("Modal not rendering because:", { isOpen, hasQuestion: !!question });

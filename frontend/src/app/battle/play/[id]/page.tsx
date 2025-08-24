@@ -421,7 +421,7 @@ export default function BattlePlayPage() {
                 key={idx}
                 onClick={() => !hasSubmitted && setSelectedAnswer(option)}
                 disabled={hasSubmitted}
-                className={`w-full p-4 rounded-xl border-2 text-left transition-all ${
+                className={`w-full p-4 rounded-xl border-2 text-left transition-all hover:caret-fuchsia-800 hover:cursor-pointer ${
                   hasSubmitted
                     ? "cursor-not-allowed opacity-60"
                     : "hover:cursor-pointer"
@@ -462,7 +462,7 @@ export default function BattlePlayPage() {
           <button
             onClick={handleSubmit}
             disabled={selectedAnswer === null || hasSubmitted}
-            className={`px-8 py-3 rounded-xl font-semibold transition-all ${
+            className={`px-8 py-3 rounded-xl font-semibold transition-all hover:cursor-pointer ${
               selectedAnswer !== null && !hasSubmitted
                 ? "bg-lime-500 hover:bg-lime-400 text-black"
                 : "bg-neutral-600 text-neutral-400 cursor-not-allowed"

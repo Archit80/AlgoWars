@@ -59,13 +59,11 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
     return () => {
       // authListener is a { subscription } object in older libs; handle both shapes
-      /* eslint-disable @typescript-eslint/no-explicit-any */
       if (authListener && (authListener as any).subscription) {
         (authListener as any).subscription.unsubscribe();
       } else if (authListener && typeof (authListener as any).unsubscribe === 'function') {
         (authListener as any).unsubscribe();
       }
-      /* eslint-enable @typescript-eslint/no-explicit-any */
     };
   }, []);
 

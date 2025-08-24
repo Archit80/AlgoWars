@@ -1,12 +1,13 @@
+
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { useUserStore } from "@/stores/userStore";
 import { useMatchStore } from "@/stores/matchStore";
 import MatchService from "@/services/matchService";
 
-export default function JoinByCode() {
+function JoinByCodeInner() {
   const params = useSearchParams();
   const router = useRouter();
   const user = useUserStore((s) => s.supabaseUser);
@@ -74,11 +75,19 @@ export default function JoinByCode() {
             placeholder="Enter 6-8 char code"
             className="w-full px-4 py-3 rounded border border-neutral-700 bg-neutral-900/50"
           />
-          <Button onClick={handleJoin} disabled={!code || joining} className="bg-lime-600 hover:bg-lime-500 text-black">
+          <Button onClick={handleJoin} disabled={!code || joining} className="bg-lime-600 hover:bg-lime-500 text-center text-black hover:cursor-pointer">
             Join
           </Button>
         </div>
       </div>
     </div>
+  );
+}
+
+export default function JoinByCode() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center text-white">Loading...</div>}>
+      <JoinByCodeInner />
+    </Suspense>
   );
 }

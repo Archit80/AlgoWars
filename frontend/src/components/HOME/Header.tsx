@@ -1,5 +1,5 @@
 import React from "react";
-import { Code, Flame } from "lucide-react";
+import { Flame } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";

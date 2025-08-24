@@ -1,6 +1,6 @@
 import { Progress } from "@/components/ui/progress"
 import { Badge } from "@/components/ui/badge"
-import { Zap, Crown, Star, Shield, Sword, Trophy, Diamond, Flame, Rocket } from "lucide-react"
+import { Zap, Crown, Star, Shield, Sword, Trophy, Diamond, Flame } from "lucide-react"
 
 interface XPProgressProps {
   // Basic level info
@@ -83,7 +83,7 @@ export function XPProgress({
             <div className="flex items-center gap-2">
               <span className="text-xl font-bold text-white">Level {safeLevel}</span>
               {isAtMilestone && (
-                <Crown className="w-5 h-5 text-yellow-400" title="Milestone Level!" />
+                <Crown className="w-5 h-5 text-yellow-400" />
               )}
             </div>
             {tierName && (
@@ -98,7 +98,7 @@ export function XPProgress({
         </div>
         
         {/* XP Badge */}
-        <Badge variant="electric" className="text-sm">
+        <Badge className="text-sm">
           {displayCurrentLevelXP.toLocaleString()} / {displayXPRequired.toLocaleString()} XP
         </Badge>
       </div>

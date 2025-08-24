@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -110,9 +109,9 @@ export default function RandomWaitingRoom() {
       if (handleMatchFound) {
         socket.off('match:found', handleMatchFound);
       }
-      console.log(`[Random Waiting] Socket cleanup completed for user: ${(supabaseUser as any).id}`);
+      console.log(`[Random Waiting] Socket cleanup completed for user: ${(supabaseUser as { id?: string })?.id || 'unknown'}`);
     };
-  }, [router, supabaseUser?.id, setMatchData, username]);
+  }, [router, supabaseUser, setMatchData, username]);
 
   // Timeout logic: after 90s without match, show fallback UI
   useEffect(() => {
@@ -125,7 +124,7 @@ export default function RandomWaitingRoom() {
         if (socket?.connected) {
           socket.off('match:found');
         }
-      } catch (e) {
+      } catch {
         // swallow
       }
     }

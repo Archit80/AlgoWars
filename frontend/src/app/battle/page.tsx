@@ -256,7 +256,7 @@ export default function BattleSetup() {
         </motion.div>
 
         <div className="flex justify-center">
-          <Button onClick={startBattle} disabled={!mode || selectedTopics.length === 0 || loading} className={`inline-flex items-center gap-2 px-16 py-6 rounded-lg font-bold text-lg transition-all ${!mode || selectedTopics.length === 0 ? "bg-gray-600 text-gray-400" : "bg-lime-500 hover:bg-lime-400 text-black"}`}>
+          <Button onClick={startBattle} disabled={!mode || selectedTopics.length === 0 || loading} className={`inline-flex items-center gap-2 px-16 py-6 rounded-lg font-bold hover:cursor-pointer text-lg transition-all ${!mode || selectedTopics.length === 0 ? "bg-gray-600 text-gray-400" : "bg-lime-500 hover:bg-lime-400 text-black"}`}>
             <Swords className="w-6 h-6" />
             {mode === "friend" ? "Create Private Room" : mode === "random" ? "Find Match" : "Start"}
           </Button>
