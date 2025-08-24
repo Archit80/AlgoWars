@@ -2,7 +2,6 @@
 import "./home.css";
 import Prism from "@/components/Prism/Prism";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabaseClient";
 import { useUser } from "@/contexts/userContext";
 import { Button } from "@/components/ui/button";
@@ -20,20 +19,10 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export default function HomePage() {
-  const { supabaseUser, initialized } = useUser();
-  const router = useRouter();
+  const { supabaseUser } = useUser();
   const [user, setUser] = useState<any>(null);
   const [userData, setUserData] = useState<UserData | null>(null);
   const [loading, setLoading] = useState(true);
-
-  // Route protection
-  useEffect(() => {
-    // Wait until auth state has been initialized to avoid redirecting prematurely on reload
-    if (!initialized) return;
-    if (!supabaseUser) {
-      router.push("/login");
-    }
-  }, [supabaseUser, initialized, router]);
 
   useEffect(() => {
     const fetchData = async () => {

@@ -6,7 +6,6 @@ import Orb from "@/components/Orb/Orb";
 import Header from "../landing-components/Header";
 import { Space_Grotesk } from "next/font/google";
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"] });
-import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 export default function LoginPage() {
@@ -17,7 +16,6 @@ export default function LoginPage() {
   const [message, setMessage] = useState("");
   const [showForgot, setShowForgot] = useState(false);
   const [isSignup, setIsSignup] = useState(false);
-  const router = useRouter();
 
   const handleLogin = async (e: any) => {
     e.preventDefault();
@@ -32,7 +30,7 @@ export default function LoginPage() {
       console.log("Login error:", error);
     } else {
       setMessage("Login successful!");
-      router.replace("/dashboard"); // Redirect to dashboard after login
+      // Let AuthGuard handle redirect based on onboarding status
     }
     setLoading(false);
   };
@@ -65,7 +63,7 @@ export default function LoginPage() {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: `${window.location.origin}/onboarding`,
+        redirectTo: `${window.location.origin}/auth/callback`,
       },
     });
     if (error) setError(error.message);

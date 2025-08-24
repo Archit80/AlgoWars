@@ -1,6 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useUser } from "../../contexts/userContext";
 import { useUserStore } from "../../stores/userStore";
 import userService from "../../services/userService";
@@ -12,7 +11,6 @@ import Image from "next/image";
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"] });
 
 export default function OnboardingPage() {
-  const router = useRouter();
   // Define the type for supabaseUser to avoid 'unknown' errors
   interface SupabaseUser {
     id: string;
@@ -33,15 +31,7 @@ export default function OnboardingPage() {
   const [dragActive, setDragActive] = useState(false);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
-  // Redirect to dashboard if user is already onboarded
-  useEffect(() => {
-    if (userDataFetched && isOnboarded) {
-      router.push("/dashboard");
-    }
-    else if (!userDataFetched) {
-      router.push("/login");
-    }
-  }, [isOnboarded, userDataFetched, router]);
+  // No redirect logic needed - AuthGuard handles this
 
   const validateUsername = (name: string) => {
     if (!name) {
@@ -137,7 +127,7 @@ export default function OnboardingPage() {
 
       refreshUser();
       setMessage("Profile updated!");
-      router.push("/dashboard");
+      // AuthGuard will handle redirect to dashboard
     } catch (err: any) {
       setError(err?.message || "Failed to update profile");
     } finally {
