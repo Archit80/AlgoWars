@@ -19,22 +19,55 @@ function generateRoomCode(length = 6) {
 }
 
 async function pickQuestions(categories, difficulty, count = QUESTIONS_PER_MATCH) {
-  const all = [];
-  const perCat = Math.max(1, Math.ceil(count / Math.max(1, categories.length)));
-  for (const cat of categories) {
-    const qs = await prisma.question.findMany({
-      where: { categories: { has: cat }, difficulty },
-      take: perCat * 2,
-    });
-    all.push(...qs);
+  // Prefer DB-side random sampling (Postgres) for efficiency and uniformity.
+  const allRows = [];
+  const perCat = Math.max(1, Math.ceil(count / Math.max(1, (categories || []).length)));
+
+  // If categories is empty, skip per-category queries and use fallback below.
+  if (Array.isArray(categories) && categories.length > 0) {
+    for (const cat of categories) {
+      try {
+        // Use Postgres ANY() to check membership and ORDER BY random() for random sample
+        const rows = await prisma.$queryRaw`
+          SELECT id FROM "Question"
+          WHERE ${cat} = ANY(categories) AND difficulty = ${difficulty}
+          ORDER BY random()
+          LIMIT ${perCat};
+        `;
+        allRows.push(...rows);
+      } catch (err) {
+        // Fallback to Prisma findMany if raw query fails for any reason
+        const rows = await prisma.question.findMany({ where: { categories: { has: cat }, difficulty }, take: perCat });
+        allRows.push(...rows.map(r => ({ id: r.id })));
+      }
+    }
   }
-  if (all.length === 0) {
-    const fallback = await prisma.question.findMany({ where: { difficulty }, take: count * 2 });
-    all.push(...fallback);
+
+  // If we didn't collect any rows from categories, fallback to difficulty-only sampling
+  if (allRows.length === 0) {
+    const fallback = await prisma.$queryRaw`
+      SELECT id FROM "Question"
+      WHERE difficulty = ${difficulty}
+      ORDER BY random()
+      LIMIT ${count * 2};
+    `;
+    allRows.push(...fallback);
   }
-  const shuffled = all.sort(() => 0.5 - Math.random());
-  const selected = shuffled.slice(0, count);
-  return selected.map((q) => q.id);
+
+  // Deduplicate by id while preserving order
+  const seen = new Set();
+  const uniqueIds = [];
+  for (const r of allRows) {
+    const id = r.id || r.ID || r._id;
+    if (!id) continue;
+    if (!seen.has(id)) {
+      seen.add(id);
+      uniqueIds.push(id);
+    }
+    if (uniqueIds.length >= count) break;
+  }
+
+  return uniqueIds.slice(0, count);
 }
 
 export const createFriendMatch = async (req, res) => {
@@ -160,14 +193,21 @@ export async function joinRandomMatch(req, res) {
     if (opponent) {
       // Match found - create match in DB
       const diff = normalizeDifficulty(difficulty);
-      const questionIds = await pickQuestions(topics, diff);
-      
+
+      // Use intersection of both players' topics so questions reflect both preferences
+      const intersection = Array.isArray(topics) && Array.isArray(opponent.topics)
+        ? topics.filter((t) => opponent.topics.includes(t))
+        : [];
+      const categoriesToUse = intersection.length ? intersection : topics;
+
+      const questionIds = await pickQuestions(categoriesToUse, diff);
+
       const match = await prisma.match.create({
         data: {
           user1Id: opponent.userId,
           user2Id: player.userId,
           isPrivate: false,
-          categories: topics,
+          categories: categoriesToUse,
           difficulty: diff,
           status: 'ONGOING',
           questions: { connect: questionIds.map((id) => ({ id })) },

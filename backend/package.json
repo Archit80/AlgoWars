@@ -11,6 +11,8 @@
     "postinstall": "prisma generate",
     "db:push": "prisma db push",
     "db:seed": "node scripts/seed-leetcode-questions.js",
+    "db:seed:arrays": "node scripts/seed-arrays-questions.js",
+    "db:append:strings": "node scripts/seed-strings-questions.js",
     "db:studio": "prisma studio",
     "db:reset": "prisma migrate reset",
     "test": "echo \"Error: no test specified\" && exit 1"
