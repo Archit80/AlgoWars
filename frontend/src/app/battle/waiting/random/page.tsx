@@ -209,7 +209,6 @@ export default function RandomWaitingRoom() {
                       <span className="bg-lime-500 text-black px-3 py-1 rounded-full text-xs font-bold">YOU</span>
                     </div>
                     <div className="font-semibold text-white">{username || 'Player'}</div>
-                    <div className="text-xs text-lime-400">Level {userStats?.level || 1}</div>
                   </div>
                   {/* Waiting for opponent */}
                   <div className="bg-neutral-800/50 border-2 border-dashed border-neutral-600 rounded-xl p-4 flex flex-col items-center justify-center">

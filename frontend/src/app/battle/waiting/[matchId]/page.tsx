@@ -28,10 +28,8 @@ export default function WaitingRoom() {
   const router = useRouter();
   const [match, setMatch] = useState<MatchSummary | null>(null);
   // Use real user info from Zustand store
-  const userStats = useUserStore((state) => state.userStats);
   const user = {
     name: "You",
-    level: userStats?.level ?? 1,
   };
 
   useEffect(() => {
@@ -154,9 +152,7 @@ export default function WaitingRoom() {
                   </span>
                   <span className="font-semibold text-white">{user.name}</span>
                 </div>
-                <span className="text-xs bg-neutral-900 text-lime-400 px-2 py-1 rounded">
-                  Level {user.level}
-                </span>
+               
               </div>
               {/* Player 2 */}
               <div className="rounded-xl bg-neutral-900 border-2 border-dashed border-neutral-700 p-4 flex flex-col items-center justify-center">
