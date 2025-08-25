@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useUser } from "../../contexts/userContext";
 import { useUserStore } from "../../stores/userStore";
 import userService from "../../services/userService";
@@ -9,9 +9,10 @@ import Header from "../landing-components/Header";
 import { Space_Grotesk } from "next/font/google";
 import Image from "next/image";
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"] });
-
+import { useRouter } from "next/navigation";
 export default function OnboardingPage() {
   // Define the type for supabaseUser to avoid 'unknown' errors
+  const router = useRouter();
   interface SupabaseUser {
     id: string;
     [key: string]: any;
@@ -107,8 +108,8 @@ export default function OnboardingPage() {
 
         const { error: uploadError } = await supabase.storage
           .from("PFPs")
-          .upload(filePath, profilePic,{
-            upsert: true
+          .upload(filePath, profilePic, {
+            upsert: true,
           });
 
         if (uploadError) {
@@ -127,13 +128,20 @@ export default function OnboardingPage() {
 
       refreshUser();
       setMessage("Profile updated!");
-      // AuthGuard will handle redirect to dashboard
+      // Removed inline redirect, useEffect will handle redirect
     } catch (err: any) {
       setError(err?.message || "Failed to update profile");
     } finally {
       setLoading(false);
     }
   };
+
+  // Optimal redirect: watch isOnboarded and redirect when true
+  useEffect(() => {
+    if (isOnboarded) {
+      router.replace("/dashboard");
+    }
+  }, [isOnboarded, router]);
 
   return userLoading || !userDataFetched || isOnboarded ? (
     <></>
