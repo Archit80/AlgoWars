@@ -21,7 +21,8 @@ export default function OnboardingPage() {
     supabaseUser: SupabaseUser | null;
     refreshUser: () => void;
   };
-  const { isOnboarded, loading: userLoading, userDataFetched } = useUserStore();
+  const { isOnboarded, loading: userLoading, userDataFetched, setIsOnboarded } =
+    useUserStore();
   const [username, setUsername] = useState("");
   const [usernameError, setUsernameError] = useState("");
   const [profilePic, setProfilePic] = useState<File | null>(null);
@@ -126,6 +127,7 @@ export default function OnboardingPage() {
         profilePic: profilePicUrl,
       });
 
+      setIsOnboarded(true); // Immediate update for fast redirect
       refreshUser();
       setMessage("Profile updated!");
       // Removed inline redirect, useEffect will handle redirect
