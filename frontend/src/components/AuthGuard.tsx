@@ -4,6 +4,8 @@ import { useRouter } from "next/navigation";
 import { useUser } from "@/contexts/userContext";
 import { useUserStore } from "@/stores/userStore";
 
+const publicPaths = ["/", "/login"];
+
 export default function AuthGuard({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const { supabaseUser, initialized } = useUser();
@@ -13,30 +15,12 @@ export default function AuthGuard({ children }: { children: React.ReactNode }) {
     // Wait for auth initialization
     if (!initialized || loading) return;
 
-    console.log("AuthGuard check:", { 
-      supabaseUser: !!supabaseUser, 
-      isOnboarded, 
-      userDataFetched,
-      currentPath: window.location.pathname 
-    });
-
     const currentPath = window.location.pathname;
+    const isPublic = publicPaths.includes(currentPath) || currentPath.startsWith("/profile/");
 
-    // Check if current path is a profile route (publicly accessible)
-    const isProfileRoute = currentPath.startsWith("/profile/");
-
-    // Not authenticated
-    if (!supabaseUser) {
-      if (currentPath !== "/login" && currentPath !== "/" && !isProfileRoute) {
-        console.log("Redirecting to login - no user");
-        router.replace("/login");
-      }
-      return;
-    }
-
-    // User exists but data not fetched yet
-    if (!userDataFetched) {
-      console.log("Waiting for user data to load...");
+    // Not authenticated and not on a public path
+    if (!supabaseUser && !isPublic) {
+      router.replace("/login");
       return;
     }
 
@@ -44,16 +28,11 @@ export default function AuthGuard({ children }: { children: React.ReactNode }) {
     if (supabaseUser && userDataFetched) {
       // Not onboarded - send to onboarding (unless already there)
       if (!isOnboarded && currentPath !== "/onboarding") {
-        console.log("Redirecting to onboarding - not onboarded");
         router.replace("/onboarding");
-        return;
-      }
-
+      } 
       // Onboarded but on login/onboarding pages - send to dashboard
-      if (isOnboarded && (currentPath === "/login" || currentPath === "/onboarding")) {
-        console.log("Redirecting to dashboard - already onboarded");
+      else if (isOnboarded && (currentPath === "/login" || currentPath === "/onboarding")) {
         router.replace("/dashboard");
-        return;
       }
     }
   }, [supabaseUser, initialized, isOnboarded, userDataFetched, loading, router]);

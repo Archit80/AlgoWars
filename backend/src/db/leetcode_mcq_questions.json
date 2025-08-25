@@ -38965,4 +38965,365 @@
     "answer": "4",
     "difficulty": "HARD"
   }
+,
+  {
+    "text": "What will be the value of map after executing this algorithm?\n\n```\nARRAY = [3, 2, 4]\nTARGET = 6\nMAP = empty hash table\n\nfor i = 0 to length(ARRAY) - 1:\n    needed = TARGET - ARRAY[i]\n    if needed exists in MAP:\n        return [MAP[needed], i]\n    MAP[ARRAY[i]] = i\n\nWhen i = 1, what does MAP contain?\n```",
+    "type": "MCQ",
+    "categories": ["Arrays", "HashMaps"],
+    "options": [
+      "MAP = {3: 0}",
+      "MAP = {3: 0, 2: 1}",
+      "MAP = {2: 1}",
+      "MAP = empty"
+    ],
+    "answer": "MAP = {3: 0}"
+  },
+  {
+    "text": "What is the output of this code?\n\n```\nstack = []\nfor char in \"((())\":\n    if char == '(':\n        stack.push(char)\n    else:\n        if stack.isEmpty():\n            return False\n        stack.pop()\nreturn stack.isEmpty()\n```",
+    "type": "MCQ",
+    "categories": ["Stack", "String"],
+    "options": [
+      "True",
+      "False",
+      "Error",
+      "None"
+    ],
+    "answer": "True"
+  },
+  {
+    "text": "After executing this binary search, what is the value of mid?\n\n```\narr = [1, 3, 5, 7, 9, 11]\ntarget = 7\nleft = 0, right = 5\n\nwhile left <= right:\n    mid = (left + right) // 2\n    if arr[mid] == target:\n        return mid\n    elif arr[mid] < target:\n        left = mid + 1\n    else:\n        right = mid - 1\n```",
+    "type": "MCQ",
+    "categories": ["BinarySearch", "Arrays"],
+    "options": [
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "answer": "3"
+  },
+  {
+    "text": "What is the time complexity of finding the kth largest element using a min-heap of size k?",
+    "type": "MCQ",
+    "categories": ["Heap", "Complexity"],
+    "options": [
+      "O(n)",
+      "O(k log k)",
+      "O(n log k)",
+      "O(n log n)"
+    ],
+    "answer": "O(n log k)"
+  },
+  {
+    "text": "Given this linked list operation, what is the result?\n\n```\nlist = 1 -> 2 -> 3 -> 4\ncurrent = list\nwhile current.next != null:\n    current = current.next\ncurrent.next = new Node(5)\n```",
+    "type": "MCQ",
+    "categories": ["LinkedList"],
+    "options": [
+      "1 -> 2 -> 3 -> 4 -> 5",
+      "5 -> 1 -> 2 -> 3 -> 4",
+      "1 -> 2 -> 3 -> 5",
+      "Error"
+    ],
+    "answer": "1 -> 2 -> 3 -> 4 -> 5"
+  },
+  {
+    "text": "What does this recursive function return for n=5?\n\n```\nfunction mystery(n):\n    if n <= 1:\n        return n\n    return mystery(n-1) + mystery(n-2)\n```",
+    "type": "MCQ",
+    "categories": ["Recursion", "DynamicProgramming"],
+    "options": [
+      "3",
+      "5",
+      "8",
+      "13"
+    ],
+    "answer": "5"
+  },
+  {
+    "text": "Which data structure would be most efficient for implementing an LRU cache?",
+    "type": "MCQ",
+    "categories": ["DataStructures", "Design"],
+    "options": [
+      "Array",
+      "Binary Search Tree",
+      "HashMap + Doubly Linked List",
+      "Stack"
+    ],
+    "answer": "HashMap + Doubly Linked List"
+  },
+  {
+    "text": "What is the space complexity of merge sort?",
+    "type": "MCQ",
+    "categories": ["Sorting", "Complexity"],
+    "options": [
+      "O(1)",
+      "O(log n)",
+      "O(n)",
+      "O(n²)"
+    ],
+    "answer": "O(n)"
+  },
+  {
+    "text": "After one pass of bubble sort on [5, 2, 8, 1, 9], what is the array?",
+    "type": "MCQ",
+    "categories": ["Sorting", "Arrays"],
+    "options": [
+      "[2, 5, 1, 8, 9]",
+      "[2, 5, 8, 1, 9]",
+      "[1, 2, 5, 8, 9]",
+      "[5, 2, 8, 9, 1]"
+    ],
+    "answer": "[2, 5, 1, 8, 9]"
+  },
+  {
+    "text": "What is the height of a complete binary tree with 15 nodes?",
+    "type": "MCQ",
+    "categories": ["BinaryTree", "Math"],
+    "options": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "answer": "3"
+  },
+  {
+    "text": "Which traversal of a BST gives sorted order?",
+    "type": "MCQ",
+    "categories": ["BinaryTree", "BST"],
+    "options": [
+      "Preorder",
+      "Inorder",
+      "Postorder",
+      "Level order"
+    ],
+    "answer": "Inorder"
+  },
+  {
+    "text": "What is the result of this bit operation: 5 ^ 3?",
+    "type": "MCQ",
+    "categories": ["BitManipulation"],
+    "options": [
+      "2",
+      "6",
+      "8",
+      "15"
+    ],
+    "answer": "6"
+  },
+  {
+    "text": "How many edges does a tree with n nodes have?",
+    "type": "MCQ",
+    "categories": ["Graph", "Tree"],
+    "options": [
+      "n",
+      "n-1",
+      "n+1",
+      "2n"
+    ],
+    "answer": "n-1"
+  },
+  {
+    "text": "What is the worst-case time complexity of quicksort?",
+    "type": "MCQ",
+    "categories": ["Sorting", "Complexity"],
+    "options": [
+      "O(n)",
+      "O(n log n)",
+      "O(n²)",
+      "O(n³)"
+    ],
+    "answer": "O(n²)"
+  },
+  {
+    "text": "Which algorithm is best for finding shortest path in unweighted graph?",
+    "type": "MCQ",
+    "categories": ["Graph", "Algorithms"],
+    "options": [
+      "DFS",
+      "BFS",
+      "Dijkstra",
+      "Floyd-Warshall"
+    ],
+    "answer": "BFS"
+  },
+  {
+    "text": "What is the maximum number of nodes at level k in a binary tree?",
+    "type": "MCQ",
+    "categories": ["BinaryTree", "Math"],
+    "options": [
+      "k",
+      "2^k",
+      "k²",
+      "2k"
+    ],
+    "answer": "2^k"
+  },
+  {
+    "text": "After executing this code, what is the value of result?\n\n```\nresult = 0\nfor i in range(1, 4):\n    for j in range(i):\n        result += 1\n```",
+    "type": "MCQ",
+    "categories": ["Loops", "Complexity"],
+    "options": [
+      "3",
+      "6",
+      "9",
+      "12"
+    ],
+    "answer": "6"
+  },
+  {
+    "text": "Which of these is NOT a stable sorting algorithm?",
+    "type": "MCQ",
+    "categories": ["Sorting"],
+    "options": [
+      "Merge Sort",
+      "Insertion Sort",
+      "Quick Sort",
+      "Bubble Sort"
+    ],
+    "answer": "Quick Sort"
+  },
+  {
+    "text": "What is the time complexity of building a heap from an array?",
+    "type": "MCQ",
+    "categories": ["Heap", "Complexity"],
+    "options": [
+      "O(n)",
+      "O(n log n)",
+      "O(n²)",
+      "O(log n)"
+    ],
+    "answer": "O(n)"
+  },
+  {
+    "text": "In dynamic programming, what does memoization help avoid?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "Stack overflow",
+      "Redundant calculations",
+      "Memory leaks",
+      "Infinite loops"
+    ],
+    "answer": "Redundant calculations"
+  },
+  {
+    "text": "What is the result of this operation on a max heap [9, 7, 6, 5, 3] after inserting 8?",
+    "type": "MCQ",
+    "categories": ["Heap", "DataStructures"],
+    "options": [
+      "[9, 7, 8, 5, 3, 6]",
+      "[9, 7, 6, 5, 3, 8]",
+      "[9, 8, 6, 5, 3, 7]",
+      "[9, 7, 8, 5, 6, 3]"
+    ],
+    "answer": "[9, 7, 8, 5, 3, 6]"
+  },
+  {
+    "text": "Which technique is used in the KMP string matching algorithm?",
+    "type": "MCQ",
+    "categories": ["String", "Algorithms"],
+    "options": [
+      "Hashing",
+      "Prefix function",
+      "Suffix tree",
+      "Dynamic programming"
+    ],
+    "answer": "Prefix function"
+  },
+  {
+    "text": "What is the minimum number of queues needed to implement a stack?",
+    "type": "MCQ",
+    "categories": ["Stack", "Queue"],
+    "options": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "answer": "2"
+  },
+  {
+    "text": "In a graph with V vertices and E edges, what is the time complexity of DFS?",
+    "type": "MCQ",
+    "categories": ["Graph", "Complexity"],
+    "options": [
+      "O(V)",
+      "O(E)",
+      "O(V + E)",
+      "O(V * E)"
+    ],
+    "answer": "O(V + E)"
+  },
+  {
+    "text": "What is the output of this sliding window code?\n\n```\narr = [1, 3, 2, 6, -1, 4, 1, 8, 2]\nk = 5\nmax_sum = float('-inf')\nwindow_sum = sum(arr[:k])\nmax_sum = window_sum\n\nfor i in range(k, len(arr)):\n    window_sum = window_sum - arr[i-k] + arr[i]\n    max_sum = max(max_sum, window_sum)\n\nreturn max_sum\n```",
+    "type": "MCQ",
+    "categories": ["SlidingWindow", "Arrays"],
+    "options": [
+      "11",
+      "13",
+      "17",
+      "20"
+    ],
+    "answer": "17"
+  },
+  {
+    "text": "Which of these problems CANNOT be solved using two pointers technique?",
+    "type": "MCQ",
+    "categories": ["TwoPointers", "Algorithms"],
+    "options": [
+      "Finding pair with given sum in sorted array",
+      "Reversing a linked list",
+      "Finding all subsets of an array",
+      "Removing duplicates from sorted array"
+    ],
+    "answer": "Finding all subsets of an array"
+  },
+  {
+    "text": "What is the space complexity of recursive factorial function?",
+    "type": "MCQ",
+    "categories": ["Recursion", "Complexity"],
+    "options": [
+      "O(1)",
+      "O(n)",
+      "O(n²)",
+      "O(log n)"
+    ],
+    "answer": "O(n)"
+  },
+  {
+    "text": "In Union-Find with path compression and union by rank, what is the amortized time complexity?",
+    "type": "MCQ",
+    "categories": ["UnionFind", "DataStructures"],
+    "options": [
+      "O(1)",
+      "O(log n)",
+      "O(α(n))",
+      "O(n)"
+    ],
+    "answer": "O(α(n))"
+  },
+  {
+    "text": "What is the result of rotating [1,2,3,4,5,6,7] to the right by 3 positions?",
+    "type": "MCQ",
+    "categories": ["Arrays"],
+    "options": [
+      "[5,6,7,1,2,3,4]",
+      "[4,5,6,7,1,2,3]",
+      "[3,4,5,6,7,1,2]",
+      "[7,6,5,4,3,2,1]"
+    ],
+    "answer": "[5,6,7,1,2,3,4]"
+  },
+  {
+    "text": "Which data structure is used in Dijkstra's algorithm for optimal performance?",
+    "type": "MCQ",
+    "categories": ["Graph", "DataStructures"],
+    "options": [
+      "Stack",
+      "Queue",
+      "Priority Queue",
+      "Deque"
+    ],
+    "answer": "Priority Queue"
+  }
 ]

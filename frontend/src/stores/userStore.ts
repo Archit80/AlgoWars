@@ -59,25 +59,42 @@ export const useUserStore = create<UserStore>()(
     (window as WindowWithAuthListener).__userStoreAuthListener = true;
     
     // Initial auth check
-    supabase.auth.getUser().then(async ({ data }) => {
-      const user = data?.user || null;
-      const currentState = useUserStore.getState();
-      
-      set({ supabaseUser: user });
-      
-      // Only fetch user data if not already fetched and persisted
-      if (user?.id && !currentState.userDataFetched) {
-        try {
-          const userData = await userService.getUserData(user.id);
-          set({ isOnboarded: userData.isOnboarded, userDataFetched: true, loading: false });
-        } catch (error) {
-          console.error('Failed to fetch user data:', error);
-          set({ userDataFetched: true, loading: false });
+      supabase.auth.getUser().then(async ({ data }) => {
+        const user = data?.user || null;
+        const currentState = useUserStore.getState();
+        set({ supabaseUser: user });
+        // Only fetch user data if not already fetched and persisted
+        if (user?.id && !currentState.userDataFetched) {
+          try {
+            // Centralized data fetching: fetch profile and stats in parallel
+            const [userData, userStatsRaw] = await Promise.all([
+              userService.getUserData(user.id),
+              userService.getUserStats ? userService.getUserStats(user.id) : Promise.resolve({}),
+            ]);
+            // Ensure userStats always matches UserStats interface
+            const userStats: UserStats = {
+              xp: (userStatsRaw as Partial<UserStats>)?.xp ?? 0,
+              level: (userStatsRaw as Partial<UserStats>)?.level ?? 0,
+              streak: (userStatsRaw as Partial<UserStats>)?.streak ?? 0,
+              totalBattles: (userStatsRaw as Partial<UserStats>)?.totalBattles ?? 0,
+              wins: (userStatsRaw as Partial<UserStats>)?.wins ?? 0,
+              losses: (userStatsRaw as Partial<UserStats>)?.losses ?? 0,
+              accuracy: (userStatsRaw as Partial<UserStats>)?.accuracy ?? 0,
+            };
+            set({
+              isOnboarded: userData.isOnboarded,
+              userStats,
+              userDataFetched: true,
+              loading: false,
+            });
+          } catch (error) {
+            console.error('Failed to fetch user data:', error);
+            set({ userDataFetched: true, loading: false });
+          }
+        } else {
+          set({ loading: false });
         }
-      } else {
-        set({ loading: false });
-      }
-    });
+      });
     
     // Listen for auth state changes
     supabase.auth.onAuthStateChange(async (_event, session) => {
@@ -87,8 +104,26 @@ export const useUserStore = create<UserStore>()(
       if (user?.id) {
         set({ supabaseUser: user });
         try {
-          const userData = await userService.getUserData(user.id);
-          set({ isOnboarded: userData.isOnboarded, userDataFetched: true, loading: false });
+          // Centralized data fetching: fetch profile and stats in parallel
+          const [userData, userStatsRaw] = await Promise.all([
+            userService.getUserData(user.id),
+            userService.getUserStats ? userService.getUserStats(user.id) : Promise.resolve({}),
+          ]);
+          const userStats: UserStats = {
+            xp: (userStatsRaw as Partial<UserStats>)?.xp ?? 0,
+            level: (userStatsRaw as Partial<UserStats>)?.level ?? 0,
+            streak: (userStatsRaw as Partial<UserStats>)?.streak ?? 0,
+            totalBattles: (userStatsRaw as Partial<UserStats>)?.totalBattles ?? 0,
+            wins: (userStatsRaw as Partial<UserStats>)?.wins ?? 0,
+            losses: (userStatsRaw as Partial<UserStats>)?.losses ?? 0,
+            accuracy: (userStatsRaw as Partial<UserStats>)?.accuracy ?? 0,
+          };
+          set({
+            isOnboarded: userData.isOnboarded,
+            userStats,
+            userDataFetched: true,
+            loading: false,
+          });
         } catch (error) {
           console.error('Failed to fetch user data:', error);
           set({ userDataFetched: true, loading: false });
@@ -127,11 +162,23 @@ export const useUserStore = create<UserStore>()(
       const { data } = await supabase.auth.getUser();
       set({ supabaseUser: data?.user || null, loading: false });
       
-      // Fetch user data from backend to get isOnboarded status
+      // Fetch user data and stats from backend
       if (data?.user?.id) {
         try {
-          const userData = await userService.getUserData(data.user.id);
-          set({ isOnboarded: userData.isOnboarded, userDataFetched: true });
+          const [userData, userStatsRaw] = await Promise.all([
+            userService.getUserData(data.user.id),
+            userService.getUserStats ? userService.getUserStats(data.user.id) : Promise.resolve({}),
+          ]);
+          const userStats: UserStats = {
+            xp: (userStatsRaw as Partial<UserStats>)?.xp ?? 0,
+            level: (userStatsRaw as Partial<UserStats>)?.level ?? 0,
+            streak: (userStatsRaw as Partial<UserStats>)?.streak ?? 0,
+            totalBattles: (userStatsRaw as Partial<UserStats>)?.totalBattles ?? 0,
+            wins: (userStatsRaw as Partial<UserStats>)?.wins ?? 0,
+            losses: (userStatsRaw as Partial<UserStats>)?.losses ?? 0,
+            accuracy: (userStatsRaw as Partial<UserStats>)?.accuracy ?? 0,
+          };
+          set({ isOnboarded: userData.isOnboarded, userStats, userDataFetched: true });
         } catch (error) {
           console.error('Failed to fetch user data:', error);
         }
