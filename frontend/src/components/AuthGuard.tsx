@@ -1,4 +1,5 @@
 "use client";
+import Loader from "@/components/ui/Loader";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useUser } from "@/contexts/userContext";
@@ -41,7 +42,10 @@ export default function AuthGuard({ children }: { children: React.ReactNode }) {
   if (!initialized || loading) {
     return (
       <div className="min-h-screen bg-zinc-950 flex items-center justify-center">
-        <div className="text-white">Loading...</div>
+        <div className="text-white">
+          {/* Common Loader component */}
+          <Loader />
+        </div>
       </div>
     );
   }
