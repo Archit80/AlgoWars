@@ -47,9 +47,17 @@ app.get('/health', (req, res) => {
   });
 });
 
-// Legacy test endpoint
-app.get('/test', (req, res) => {
-  res.send('AlgoWars backend running!');
+// Supabase Wake Endpoint
+app.get('/api/ping-supabase', async (req, res) => {
+  try {
+    const { PrismaClient } = await import('@prisma/client');
+    const prisma = new PrismaClient();
+    await prisma.$queryRaw`SELECT 1;`;
+    res.json({ status: 'ok', message: 'Supabase pinged successfully' });
+  } catch (error) {
+    console.error('Failed to ping Supabase:', error);
+    res.status(500).json({ status: 'error', message: 'Failed to ping Supabase' });
+  }
 });
 
 // Routes

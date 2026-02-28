@@ -1,5 +1,5 @@
 import prisma from '../db/prismaClient.js';
-import { ensureMatchTimer, resetMatchTimer } from '../sockets/io.js';
+import { getIO, cleanupMatch, ensureMatchTimer, resetMatchTimer, updateMatchCache } from '../sockets/io.js';
 import { enqueuePlayer, findMatchForPlayer, removePlayer, getQueueSize } from "../utils/matchmakingQueue.js";
 import AchievementService from '../services/achievementService.js';
  
@@ -143,10 +143,12 @@ export const joinFriendMatch = async (req, res) => {
       include: { questions: true, user1: { select: { username: true } }, user2: { select: { username: true } } },
     });
 
-    // Emit match start via Socket.IO if available
+    // Notify user1 (already in their user room) that the match is ready
     try {
-      const { getIO } = await import('../sockets/io.js');
-      getIO()?.to(updated.id).emit('match:started', { matchId: updated.id });
+      const io = getIO();
+      if (io) {
+        io.to(updated.user1Id).emit('match:started', { matchId: updated.id });
+      }
     } catch {}
 
     return res.json({
@@ -217,17 +219,13 @@ export async function joinRandomMatch(req, res) {
 
       // Notify both players via socket
       try {
-        const { getIO } = await import('../sockets/io.js');
         const io = getIO();
-        console.log(`[Random Match] Emitting match:found to users: ${opponent.userId} and ${player.userId}`);
-        console.log(`[Random Match] Opponent rooms:`, io.sockets.adapter.rooms.get(opponent.userId)?.size || 0);
-        console.log(`[Random Match] Player rooms:`, io.sockets.adapter.rooms.get(player.userId)?.size || 0);
-        
-        io.to(opponent.userId).emit("match:found", { matchId: match.id, opponent: player });
-        io.to(player.userId).emit("match:found", { matchId: match.id, opponent });
-        io.to(match.id).emit('match:started', { matchId: match.id });
-        
-        console.log(`[Random Match] Socket events emitted successfully`);
+        if (io) {
+          io.to(opponent.userId).emit("match:found", { matchId: match.id, opponent: player });
+          io.to(player.userId).emit("match:found", { matchId: match.id, opponent });
+          // Don't emit match:started here — neither player has joined the match room yet.
+          // It will be triggered when both players join via match:join socket event.
+        }
       } catch (err) {
         console.error('[Random Match] Socket emission error:', err);
       }
@@ -336,22 +334,8 @@ export const getMatchQuestions = async (req, res) => {
 };
 
 
-// In-memory live state (timer, etc.)
-const liveMatches = new Map();
-const MATCH_TIME_PER_QUESTION = 60; // seconds
-
-const getLiveState = (matchId) => {
-  if (!liveMatches.has(matchId)) {
-    liveMatches.set(matchId, {
-      startedAt: Date.now(),
-      index: 0,
-      perUser: {},
-      timer: MATCH_TIME_PER_QUESTION,
-      lastTick: Date.now(),
-    });
-  }
-  return liveMatches.get(matchId);
-};
+// NOTE: In-memory live state is now consolidated in io.js matchTimers.
+// Use updateMatchCache() to sync state between controller and socket layer.
 
 // Forfeit logic: called when a user exits or times out
 export async function forfeitMatch(matchId, exiterId) {
@@ -438,18 +422,18 @@ export async function forfeitMatch(matchId, exiterId) {
 
   // Emit match completed event via socket
   try {
-    const io = (await import('../sockets/io.js')).getIO();
-    io.to(matchId).emit('match:completed', {
-      matchId,
-      winnerId,
-      user1Score,
-      user2Score,
-      forfeit: true,
-      exiterId
-    });
-    // Clean up match after completion
-    const { cleanupMatch } = await import('../sockets/io.js');
-    setTimeout(() => cleanupMatch(matchId), 5000);
+    const io = getIO();
+    if (io) {
+      io.to(matchId).emit('match:completed', {
+        matchId,
+        winnerId,
+        user1Score,
+        user2Score,
+        forfeit: true,
+        exiterId
+      });
+      setTimeout(() => cleanupMatch(matchId), 5000);
+    }
   } catch (err) {
     console.error('Socket emission error (forfeit):', err);
   }
@@ -494,11 +478,11 @@ export const submitMatchAnswer = async (req, res) => {
       return res.status(400).json({ error: 'Already answered' });
     }
 
-    // Update in-memory score
-    const live = getLiveState(matchId);
-    if (!live.perUser[userId]) live.perUser[userId] = { score: 0, answers: [] };
-    if (correct) live.perUser[userId].score += 1;
-    live.perUser[userId].answers.push({ qId: questionId, correct });
+    // Update match cache in io.js (consolidated state)
+    updateMatchCache(matchId, {
+      user1Score: userId === match.user1Id && correct ? match.user1Score + 1 : match.user1Score,
+      user2Score: userId === match.user2Id && correct ? match.user2Score + 1 : match.user2Score,
+    });
 
     // Check if both users have now answered this question
     const totalAnswers = await prisma.matchAnswer.count({ where: { matchId, questionId } });
@@ -592,35 +576,36 @@ export const submitMatchAnswer = async (req, res) => {
 
     // Broadcast + reveal if both answered
     try {
-      const io = (await import('../sockets/io.js')).getIO();
-      
-      // Calculate current scores for emission
-      const currentUser1Score = userId === match.user1Id && correct ? match.user1Score + 1 : match.user1Score;
-      const currentUser2Score = userId === match.user2Id && correct ? match.user2Score + 1 : match.user2Score;
-      
-      io.to(matchId).emit('match:answer', {
-        matchId,
-        userId,
-        questionId,
-        correct,
-        user1Score: currentUser1Score,
-        user2Score: currentUser2Score,
-        userScore: userId === match.user1Id ? currentUser1Score : currentUser2Score,
-        currentIndex: newIndex,
-        completed,
-      });
-      if (advance && !completed) {
-        console.log(`Match ${matchId}: Emitting match:state with currentIndex ${newIndex}`);
-        io.to(matchId).emit('match:state', { matchId, currentIndex: newIndex });
-        // Reset timer for next question when both answered
-        resetMatchTimer(matchId);
-      }
-      if (completed) {
-        const final = await prisma.match.findUnique({ where: { id: matchId } });
-        io.to(matchId).emit('match:completed', { matchId, winnerId: final.winnerId, user1Score: final.user1Score, user2Score: final.user2Score });
-        // Clean up match after completion
-        const { cleanupMatch } = await import('../sockets/io.js');
-        setTimeout(() => cleanupMatch(matchId), 5000);
+      const io = getIO();
+      if (io) {
+        // Use post-update scores (from `updated` object, not stale `match`)
+        io.to(matchId).emit('match:answer', {
+          matchId,
+          userId,
+          questionId,
+          correct,
+          user1Score: updated.user1Score,
+          user2Score: updated.user2Score,
+          userScore: userId === match.user1Id ? updated.user1Score : updated.user2Score,
+          currentIndex: newIndex,
+          completed,
+        });
+        if (advance && !completed) {
+          io.to(matchId).emit('match:state', { matchId, currentIndex: newIndex });
+          resetMatchTimer(matchId);
+          // Sync the cache in io.js
+          updateMatchCache(matchId, { currentIndex: newIndex });
+        }
+        if (completed) {
+          const final = await prisma.match.findUnique({ where: { id: matchId } });
+          io.to(matchId).emit('match:completed', {
+            matchId,
+            winnerId: final.winnerId,
+            user1Score: final.user1Score,
+            user2Score: final.user2Score,
+          });
+          setTimeout(() => cleanupMatch(matchId), 5000);
+        }
       }
     } catch (err) {
       console.error('Socket emission error:', err);
