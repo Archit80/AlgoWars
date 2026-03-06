@@ -51,7 +51,13 @@ app.get('/health', (req, res) => {
 app.get('/api/ping-supabase', async (req, res) => {
   try {
     const { PrismaClient } = await import('@prisma/client');
-    const prisma = new PrismaClient();
+    const { default: pg } = await import('pg');
+    const { PrismaPg } = await import('@prisma/adapter-pg');
+    
+    const pool = new pg.Pool({ connectionString: process.env.DATABASE_URL });
+    const adapter = new PrismaPg(pool);
+    const prisma = new PrismaClient({ adapter });
+    
     await prisma.$queryRaw`SELECT 1;`;
     res.json({ status: 'ok', message: 'Supabase pinged successfully' });
   } catch (error) {
