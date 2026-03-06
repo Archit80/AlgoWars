@@ -1,5 +1,4 @@
 import cron from 'node-cron';
-import fetch from 'node-fetch'; // assuming fetch is accessible or use global fetch in Node 18+
 
 export function initCronJobs() {
   // Only run in production to avoid local spam
