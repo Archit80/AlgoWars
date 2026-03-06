@@ -1,0 +1,1781 @@
+[
+{
+"text": "Which of the following is the average-case time complexity of standard binary search on a sorted array of size n?",
+"type": "MCQ",
+"categories": ["BinarySearch"],
+"options": ["O(1)", "O(log n)", "O(n)", "O(n log n)"],
+"answer": "O(log n)",
+"difficulty": "EASY"
+},
+{
+"text": "In a standard iterative binary search on indices low..high, which mid computation prevents integer overflow in languages with fixed-size integers?",
+"type": "MCQ",
+"categories": ["BinarySearch"],
+"options": ["mid = (low + high) / 2", "mid = low + (high - low) / 2", "mid = (low * high) / 2", "mid = high - low"],
+"answer": "mid = low + (high - low) / 2",
+"difficulty": "EASY"
+},
+{
+"text": "Predict the output (index) produced by the following pseudocode when given A = [1,3,5,7,9], key = 7.\n`procedure BSearch(A,n,key)\n  low<-1; high<-n;\n  while low<=high do\n    mid<-(low+high)//2;\n    if A[mid]=key then return mid;\n    if A[mid]<key then low<-mid+1 else high<-mid-1\n  end while\n  return -1\nend procedure`",
+"type": "PREDICT_OUTPUT",
+"categories": ["BinarySearch"],
+"options": ["2", "3", "4", "-1"],
+"answer": "3",
+"difficulty": "EASY"
+},
+{
+"text": "Which variant of binary search finds the first index i such that A[i] >= target in a sorted array (i.e., lower_bound)?",
+"type": "MCQ",
+"categories": ["BinarySearch"],
+"options": ["Standard binary search", "Lower-bound binary search", "Exponential search", "Ternary search"],
+"answer": "Lower-bound binary search",
+"difficulty": "EASY"
+},
+{
+"text": "Fill the missing condition to make this lower-bound pseudocode correct (find first index with A[i] >= key):\n`procedure LowerBound(A, n, key)\n  low<-0; high<-n\n\n  while low<high do\n    mid<-low + (high-low)//2\n    if A[mid] < key then low<-mid+1 else high<-_____ \n  end while\n  return low\nend procedure`",
+"type": "FILL_BLANK",
+"categories": ["BinarySearch"],
+"options": ["mid", "mid+1", "mid-1", "low"],
+"answer": "mid",
+"difficulty": "EASY"
+},
+{
+"text": "Predict the output index of first occurrence using this pseudocode on A = [2,2,2,2], key = 2:\n`procedure FirstOcc(A,n,key)\n  low<-0; high<-n-1; ans<- -1\n  while low<=high do\n    mid<-low+(high-low)//2\n    if A[mid]=key then ans<-mid; high<-mid-1\n    else if A[mid]<key then low<-mid+1 else high<-mid-1\n  end while\n  return ans\nend procedure`",
+"type": "PREDICT_OUTPUT",
+"categories": ["BinarySearch"],
+"options": ["0", "1", "2", "3"],
+"answer": "0",
+"difficulty": "EASY"
+},
+{
+"text": "Which property must hold true for using binary search on a function f(x) defined on integers to find smallest x with f(x)=true?",
+"type": "MCQ",
+"categories": ["BinarySearch"],
+"options": ["f must be monotonic non-decreasing (false..true)", "f must be periodic", "f must be strictly decreasing", "f must be injective"],
+"answer": "f must be monotonic non-decreasing (false..true)",
+"difficulty": "EASY"
+},
+{
+"text": "Predict the output of the pseudocode that searches in a rotated sorted array A = [6,7,8,1,2,3,4,5] for key=3:\n`procedure RotSearch(A,n,key)\n  low<-0; high<-n-1\n  while low<=high do\n    mid<-low+(high-low)//2\n    if A[mid]=key then return mid\n    if A[low]<=A[mid] then\n      if A[low]<=key and key<A[mid] then high<-mid-1 else low<-mid+1\n    else\n      if A[mid]<key and key<=A[high] then low<-mid+1 else high<-mid-1\n    end if\n  end while\n  return -1\nend procedure`",
+"type": "PREDICT_OUTPUT",
+"categories": ["BinarySearch"],
+"options": ["2", "5", "3", "-1"],
+"answer": "5",
+"difficulty": "MEDIUM"
+},
+{
+"text": "Which choice gives the correct worst-case space complexity of the recursive binary search on an array of size n (recursion depth counted)?",
+"type": "MCQ",
+"categories": ["BinarySearch"],
+"options": ["O(1)", "O(log n)", "O(n)", "O(n log n)"],
+"answer": "O(log n)",
+"difficulty": "EASY"
+},
+{
+"text": "Fill the blank to avoid off-by-one when searching for upper bound (first index > key):\n`procedure UpperBound(A,n,key)\n  low<-0; high<-n\n\n  while low<high do\n    mid<-low + (high-low)//2\n    if A[mid] <= key then low<-mid+1 else high<-_____ \n  end while\n  return low\nend procedure`",
+"type": "FILL_BLANK",
+"categories": ["BinarySearch"],
+"options": ["mid-1", "mid", "low", "high-1"],
+"answer": "mid",
+"difficulty": "EASY"
+},
+{
+"text": "Predict the output of this pseudocode that approximates square root floor for x=15 (integer floor):\n`procedure IntSqrt(x)\n  if x<2 then return x\n  low<-1; high<-x//2\n  while low<=high do\n    mid<-low+(high-low)//2\n    if mid*mid = x then return mid\n    if mid*mid < x then low<-mid+1; ans<-mid else high<-mid-1\n  end while\n  return ans\nend procedure`",
+"type": "PREDICT_OUTPUT",
+"categories": ["BinarySearch"],
+"options": ["3", "4", "5", "6"],
+"answer": "3",
+"difficulty": "MEDIUM"
+},
+{
+"text": "Which binary search variant returns the last index i such that A[i] <= key (i.e., floor index)?",
+"type": "MCQ",
+"categories": ["BinarySearch"],
+"options": ["Lower bound", "Upper bound then -1", "Last occurrence variant", "Exponential search"],
+"answer": "Last occurrence variant",
+"difficulty": "EASY"
+},
+{
+"text": "Fill the missing comparison to make this 'find peak in mountain array' binary search correct (peak where A[i-1]<A[i]>A[i+1]):\n`procedure FindPeak(A,n)\n  low<-1; high<-n-2\n  while low<=high do\n    mid<-low+(high-low)//2\n    if A[mid] < A[mid+1] then low<-mid+1 else high<-mid-1\n  end while\n  return low\nend procedure`",
+"type": "FILL_BLANK",
+"categories": ["BinarySearch"],
+"options": ["A[mid] < A[mid+1]", "A[mid] > A[mid+1]", "A[mid] = A[mid+1]", "A[mid-1] < A[mid]"],
+"answer": "A[mid] < A[mid+1]",
+"difficulty": "MEDIUM"
+},
+{
+"text": "Predict the output index when searching for 10 in a nearly sorted array using standard binary search on A = [10,1,2,3,4,5]:\n`procedure StdB(A,n,key)\n  low<-0; high<-n-1\n  while low<=high do\n    mid<-low+(high-low)//2\n    if A[mid]=key then return mid\n    if A[mid]<key then low<-mid+1 else high<-mid-1\n  end while\n  return -1\nend procedure`",
+"type": "PREDICT_OUTPUT",
+"categories": ["BinarySearch"],
+"options": ["0", "1", "-1", "5"],
+"answer": "0",
+"difficulty": "MEDIUM"
+},
+{
+"text": "Which statement is true about binary search on a sorted array with all identical elements equal to v when searching for key = v?",
+"type": "MCQ",
+"categories": ["BinarySearch"],
+"options": ["Returns first index always", "Returns last index always", "Returns some index containing v (implementation dependent)", "Always returns -1"],
+"answer": "Returns some index containing v (implementation dependent)",
+"difficulty": "EASY"
+},
+{
+"text": "Fill the missing return value for a binary search that should return insertion position for key in sorted array A of size n (if key not found):\n`procedure InsertPos(A,n,key)\n  low<-0; high<-n\n\n  while low<high do\n    mid<-low+(high-low)//2\n    if A[mid] < key then low<-mid+1 else high<-mid\n  end while\n  return _____\nend procedure`",
+"type": "FILL_BLANK",
+"categories": ["BinarySearch"],
+"options": ["mid", "low", "high", "low-1"],
+"answer": "low",
+"difficulty": "EASY"
+},
+{
+"text": "Predict the output (index) when searching for key 0 in matrix where each row and column sorted ascending using binary search on rows: matrix = [[1,2,3],[4,5,6],[7,8,9]] and the code searches rows then binary searches each row.",
+"type": "PREDICT_OUTPUT",
+"categories": ["BinarySearch"],
+"options": ["(0,0)", "(-1,-1)", "(2,2)", "(1,0)"],
+"answer": "(-1,-1)",
+"difficulty": "MEDIUM"
+},
+{
+"text": "Which of the following is the correct time complexity for searching an element in an n x m matrix where each row and column is sorted and you use the 'staircase' method starting from top-right?",
+"type": "MCQ",
+"categories": ["BinarySearch"],
+"options": ["O(n log m)", "O(n+m)", "O(log n + log m)", "O(n*m)"],
+"answer": "O(n+m)",
+"difficulty": "MEDIUM"
+},
+{
+"text": "Predict the result (true/false) of binary searching a monotonic boolean function f on domain [0..10] given f(x) = (x>=7) to find existence of x with f(x)=true:\n`procedure ExistTrue(f)\n  low<-0; high<-10\n  while low<=high do\n    mid<-low+(high-low)//2\n    if f(mid) then return true\n    else low<-mid+1\n  end while\n  return false\nend procedure`",
+"type": "PREDICT_OUTPUT",
+"categories": ["BinarySearch"],
+"options": ["true", "false", "depends on function", "error"],
+"answer": "true",
+"difficulty": "EASY"
+},
+{
+"text": "Fill the blank in this pseudocode for counting occurrences of key in a sorted array by using first and last occurrence binary searches:\n`procedure CountOcc(A,n,key)\n  first<-FindFirst(A,n,key)\n  if first = -1 then return 0\n  last<-FindLast(A,n,key)\n  return _____\nend procedure`",
+"type": "FILL_BLANK",
+"categories": ["BinarySearch"],
+"options": ["last-first", "last-first+1", "first-last+1", "last+first"],
+"answer": "last-first+1",
+"difficulty": "EASY"
+},
+{
+"text": "Predict the output index for FindLast pseudocode on A=[1,2,2,2,3], key=2:\n`procedure FindLast(A,n,key)\n  low<-0; high<-n-1; ans<- -1\n  while low<=high do\n    mid<-low+(high-low)//2\n    if A[mid]=key then ans<-mid; low<-mid+1\n    else if A[mid]<key then low<-mid+1 else high<-mid-1\n  end while\n  return ans\nend procedure`",
+"type": "PREDICT_OUTPUT",
+"categories": ["BinarySearch"],
+"options": ["1", "2", "3", "4"],
+"answer": "3",
+"difficulty": "EASY"
+},
+{
+"text": "Which adjustment is recommended to mid calculation to prevent infinite loop in languages where // denotes floor division when using low<high loop invariant?",
+"type": "MCQ",
+"categories": ["BinarySearch"],
+"options": ["Use mid = (low+high)//2 and update both sides symmetrically", "Use mid = low + (high-low+1)//2 when moving low to mid", "Use mid = high - (high-low)//2 only", "Use mid = low*2 - high"],
+"answer": "Use mid = low + (high-low+1)//2 when moving low to mid",
+"difficulty": "MEDIUM"
+},
+{
+"text": "Fill the blank to make this binary search on answer space for minimum maximum load valid (check(k) is monotonic):\n`procedure BinAnswer(low,high)\n  while low<high do\n    mid<-low+(high-low)//2\n    if check(mid) then high<-mid else low<-_____ \n  end while\n  return low\nend procedure`",
+"type": "FILL_BLANK",
+"categories": ["BinarySearch"],
+"options": ["mid+1", "mid-1", "mid", "high-1"],
+"answer": "mid+1",
+"difficulty": "HARD"
+},
+{
+"text": "Predict the index returned by this pseudocode which intends to find floor value (largest <= key) in A=[1,3,5,7], key=6:\n`procedure FloorIndex(A,n,key)\n  low<-0; high<-n-1; ans<- -1\n  while low<=high do\n    mid<-low+(high-low)//2\n    if A[mid] <= key then ans<-mid; low<-mid+1 else high<-mid-1\n  end while\n  return ans\nend procedure`",
+"type": "PREDICT_OUTPUT",
+"categories": ["BinarySearch"],
+"options": ["1", "2", "3", "-1"],
+"answer": "2",
+"difficulty": "MEDIUM"
+},
+{
+"text": "Which of these is a correct use-case for binary search on answer space (parametric search)?",
+"type": "MCQ",
+"categories": ["BinarySearch"],
+"options": ["Finding exact index of value in unsorted array", "Finding minimal feasible largest partition sum given k partitions", "Sorting an array in O(log n) time", "Computing Fibonacci numbers faster"],
+"answer": "Finding minimal feasible largest partition sum given k partitions",
+"difficulty": "MEDIUM"
+},
+{
+"text": "Predict the output of this pseudocode for searching in a 2D matrix where each row is sorted and the first element of each row is greater than the last element of the previous row. Matrix = [[1,2],[3,4]] searching key=3:\n`procedure MatrixSearch(M,r,c,key)\n  low<-0; high<-(r*c)-1\n  while low<=high do\n    mid<-low+(high-low)//2\n    val<-M[mid//c][mid % c]\n    if val=key then return (mid//c, mid % c)\n    if val<key then low<-mid+1 else high<-mid-1\n  end while\n  return (-1,-1)\nend procedure`",
+"type": "PREDICT_OUTPUT",
+"categories": ["BinarySearch"],
+"options": ["(1,0)", "(0,1)", "(1,1)", "(-1,-1)"],
+"answer": "(1,0)",
+"difficulty": "MEDIUM"
+},
+{
+"text": "Fill the blank to correctly handle integer overflow when computing mid for very large low and high indices:\n`procedure SafeMid(low,high)\n  mid<- ____\n  return mid\nend procedure`",
+"type": "FILL_BLANK",
+"categories": ["BinarySearch"],
+"options": ["(low+high)//2", "low + (high-low)//2", "low*high//2", "high - (low+high)//2"],
+"answer": "low + (high-low)//2",
+"difficulty": "EASY"
+},
+{
+"text": "Which of the following explains why binary search requires random access to array elements (O(1) indexing)?",
+"type": "MCQ",
+"categories": ["BinarySearch"],
+"options": ["Because it repeatedly accesses middle elements by index", "Because it needs O(n) time per access", "Because it sorts the array in-place", "Because binary search modifies the array structure"],
+"answer": "Because it repeatedly accesses middle elements by index",
+"difficulty": "EASY"
+},
+{
+"text": "Predict the output of this pseudocode which intends to find first true in boolean array f=[false,false,true,true], using indices 0..3:\n`procedure FindFirstTrue(f,n)\n  low<-0; high<-n-1; ans<- -1\n  while low<=high do\n    mid<-low+(high-low)//2\n    if f[mid] then ans<-mid; high<-mid-1 else low<-mid+1\n  end while\n  return ans\nend procedure`",
+"type": "PREDICT_OUTPUT",
+"categories": ["BinarySearch"],
+"options": ["1", "2", "3", "-1"],
+"answer": "2",
+"difficulty": "EASY"
+},
+{
+"text": "Fill the missing update to avoid infinite loop in this while low<high variant when searching for last true (highest index with predicate true):\n`procedure LastTrue(n)\n  low<-0; high<-n-1\n  while low<high do\n    mid<-low + (high-low+1)//2\n    if pred(mid) then low<-mid else high<-mid-1 \n  end while\n  return low\nend procedure`",
+"type": "FILL_BLANK",
+"categories": ["BinarySearch"],
+"options": ["mid", "mid-1", "low", "high-1"],
+"answer": "mid-1",
+"difficulty": "HARD"
+},
+{
+"text": "Which of the following is a common pitfall when implementing binary search leading to incorrect behavior on small arrays?",
+"type": "MCQ",
+"categories": ["BinarySearch"],
+"options": ["Using mid = (low+high)//2 without careful loop condition", "Using integer mid computation to avoid overflow", "Using iteration instead of recursion", "Using zero-based indices"],
+"answer": "Using mid = (low+high)//2 without careful loop condition",
+"difficulty": "EASY"
+},
+{
+"text": "In an iterative binary search implementation, which variables are typically used to define the current search space within the array?",
+"type": "MCQ",
+"categories": [],
+"options": [
+"start and end indices",
+"a search key and a counter",
+"a head and a tail pointer",
+"a stack and a queue"
+],
+"answer": "start and end indices",
+"difficulty": "EASY"
+},
+{
+"text": "What is the best-case time complexity of a binary search algorithm?",
+"type": "MCQ",
+"categories": [],
+"options": [
+"$O(1)$",
+"$O(\\log n)$",
+"$O(n)$",
+"$O(n \\log n)$"
+],
+"answer": "$O(1)$",
+"difficulty": "EASY"
+},
+{
+"text": "The best-case scenario for binary search occurs when...",
+"type": "MCQ",
+"categories": [],
+"options": [
+"the target element is the middle element of the array.",
+"the target element is the first element of the array.",
+"the target element is the last element of the array.",
+"the target element is not present in the array."
+],
+"answer": "the target element is the middle element of the array.",
+"difficulty": "EASY"
+},
+{
+"text": "Consider the following pseudocode for binary search. What is the output for `A = ` and `target = 30`?\n```\nFUNCTION BINARY_SEARCH(A, target)\n  low = 0\n  high = A.length - 1\n  WHILE low <= high\n    mid = low + floor((high - low) / 2)\n    IF A[mid] == target\n      RETURN mid\n    ELSE IF A[mid] < target\n      low = mid + 1\n    ELSE\n      high = mid - 1\n  RETURN -1\n```",
+"type": "PREDICT_OUTPUT",
+"categories": [],
+"options": [
+"2",
+"3",
+"1",
+"-1"
+],
+"answer": "2",
+"difficulty": "EASY"
+},
+{
+"text": "Given the array `A = ` and `target = 23`, what are the values of `low`, `mid`, and `high` in the first iteration of a standard iterative binary search?",
+"type": "MCQ",
+"categories": [],
+"options": [
+"low=0, mid=4, high=9",
+"low=0, mid=5, high=9",
+"low=1, mid=5, high=10",
+"low=0, mid=4, high=8"
+],
+"answer": "low=0, mid=4, high=9",
+"difficulty": "EASY"
+},
+{
+"text": "Complete the missing line in this iterative binary search pseudocode.\n```\nFUNCTION BINARY_SEARCH(A, target)\n  low = 0\n  high = A.length - 1\n  WHILE low <= high\n    mid = low + floor((high - low) / 2)\n    IF A[mid] == target\n      RETURN mid\n    ELSE IF A[mid] < target\n      // MISSING LINE\n    ELSE\n      high = mid - 1\n  RETURN -1\n```",
+"type": "FILL_BLANK",
+"categories": [],
+"options": [
+"low = mid + 1",
+"high = mid + 1",
+"low = mid",
+"high = mid"
+],
+"answer": "low = mid + 1",
+"difficulty": "EASY"
+},
+{
+"text": "Binary search is an example of which algorithmic paradigm?",
+"type": "MCQ",
+"categories": [],
+"options": ["Divide and Conquer"],
+"answer": "Divide and Conquer",
+"difficulty": "EASY"
+},
+{
+"text": "What is the worst-case time complexity of binary search on a sorted array of size $n$?",
+"type": "MCQ",
+"categories": [],
+"options": [
+"$O(\\log n)$",
+"$O(n)$",
+"$O(1)$",
+"$O(n^2)$"
+],
+"answer": "$O(\\log n)$",
+"difficulty": "EASY"
+},
+{
+"text": "If a binary search is performed on an empty array, what should the algorithm ideally return to indicate the target was not found?",
+"type": "MCQ",
+"categories": [],
+"options": [],
+"answer": "-1 or a similar sentinel value",
+"difficulty": "EASY"
+},
+{
+"text": "Consider the array `A = `. If you perform a binary search for `target = 100`, what is the expected output?",
+"type": "PREDICT_OUTPUT",
+"categories": [],
+"options": [
+"0",
+"1",
+"-1",
+"An infinite loop occurs"
+],
+"answer": "0",
+"difficulty": "EASY"
+},
+{
+"text": "Complete the base case for this recursive binary search pseudocode.\n```\nFUNCTION RECURSIVE_BS(A, target, low, high)\n  // MISSING LINE\n    RETURN -1\n\n  mid = low + floor((high - low) / 2)\n  IF A[mid] == target\n    RETURN mid\n  ELSE IF A[mid] < target\n    RETURN RECURSIVE_BS(A, target, mid + 1, high)\n  ELSE\n    RETURN RECURSIVE_BS(A, target, low, mid - 1)\n```",
+"type": "FILL_BLANK",
+"categories": [],
+"options": [
+"IF low > high",
+"IF low == high",
+"IF low >= high",
+"IF A is empty"
+],
+"answer": "IF low > high",
+"difficulty": "EASY"
+},
+{
+"text": "Why is `mid = low + (high - low) / 2` preferred over `mid = (low + high) / 2` for calculating the middle index in binary search?",
+"type": "MCQ",
+"categories": [],
+"options": [],
+"answer": "To prevent potential integer overflow when `low` and `high` are large.",
+"difficulty": "EASY"
+},
+{
+"text": "What is the output of the following binary search for `A = ` and `target = 12`?\n```\nFUNCTION BINARY_SEARCH(A, target)\n  low = 0\n  high = A.length - 1\n  WHILE low <= high\n    mid = low + floor((high - low) / 2)\n    IF A[mid] == target\n      RETURN mid\n    ELSE IF A[mid] < target\n      low = mid + 1\n    ELSE\n      high = mid - 1\n  RETURN -1\n```",
+"type": "PREDICT_OUTPUT",
+"categories": [],
+"options": [
+"-1",
+"2",
+"3",
+"1"
+],
+"answer": "-1",
+"difficulty": "EASY"
+},
+{
+"text": "If binary search is applied to an unsorted array, what is the most likely outcome?",
+"type": "MCQ",
+"categories": [],
+"options": [
+"It may return an incorrect result or fail to find an existing element.",
+"It will always throw an error.",
+"It will automatically sort the array first.",
+"It will revert to a linear search and have O(n) complexity."
+],
+"answer": "It may return an incorrect result or fail to find an existing element.",
+"difficulty": "EASY"
+},
+{
+"text": "In a sorted array of $n$ elements, what is the maximum number of comparisons a binary search will perform in the worst case?",
+"type": "MCQ",
+"categories": [],
+"options": [
+"Approximately $\\log_2 n$",
+"Approximately $n/2$",
+"Exactly $n$",
+"Exactly $n-1$"
+],
+"answer": "Approximately $\\log_2 n$",
+"difficulty": "EASY"
+},
+{
+"text": "Which of these is NOT a valid application of binary search?",
+"type": "MCQ",
+"categories": [],
+"options": [],
+"answer": "Finding the maximum element in an unsorted array.",
+"difficulty": "EASY"
+},
+{
+"text": "Complete the condition in the `WHILE` loop for a standard iterative binary search.\n```\nFUNCTION BINARY_SEARCH(A, target)\n  low = 0\n  high = A.length - 1\n  WHILE __________\n    mid = low + floor((high - low) / 2)\n    IF A[mid] == target\n      RETURN mid\n    ELSE IF A[mid] < target\n      low = mid + 1\n    ELSE\n      high = mid - 1\n  RETURN -1\n```",
+"type": "FILL_BLANK",
+"categories": [],
+"options": [
+"low <= high",
+"low < high",
+"low!= high",
+"high > 0"
+],
+"answer": "low <= high",
+"difficulty": "EASY"
+},
+{
+"text": "What is the space complexity of an iterative binary search algorithm?",
+"type": "MCQ",
+"categories": [],
+"options": [
+"$O(1)$",
+"$O(\\log n)$",
+"$O(n)$",
+"$O(n \\log n)$"
+],
+"answer": "$O(1)$",
+"difficulty": "EASY"
+},
+{
+"text": "Given the array `A = ` and `target = 6`, what are the values of `low` and `high` just before the final successful comparison?",
+"type": "PREDICT_OUTPUT",
+"categories": [],
+"options": [
+"low=5, high=5",
+"low=5, high=6",
+"low=4, high=5",
+"low=6, high=6"
+],
+"answer": "low=5, high=5",
+"difficulty": "EASY"
+},
+{
+"text": "The concept of repeatedly dividing the search interval in half is central to binary search. If an array has 16 elements, after the first comparison, how many elements will be in the remaining search space?",
+"type": "MCQ",
+"categories": [],
+"options": [
+"7",
+"8",
+"15",
+"4"
+],
+"answer": "7",
+"difficulty": "EASY"
+},
+{
+"text": "What is the purpose of the `floor()` function when calculating the `mid` index in binary search?",
+"type": "MCQ",
+"categories": [],
+"options": [],
+"answer": "To ensure the `mid` index is always an integer.",
+"difficulty": "EASY"
+},
+{
+"text": "For the array `A = ` and `target = 10`, what will be the final values of `low` and `high` when the search terminates unsuccessfully?",
+"type": "PREDICT_OUTPUT",
+"categories": [],
+"options": [
+"low=0, high=-1",
+"low=0, high=0",
+"low=-1, high=-1",
+"low=1, high=0"
+],
+"answer": "low=0, high=-1",
+"difficulty": "EASY"
+},
+{
+"text": "Which of the following is a key disadvantage of binary search compared to linear search?",
+"type": "MCQ",
+"categories": [],
+"options": [
+"It requires the input array to be sorted.",
+"It has a higher time complexity in the worst case.",
+"It uses more memory.",
+"It is more difficult to implement recursively."
+],
+"answer": "It requires the input array to be sorted.",
+"difficulty": "EASY"
+},
+{
+"text": "Complete the recursive call for when the target is greater than the middle element.\n```\nFUNCTION RECURSIVE_BS(A, target, low, high)\n  IF low > high\n    RETURN -1\n  mid = low + floor((high - low) / 2)\n  IF A[mid] == target\n    RETURN mid\n  ELSE IF A[mid] < target\n    RETURN __________\n  ELSE\n    RETURN RECURSIVE_BS(A, target, low, mid - 1)\n```",
+"type": "FILL_BLANK",
+"categories": [],
+"options": [],
+"answer": "RECURSIVE_BS(A, target, mid + 1, high)",
+"difficulty": "EASY"
+},
+{
+"text": "If you need to find the floor of a number `x` in a sorted array `A` (the largest element in `A` that is less than or equal to `x`), which binary search variant is most suitable?",
+"type": "MCQ",
+"categories": [],
+"options": [],
+"answer": "A modified search to find the rightmost occurrence or insertion point.",
+"difficulty": "MEDIUM"
+},
+{
+"text": "In a sorted array with duplicates, `A = `, what should a function designed to find the 'lower bound' of `5` return?",
+"type": "MCQ",
+"categories": [],
+"options": [],
+"answer": "The index of the first element that is greater than or equal to 5 (index 1).",
+"difficulty": "MEDIUM"
+},
+{
+"text": "What is the primary logical modification required in a standard binary search to find the first occurrence of a target value in an array with duplicates?",
+"type": "MCQ",
+"categories": [],
+"options": [],
+"answer": "When a match is found, continue searching in the left half of the array.",
+"difficulty": "MEDIUM"
+},
+{
+"text": "Consider the following pseudocode to find the first occurrence of a target. What is the output for `A = ` and `target = 4`?\n```\nFUNCTION FIND_FIRST(A, target)\n  low = 0, high = A.length - 1\n  result = -1\n  WHILE low <= high\n    mid = low + floor((high - low) / 2)\n    IF A[mid] == target\n      result = mid\n      high = mid - 1\n    ELSE IF A[mid] < target\n      low = mid + 1\n    ELSE\n      high = mid - 1\n  RETURN result\n```",
+"type": "PREDICT_OUTPUT",
+"categories": [],
+"options": [
+"2",
+"3",
+"4",
+"-1"
+],
+"answer": "2",
+"difficulty": "MEDIUM"
+},
+{
+"text": "Complete the missing line in the pseudocode for finding the last occurrence of a target.\n```\nFUNCTION FIND_LAST(A, target)\n  low = 0, high = A.length - 1\n  result = -1\n  WHILE low <= high\n    mid = low + floor((high - low) / 2)\n    IF A[mid] == target\n      result = mid\n      // MISSING LINE\n    ELSE IF A[mid] < target\n      low = mid + 1\n    ELSE\n      high = mid - 1\n  RETURN result\n```",
+"type": "FILL_BLANK",
+"categories": [],
+"options": [],
+"answer": "low = mid + 1",
+"difficulty": "MEDIUM"
+},
+{
+"text": "To find the number of occurrences of an element in a sorted array, what is the most efficient approach using binary search?",
+"type": "MCQ",
+"categories": [],
+"options": [
+"Find the index of the first occurrence and the last occurrence, then calculate the difference.",
+"Find one occurrence and then linearly scan left and right.",
+"Use a standard binary search and count duplicates if the middle element is the target.",
+"Perform a recursive binary search on both halves of the array simultaneously."
+],
+"answer": "Find the index of the first occurrence and the last occurrence, then calculate the difference.",
+"difficulty": "MEDIUM"
+},
+{
+"text": "What is the time complexity of finding the count of an element in a sorted array of size $n$ using two binary searches (for first and last occurrence)?",
+"type": "MCQ",
+"categories": [],
+"options": [
+"$O(\\log n)$",
+"$O(n)$",
+"$O(k + \\log n)$ where k is the count",
+"$O(n \\log n)$"
+],
+"answer": "$O(\\log n)$",
+"difficulty": "MEDIUM"
+},
+{
+"text": "A function `isBadVersion(version)` returns true if a version is bad and false otherwise. Given that all versions after a bad version are also bad, which algorithm is best to find the first bad version from `n` versions?",
+"type": "MCQ",
+"categories": [],
+"options": [],
+"answer": "Binary search on the version numbers from 1 to n.",
+"difficulty": "MEDIUM"
+},
+{
+"text": "In a search on a rotated sorted array like ``, what is the key condition to check after finding a middle element `A[mid]`?",
+"type": "MCQ",
+"categories": [],
+"options": [
+"Determine which half of the array (`[low...mid]` or `[mid...high]`) is sorted.",
+"Check if `A[mid]` is greater than the target.",
+"Check if the array has duplicates.",
+"Find the pivot point before starting the search."
+],
+"answer": "Determine which half of the array (`[low...mid]` or `[mid...high]`) is sorted.",
+"difficulty": "MEDIUM"
+},
+{
+"text": "Given the rotated sorted array `A = ` and `target = 3`, what are the values of `low`, `mid`, and `high` after the first iteration of a modified binary search?",
+"type": "PREDICT_OUTPUT",
+"categories": [],
+"options": [
+"low=4, mid=3, high=6",
+"low=0, mid=3, high=2",
+"low=0, mid=3, high=6",
+"low=4, mid=5, high=6"
+],
+"answer": "low=4, mid=3, high=6",
+"difficulty": "MEDIUM"
+},
+{
+"text": "Complete the logic to handle the case where the left part of a rotated sorted array is sorted.\n```\n//... inside binary search loop\nIF A[low] <= A[mid] // Left part is sorted\n  IF target >= A[low] AND target < A[mid]\n    high = mid - 1\n  ELSE\n    // MISSING LINE\nELSE // Right part is sorted\n  //... handle right part\n```",
+"type": "FILL_BLANK",
+"categories": [],
+"options": [],
+"answer": "low = mid + 1",
+"difficulty": "MEDIUM"
+},
+{
+"text": "What is the worst-case time complexity for finding an element in a rotated sorted array of size $n$?",
+"type": "MCQ",
+"categories": [],
+"options": [
+"$O(\\log n)$",
+"$O(n)$",
+"$O(1)$",
+"$O(n \\log n)$"
+],
+"answer": "$O(\\log n)$",
+"difficulty": "MEDIUM"
+},
+{
+"text": "An element is a 'peak element' if it is strictly greater than its neighbors. For an array `A`, how can binary search be used to find a peak?",
+"type": "MCQ",
+"categories": [],
+"options": [
+"If `A[mid] < A[mid+1]`, a peak must exist in the right half, so search right.",
+"The array must be sorted first.",
+"If `A[mid] < A[mid+1]`, a peak must exist in the left half, so search left.",
+"It is not possible to use binary search for this problem."
+],
+"answer": "If `A[mid] < A[mid+1]`, a peak must exist in the right half, so search right.",
+"difficulty": "MEDIUM"
+},
+{
+"text": "Using a binary search approach to find a peak element in `A = `, which of the following could be a valid returned index?",
+"type": "PREDICT_OUTPUT",
+"categories": [],
+"options": [
+"5",
+"0",
+"3",
+"6"
+],
+"answer": "5",
+"difficulty": "MEDIUM"
+},
+{
+"text": "When using binary search to find the integer square root of a number `N`, what is the search space?",
+"type": "MCQ",
+"categories": [],
+"options": [],
+"answer": "The range of numbers from 0 to N.",
+"difficulty": "MEDIUM"
+},
+{
+"text": "Complete the check condition for finding the integer square root of `N` using binary search.\n```\nFUNCTION INTEGER_SQRT(N)\n  low = 0, high = N, ans = 0\n  WHILE low <= high\n    mid = low + floor((high - low) / 2)\n    IF __________\n      ans = mid\n      low = mid + 1\n    ELSE\n      high = mid - 1\n  RETURN ans\n```",
+"type": "FILL_BLANK",
+"categories": [],
+"options": [
+"mid * mid <= N",
+"mid * mid == N",
+"mid * mid > N",
+"mid <= N / mid"
+],
+"answer": "mid * mid <= N",
+"difficulty": "MEDIUM"
+},
+{
+"text": "What is the time complexity of finding the integer square root of a number `N` using binary search?",
+"type": "MCQ",
+"categories": [],
+"options": [
+"$O(\\log N)$",
+"$O(\\sqrt{N})$",
+"$O(N)$",
+"$O(1)$"
+],
+"answer": "$O(\\log N)$",
+"difficulty": "MEDIUM"
+},
+{
+"text": "A 2D matrix is sorted such that each row is sorted left-to-right, and the first element of each row is greater than the last element of the previous row. What is the most efficient way to search for a target?",
+"type": "MCQ",
+"categories": [],
+"options": [],
+"answer": "Treat the 2D matrix as a flattened 1D sorted array and perform one binary search.",
+"difficulty": "MEDIUM"
+},
+{
+"text": "In a 2D matrix where rows and columns are sorted, what is the time complexity of searching by performing a binary search on each row? (m = rows, n = columns)",
+"type": "MCQ",
+"categories": [],
+"options": [
+"$O(m \\log n)$",
+"$O(n \\log m)$",
+"$O(m+n)$",
+"$O(\\log(m*n))$"
+],
+"answer": "$O(m \\log n)$",
+"difficulty": "MEDIUM"
+},
+{
+"text": "The 'staircase search' (starting at top-right or bottom-left) in a row-wise and column-wise sorted matrix has a time complexity of $O(m+n)$. How does this compare to a binary search-based approach?",
+"type": "MCQ",
+"categories": [],
+"options": [
+"It is generally more efficient than performing binary search on each row ($O(m \\log n)$).",
+"It is always less efficient.",
+"It has the same time complexity.",
+"Its efficiency depends on the value of the target."
+],
+"answer": "It is generally more efficient than performing binary search on each row ($O(m \\log n)$).",
+"difficulty": "MEDIUM"
+},
+{
+"text": "What is the space complexity of a recursive binary search implementation?",
+"type": "MCQ",
+"categories": [],
+"options": [
+"$O(\\log n)$",
+"$O(1)$",
+"$O(n)$",
+"$O(n \\log n)$"
+],
+"answer": "$O(\\log n)$",
+"difficulty": "MEDIUM"
+},
+{
+"text": "The space complexity of recursive binary search is $O(\\log n)$ due to...",
+"type": "MCQ",
+"categories": [],
+"options": [
+"the recursion call stack.",
+"the need to store a copy of the array.",
+"the variables `low`, `high`, and `mid`.",
+"the depth of the binary search tree."
+],
+"answer": "the recursion call stack.",
+"difficulty": "MEDIUM"
+},
+{
+"text": "A loop invariant for a standard binary search is that if the target exists in the array, it must be within the indices `[low...high]`. What is the state of this invariant when the loop terminates because `low > high`?",
+"type": "MCQ",
+"categories": [],
+"options": [
+"The invariant holds, and the range `[low...high]` is empty, proving the element is not present.",
+"The invariant is violated, indicating an error.",
+"The invariant is irrelevant at termination.",
+"The invariant proves the element is at either `low` or `high`."
+],
+"answer": "The invariant holds, and the range `[low...high]` is empty, proving the element is not present.",
+"difficulty": "MEDIUM"
+},
+{
+"text": "Consider the array `A = ` and `target = 7`. What is the output of a function that correctly finds the upper bound of the target?",
+"type": "PREDICT_OUTPUT",
+"categories": [],
+"options": [
+"5",
+"2",
+"4",
+"6"
+],
+"answer": "5",
+"difficulty": "MEDIUM"
+},
+{
+"text": "If `first_occurrence(target)` returns index `i` and `last_occurrence(target)` returns index `j`, how do you calculate the number of occurrences of `target`?",
+"type": "MCQ",
+"categories": [],
+"options": [
+"$j - i + 1$",
+"$j - i$",
+"$j + i - 1$",
+"$j / i$"
+],
+"answer": "$j - i + 1$",
+"difficulty": "EASY"
+},
+{
+"text": "What is the output of the following pseudocode for `A = ` and `target = 10`?\n```\nFUNCTION FIND_LAST(A, target)\n  low = 0, high = A.length - 1\n  result = -1\n  WHILE low <= high\n    mid = low + floor((high - low) / 2)\n    IF A[mid] == target\n      result = mid\n      low = mid + 1\n    ELSE IF A[mid] < target\n      low = mid + 1\n    ELSE\n      high = mid - 1\n  RETURN result\n```",
+"type": "PREDICT_OUTPUT",
+"categories": [],
+"options": [
+"4",
+"0",
+"2",
+"-1"
+],
+"answer": "4",
+"difficulty": "MEDIUM"
+},
+{
+"text": "When is linear search more efficient than binary search?",
+"type": "MCQ",
+"categories": [],
+"options": [
+"For small arrays, due to lower overhead.",
+"For arrays with many duplicate elements.",
+"For arrays sorted in descending order.",
+"Never."
+],
+"answer": "For small arrays, due to lower overhead.",
+"difficulty": "EASY"
+},
+{
+"text": "Consider an array `A = ['c', 'f', 'j']` and `target = 'a'`. What would a function that finds the smallest character in the array that is larger than the target (ceiling) return?",
+"type": "PREDICT_OUTPUT",
+"categories": [],
+"options": [
+"'c'",
+"'f'",
+"'j'",
+"No character found"
+],
+"answer": "'c'",
+"difficulty": "MEDIUM"
+},
+{
+"text": "The problem of finding the minimum capacity of a ship to transport all packages within D days is a classic example of:",
+"type": "MCQ",
+"categories": [],
+"options": [],
+"answer": "Binary search on the answer space.",
+"difficulty": "MEDIUM"
+},
+{
+"text": "In a 'binary search on the answer' problem, what property must the 'check' function (or predicate) have?",
+"type": "MCQ",
+"categories": [],
+"options": [
+"Monotonicity",
+"Linearity",
+"Injectivity",
+"Idempotence"
+],
+"answer": "Monotonicity",
+"difficulty": "MEDIUM"
+},
+{
+"text": "For the 'Aggressive Cows' problem, where you must maximize the minimum distance between cows, what does the binary search operate on?",
+"type": "MCQ",
+"categories": [],
+"options": [],
+"answer": "The possible minimum distances between cows.",
+"difficulty": "HARD"
+},
+{
+"text": "What is the search space for the 'Book Allocation' problem, where you need to minimize the maximum number of pages allocated to a student?",
+"type": "MCQ",
+"categories": [],
+"options": [
+"From the maximum pages in a single book to the sum of all pages.",
+"From 1 to the total number of books.",
+"From 1 to the total number of students.",
+"From 0 to the total number of pages."
+],
+"answer": "From the maximum pages in a single book to the sum of all pages.",
+"difficulty": "HARD"
+},
+{
+"text": "Consider a 'nearly sorted' array where each element `A[i]` can be at index `i-1`, `i`, or `i+1`. How does this affect the binary search logic?",
+"type": "MCQ",
+"categories": [],
+"options": [
+"At each step, we must check `A[mid]`, `A[mid-1]`, and `A[mid+1]` for the target.",
+"Binary search cannot be used.",
+"The array must be fully sorted first, taking O(n log n) time.",
+"The search space is reduced by a factor of three instead of two."
+],
+"answer": "At each step, we must check `A[mid]`, `A[mid-1]`, and `A[mid+1]` for the target.",
+"difficulty": "MEDIUM"
+},
+{
+"text": "In a modified binary search for a nearly sorted array, if the target is not at `mid`, `mid-1`, or `mid+1`, and `target < A[mid]`, how should the search space be updated?",
+"type": "MCQ",
+"categories": [],
+"options": [
+"high = mid - 2",
+"high = mid - 1",
+"high = mid",
+"low = mid + 2"
+],
+"answer": "high = mid - 2",
+"difficulty": "HARD"
+},
+{
+"text": "What is the time complexity of searching in a nearly sorted array (where elements can be at `i`, `i-1`, or `i+1`) using a modified binary search?",
+"type": "MCQ",
+"categories": [],
+"options": [
+"$O(\\log n)$",
+"$O(n)$",
+"$O(k \\log n)$",
+"$O(\\sqrt{n})$"
+],
+"answer": "$O(\\log n)$",
+"difficulty": "MEDIUM"
+},
+{
+"text": "Amortized analysis is generally not applied to repeated binary searches on a static sorted array because:",
+"type": "MCQ",
+"categories": [],
+"options": [],
+"answer": "Each search is an independent operation that does not change the state of the data structure.",
+"difficulty": "HARD"
+},
+{
+"text": "An off-by-one error in binary search is most likely to be caused by:",
+"type": "MCQ",
+"categories": [],
+"options": [],
+"answer": "Incorrectly updating the `low` or `high` boundaries (e.g., `high = mid` instead of `high = mid - 1`).",
+"difficulty": "MEDIUM"
+},
+{
+"text": "If the loop condition in an iterative binary search is `WHILE low < high`, which element might be missed if boundary updates are not handled correctly?",
+"type": "MCQ",
+"categories": [],
+"options": [],
+"answer": "The last remaining element when `low` equals `high`.",
+"difficulty": "MEDIUM"
+},
+{
+"text": "What is the recurrence relation that describes the time complexity of binary search?",
+"type": "MCQ",
+"categories": [],
+"options": [],
+"answer": "$T(n) = T(n/2) + O(1)$",
+"difficulty": "MEDIUM"
+},
+{
+"text": "The solution to the recurrence relation $T(n) = T(n/2) + c$ is:",
+"type": "MCQ",
+"categories": [],
+"options": [
+"$O(\\log n)$",
+"$O(n)$",
+"$O(n \\log n)$",
+"$O(c \\log n)$"
+],
+"answer": "$O(\\log n)$",
+"difficulty": "EASY"
+},
+{
+"text": "Given `A = ` and `target = 1`, how many comparisons are made to find the target?",
+"type": "PREDICT_OUTPUT",
+"categories": [],
+"options": [
+"3",
+"1",
+"2",
+"4"
+],
+"answer": "3",
+"difficulty": "MEDIUM"
+},
+{
+"text": "Given `A = ` and `target = 2`, what is the index returned by a standard binary search that terminates as soon as a match is found?",
+"type": "PREDICT_OUTPUT",
+"categories": [],
+"options": [
+"2",
+"1",
+"3",
+"Could be 1, 2, or 3"
+],
+"answer": "2",
+"difficulty": "MEDIUM"
+},
+{
+"text": "Fill in the blank for the `check` function in the 'Aggressive Cows' problem, which determines if `k` cows can be placed with at least `dist` distance between them.\n```\nFUNCTION check(stalls, k, dist)\n  cows_placed = 1\n  last_pos = stalls\n  FOR i = 1 to stalls.length - 1\n    IF stalls[i] - last_pos >= dist\n      cows_placed = cows_placed + 1\n      last_pos = stalls[i]\n  RETURN __________\n```",
+"type": "FILL_BLANK",
+"categories": [],
+"options": [
+"cows_placed >= k",
+"cows_placed == k",
+"cows_placed > k",
+"cows_placed < k"
+],
+"answer": "cows_placed >= k",
+"difficulty": "HARD"
+},
+{
+"text": "In the 'Book Allocation' problem, the `is_possible(max_pages)` check function determines if books can be allocated to `k` students such that no student reads more than `max_pages`. This check is typically implemented using what strategy?",
+"type": "MCQ",
+"categories": [],
+"options": [
+"A greedy approach",
+"A recursive approach",
+"A dynamic programming approach",
+"Another binary search"
+],
+"answer": "A greedy approach",
+"difficulty": "HARD"
+},
+{
+"text": "If a rotated sorted array may contain duplicates, how does this affect the worst-case time complexity of searching for an element?",
+"type": "MCQ",
+"categories": [],
+"options": [
+"It can degrade to $O(n)$ in the worst case.",
+"It remains $O(\\log n)$.",
+"It improves to $O(1)$.",
+"It becomes $O(n \\log n)$."
+],
+"answer": "It can degrade to $O(n)$ in the worst case.",
+"difficulty": "HARD"
+},
+{
+"text": "The worst case for search in a rotated sorted array with duplicates (e.g., ``) occurs when `A[low] == A[mid] == A[high]`. Why does this degrade performance?",
+"type": "MCQ",
+"categories": [],
+"options": [
+"It becomes impossible to determine which half is sorted, forcing a linear shrink of the search space.",
+"It causes an infinite loop.",
+"It requires sorting the subarray first.",
+"It leads to integer overflow."
+],
+"answer": "It becomes impossible to determine which half is sorted, forcing a linear shrink of the search space.",
+"difficulty": "HARD"
+},
+{
+"text": "To apply binary search on a collection of custom objects, what is required?",
+"type": "MCQ",
+"categories": [],
+"options": [],
+"answer": "The collection must be sorted according to a consistent comparison criterion.",
+"difficulty": "MEDIUM"
+},
+{
+"text": "Given a list of `Student` objects sorted by `student_id`, how would you binary search for a student with a specific `name`?",
+"type": "MCQ",
+"categories": [],
+"options": [
+"It's not possible with binary search unless the list is also sorted by name.",
+"Use a custom comparator that compares student names.",
+"Iterate through the list and check each student's name.",
+"Create a hash map of names to objects."
+],
+"answer": "It's not possible with binary search unless the list is also sorted by name.",
+"difficulty": "HARD"
+},
+{
+"text": "What is the output for `A = ` and `target = 5` using the provided pseudocode?\n```\nFUNCTION BINARY_SEARCH(A, target)\n  low = 0\n  high = A.length - 1\n  WHILE low <= high\n    mid = low + floor((high - low) / 2)\n    IF A[mid] == target\n      RETURN mid\n    ELSE IF A[mid] < target\n      low = mid + 1\n    ELSE\n      high = mid - 1\n  RETURN -1\n```",
+"type": "PREDICT_OUTPUT",
+"categories": [],
+"options": [
+"-1",
+"0",
+"1",
+"An error occurs"
+],
+"answer": "-1",
+"difficulty": "EASY"
+},
+{
+"text": "What is the output for `A = ` and `target = 40` using the provided pseudocode?\n```\nFUNCTION BINARY_SEARCH(A, target)\n  low = 0\n  high = A.length - 1\n  WHILE low <= high\n    mid = low + floor((high - low) / 2)\n    IF A[mid] == target\n      RETURN mid\n    ELSE IF A[mid] < target\n      low = mid + 1\n    ELSE\n      high = mid - 1\n  RETURN -1\n```",
+"type": "PREDICT_OUTPUT",
+"categories": [],
+"options": [
+"-1",
+"2",
+"3",
+"An error occurs"
+],
+"answer": "-1",
+"difficulty": "EASY"
+},
+{
+"text": "In the pseudocode below, what is the value of `mid` in the first iteration if `A.length` is 10?",
+"type": "PREDICT_OUTPUT",
+"categories": [],
+"options": [
+"4",
+"5",
+"0",
+"9"
+],
+"answer": "4",
+"difficulty": "EASY"
+},
+{
+"text": "In the pseudocode below, what is the value of `mid` in the first iteration if `A.length` is 11?",
+"type": "PREDICT_OUTPUT",
+"categories": [],
+"options": [
+"5",
+"4",
+"6",
+"10"
+],
+"answer": "5",
+"difficulty": "EASY"
+},
+{
+"text": "Complete the missing recursive call for the case when the target is smaller than the middle element.",
+"type": "FILL_BLANK",
+"categories": [],
+"options": [],
+"answer": "RECURSIVE_BS(A, target, low, mid - 1)",
+"difficulty": "EASY"
+},
+{
+"text": "If an array has 1,000,000 elements, approximately how many comparisons will a binary search take in the worst case? ($log_2 10^6 \\approx 20$)",
+"type": "MCQ",
+"categories": [],
+"options": [
+"20",
+"1,000,000",
+"500,000",
+"100"
+],
+"answer": "20",
+"difficulty": "EASY"
+},
+{
+"text": "What is the primary reason for the efficiency of binary search?",
+"type": "MCQ",
+"categories": [],
+"options": [
+"It eliminates half of the remaining search space with each comparison.",
+"It uses recursion to simplify the code.",
+"It works well with small arrays.",
+"It requires constant memory."
+],
+"answer": "It eliminates half of the remaining search space with each comparison.",
+"difficulty": "EASY"
+},
+{
+"text": "Given `A = ` and `target = 2`, what is the final value of `low` when the search terminates?",
+"type": "PREDICT_OUTPUT",
+"categories": [],
+"options": [
+"5",
+"4",
+"3",
+"2"
+],
+"answer": "5",
+"difficulty": "MEDIUM"
+},
+{
+"text": "Given `A = ` and `target = 4`, what is the final value of `high` when the search terminates?",
+"type": "PREDICT_OUTPUT",
+"categories": [],
+"options": [
+"-1",
+"0",
+"1",
+"2"
+],
+"answer": "-1",
+"difficulty": "MEDIUM"
+},
+{
+"text": "The problem of finding the smallest divisor such that the sum of quotients is less than a threshold can be solved using binary search on what?",
+"type": "MCQ",
+"categories": [],
+"options": [],
+"answer": "The possible values of the divisor.",
+"difficulty": "HARD"
+},
+{
+"text": "A function `f(x)` is monotonic if it is either non-increasing or non-decreasing. Which of these functions on the domain of positive integers is NOT monotonic?",
+"type": "MCQ",
+"categories": [],
+"options": [
+"$f(x) = x^2 - 8x + 5$",
+"$f(x) = x^3$",
+"$f(x) = \\log(x)$",
+"$f(x) = 100 - x$"
+],
+"answer": "$f(x) = x^2 - 8x + 5$",
+"difficulty": "MEDIUM"
+},
+{
+"text": "What is the average case time complexity of binary search?",
+"type": "MCQ",
+"categories": [],
+"options": [
+"$O(\\log n)$",
+"$O(1)$",
+"$O(n)$",
+"$O(n/2)$"
+],
+"answer": "$O(\\log n)$",
+"difficulty": "EASY"
+},
+{
+"text": "If `lower_bound(A, target)` returns index `i` and `upper_bound(A, target)` returns index `j`, the count of `target` in `A` is:",
+"type": "MCQ",
+"categories": [],
+"options": [
+"$j - i$",
+"$j - i + 1$",
+"$j - i - 1$",
+"$i - j$"
+],
+"answer": "$j - i$",
+"difficulty": "MEDIUM"
+},
+{
+"text": "Given `A = ` and `target = 5`, what would `lower_bound` return?",
+"type": "PREDICT_OUTPUT",
+"categories": [],
+"options": [
+"2",
+"3",
+"1",
+"4"
+],
+"answer": "2",
+"difficulty": "MEDIUM"
+},
+{
+"text": "Given `A = ` and `target = 4`, what would `upper_bound` return?",
+"type": "PREDICT_OUTPUT",
+"categories": [],
+"options": [
+"2",
+"1",
+"3",
+"4"
+],
+"answer": "2",
+"difficulty": "MEDIUM"
+},
+{
+"text": "Fill in the blank for finding the ceiling of a target (smallest element >= target), which is equivalent to finding the lower bound.\n```\nFUNCTION FIND_CEILING(A, target)\n  low = 0, high = A.length - 1\n  ans = -1\n  WHILE low <= high\n    mid = low + floor((high - low) / 2)\n    IF A[mid] >= target\n      ans = A[mid]\n      __________\n    ELSE\n      low = mid + 1\n  RETURN ans\n```",
+"type": "FILL_BLANK",
+"categories": [],
+"options": [],
+"answer": "high = mid - 1",
+"difficulty": "MEDIUM"
+},
+{
+"text": "In a rotated sorted array `A = `, searching for `target = 1` will result in which index?",
+"type": "PREDICT_OUTPUT",
+"categories": [],
+"options": [
+"1",
+"0",
+"-1",
+"An error"
+],
+"answer": "1",
+"difficulty": "MEDIUM"
+},
+{
+"text": "What is the time complexity to find the pivot (minimum element) in a rotated sorted array of size $n$?",
+"type": "MCQ",
+"categories": [],
+"options": [
+"$O(\\log n)$",
+"$O(n)$",
+"$O(1)$",
+"$O(\\sqrt{n})$"
+],
+"answer": "$O(\\log n)$",
+"difficulty": "MEDIUM"
+},
+{
+"text": "If you find a peak element at index `mid` such that `A[mid] > A[mid-1]` and `A[mid] > A[mid+1]`, why can you stop searching?",
+"type": "MCQ",
+"categories": [],
+"options": [],
+"answer": "The problem only requires finding any one peak.",
+"difficulty": "EASY"
+},
+{
+"text": "To find the cube root of a number `N` using binary search, the check condition inside the loop would be:",
+"type": "MCQ",
+"categories": [],
+"options": [
+"`mid * mid * mid <= N`",
+"`mid * mid <= N`",
+"`mid * 3 <= N`",
+"`mid^3 == N`"
+],
+"answer": "`mid * mid * mid <= N`",
+"difficulty": "MEDIUM"
+},
+{
+"text": "If a 2D matrix is treated as a flattened 1D array for binary search, how would you map a 1D index `mid` to 2D coordinates `(row, col)`? (n_cols = number of columns)",
+"type": "MCQ",
+"categories": [],
+"options": [
+"row = mid / n_cols, col = mid % n_cols",
+"row = mid % n_cols, col = mid / n_cols",
+"row = mid - n_cols, col = mid + n_cols",
+"row = mid, col = mid"
+],
+"answer": "row = mid / n_cols, col = mid % n_cols",
+"difficulty": "MEDIUM"
+},
+{
+"text": "What is the total number of comparisons required by binary search to determine that the key 7 is not in the array `A = `?",
+"type": "PREDICT_OUTPUT",
+"categories": [],
+"options": [
+"3",
+"2",
+"4",
+"6"
+],
+"answer": "3",
+"difficulty": "MEDIUM"
+},
+{
+"text": "The condition `low <= high` is crucial for correctness. If it were `low < high`, which case would fail for `A = ` and `target = 20`?",
+"type": "PREDICT_OUTPUT",
+"categories": [],
+"options": [],
+"answer": "The search would fail to find 20.",
+"difficulty": "HARD"
+},
+{
+"text": "What does it mean for a function to be monotonic in the context of binary search?",
+"type": "MCQ",
+"categories": [],
+"options": [],
+"answer": "The function is either consistently non-decreasing or non-increasing.",
+"difficulty": "EASY"
+},
+{
+"text": "Which of the following problems cannot be solved using binary search on the answer space?",
+"type": "MCQ",
+"categories": [],
+"options": [
+"Finding the mode (most frequent element) in an unsorted array.",
+"Finding the minimum time to complete all tasks given a set of workers.",
+"Finding the k-th smallest element in a sorted matrix.",
+"Finding the maximum possible minimum distance between k elements."
+],
+"answer": "Finding the mode (most frequent element) in an unsorted array.",
+"difficulty": "HARD"
+},
+{
+"text": "In a binary search implementation, if `low` and `high` are very large positive integers, `low + high` could overflow. Which data type would be most appropriate to use for `mid` calculation to mitigate this in languages like C++ or Java?",
+"type": "MCQ",
+"categories": [],
+"options": [],
+"answer": "A 64-bit integer (long long / long)",
+"difficulty": "MEDIUM"
+},
+{
+"text": "A binary search implementation uses the loop condition `while (low < high)`. To prevent an infinite loop when `high = low + 1`, how must `mid` be calculated if the search space is narrowed with `low = mid`?",
+"type": "MCQ",
+"categories": [],
+"options": [
+"mid = low + ceil((high - low) / 2)",
+"mid = low + floor((high - low) / 2)",
+"mid = high - 1",
+"mid = low + 1"
+],
+"answer": "mid = low + ceil((high - low) / 2)",
+"difficulty": "HARD"
+},
+{
+"text": "Given `A = ` and `target = 0`, the search will terminate. What will be the final values of `low` and `high`?",
+"type": "PREDICT_OUTPUT",
+"categories": [],
+"options": [
+"low=0, high=-1",
+"low=0, high=0",
+"low=-1, high=-1",
+"low=1, high=0"
+],
+"answer": "low=0, high=-1",
+"difficulty": "MEDIUM"
+},
+{
+"text": "Given `A = ` and `target = 25`, the search will terminate. What will be the final values of `low` and `high`?",
+"type": "PREDICT_OUTPUT",
+"categories": [],
+"options": [
+"low=5, high=4",
+"low=4, high=4",
+"low=4, high=5",
+"low=5, high=5"
+],
+"answer": "low=5, high=4",
+"difficulty": "MEDIUM"
+},
+{
+"text": "If a sorted array contains all identical elements, e.g., `A = `, what is the output of a standard binary search for `target = 7`?",
+"type": "PREDICT_OUTPUT",
+"categories": [],
+"options": [
+"2",
+"0",
+"4",
+"Any index from 0 to 4"
+],
+"answer": "2",
+"difficulty": "EASY"
+},
+{
+"text": "If a sorted array contains all identical elements, e.g., `A = `, what is the output of a correct `FIND_FIRST` implementation for `target = 7`?",
+"type": "PREDICT_OUTPUT",
+"categories": [],
+"options": [
+"0",
+"2",
+"4",
+"-1"
+],
+"answer": "0",
+"difficulty": "MEDIUM"
+},
+{
+"text": "If a sorted array contains all identical elements, e.g., `A = `, what is the time complexity of finding the first occurrence of `target = 7`?",
+"type": "MCQ",
+"categories": [],
+"options": [],
+"answer": "$O(\\log n)$",
+"difficulty": "MEDIUM"
+},
+{
+"text": "Consider the pseudocode for finding the rightmost element. What is the output for `A = `, `n=7`, `T=4`?\n```\nFUNCTION BINARY_SEARCH_RIGHTMOST(A, n, T)\n  L = 0, R = n\n  WHILE L < R\n    m = L + floor((R - L) / 2)\n    IF A[m] > T\n      R = m\n    ELSE\n      L = m + 1\n  RETURN R - 1\n```",
+"type": "PREDICT_OUTPUT",
+"categories": [],
+"options": [
+"5",
+"4",
+"6",
+"3"
+],
+"answer": "5",
+"difficulty": "HARD"
+},
+{
+"text": "The `BINARY_SEARCH_RIGHTMOST` pseudocode has a subtle behavior. What does it return if the target `T` is not in the array?",
+"type": "MCQ",
+"categories": [],
+"options": [],
+"answer": "The index of the last element smaller than T.",
+"difficulty": "HARD"
+},
+{
+"text": "Fill in the blank in the `BINARY_SEARCH_LEFTMOST` pseudocode, which finds the first index `i` such that `A[i] >= T`.\n```\nFUNCTION BINARY_SEARCH_LEFTMOST(A, n, T)\n  L = 0, R = n\n  WHILE L < R\n    m = L + floor((R - L) / 2)\n    IF A[m] < T\n      L = m + 1\n    ELSE\n      // MISSING LINE\n  RETURN L\n```",
+"type": "FILL_BLANK",
+"categories": [],
+"options": [],
+"answer": "R = m",
+"difficulty": "HARD"
+},
+{
+"text": "Given the `BINARY_SEARCH_LEFTMOST` pseudocode from the previous question, what is the output for `A = `, `n=5`, `T=3`?",
+"type": "PREDICT_OUTPUT",
+"categories": [],
+"options": [
+"2",
+"1",
+"3",
+"5"
+],
+"answer": "2",
+"difficulty": "MEDIUM"
+},
+{
+"text": "The comparison `A[low] <= A[mid]` is used in the search on a rotated sorted array to check if the left half is sorted. What is the equivalent check for the right half?",
+"type": "MCQ",
+"categories": [],
+"options": [
+"`A[mid] <= A[high]`",
+"`A[mid] > A[high]`",
+"`A[low] > A[mid]`",
+"`A[low] > A[high]`"
+],
+"answer": "`A[mid] <= A[high]`",
+"difficulty": "MEDIUM"
+},
+{
+"text": "What is the output of a peak-finding algorithm for `A = `?",
+"type": "PREDICT_OUTPUT",
+"categories": [],
+"options": [
+"0",
+"4",
+"2",
+"Any index is valid"
+],
+"answer": "0",
+"difficulty": "MEDIUM"
+},
+{
+"text": "What is the output of a peak-finding algorithm for `A = `?",
+"type": "PREDICT_OUTPUT",
+"categories": [],
+"options": [
+"4",
+"0",
+"2",
+"Any index is valid"
+],
+"answer": "4",
+"difficulty": "MEDIUM"
+},
+{
+"text": "When finding the square root of `N` up to `p` decimal places, the binary search is first used to find the integer part. What is the subsequent step?",
+"type": "MCQ",
+"categories": [],
+"options": [
+"Incrementally add fractional parts (0.1, 0.01,...) while the square is less than N.",
+"Perform another binary search on the range .",
+"Use Newton's method for refinement.",
+"The integer part is the final answer."
+],
+"answer": "Incrementally add fractional parts (0.1, 0.01,...) while the square is less than N.",
+"difficulty": "MEDIUM"
+},
+{
+"text": "In a 2D matrix where rows are sorted but columns are not, what is the best approach to find an element?",
+"type": "MCQ",
+"categories": [],
+"options": [],
+"answer": "Perform binary search on each row.",
+"difficulty": "MEDIUM"
+},
+{
+"text": "The problem of finding the k-th smallest element in the union of two sorted arrays can be solved efficiently using a modified binary search. What is the search space?",
+"type": "MCQ",
+"categories": [],
+"options": [],
+"answer": "The number of elements to take from the first array.",
+"difficulty": "HARD"
+},
+{
+"text": "In the `is_possible(dist)` check for 'Aggressive Cows', why is it optimal to always place the next cow at the earliest possible stall that satisfies the distance constraint?",
+"type": "MCQ",
+"categories": [],
+"options": [],
+"answer": "This greedy choice leaves the maximum possible space for subsequent cows.",
+"difficulty": "HARD"
+},
+{
+"text": "Fill in the blank in the `is_possible` check for the 'Book Allocation' problem.\n```\nFUNCTION is_possible(books, k, max_pages)\n  students_needed = 1\n  current_pages = 0\n  FOR each book in books\n    IF book > max_pages RETURN false\n    IF current_pages + book > max_pages\n      students_needed = students_needed + 1\n      current_pages = book\n    ELSE\n      current_pages = current_pages + book\n  RETURN __________\n```",
+"type": "FILL_BLANK",
+"categories": [],
+"options": [
+"students_needed <= k",
+"students_needed == k",
+"students_needed < k",
+"students_needed > k"
+],
+"answer": "students_needed <= k",
+"difficulty": "HARD"
+},
+{
+"text": "What is the overall time complexity of the 'Aggressive Cows' solution, where $N$ is the number of stalls and $M$ is the maximum stall coordinate?",
+"type": "MCQ",
+"categories": [],
+"options": [
+"$O(N \\log M)$",
+"$O(N \\log N)$",
+"$O(M \\log N)$",
+"$O(N + \\log M)$"
+],
+"answer": "$O(N \\log M)$",
+"difficulty": "HARD"
+},
+{
+"text": "What is the time complexity of the 'Book Allocation' solution, where $N$ is the number of books and $S$ is the sum of all pages?",
+"type": "MCQ",
+"categories": [],
+"options": [],
+"answer": "$O(N \\log S)$",
+"difficulty": "HARD"
+},
+{
+"text": "Given a nearly sorted array `A = ` where elements are at most 1 position away from their sorted position, what is the output of a modified binary search for `target = 40`?",
+"type": "PREDICT_OUTPUT",
+"categories": [],
+"options": [
+"2",
+"1",
+"3",
+"-1"
+],
+"answer": "2",
+"difficulty": "MEDIUM"
+},
+{
+"text": "Which of these four binary search implementations is correct for finding a target in a standard sorted array?",
+"type": "MCQ",
+"categories": [],
+"options": [
+"low=0, high=n-1; while(low<=high){ mid=...; if(A[mid]<t) low=mid+1; else high=mid-1; }",
+"low=0, high=n-1; while(low<high){ mid=...; if(A[mid]<t) low=mid+1; else high=mid; }",
+"low=0, high=n; while(low<high){ mid=...; if(A[mid]<t) low=mid+1; else high=mid; }",
+"low=0, high=n-1; while(low<=high){ mid=...; if(A[mid]<t) low=mid; else high=mid; }"
+],
+"answer": "low=0, high=n; while(low<high){ mid=...; if(A[mid]<t) low=mid+1; else high=mid; }",
+"difficulty": "HARD"
+},
+{
+"text": "The binary search algorithm's efficiency stems from its logarithmic time complexity. This is a direct result of:",
+"type": "MCQ",
+"categories": [],
+"options": [],
+"answer": "Halving the search space in each step.",
+"difficulty": "EASY"
+},
+{
+"text": "If a binary search on 32 elements takes at most 6 comparisons, how many comparisons would it take at most for 64 elements?",
+"type": "MCQ",
+"categories": [],
+"options": [
+"7",
+"6",
+"8",
+"12"
+],
+"answer": "7",
+"difficulty": "EASY"
+},
+{
+"text": "What is the output of the following pseudocode for `A = ` and `target = 2`?\n```\nFUNCTION FIND_FIRST(A, target)\n  low = 0, high = A.length - 1\n  result = -1\n  WHILE low <= high\n    mid = low + floor((high - low) / 2)\n    IF A[mid] >= target\n      result = mid\n      high = mid - 1\n    ELSE\n      low = mid + 1\n  RETURN result\n```",
+"type": "PREDICT_OUTPUT",
+"categories": [],
+"options": [
+"0",
+"1",
+"-1",
+"An infinite loop"
+],
+"answer": "0",
+"difficulty": "MEDIUM"
+},
+{
+"text": "What does the following pseudocode compute?\n```\nFUNCTION UNKNOWN(A, target)\n  low = 0, high = A.length - 1\n  ans = A.length\n  WHILE low <= high\n    mid = low + floor((high - low) / 2)\n    IF A[mid] > target\n      ans = mid\n      high = mid - 1\n    ELSE\n      low = mid + 1\n  RETURN ans\n```",
+"type": "MCQ",
+"categories": [],
+"options": [
+"Upper bound of the target",
+"Lower bound of the target",
+"Last occurrence of the target",
+"Floor of the target"
+],
+"answer": "Upper bound of the target",
+"difficulty": "HARD"
+},
+{
+"text": "What is the output of the `UNKNOWN` function from the previous question for `A = ` and `target = 7`?",
+"type": "PREDICT_OUTPUT",
+"categories": [],
+"options": [
+"4",
+"3",
+"-1",
+"0"
+],
+"answer": "4",
+"difficulty": "MEDIUM"
+},
+{
+"text": "In a rotated sorted array search, if `A[mid] > A[high]`, which half of the array is guaranteed to be sorted?",
+"type": "MCQ",
+"categories": [],
+"options": [
+"The left half (`A[low]` to `A[mid]`)",
+"The right half (`A[mid]` to `A[high]`)",
+"Neither half is guaranteed to be sorted",
+"Both halves are guaranteed to be sorted"
+],
+"answer": "The left half (`A[low]` to `A[mid]`)",
+"difficulty": "MEDIUM"
+},
+{
+"text": "What is the output of a peak-finding algorithm for the bitonic array `A = `?",
+"type": "PREDICT_OUTPUT",
+"categories": [],
+"options": [
+"2",
+"1",
+"3",
+"4"
+],
+"answer": "2",
+"difficulty": "MEDIUM"
+},
+{
+"text": "After finding the peak in a bitonic array, how would you search for a target element?",
+"type": "MCQ",
+"categories": [],
+"options": [],
+"answer": "Perform one binary search on the increasing part and another on the decreasing part.",
+"difficulty": "MEDIUM"
+},
+{
+"text": "What is the overall time complexity of finding an element in a bitonic array of size $n$?",
+"type": "MCQ",
+"categories": [],
+"options": [
+"$O(\\log n)$",
+"$O(n)$",
+"$O(n \\log n)$",
+"$O(1)$"
+],
+"answer": "$O(\\log n)$",
+"difficulty": "MEDIUM"
+},
+{
+"text": "Given `A = ` and `target = 6`, what are the final values of `low` and `high` when the search terminates?",
+"type": "PREDICT_OUTPUT",
+"categories": [],
+"options": [
+"low=5, high=4",
+"low=4, high=4",
+"low=5, high=5",
+"low=4, high=3"
+],
+"answer": "low=5, high=4",
+"difficulty": "MEDIUM"
+},
+{
+"text": "Fill in the blank for a binary search on a descending sorted array.\n```\nFUNCTION DESC_BS(A, target)\n  low = 0, high = A.length - 1\n  WHILE low <= high\n    mid = low + floor((high - low) / 2)\n    IF A[mid] == target\n      RETURN mid\n    ELSE IF A[mid] < target\n      // MISSING LINE\n    ELSE\n      low = mid + 1\n  RETURN -1\n```",
+"type": "FILL_BLANK",
+"categories": [],
+"options": [
+"high = mid - 1",
+"low = mid + 1",
+"high = mid",
+"low = mid"
+],
+"answer": "high = mid - 1",
+"difficulty": "MEDIUM"
+},
+{
+"text": "What is the output of the `DESC_BS` function from the previous question for `A = ` and `target = 40`?",
+"type": "PREDICT_OUTPUT",
+"categories": [],
+"options": [
+"1",
+"0",
+"2",
+"-1"
+],
+"answer": "1",
+"difficulty": "EASY"
+}
+]

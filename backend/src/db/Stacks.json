@@ -1,0 +1,979 @@
+[
+  {
+    "text": "What is the time complexity of pushing an element onto a stack implemented using an array?",
+    "type": "MCQ",
+    "categories": ["StacksQueues", "Complexity"],
+    "options": ["O(1)", "O(n)", "O(log n)", "O(n²)"],
+    "answer": "O(1)",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Which of the following operations is NOT allowed in a standard queue?",
+    "type": "MCQ",
+    "categories": ["StacksQueues", "Implementation"],
+    "options": ["enqueue", "dequeue", "peek/front", "pop from end arbitrarily"],
+    "answer": "pop from end arbitrarily",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Predict the output of the following code:\n```\nstack = []\nstack.append(10)\nstack.append(20)\nstack.pop()\nstack.append(30)\nprint(stack[-1])\n```",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": ["10", "20", "30", "None"],
+    "answer": "30",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Complete the code to check if a stack is empty:\n```\ndef is_empty(stack):\n    return _____\n```",
+    "type": "FILL_BLANK",
+    "categories": ["StacksQueues", "Implementation"],
+    "options": ["stack == []", "stack.pop()", "len(stack) > 0", "stack[0]"],
+    "answer": "stack == []",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Which of the following data structures allows insertion and deletion from both ends?",
+    "type": "MCQ",
+    "categories": ["StacksQueues", "Implementation"],
+    "options": ["Queue", "Stack", "Deque", "Priority Queue"],
+    "answer": "Deque",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "What will be the output of this code?\n```\nqueue = []\nqueue.append(1)\nqueue.append(2)\nqueue.append(3)\nqueue.pop(0)\nqueue.append(4)\nprint(queue)\n```",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": ["[1, 2, 3, 4]", "[2, 3, 4]", "[3, 4, 1]", "[4, 3, 2]"],
+    "answer": "[2, 3, 4]",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Complete the function to implement a stack using a list:\n```\nclass Stack:\n    def __init__(self):\n        self.items = []\n    def push(self, item):\n        _____\n```",
+    "type": "FILL_BLANK",
+    "categories": ["StacksQueues", "Implementation"],
+    "options": [
+      "self.items.append(item)",
+      "self.items.pop()",
+      "self.items[0] = item",
+      "self.items.insert(0, item)"
+    ],
+    "answer": "self.items.append(item)",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Which operation on a queue can take O(n) time in a simple array-based implementation?",
+    "type": "MCQ",
+    "categories": ["StacksQueues", "Complexity"],
+    "options": [
+      "enqueue at end",
+      "dequeue from front",
+      "peek front",
+      "isEmpty check"
+    ],
+    "answer": "dequeue from front",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Predict the output of the following code:\n```\ndef reverse_queue(q):\n    stack = []\n    while q:\n        stack.append(q.pop(0))\n    while stack:\n        q.append(stack.pop())\n    return q\nqueue = [1, 2, 3, 4]\nprint(reverse_queue(queue))\n```",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": ["[4, 3, 2, 1]", "[1, 2, 3, 4]", "[1, 4, 3, 2]", "[2, 1, 4, 3]"],
+    "answer": "[4, 3, 2, 1]",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Which of these problems can be efficiently solved using a stack?",
+    "type": "MCQ",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": [
+      "Balanced parentheses check",
+      "Finding the shortest path in graph",
+      "Breadth-first search",
+      "Counting sort"
+    ],
+    "answer": "Balanced parentheses check",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Complete the code for a queue using two stacks:\n```\nclass Queue:\n    def __init__(self):\n        self.stack1 = []\n        self.stack2 = []\n    def enqueue(self, item):\n        self.stack1.append(item)\n    def dequeue(self):\n        if not self.stack2:\n            while self.stack1:\n                _____\n        return self.stack2.pop()\n```",
+    "type": "FILL_BLANK",
+    "categories": ["StacksQueues", "Implementation"],
+    "options": [
+      "self.stack2.append(self.stack1.pop())",
+      "self.stack1.pop(0)",
+      "self.stack1.append(stack2.pop())",
+      "stack2.pop(0)"
+    ],
+    "answer": "self.stack2.append(self.stack1.pop())",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "What is the output of this code snippet?\n```\nstack = []\nfor i in range(1, 5):\n    stack.append(i)\nwhile stack:\n    print(stack.pop(), end=' ')\n```",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": ["1 2 3 4", "4 3 2 1", "1 4 2 3", "2 3 4 1"],
+    "answer": "4 3 2 1",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Which data structure is best suited for implementing recursion manually?",
+    "type": "MCQ",
+    "categories": ["StacksQueues", "Applications"],
+    "options": ["Queue", "Stack", "Deque", "Priority Queue"],
+    "answer": "Stack",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Predict the output:\n```\nstack = []\nstack.append(1)\nstack.append(2)\nstack.append(3)\ntop = stack[-1]\nstack.pop()\nprint(top, stack[-1])\n```",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": ["3 2", "2 3", "1 2", "3 1"],
+    "answer": "3 2",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Complete the code to implement a circular queue enqueue operation:\n```\ndef enqueue(q, item, front, rear, size):\n    if (rear + 1) % size == front:\n        print('Queue Full')\n    else:\n        rear = (rear + 1) % size\n        _____\n```",
+    "type": "FILL_BLANK",
+    "categories": ["StacksQueues", "Implementation"],
+    "options": [
+      "q[rear] = item",
+      "q[front] = item",
+      "q.append(item)",
+      "q.insert(0, item)"
+    ],
+    "answer": "q[rear] = item",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Which of the following statements is true for a stack?",
+    "type": "MCQ",
+    "categories": ["StacksQueues", "Concepts"],
+    "options": [
+      "FIFO ordering",
+      "LIFO ordering",
+      "Priority-based ordering",
+      "Random ordering"
+    ],
+    "answer": "LIFO ordering",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "What is the output of this code?\n```\nqueue = []\nqueue.append(10)\nqueue.append(20)\nqueue.append(30)\nprint(queue.pop(0) + queue[0])\n```",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": ["30", "30", "20", "10"],
+    "answer": "30",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Complete the code to find the next greater element for each element using a stack:\n```\ndef next_greater(arr):\n    stack = []\n    result = [-1]*len(arr)\n    for i in range(len(arr)):\n        while stack and arr[i] > arr[stack[-1]]:\n            index = stack.pop()\n            _____\n        stack.append(i)\n    return result\n```",
+    "type": "FILL_BLANK",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": [
+      "result[index] = arr[i]",
+      "arr[index] = arr[i]",
+      "result[i] = arr[index]",
+      "stack.append(arr[i])"
+    ],
+    "answer": "result[index] = arr[i]",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Which of these problems is commonly solved using a deque?",
+    "type": "MCQ",
+    "categories": ["StacksQueues", "Applications"],
+    "options": [
+      "Sliding window maximum",
+      "Binary search",
+      "Quick sort",
+      "DFS traversal"
+    ],
+    "answer": "Sliding window maximum",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Predict the output:\n```\nstack = [1, 2, 3, 4]\nstack.reverse()\nprint(stack)\n```",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": ["[1, 2, 3, 4]", "[4, 3, 2, 1]", "[4, 1, 2, 3]", "[1, 4, 3, 2]"],
+    "answer": "[4, 3, 2, 1]",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Which of these statements about queues is FALSE?",
+    "type": "MCQ",
+    "categories": ["StacksQueues", "Concepts"],
+    "options": [
+      "Queues follow FIFO",
+      "Front element is dequeued first",
+      "Rear is where elements are removed",
+      "New elements are added at rear"
+    ],
+    "answer": "Rear is where elements are removed",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Complete the function to implement a min-stack (stack that can return minimum in O(1)) push operation:\n```\ndef push_min(stack, min_stack, value):\n    stack.append(value)\n    if not min_stack or value <= min_stack[-1]:\n        _____\n```",
+    "type": "FILL_BLANK",
+    "categories": ["StacksQueues", "Implementation"],
+    "options": [
+      "min_stack.append(value)",
+      "stack.pop()",
+      "min_stack.pop()",
+      "stack.insert(0, value)"
+    ],
+    "answer": "min_stack.append(value)",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Predict the output:\n```\nqueue = []\nfor i in range(1, 4):\n    queue.append(i)\nqueue.pop(0)\nqueue.append(4)\nprint(queue)\n```",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": ["[1, 2, 3, 4]", "[2, 3, 4]", "[3, 4, 1]", "[4, 3, 2]"],
+    "answer": "[2, 3, 4]",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Which operation is required to implement DFS using a stack?",
+    "type": "MCQ",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": [
+      "enqueue neighbors",
+      "push neighbors",
+      "dequeue neighbors",
+      "pop from front"
+    ],
+    "answer": "push neighbors",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Complete the code for checking balanced parentheses:\n```\ndef is_balanced(s):\n    stack = []\n    for ch in s:\n        if ch in '({[':\n            stack.append(ch)\n        else:\n            if not stack or _____:\n                return False\n            stack.pop()\n    return not stack\n```",
+    "type": "FILL_BLANK",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": [
+      "ch != matching(stack[-1])",
+      "ch == stack[-1]",
+      "stack.pop() != ch",
+      "ch in stack"
+    ],
+    "answer": "ch != matching(stack[-1])",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "What is the time complexity of popping an element from a stack implemented using a linked list?",
+    "type": "MCQ",
+    "categories": ["StacksQueues", "Complexity"],
+    "options": ["O(1)", "O(n)", "O(log n)", "O(n²)"],
+    "answer": "O(1)",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Which of the following is the correct order of operations in a queue?",
+    "type": "MCQ",
+    "categories": ["StacksQueues", "Concepts"],
+    "options": ["LIFO", "FIFO", "Random order", "Priority order"],
+    "answer": "FIFO",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Predict the output of the following code:\n```\nstack = [5, 10, 15]\nstack.append(20)\nstack.pop()\nstack.append(25)\nprint(stack)\n```",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": [
+      "[5, 10, 15, 20, 25]",
+      "[5, 10, 15, 25]",
+      "[5, 10, 15, 20]",
+      "[25, 15, 10, 5]"
+    ],
+    "answer": "[5, 10, 15, 25]",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Complete the code to implement a queue using two stacks:\n```\nclass Queue:\n    def __init__(self):\n        self.s1 = []\n        self.s2 = []\n    def enqueue(self, x):\n        self.s1.append(x)\n    def dequeue(self):\n        if not self.s2:\n            while self.s1:\n                _____\n        return self.s2.pop()\n```",
+    "type": "FILL_BLANK",
+    "categories": ["StacksQueues", "Implementation"],
+    "options": [
+      "self.s2.append(self.s1.pop())",
+      "self.s1.pop(0)",
+      "self.s1.append(self.s2.pop())",
+      "self.s2.pop(0)"
+    ],
+    "answer": "self.s2.append(self.s1.pop())",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Which problem is best solved using a monotonic stack?",
+    "type": "MCQ",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": [
+      "Next greater element",
+      "Queue implementation",
+      "Breadth-first search",
+      "Binary search"
+    ],
+    "answer": "Next greater element",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Predict the output:\n```\nqueue = []\nqueue.append(1)\nqueue.append(2)\nqueue.append(3)\nqueue.pop(0)\nqueue.append(4)\nprint(queue[0], queue[-1])\n```",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": ["1 4", "2 4", "2 3", "1 3"],
+    "answer": "2 4",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Complete the code to push an element into a circular stack:\n```\ndef push_circular(stack, value, top, size):\n    if (top + 1) % size == 0:\n        print('Overflow')\n    else:\n        top = (top + 1) % size\n        _____\n```",
+    "type": "FILL_BLANK",
+    "categories": ["StacksQueues", "Implementation"],
+    "options": [
+      "stack[top] = value",
+      "stack.append(value)",
+      "stack.insert(0, value)",
+      "stack.pop()"
+    ],
+    "answer": "stack[top] = value",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Which of the following is a valid method to implement a stack?",
+    "type": "MCQ",
+    "categories": ["StacksQueues", "Implementation"],
+    "options": [
+      "Array only",
+      "Linked list only",
+      "Array or linked list",
+      "Queue only"
+    ],
+    "answer": "Array or linked list",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Predict the output:\n```\ndef reverse_stack(stack):\n    temp = []\n    while stack:\n        temp.append(stack.pop())\n    return temp\ns = [1,2,3]\nprint(reverse_stack(s))\n```",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": ["[1,2,3]", "[3,2,1]", "[2,1,3]", "[3,1,2]"],
+    "answer": "[3,2,1]",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Which data structure is suitable for implementing undo functionality?",
+    "type": "MCQ",
+    "categories": ["StacksQueues", "Applications"],
+    "options": ["Queue", "Stack", "Deque", "Priority Queue"],
+    "answer": "Stack",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Complete the function to find maximum in a sliding window using deque:\n```\nfrom collections import deque\n\ndef sliding_max(arr, k):\n    dq = deque()\n    result = []\n    for i in range(len(arr)):\n        while dq and arr[i] >= arr[dq[-1]]:\n            dq.pop()\n        dq.append(i)\n        if dq[0] <= i - k:\n            dq.popleft()\n        if i >= k - 1:\n            result.append(arr[dq[0]])\n    return result\n```",
+    "type": "FILL_BLANK",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": ["dq.pop()", "dq.appendleft(i)", "dq.insert(0,i)", "dq.clear()"],
+    "answer": "dq.pop()",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "What is the time complexity of enqueue and dequeue operations in a circular queue implemented using an array?",
+    "type": "MCQ",
+    "categories": ["StacksQueues", "Complexity"],
+    "options": [
+      "O(1) for both",
+      "O(n) for both",
+      "O(1) enqueue, O(n) dequeue",
+      "O(n) enqueue, O(1) dequeue"
+    ],
+    "answer": "O(1) for both",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Predict the output:\n```\nstack = []\nfor i in range(3):\n    stack.append(i)\nstack.pop()\nstack.append(5)\nprint(stack)\n```",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": ["[0,1,2,5]", "[0,1,5]", "[1,2,5]", "[5,0,1,2]"],
+    "answer": "[0,1,5]",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Which operation is required to implement BFS using a queue?",
+    "type": "MCQ",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": [
+      "push neighbors",
+      "enqueue neighbors",
+      "pop from top",
+      "stack push"
+    ],
+    "answer": "enqueue neighbors",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Complete the code to evaluate a postfix expression using a stack:\n```\ndef evaluate_postfix(expr):\n    stack = []\n    for ch in expr:\n        if ch.isdigit():\n            stack.append(int(ch))\n        else:\n            b = stack.pop()\n            a = stack.pop()\n            if ch == '+':\n                stack.append(a + b)\n            elif ch == '-':\n                stack.append(a - b)\n            elif ch == '*':\n                stack.append(a * b)\n            elif ch == '/':\n                _____\n    return stack.pop()\n```",
+    "type": "FILL_BLANK",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": [
+      "stack.append(a // b)",
+      "stack.pop()",
+      "stack.append(a / b * b)",
+      "stack.append(a + b)"
+    ],
+    "answer": "stack.append(a // b)",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Predict the output of the following code:\n```\nstack = []\nfor i in [1,2,3,4]:\n    stack.append(i)\nprint(stack.pop(), stack.pop())\n```",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": ["1 2", "3 4", "4 3", "2 1"],
+    "answer": "4 3",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Which problem can be efficiently implemented using a deque?",
+    "type": "MCQ",
+    "categories": ["StacksQueues", "Applications"],
+    "options": [
+      "Sliding window maximum",
+      "DFS traversal",
+      "Quick sort",
+      "Merge sort"
+    ],
+    "answer": "Sliding window maximum",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Complete the code for stock span problem using stack:\n```\ndef calculate_span(prices):\n    span = [0]*len(prices)\n    stack = []\n    for i in range(len(prices)):\n        while stack and prices[i] >= prices[stack[-1]]:\n            stack.pop()\n        span[i] = i + 1 if not stack else i - stack[-1]\n        stack.append(i)\n    return span\n```",
+    "type": "FILL_BLANK",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": [
+      "stack.pop()",
+      "stack.append(i)",
+      "span[i] = i",
+      "stack.clear()"
+    ],
+    "answer": "stack.pop()",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Predict the output:\n```\nqueue = []\nfor i in range(1, 4):\n    queue.append(i)\nqueue.pop(0)\nqueue.append(4)\nprint(queue)\n```",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": ["[1,2,3,4]", "[2,3,4]", "[3,4,1]", "[4,3,2]"],
+    "answer": "[2,3,4]",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Which of the following can be implemented efficiently using a deque?",
+    "type": "MCQ",
+    "categories": ["StacksQueues", "Applications"],
+    "options": [
+      "Sliding window maximum",
+      "Binary search",
+      "DFS traversal",
+      "Heap sort"
+    ],
+    "answer": "Sliding window maximum",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Predict the output:\n```\nstack = []\nfor i in range(5):\n    stack.append(i)\nwhile stack:\n    print(stack.pop(), end=' ')\n```",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": ["0 1 2 3 4", "4 3 2 1 0", "1 2 3 4 5", "5 4 3 2 1"],
+    "answer": "4 3 2 1 0",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Complete the function for LRU Cache using deque and dictionary:\n```\nfrom collections import deque\nclass LRUCache:\n    def __init__(self, capacity):\n        self.cache = {}\n        self.queue = deque()\n        self.capacity = capacity\n    def put(self, key, value):\n        if key in self.cache:\n            self.queue.remove(key)\n        elif len(self.queue) >= self.capacity:\n            oldest = self.queue.popleft()\n            del self.cache[oldest]\n        self.cache[key] = value\n        _____\n```",
+    "type": "FILL_BLANK",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": [
+      "self.queue.append(key)",
+      "self.cache.pop(key)",
+      "self.queue.popleft()",
+      "self.queue.appendleft(key)"
+    ],
+    "answer": "self.queue.append(key)",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Which of the following operations is O(1) in a standard stack implemented using a linked list?",
+    "type": "MCQ",
+    "categories": ["StacksQueues", "Complexity"],
+    "options": ["Push", "Search for an element", "Traverse", "Pop from bottom"],
+    "answer": "Push",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Predict the output of the next greater element problem:\n```\ndef next_greater(arr):\n    stack = []\n    res = [-1]*len(arr)\n    for i in range(len(arr)):\n        while stack and arr[i] > arr[stack[-1]]:\n            res[stack.pop()] = arr[i]\n        stack.append(i)\n    return res\nprint(next_greater([4,5,2,25]))\n```",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": [
+      "[5, 25, 25, -1]",
+      "[5, 2, 25, -1]",
+      "[25, -1, 25, -1]",
+      "[5, 25, -1, -1]"
+    ],
+    "answer": "[5, 25, 25, -1]",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Complete the code to implement a double-ended queue (deque) using circular array:\n```\nclass CircularDeque:\n    def __init__(self, size):\n        self.deque = [None]*size\n        self.front = -1\n        self.rear = -1\n        self.size = size\n    def insert_rear(self, value):\n        if (self.front == 0 and self.rear == self.size-1) or (self.rear + 1) % self.size == self.front:\n            print('Overflow')\n        else:\n            self.rear = (self.rear + 1) % self.size\n            _____\n```",
+    "type": "FILL_BLANK",
+    "categories": ["StacksQueues", "Implementation"],
+    "options": [
+      "self.deque[self.rear] = value",
+      "self.deque[self.front] = value",
+      "self.deque.append(value)",
+      "self.deque.insert(0, value)"
+    ],
+    "answer": "self.deque[self.rear] = value",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Which of the following can be efficiently solved using a stack?",
+    "type": "MCQ",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": [
+      "Evaluate postfix expression",
+      "Breadth-first search",
+      "Quick sort",
+      "Heapify array"
+    ],
+    "answer": "Evaluate postfix expression",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Predict the output:\n```\nstack = [2, 3, 1]\nstack.append(4)\nstack.pop()\nstack.append(5)\nprint(stack)\n```",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": ["[2,3,1,5]", "[2,3,1,4,5]", "[2,3,1,4]", "[5,1,3,2]"],
+    "answer": "[2,3,1,5]",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Complete the code to check if a given sequence of operations is valid for a stack:\n```\ndef validate_stack_sequence(pushed, popped):\n    stack = []\n    i = 0\n    for num in pushed:\n        stack.append(num)\n        while stack and stack[-1] == popped[i]:\n            stack.pop()\n            i += 1\n    return _____\n```",
+    "type": "FILL_BLANK",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": [
+      "i == len(popped)",
+      "stack == []",
+      "len(stack) == len(popped)",
+      "stack[-1] == popped[-1]"
+    ],
+    "answer": "i == len(popped)",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Which of the following statements about a circular queue is TRUE?",
+    "type": "MCQ",
+    "categories": ["StacksQueues", "Concepts"],
+    "options": [
+      "Rear points to last element; front points to first",
+      "Circular queues cannot be implemented with arrays",
+      "Front and rear always start at 1",
+      "Insertion at front is impossible"
+    ],
+    "answer": "Rear points to last element; front points to first",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Predict the output:\n```\nqueue = []\nqueue.append(10)\nqueue.append(20)\nqueue.append(30)\nqueue.pop(0)\nqueue.pop(0)\nprint(queue)\n```",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": ["[10,20,30]", "[30]", "[30,20]", "[10]"],
+    "answer": "[30]",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Complete the code for largest rectangle in histogram using stack:\n```\ndef largest_rectangle(heights):\n    stack = []\n    max_area = 0\n    i = 0\n    while i < len(heights):\n        if not stack or heights[i] >= heights[stack[-1]]:\n            stack.append(i)\n            i += 1\n        else:\n            top = stack.pop()\n            area = heights[top] * (i if not stack else i - stack[-1] - 1)\n            max_area = max(max_area, area)\n    while stack:\n        top = stack.pop()\n        area = heights[top] * (i if not stack else i - stack[-1] - 1)\n        max_area = max(max_area, area)\n    return max_area\n```",
+    "type": "FILL_BLANK",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": ["stack.pop()", "stack.append(i)", "max_area = 0", "i += 1"],
+    "answer": "stack.pop()",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Which of the following problems can be solved using two stacks?",
+    "type": "MCQ",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": [
+      "Implement a queue",
+      "Heapify an array",
+      "Binary search",
+      "DFS traversal"
+    ],
+    "answer": "Implement a queue",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Predict the output:\n```\ndef reverse_queue(q):\n    stack = []\n    while q:\n        stack.append(q.pop(0))\n    while stack:\n        q.append(stack.pop())\n    return q\nqueue = [1,2,3]\nprint(reverse_queue(queue))\n```",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": ["[1,2,3]", "[3,2,1]", "[2,1,3]", "[3,1,2]"],
+    "answer": "[3,2,1]",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Predict the output:\n```\nstack S;\nfor i = 0 to 4 do\n    push(S, i);\nwhile not isEmpty(S) do\n    print(pop(S));\n```",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": ["0 1 2 3 4", "4 3 2 1 0", "1 2 3 4 5", "5 4 3 2 1"],
+    "answer": "4 3 2 1 0",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Which operation in a stack implemented with linked list is O(1)?",
+    "type": "MCQ",
+    "categories": ["StacksQueues", "Complexity"],
+    "options": ["Push", "Search element", "Traverse", "Pop bottom"],
+    "answer": "Push",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Complete the code for next greater element:\n```\narr[] = {4, 5, 2, 25};\nstack S;\nres[] = {-1, -1, -1, -1};\nfor i = 0 to length(arr)-1 do\n    while not isEmpty(S) and arr[i] > arr[top(S)] do\n        res[pop(S)] = arr[i];\n    _____\n```",
+    "type": "FILL_BLANK",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": ["push(S, i);", "pop(S);", "res[i] = arr[i];", "top(S) = i;"],
+    "answer": "push(S, i);",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Predict the output of reversing a queue:\n```\nqueue Q;\nwhile not isEmpty(Q) do\n    push(S, dequeue(Q));\nwhile not isEmpty(S) do\n    enqueue(Q, pop(S));\nprint(Q);\n```",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": [
+      "Original order",
+      "Reversed order",
+      "First half reversed",
+      "Error"
+    ],
+    "answer": "Reversed order",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Which data structure is best for evaluating a postfix expression?",
+    "type": "MCQ",
+    "categories": ["StacksQueues", "Applications"],
+    "options": ["Stack", "Queue", "Heap", "Linked List"],
+    "answer": "Stack",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Complete the code for stack sort using recursion:\n```\nfunction sorted_insert(S, x) {\n    if isEmpty(S) or x > top(S) then\n        push(S, x);\n    else\n        temp = pop(S);\n        sorted_insert(S, x);\n        _____\n}\n```",
+    "type": "FILL_BLANK",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": ["push(S, temp);", "pop(S);", "push(S, x);", "top(S) = temp;"],
+    "answer": "push(S, temp);",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Predict the output:\n```\nstack S;\npush(S, 2);\npush(S, 3);\npush(S, 1);\npush(S, 4);\npop(S);\npush(S, 5);\nprint(S);\n```",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": ["2 3 1 5", "2 3 1 4 5", "2 3 1 4", "5 1 3 2"],
+    "answer": "2 3 1 5",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Which of the following operations is O(1) in a deque implemented with doubly linked list?",
+    "type": "MCQ",
+    "categories": ["StacksQueues", "Complexity"],
+    "options": [
+      "Insert at front",
+      "Search element",
+      "Traverse deque",
+      "Insert middle"
+    ],
+    "answer": "Insert at front",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Complete the code for stack-based sequence validation:\n```\npushed[] = {1,2,3};\npopped[] = {2,1,3};\nstack S;\ni = 0;\nfor x in pushed do\n    push(S, x);\n    while not isEmpty(S) and top(S) == popped[i] do\n        pop(S);\n        i++;\nreturn _____;\n```",
+    "type": "FILL_BLANK",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": [
+      "i == length(popped);",
+      "isEmpty(S);",
+      "top(S) == popped[i];",
+      "length(S) == length(popped);"
+    ],
+    "answer": "i == length(popped);",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Predict the output:\n```\nqueue Q;\nenqueue(Q, 10);\nenqueue(Q, 20);\nenqueue(Q, 30);\ndequeue(Q);\ndequeue(Q);\nprint(Q);\n```",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": ["[10, 20, 30]", "[30]", "[30, 20]", "[10]"],
+    "answer": "[30]",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Which of the following problems can be solved using two stacks?",
+    "type": "MCQ",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": [
+      "Implement queue",
+      "Heapify array",
+      "Binary search",
+      "DFS traversal"
+    ],
+    "answer": "Implement queue",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Predict the output for stock span problem:\n```\nprices[] = {100, 80, 60, 70, 60, 75, 85};\nstack S;\nspan[] = {0,0,0,0,0,0,0};\nfor i = 0 to 6 do\n    while not isEmpty(S) and prices[top(S)] <= prices[i] do\n        pop(S);\n    span[i] = isEmpty(S) ? i+1 : i - top(S);\n    push(S, i);\nprint(span);\n```",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": [
+      "[1,1,1,2,1,4,6]",
+      "[1,2,3,4,5,6,7]",
+      "[1,1,1,1,1,1,1]",
+      "[1,1,1,2,1,3,5]"
+    ],
+    "answer": "[1,1,1,2,1,4,6]",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Predict the output:\n```\nstack S;\npush(S, 5);\npush(S, 10);\npop(S);\npush(S, 20);\nprint(S);\n```",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": ["5 10 20", "5 20", "20 10", "10 20"],
+    "answer": "5 20",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Which of the following is true for circular queue implemented using array?",
+    "type": "MCQ",
+    "categories": ["StacksQueues", "Concepts"],
+    "options": [
+      "Front moves circularly",
+      "Pop operation is O(n)",
+      "Cannot be full",
+      "Traversal is O(n^2)"
+    ],
+    "answer": "Front moves circularly",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Complete the code for checking balanced brackets:\n```\nstack S;\nfor i = 0 to length(expr)-1 do\n    if expr[i] == '(' then\n        push(S, '(');\n    else if expr[i] == ')' then\n        if isEmpty(S) then\n            return false;\n        _____\nreturn isEmpty(S);\n```",
+    "type": "FILL_BLANK",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": ["pop(S);", "push(S, ')');", "top(S) = i;", "S.clear();"],
+    "answer": "pop(S);",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Predict the output of stack sorting using recursion:\n```\nstack S;\npush(S, 3);\npush(S, 1);\npush(S, 2);\nsorted_insert(S, 0);\nprint(S);\n```",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": ["0 1 2 3", "3 2 1 0", "1 2 3 0", "0 3 2 1"],
+    "answer": "0 3 2 1",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Which problem is efficiently solved using two stacks?",
+    "type": "MCQ",
+    "categories": ["StacksQueues", "Applications"],
+    "options": [
+      "Implement queue",
+      "Binary search",
+      "Heapify array",
+      "DFS traversal"
+    ],
+    "answer": "Implement queue",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Complete the code to implement a priority queue using array:\n```\narr[];\nfunction insert(arr, x) {\n    arr[length(arr)] = x;\n    i = length(arr)-1;\n    while i > 0 and arr[i] > arr[parent(i)] do\n        _____\n        i = parent(i);\n}\n```",
+    "type": "FILL_BLANK",
+    "categories": ["StacksQueues", "Implementation"],
+    "options": [
+      "swap(arr[i], arr[parent(i)]);",
+      "arr[i] = parent(i);",
+      "push(arr, arr[i]);",
+      "pop(arr);"
+    ],
+    "answer": "swap(arr[i], arr[parent(i)]);",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Predict the output of next smaller element:\n```\narr[] = {4, 5, 2, 10, 8};\nstack S;\nres[] = {-1,-1,-1,-1,-1};\nfor i = 0 to length(arr)-1 do\n    while not isEmpty(S) and arr[i] < arr[top(S)] do\n        res[pop(S)] = arr[i];\n    push(S, i);\nprint(res);\n```",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": [
+      "[2,2,-1,8,-1]",
+      "[5,2,10,8,-1]",
+      "[2,2,-1,-1,-1]",
+      "[2,-1,8,-1,-1]"
+    ],
+    "answer": "[2,2,-1,8,-1]",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Which operation in stack implemented using array is O(1)?",
+    "type": "MCQ",
+    "categories": ["StacksQueues", "Complexity"],
+    "options": ["Push", "Search element", "Traverse", "Insert at bottom"],
+    "answer": "Push",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Predict the output:\n```\nqueue Q;\nenqueue(Q, 1);\nenqueue(Q, 2);\nenqueue(Q, 3);\ndequeue(Q);\nprint(Q);\n```",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": ["[1,2,3]", "[2,3]", "[3]", "[]"],
+    "answer": "[2,3]",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Complete the code for multiple stacks in one array:\n```\nclass KStacks {\n    arr[];\ntop[];\nnext[];\nfree = 0;\nfunction push(stack_no, x) {\n    if free == -1 then\n        print('Overflow');\n    else\n        i = free;\n        free = next[i];\n        arr[i] = x;\n        next[i] = top[stack_no];\n        _____\n}\n```",
+    "type": "FILL_BLANK",
+    "categories": ["StacksQueues", "Implementation"],
+    "options": [
+      "top[stack_no] = i;",
+      "top[i] = stack_no;",
+      "top[stack_no] = x;",
+      "next[stack_no] = i;"
+    ],
+    "answer": "top[stack_no] = i;",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Which of the following can be efficiently implemented using deque?",
+    "type": "MCQ",
+    "categories": ["StacksQueues", "Applications"],
+    "options": [
+      "Palindrome checker",
+      "Binary search",
+      "Heap sort",
+      "DFS traversal"
+    ],
+    "answer": "Palindrome checker",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Predict the output:\n```\nstack S;\npush(S, 7);\npush(S, 3);\npop(S);\npush(S, 5);\nprint(S);\n```",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": ["7 3 5", "7 5", "5 3 7", "3 7 5"],
+    "answer": "7 5",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Which operation in a circular queue is O(1)?",
+    "type": "MCQ",
+    "categories": ["StacksQueues", "Complexity"],
+    "options": ["Enqueue", "Search", "Traverse", "Resize array"],
+    "answer": "Enqueue",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Complete the code for evaluating postfix expression:\n```\nstack S;\nfor i = 0 to length(expr)-1 do\n    if expr[i] is operand then\n        push(S, expr[i]);\n    else\n        op2 = pop(S);\n        op1 = pop(S);\n        result = apply(expr[i], op1, op2);\n        _____\nreturn pop(S);\n```",
+    "type": "FILL_BLANK",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": [
+      "push(S, result);",
+      "pop(S, result);",
+      "top(S) = result;",
+      "S.clear();"
+    ],
+    "answer": "push(S, result);",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Predict the output of queue reversal:\n```\nqueue Q;\nenqueue(Q, 1);\nenqueue(Q, 2);\nenqueue(Q, 3);\nstack S;\nwhile not isEmpty(Q) do\n    push(S, dequeue(Q));\nwhile not isEmpty(S) do\n    enqueue(Q, pop(S));\nprint(Q);\n```",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": ["[1,2,3]", "[3,2,1]", "[1]", "[2,3]"],
+    "answer": "[3,2,1]",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Which of the following can be implemented using two stacks efficiently?",
+    "type": "MCQ",
+    "categories": ["StacksQueues", "Applications"],
+    "options": ["Queue", "Heap", "Linked list", "Priority queue"],
+    "answer": "Queue",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Complete the code for LRU cache using stack & queue:\n```\nqueue Q;\nset cache;\nfunction access(x) {\n    if x in cache then\n        remove(Q, x);\n    else if length(Q) == capacity then\n        y = dequeue(Q);\n        remove(cache, y);\n    enqueue(Q, x);\n    add(cache, x);\n}\n```",
+    "type": "FILL_BLANK",
+    "categories": ["StacksQueues", "Implementation"],
+    "options": ["enqueue(Q, x);", "pop(Q);", "push(Q, x);", "top(Q) = x;"],
+    "answer": "enqueue(Q, x);",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Predict the output for stock span problem:\n```\nprices[] = {10, 4, 5, 90, 120, 80};\nstack S;\nspan[] = {0,0,0,0,0,0};\nfor i = 0 to 5 do\n    while not isEmpty(S) and prices[top(S)] <= prices[i] do\n        pop(S);\n    span[i] = isEmpty(S) ? i+1 : i - top(S);\n    push(S, i);\nprint(span);\n```",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": [
+      "[1,1,2,4,5,1]",
+      "[1,1,2,4,5,6]",
+      "[1,1,1,3,4,2]",
+      "[1,1,2,4,5,2]"
+    ],
+    "answer": "[1,1,2,4,5,1]",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Which operation in stack implemented using linked list is always O(1)?",
+    "type": "MCQ",
+    "categories": ["StacksQueues", "Complexity"],
+    "options": ["Push", "Search", "Traverse", "Delete bottom"],
+    "answer": "Push",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Predict the output:\n```\nqueue Q;\nenqueue(Q, 7);\nenqueue(Q, 8);\ndequeue(Q);\nenqueue(Q, 9);\nprint(Q);\n```",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": ["[7,8,9]", "[8,9]", "[9]", "[7,9]"],
+    "answer": "[8,9]",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Complete the code for k stacks in single array:\n```\narr[];\ntop[];\nnext[];\nfree = 0;\nfunction push(stack_no, x) {\n    if free == -1 then\n        print('Overflow');\n    else\n        i = free;\n        free = next[i];\n        arr[i] = x;\n        next[i] = top[stack_no];\n        _____\n}\n```",
+    "type": "FILL_BLANK",
+    "categories": ["StacksQueues", "Implementation"],
+    "options": [
+      "top[stack_no] = i;",
+      "top[i] = stack_no;",
+      "arr[stack_no] = i;",
+      "next[stack_no] = i;"
+    ],
+    "answer": "top[stack_no] = i;",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Which of the following problems is efficiently solved using deque?",
+    "type": "MCQ",
+    "categories": ["StacksQueues", "Applications"],
+    "options": [
+      "Sliding window maximum",
+      "Binary search",
+      "Heapify",
+      "DFS traversal"
+    ],
+    "answer": "Sliding window maximum",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Predict the output:\n```\nstack S;\npush(S, 1);\npush(S, 2);\npush(S, 3);\npop(S);\npush(S, 4);\nprint(S);\n```",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": ["1 2 3 4", "1 2 4", "4 3 2 1", "1 3 4"],
+    "answer": "1 2 4",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Complete the code to check balanced braces:\n```\nstack S;\nfor i = 0 to length(expr)-1 do\n    if expr[i] in {'(','{','['} then\n        push(S, expr[i]);\n    else\n        if isEmpty(S) then return false;\n        c = pop(S);\n        if not match(c, expr[i]) then return false;\nreturn _____;\n```",
+    "type": "FILL_BLANK",
+    "categories": ["StacksQueues", "Algorithms"],
+    "options": ["isEmpty(S);", "true;", "false;", "top(S) == nil;"],
+    "answer": "isEmpty(S);",
+    "difficulty": "HARD"
+  }
+]

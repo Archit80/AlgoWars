@@ -1,0 +1,2002 @@
+[
+  {
+    "text": "What are the two fundamental properties a problem must exhibit to be solvable using Dynamic Programming?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "Greedy Choice and Optimal Substructure",
+      "Overlapping Subproblems and Optimal Substructure",
+      "Recursive Structure and Memoization",
+      "Dynamic State and Tabulation"
+    ],
+    "answer": "Overlapping Subproblems and Optimal Substructure",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "The top-down Dynamic Programming approach uses recursion combined with caching results to avoid re-computation. This technique is known as ________.",
+    "type": "FILL_BLANK",
+    "categories": ["DynamicProgramming"],
+    "options": ["Recursion", "Tabulation", "Memoization", "Iteration"],
+    "answer": "Memoization",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "A sequence is defined by the recurrence `F(n) = F(n-1) + F(n-2)`. To compute `F(n)`, what are the standard base cases?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "F(0) = 0 and F(1) = 1",
+      "F(1) = 1 and F(2) = 1",
+      "F(0) = 1 and F(1) = 1",
+      "Only F(0) = 0 is needed"
+    ],
+    "answer": "F(0) = 0 and F(1) = 1",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Using a bottom-up (Tabulation) approach for the recurrence `F(n) = F(n-1) + F(n-2)`, what is the value of `dp[4]`? (Assume `dp[0]=0, dp[1]=1`)",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["DynamicProgramming"],
+    "options": ["2", "3", "4", "5"],
+    "answer": "3",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Which Dynamic Programming strategy is implemented iteratively and fills a DP table from the smallest subproblems to the largest?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "Tabulation (Bottom-Up)",
+      "Memoization (Top-Down)",
+      "Greedy Approach",
+      "Divide and Conquer"
+    ],
+    "answer": "Tabulation (Bottom-Up)",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Without using DP, what is the time complexity of a simple recursive solution for `F(n) = F(n-1) + F(n-2)`?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": ["O(N)", "O(log N)", "O(N^2)", "O(2^N)"],
+    "answer": "O(2^N)",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "When `F(n) = F(n-1) + F(n-2)` is solved using Dynamic Programming, what is the new time complexity?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": ["O(N)", "O(log N)", "O(N^2)", "O(2^N)"],
+    "answer": "O(N)",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "A person can climb a staircase by taking 1 or 2 steps at a time. The number of ways to reach step `n` is `ways(n-1) + ways(n-2)`. This recurrence is structurally similar to which famous sequence?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "Factorial Numbers",
+      "Catalan Numbers",
+      "Fibonacci-like sequences",
+      "Prime Numbers"
+    ],
+    "answer": "Fibonacci-like sequences",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "To climb a staircase taking 1 or 2 steps at a time, how many distinct ways are there to reach the 4th step? (Assume there is 1 way to reach step 0 and 1 way to reach step 1)",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["DynamicProgramming"],
+    "options": ["3", "4", "5", "6"],
+    "answer": "5",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "The 'Optimal Substructure' property of DP means that an optimal solution to a problem contains within it ________.",
+    "type": "FILL_BLANK",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "greedy choices",
+      "optimal solutions to its subproblems",
+      "a brute-force search path",
+      "a single base case"
+    ],
+    "answer": "optimal solutions to its subproblems",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "In a problem where you must select from a list of items to maximize value within a weight limit, and each item can be selected only once, what are the two choices for each item?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "Include the item or do not include it.",
+      "Include a fraction of the item.",
+      "Include the item once or multiple times.",
+      "Sort items by value or by weight."
+    ],
+    "answer": "Include the item or do not include it.",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Consider the following pseudocode for a value-maximization problem with a weight constraint, where `dp[i][w]` is the max value using the first `i` items with capacity `w`. Fill in the blank for the case where the `i-th` item is included.\n```\nIF weights[i-1] <= w THEN\n  DP[i][w] = max(values[i-1] + DP[i-1][w-weights[i-1]], __________)\nELSE\n  DP[i][w] = DP[i-1][w]\nENDIF\n```",
+    "type": "FILL_BLANK",
+    "categories": ["DynamicProgramming"],
+    "options": ["DP[i-1][w]", "DP[i][w-1]", "values[i-1]", "DP[i-1][w-1]"],
+    "answer": "DP[i-1][w]",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given item weights `[1, 2, 3]` and values `[6, 10, 12]`, and a capacity of 5, what is the maximum value you can obtain if each item can be chosen at most once?",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["DynamicProgramming"],
+    "options": ["16", "22", "18", "28"],
+    "answer": "22",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "What does the state `dp[i]` typically represent in a 1D Dynamic Programming problem operating on an array of length `n`?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "The final answer to the problem.",
+      "The value of the i-th element of the input array.",
+      "The optimal solution for a subproblem considering the first `i` elements.",
+      "A temporary variable."
+    ],
+    "answer": "The optimal solution for a subproblem considering the first `i` elements.",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "To find the length of the longest common subsequence of strings `X` and `Y`, if `X[i] == Y[j]`, the length of the common subsequence is:",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "LCS(X[1..i-1], Y[1..j-1])",
+      "1 + LCS(X[1..i-1], Y[1..j-1])",
+      "max(LCS(X[1..i-1], Y[1..j]), LCS(X[1..i], Y[1..j-1]))",
+      "1 + max(LCS(X[1..i-1], Y[1..j]), LCS(X[1..i], Y[1..j-1]))"
+    ],
+    "answer": "1 + LCS(X[1..i-1], Y[1..j-1])",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "To find the length of the longest common subsequence of strings `X` and `Y`, if `X[i] != Y[j]`, the length of the common subsequence is:",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "LCS(X[1..i-1], Y[1..j-1])",
+      "1 + LCS(X[1..i-1], Y[1..j-1])",
+      "max(LCS(X[1..i-1], Y[1..j]), LCS(X[1..i], Y[1..j-1]))",
+      "0"
+    ],
+    "answer": "max(LCS(X[1..i-1], Y[1..j]), LCS(X[1..i], Y[1..j-1]))",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "What is the length of the Longest Common Subsequence of `X = \"AGGTAB\"` and `Y = \"GXTXAYB\"`?",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["DynamicProgramming"],
+    "options": ["3", "4", "5", "2"],
+    "answer": "4",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "The time complexity of the standard DP solution for finding the longest common subsequence of two strings of lengths M and N is:",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": ["O(M + N)", "O(M * N)", "O(M^2 * N)", "O(2^(M+N))"],
+    "answer": "O(M * N)",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "To find the minimum number of coins to make a given amount, what is the general recurrence relation for `dp[amount]`?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "dp[amount] = 1 + dp[amount - coin]",
+      "dp[amount] = min(dp[amount], 1 + dp[amount - coin]) for each coin",
+      "dp[amount] = sum(dp[amount - coin]) for each coin",
+      "dp[amount] = dp[amount - 1] + 1"
+    ],
+    "answer": "dp[amount] = min(dp[amount], 1 + dp[amount - coin]) for each coin",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given coins `[1, 2, 5]` and an amount of 11, what is the minimum number of coins required to make the amount?",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["DynamicProgramming"],
+    "options": ["2", "3", "4", "5"],
+    "answer": "3",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "What is the base case for the problem of finding the minimum coins for an amount `i`, where `dp[i]` stores the result?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": ["dp[0] = 0", "dp[0] = 1", "dp[1] = 1", "dp[0] = Infinity"],
+    "answer": "dp[0] = 0",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "The problem of finding the longest subsequence of a sequence where all elements are in increasing order exhibits which key DP property?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "Greedy Choice Property",
+      "Optimal Substructure",
+      "Divide and Conquer",
+      "It does not have DP properties"
+    ],
+    "answer": "Optimal Substructure",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "For the array `A = [10, 9, 2, 5, 3, 7, 101, 18]`, what is the length of the Longest Increasing Subsequence?",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["DynamicProgramming"],
+    "options": ["3", "4", "5", "6"],
+    "answer": "4",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "A standard DP solution for the longest increasing subsequence has a time complexity of O(N^2). An optimized solution using binary search achieves what complexity?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": ["O(N)", "O(N log N)", "O(N * sqrt(N))", "O(N^2)"],
+    "answer": "O(N log N)",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "To find the minimum number of operations to transform string `s1` to `s2`, what are the three allowed single-character operations?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "Insert, Delete, Swap",
+      "Insert, Delete, Replace",
+      "Append, Prepend, Reverse",
+      "Copy, Paste, Cut"
+    ],
+    "answer": "Insert, Delete, Replace",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "To calculate the minimum edit distance between `s1` and `s2`, if `s1[i] == s2[j]`, then `dp[i][j]` (the distance for prefixes) is equal to ______.",
+    "type": "FILL_BLANK",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "dp[i-1][j-1]",
+      "1 + dp[i-1][j-1]",
+      "1 + min(dp[i-1][j], dp[i][j-1])",
+      "0"
+    ],
+    "answer": "dp[i-1][j-1]",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "What is the minimum number of edits (insert, delete, replace) to change `\"horse\"` to `\"ros\"`?",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["DynamicProgramming"],
+    "options": ["2", "3", "4", "5"],
+    "answer": "3",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "An iterative, bottom-up DP approach is known as ________, while a recursive, top-down DP approach is known as ________.",
+    "type": "FILL_BLANK",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "Top-down, Bottom-up",
+      "Tabulation, Memoization",
+      "Recursion, Iteration",
+      "Memoization, Tabulation"
+    ],
+    "answer": "Tabulation, Memoization",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "A thief cannot rob two adjacent houses. What is the recurrence relation for `dp[i]`, the maximum money that can be robbed up to house `i` with values `nums`?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "dp[i] = max(dp[i-1], dp[i-2])",
+      "dp[i] = nums[i] + dp[i-1]",
+      "dp[i] = max(dp[i-1], nums[i] + dp[i-2])",
+      "dp[i] = nums[i] + dp[i-2]"
+    ],
+    "answer": "dp[i] = max(dp[i-1], nums[i] + dp[i-2])",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given house values `[2, 7, 9, 3, 1]`, what is the maximum amount a thief can steal if they cannot rob adjacent houses?",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["DynamicProgramming"],
+    "options": ["11", "12", "10", "13"],
+    "answer": "12",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "The space complexity of a standard 2D DP solution using a table of size M x N is O(M*N). This can often be optimized to what complexity if each state only depends on the previous row/column?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": ["O(M+N)", "O(max(M, N))", "O(min(M, N))", "O(1)"],
+    "answer": "O(min(M, N))",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Space optimization for 2D DP is possible because the calculation for the current row `i` often depends only on values from row ______.",
+    "type": "FILL_BLANK",
+    "categories": ["DynamicProgramming"],
+    "options": ["i+1", "i-1", "0", "N"],
+    "answer": "i-1",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "To find the number of unique paths on an M x N grid from top-left to bottom-right (moving only right or down), what is the number of ways to reach cell (i, j)?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "dp[i][j] = dp[i-1][j] + dp[i][j-1]",
+      "dp[i][j] = dp[i-1][j-1]",
+      "dp[i][j] = dp[i-1][j] * dp[i][j-1]",
+      "dp[i][j] = max(dp[i-1][j], dp[i][j-1])"
+    ],
+    "answer": "dp[i][j] = dp[i-1][j] + dp[i][j-1]",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "How many unique paths are there in a 2x2 grid from top-left to bottom-right (only moving right or down)?",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["DynamicProgramming"],
+    "options": ["1", "2", "3", "4"],
+    "answer": "2",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "How many unique paths are there from the top-left to the bottom-right of a 3x2 grid (3 rows, 2 columns)?",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["DynamicProgramming"],
+    "options": ["2", "3", "4", "5"],
+    "answer": "3",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "To find the minimum path sum in a grid of positive numbers, the recurrence is `dp[i][j] = grid[i][j] + min(dp[i-1][j], dp[i][j-1])`. What is the value of `dp[0][0]`?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": ["0", "grid[0][0]", "Infinity", "min(grid[0][1], grid[1][0])"],
+    "answer": "grid[0][0]",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Given the grid `[[1,3,1],[1,5,1],[4,2,1]]`, what is the minimum path sum from top-left to bottom-right?",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["DynamicProgramming"],
+    "options": ["7", "8", "9", "6"],
+    "answer": "7",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "When is a top-down (Memoization) approach generally preferred over a bottom-up (Tabulation) one?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "When the state space is small and all states must be computed.",
+      "When the state transitions are sparse and many states in the DP table will not be visited.",
+      "When space complexity is the primary concern.",
+      "When the problem requires finding a maximum value."
+    ],
+    "answer": "When the state transitions are sparse and many states in the DP table will not be visited.",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "What is a potential downside of a recursive, memoized DP solution compared to an iterative one?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "Higher space complexity due to the DP table.",
+      "Potential for stack overflow errors if the recursion depth is very large.",
+      "Slower theoretical time complexity.",
+      "Harder to understand."
+    ],
+    "answer": "Potential for stack overflow errors if the recursion depth is very large.",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "The problem 'Can a set of numbers be partitioned into two subsets with equal sum?' can be reduced to finding if there is a subset that sums to `______`.",
+    "type": "FILL_BLANK",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "zero",
+      "the maximum element",
+      "half of the total sum of the set",
+      "the total sum of the set"
+    ],
+    "answer": "half of the total sum of the set",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Given the set `[1, 5, 11, 5]`, can it be partitioned into two subsets with equal sum?",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["DynamicProgramming"],
+    "options": ["Yes", "No", "Cannot be determined", "Invalid Input"],
+    "answer": "Yes",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "In a value-maximization problem with a weight limit where items can be chosen multiple times, how does the recurrence `DP[w] = max(DP[w], values[i] + ...)` differ from the single-choice version?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "The second term is `DP[w - weights[i]]` instead of `DP_prev_row[w - weights[i]]`.",
+      "It uses `min` instead of `max`.",
+      "The state definition is completely different.",
+      "There is no difference."
+    ],
+    "answer": "The second term is `DP[w - weights[i]]` instead of `DP_prev_row[w - weights[i]]`.",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "What does the state `dp[i][j]` represent in a common DP solution for finding the longest palindromic substring of a string `s`?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "The length of the longest palindrome ending at index j.",
+      "A boolean indicating if the substring `s[i..j]` is a palindrome.",
+      "The number of palindromic substrings in the first i characters.",
+      "The length of the longest palindromic subsequence."
+    ],
+    "answer": "A boolean indicating if the substring `s[i..j]` is a palindrome.",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "In the DP solution for the longest palindromic substring, `dp[i][j]` is true if `s[i] == s[j]` and `_______`.",
+    "type": "FILL_BLANK",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "dp[i+1][j-1] is true",
+      "dp[i-1][j+1] is true",
+      "dp[i][j-1] is true",
+      "the length is less than or equal to 2"
+    ],
+    "answer": "dp[i+1][j-1] is true",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "For the string `\"babad\"`, what is a longest palindromic substring?",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["DynamicProgramming"],
+    "options": ["\"bab\"", "\"aba\"", "\"b\"", "\"bad\""],
+    "answer": "bab",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "How many contiguous substrings does a string of length N have?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": ["N", "N^2", "N * (N+1) / 2", "2^N"],
+    "answer": "N * (N+1) / 2",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "A problem asks if a string `s` can be segmented into a sequence of dictionary words. What does `dp[i]` typically represent in its DP solution?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "The number of ways to break the first `i` characters.",
+      "A boolean indicating if the prefix of `s` of length `i` can be segmented.",
+      "The longest word in the dictionary ending at `i`.",
+      "The shortest word in the dictionary ending at `i`."
+    ],
+    "answer": "A boolean indicating if the prefix of `s` of length `i` can be segmented.",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Given `s = \"leetcode\"` and `wordDict = [\"leet\", \"code\"]`, can `s` be segmented using the dictionary?",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["DynamicProgramming"],
+    "options": ["Yes", "No", "Maybe", "Error"],
+    "answer": "Yes",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "The time complexity for a common DP solution to the word segmentation problem is O(N^3) or O(N^2) depending on the implementation. The nested loops iterate through start and end points of substrings. What causes the extra factor of N in the O(N^3) case?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "Dictionary lookup time.",
+      "The time taken to create and check a substring of length up to N.",
+      "The number of words in the dictionary.",
+      "The recursion depth."
+    ],
+    "answer": "The time taken to create and check a substring of length up to N.",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "For a DP problem where the state must represent a subset of items and the total number of items is small (e.g., <= 20), which technique is often used?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "Space Optimization",
+      "DP with Bitmasking",
+      "Divide and Conquer",
+      "Greedy approach"
+    ],
+    "answer": "DP with Bitmasking",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "In DP with Bitmasking, a subset of items is represented by an integer, where the i-th bit being set to 1 means the i-th item is ______ the subset.",
+    "type": "FILL_BLANK",
+    "categories": ["DynamicProgramming"],
+    "options": ["removed from", "equal to", "included in", "larger than"],
+    "answer": "included in",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Due to the typical time complexity of O(N^2 * 2^N), DP with bitmasking is generally feasible only for values of N up to around what number?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": ["1000", "100", "50", "20"],
+    "answer": "20",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "If a DP state is defined as `dp[mask]`, what does `mask = 5` (binary `101`) usually represent in a bitmasking approach?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "Items 1 and 0 (from the right) have been processed.",
+      "Items 2 and 0 (from the right) have been processed.",
+      "Item 5 has been processed.",
+      "The solution has a value of 5."
+    ],
+    "answer": "Items 2 and 0 (from the right) have been processed.",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "To find the most efficient way to multiply a sequence of matrices, DP is used to find the optimal ________ for the multiplications.",
+    "type": "FILL_BLANK",
+    "categories": ["DynamicProgramming"],
+    "options": ["sum", "product", "parenthesization", "diagonal"],
+    "answer": "parenthesization",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "What is the size of the state space (i.e., the number of subproblems) in a typical DP solution for finding the optimal multiplication order for N matrices?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": ["O(N)", "O(N^2)", "O(N^3)", "O(2^N)"],
+    "answer": "O(N^2)",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "What is a common error when defining the base cases for a recursive DP solution on an array?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "Making them too simple.",
+      "Forgetting to handle the case where the index goes out of bounds.",
+      "Using too many base cases.",
+      "Defining them iteratively."
+    ],
+    "answer": "Forgetting to handle the case where the index goes out of bounds.",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "To find the maximum sum of a contiguous subarray, a 1D DP approach can be used. What is the recurrence relation where `dp[i]` is the max sum ending at index `i`?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "dp[i] = max(nums[i], nums[i] + dp[i-1])",
+      "dp[i] = nums[i] + dp[i-1]",
+      "dp[i] = max(dp[i-1], nums[i])",
+      "dp[i] = min(nums[i], nums[i] + dp[i-1])"
+    ],
+    "answer": "dp[i] = max(nums[i], nums[i] + dp[i-1])",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given the array `[-2, 1, -3, 4, -1, 2, 1, -5, 4]`, what is the sum of the maximum contiguous subarray?",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["DynamicProgramming"],
+    "options": ["6", "5", "7", "10"],
+    "answer": "6",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "What is the space complexity of the optimized, constant-space solution for the Maximum Subarray problem?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": ["O(N)", "O(log N)", "O(N^2)", "O(1)"],
+    "answer": "O(1)",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "The problem of finding the number of ways to make change for an amount where coin order does not matter is a variation of which classic DP problem type?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "Single-choice selection",
+      "Unbounded selection",
+      "Longest subsequence",
+      "Subset sum"
+    ],
+    "answer": "Unbounded selection",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given coins `[1, 2, 5]` and amount 5, how many distinct combinations of coins make up that amount?",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["DynamicProgramming"],
+    "options": ["3", "4", "5", "6"],
+    "answer": "4",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "In a DP solution for counting paths on a grid, what should the value of `dp[i][j]` be if the cell `(i, j)` contains an obstacle?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": ["1", "0", "-1", "Infinity"],
+    "answer": "0",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Consider a 3x3 grid with an obstacle at the center cell (1,1). How many unique paths are there from (0,0) to (2,2) moving only right or down?",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["DynamicProgramming"],
+    "options": ["0", "1", "2", "4"],
+    "answer": "2",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "In Dynamic Programming, the 'state' refers to:",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "The final answer of the problem.",
+      "The set of parameters that uniquely identify a subproblem.",
+      "The input array or string.",
+      "The current value of the loop counter."
+    ],
+    "answer": "The set of parameters that uniquely identify a subproblem.",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "The collection of all possible states, or unique subproblems, in a DP solution is known as the ______.",
+    "type": "FILL_BLANK",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "state space",
+      "problem size",
+      "solution space",
+      "search space"
+    ],
+    "answer": "state space",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "The time complexity of a DP algorithm is generally calculated as:",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "(Number of states) + (Time per transition)",
+      "(Number of states) * (Time per transition)",
+      "(Number of states) / (Time per transition)",
+      "log(Number of states)"
+    ],
+    "answer": "(Number of states) * (Time per transition)",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "If a problem can be solved by making a locally optimal choice at each step that leads to a globally optimal solution, it is best solved with a _______ algorithm.",
+    "type": "FILL_BLANK",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "dynamic programming",
+      "divide and conquer",
+      "greedy",
+      "recursive"
+    ],
+    "answer": "greedy",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Why can't the single-choice knapsack problem be solved by a greedy approach (e.g., picking items with the best value-to-weight ratio first)?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "The greedy choice is too slow.",
+      "A locally optimal choice (best ratio) does not guarantee a globally optimal solution.",
+      "The problem has no optimal substructure.",
+      "The subproblems do not overlap."
+    ],
+    "answer": "A locally optimal choice (best ratio) does not guarantee a globally optimal solution.",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given a `dp` table for the longest increasing subsequence problem on an array `nums`. If `dp[i]` stores the length of the LIS ending at index `i`, what is the formula to compute `dp[i]`?\n```\n// Pseudocode to compute dp[i] for LIS\ndp[i] = 1\nFOR j FROM 0 TO i-1\n  IF nums[i] > nums[j]\n    dp[i] = max(dp[i], ________)\n  ENDIF\nENDFOR\n```",
+    "type": "FILL_BLANK",
+    "categories": ["DynamicProgramming"],
+    "options": ["dp[j]", "1 + dp[j]", "1 + nums[j]", "dp[j-1]"],
+    "answer": "1 + dp[j]",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Dynamic Programming is essentially an optimization over simple recursion. It's a 'careful brute force' that avoids re-computing the same subproblem, a property known as __________.",
+    "type": "FILL_BLANK",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "optimal substructure",
+      "overlapping subproblems",
+      "greedy choice",
+      "memoization"
+    ],
+    "answer": "overlapping subproblems",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "A problem of cutting a rod into pieces to maximize its total value is structurally identical to which other classic DP problem type?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "Single-choice Knapsack",
+      "Unbounded Knapsack",
+      "Longest Common Subsequence",
+      "Edit Distance"
+    ],
+    "answer": "Unbounded Knapsack",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Given a rod of length 4 and prices for cut pieces of lengths 1, 2, 3, 4 as `[2, 5, 7, 8]`, what is the maximum value you can get by cutting the rod?",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["DynamicProgramming"],
+    "options": ["8", "9", "10", "11"],
+    "answer": "10",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "To find the maximum profit from a single stock transaction given an array of prices, what is the optimal strategy at each day `i`?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "Buy if price is low, sell if high.",
+      "Calculate the potential profit if selling today with the minimum price seen so far, and update the overall max profit.",
+      "Buy on the first day and sell on the last day.",
+      "This problem cannot be solved with DP."
+    ],
+    "answer": "Calculate the potential profit if selling today with the minimum price seen so far, and update the overall max profit.",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Given stock prices `[7, 1, 5, 3, 6, 4]`, what is the maximum profit from one buy-sell transaction?",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["DynamicProgramming"],
+    "options": ["5", "6", "7", "4"],
+    "answer": "5",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "In a 2D DP table, what does the cell `dp[i][j]` usually represent?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "The input value at (i, j).",
+      "The final answer to the entire problem.",
+      "A boolean flag.",
+      "The solution to a subproblem defined by parameters i and j."
+    ],
+    "answer": "The solution to a subproblem defined by parameters i and j.",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "To reconstruct the actual solution (e.g., the elements of the LIS, not just its length) from a DP table, what is a common technique?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "Store parent pointers or backtrack from the final state based on the DP transition choices.",
+      "Re-run the DP algorithm with different parameters.",
+      "Use a hash map to store the sequence.",
+      "The solution cannot be reconstructed from the DP table."
+    ],
+    "answer": "Store parent pointers or backtrack from the final state based on the DP transition choices.",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "If a simple recursive solution runs in O(2^N) time, the reason DP can often reduce this to polynomial time is that the number of unique subproblems is _______.",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "also exponential",
+      "constant",
+      "logarithmic",
+      "polynomial in N (e.g., O(N), O(N^2))"
+    ],
+    "answer": "polynomial in N (e.g., O(N), O(N^2))",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "To find the minimum cost to paint `n` houses with 3 colors where adjacent houses can't be the same color, `dp[i][color]` stores the min cost for the first `i` houses ending with that color. The recurrence for `dp[i][red]` is `cost[i][red] + min(______)`.",
+    "type": "FILL_BLANK",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "dp[i-1][blue], dp[i-1][green]",
+      "dp[i-1][red], dp[i-1][blue]",
+      "dp[i-1][red], dp[i-1][green]",
+      "dp[i][blue], dp[i][green]"
+    ],
+    "answer": "dp[i-1][blue], dp[i-1][green]",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given costs `[[17,2,17],[16,16,5],[14,3,19]]` for 3 houses and 3 colors (R,G,B), what is the minimum cost to paint all houses without adjacent ones having the same color?",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["DynamicProgramming"],
+    "options": ["10", "15", "20", "25"],
+    "answer": "10",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "If a DP problem involves counting the number of ways to achieve a goal, the recurrence relation will likely involve _____ subproblem results.",
+    "type": "FILL_BLANK",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "adding",
+      "finding the minimum of",
+      "finding the maximum of",
+      "multiplying"
+    ],
+    "answer": "adding",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "If a DP problem involves finding an optimal (minimum or maximum) value, the recurrence relation will likely involve _____.",
+    "type": "FILL_BLANK",
+    "categories": ["DynamicProgramming"],
+    "options": ["summations", "min/max functions", "divisions", "subtractions"],
+    "answer": "min/max functions",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "What is a key difference between Dynamic Programming and the Divide and Conquer paradigm?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "DP uses recursion, while Divide and Conquer does not.",
+      "Divide and Conquer subproblems are typically independent, while DP subproblems often overlap.",
+      "DP is top-down, while Divide and Conquer is bottom-up.",
+      "DP is only for optimization problems."
+    ],
+    "answer": "Divide and Conquer subproblems are typically independent, while DP subproblems often overlap.",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Which of these algorithms is a classic example of Divide and Conquer, NOT Dynamic Programming?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "Calculating Fibonacci numbers with a DP table.",
+      "The Merge Sort algorithm.",
+      "The 0/1 Knapsack problem.",
+      "Finding the Longest Common Subsequence."
+    ],
+    "answer": "The Merge Sort algorithm.",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "A famous sequence in combinatorics is defined by `C(n) = sum(C(i) * C(n-1-i))` for `i` from 0 to `n-1`, with `C(0)=1`. This structure is well-suited for a solution using ______.",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "A greedy algorithm",
+      "Dynamic Programming",
+      "A simple loop",
+      "A sorting algorithm"
+    ],
+    "answer": "Dynamic Programming",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Using the recurrence `C(n) = sum(C(i) * C(n-1-i))`, what is the 4th term, C(4)? (Given C(0)=1, C(1)=1, C(2)=2, C(3)=5)",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["DynamicProgramming"],
+    "options": ["10", "12", "14", "16"],
+    "answer": "14",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Why is it common to initialize a DP table with a special value like -1 or infinity in a top-down, memoized solution?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "It is required by the language syntax.",
+      "To distinguish between a subproblem that has not been computed yet and one whose result is legitimately 0.",
+      "To mark the starting point in the table.",
+      "It makes the code run faster."
+    ],
+    "answer": "To distinguish between a subproblem that has not been computed yet and one whose result is legitimately 0.",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "A string of digits can be decoded into letters (A=1, B=2, ..., Z=26). The number of ways to decode a string `s` at position `i`, `dp[i]`, depends on `dp[i-1]` (for a single digit) and potentially `_______` (for a two-digit number).",
+    "type": "FILL_BLANK",
+    "categories": ["DynamicProgramming"],
+    "options": ["dp[i-2]", "dp[i+1]", "dp[i+2]", "dp[0]"],
+    "answer": "dp[i-2]",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "How many ways can the string of digits \"226\" be decoded into letters?",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["DynamicProgramming"],
+    "options": ["1", "2", "3", "4"],
+    "answer": "3",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "What should the result be for finding the longest increasing subsequence of an empty array?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": ["1", "0", "-1", "An error should be thrown"],
+    "answer": "0",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "A problem requires matching a text string against a pattern that can contain special characters like `.` (matches any character) and `*` (matches zero or more of the preceding element). The state `dp[i][j]` would typically represent whether the first `i` characters of the text match the first `j` characters of the _______.",
+    "type": "FILL_BLANK",
+    "categories": ["DynamicProgramming"],
+    "options": ["pattern", "text", "alphabet", "result"],
+    "answer": "pattern",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "In a pattern matching DP, if the pattern character is `*`, its effect depends on two main possibilities: the `*` and its preceding character match zero elements, or they match _________ elements of the text.",
+    "type": "FILL_BLANK",
+    "categories": ["DynamicProgramming"],
+    "options": ["exactly two", "one or more", "only odd", "zero"],
+    "answer": "one or more",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "DP on trees often involves a post-order traversal recursive strategy. Why is this traversal order effective?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "It is the fastest tree traversal method.",
+      "It ensures that the solutions for a node's children are computed before the solution for the node itself.",
+      "It processes the root node first, which serves as the base case.",
+      "It is the only traversal that works with recursion."
+    ],
+    "answer": "It ensures that the solutions for a node's children are computed before the solution for the node itself.",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "A thief is robbing houses arranged in a binary tree, but cannot rob a parent and its direct child. The DP state for each node often returns a pair of values. What do these two values logically represent?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "Max money if the current node IS robbed, and max money if it is NOT robbed.",
+      "Max money from the left subtree and right subtree.",
+      "The value of the current node and its parent.",
+      "The height of the tree and the number of nodes."
+    ],
+    "answer": "Max money if the current node IS robbed, and max money if it is NOT robbed.",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "If a DP solution is defined by a recursive function `solve(index, remaining_capacity)`, what problem is it most likely solving?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "Longest Common Subsequence",
+      "A Knapsack-type problem",
+      "Climbing Stairs",
+      "Fibonacci sequence"
+    ],
+    "answer": "A Knapsack-type problem",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "What is the length of the longest common subsequence between 'sea' and 'eat'?",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["DynamicProgramming"],
+    "options": ["1", "2", "3", "0"],
+    "answer": "2",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "A problem's recurrence relation is `T(n) = 2*T(n/2) + n`. This structure is characteristic of which algorithmic paradigm where subproblems are independent?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "Dynamic Programming",
+      "Divide and Conquer",
+      "Greedy",
+      "Backtracking"
+    ],
+    "answer": "Divide and Conquer",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "To find the minimum path sum from top to bottom of a numerical triangle, the value at `triangle[i][j]` can be reached from `triangle[i-1][j-1]` and `_______` in the row above.",
+    "type": "FILL_BLANK",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "triangle[i-1][j+1]",
+      "triangle[i-1][j]",
+      "triangle[i][j-1]",
+      "triangle[i][j+1]"
+    ],
+    "answer": "triangle[i-1][j]",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given the triangle `[[2],[3,4],[6,5,7],[4,1,8,3]]`, what is the minimum path sum from the top to any element in the bottom row?",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["DynamicProgramming"],
+    "options": ["11", "13", "10", "12"],
+    "answer": "11",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "The space complexity for solving the minimum path sum in a triangle can be optimized from O(N^2) to O(N), where N is the number of rows. This is because each row's calculation only depends on the ________ row.",
+    "type": "FILL_BLANK",
+    "categories": ["DynamicProgramming"],
+    "options": ["current", "next", "first", "previous"],
+    "answer": "previous",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "The problem of counting the number of unique Binary Search Trees that can be formed with N nodes is a classic DP problem whose solution is the Nth ______ number.",
+    "type": "FILL_BLANK",
+    "categories": ["DynamicProgramming"],
+    "options": ["Fibonacci", "Prime", "Catalan", "Eulerian"],
+    "answer": "Catalan",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "For the array `A = [3, 1, 4, 1, 5, 9]`, what is the length of the Longest Increasing Subsequence?",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["DynamicProgramming"],
+    "options": ["3", "4", "5", "6"],
+    "answer": "4",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "The order of filling a DP table is crucial. For a problem like finding the longest common subsequence, you would typically iterate from the top-left to the ________ of the table.",
+    "type": "FILL_BLANK",
+    "categories": ["DynamicProgramming"],
+    "options": ["top-right", "bottom-left", "bottom-right", "center"],
+    "answer": "bottom-right",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "If a problem involves states like `(day_index, has_stock_bool)`, it is likely a variation of a ________ problem.",
+    "type": "FILL_BLANK",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "pathfinding",
+      "string matching",
+      "stock trading optimization",
+      "subset selection"
+    ],
+    "answer": "stock trading optimization",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "To maximize profit from stock trades with a one-day cooldown period after selling, the DP state needs to track more than just buying or selling. What is a reasonable set of states for any given day?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "buy, sell, hold",
+      "state of holding stock, state of being able to buy (after cooldown), state of being in cooldown",
+      "buy, sell, wait",
+      "start, middle, end"
+    ],
+    "answer": "state of holding stock, state of being able to buy (after cooldown), state of being in cooldown",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Given `prices = [1,2,3,0,2]` and a one-day cooldown after selling, what is the maximum profit you can achieve?",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["DynamicProgramming"],
+    "options": ["2", "3", "4", "1"],
+    "answer": "3",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "A problem asks if string `s3` is formed by an interleaving of strings `s1` and `s2`. The state `dp[i][j]` represents if the first `i+j` chars of `s3` can be formed by the first `i` chars of `s1` and `j` chars of `s2`. This requires a ____ DP table.",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": ["1D", "2D", "3D", "Bitmask"],
+    "answer": "2D",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Given `s1 = \"aabcc\"`, `s2 = \"dbbca\"`, and `s3 = \"aadbbcbcac\"`, is s3 a valid interleaving of s1 and s2?",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["DynamicProgramming"],
+    "options": ["Yes", "No", "Invalid strings", "Not enough information"],
+    "answer": "Yes",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "What is a potential issue when using floating-point numbers in DP states or transitions?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "It is impossible.",
+      "Floating-point precision errors can lead to incorrect comparisons and results.",
+      "The memory usage will be too high.",
+      "The time complexity increases exponentially."
+    ],
+    "answer": "Floating-point precision errors can lead to incorrect comparisons and results.",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "For the recurrence `dp[i] = max(dp[i-1], nums[i] + dp[i-2])`, what are the correct base cases for `dp[0]` and `dp[1]` given an array of values `nums` of size at least 2?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "dp[0]=0, dp[1]=0",
+      "dp[0]=nums[0], dp[1]=max(nums[0], nums[1])",
+      "dp[0]=nums[0], dp[1]=nums[1]",
+      "dp[0]=0, dp[1]=nums[0]"
+    ],
+    "answer": "dp[0]=nums[0], dp[1]=max(nums[0], nums[1])",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "The problem of finding the shortest string that contains two other strings as subsequences is closely related to finding their ________.",
+    "type": "FILL_BLANK",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "longest common subsequence",
+      "shortest common substring",
+      "edit distance",
+      "longest increasing subsequence"
+    ],
+    "answer": "longest common subsequence",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "If strings X and Y have lengths m and n, and their longest common subsequence has length l, what is the length of their shortest common supersequence?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": ["m + n", "m + n - l", "m + n + l", "max(m, n)"],
+    "answer": "m + n - l",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "For strings `s1 = \"abac\"` and `s2 = \"cab\"`, what is the length of their shortest common supersequence?",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["DynamicProgramming"],
+    "options": ["4", "5", "6", "7"],
+    "answer": "5",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "A problem asks for the number of ways to tile a 2xN board with 2x1 dominoes. The recurrence is `dp[n] = dp[n-1] + dp[n-2]`. This problem is equivalent to computing terms of which sequence?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "Knapsack values",
+      "LCS lengths",
+      "A Fibonacci-like sequence",
+      "Coin change combinations"
+    ],
+    "answer": "A Fibonacci-like sequence",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "How many distinct ways can you tile a 2x3 board with 2x1 dominoes?",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["DynamicProgramming"],
+    "options": ["2", "3", "4", "5"],
+    "answer": "3",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "If a tabulation solution iterates from `i=0` to `N-1` to build up the DP table, it is using a ________ loop.",
+    "type": "FILL_BLANK",
+    "categories": ["DynamicProgramming"],
+    "options": ["forward", "backward", "recursive", "nested"],
+    "answer": "forward",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "What is the primary trade-off when choosing tabulation over memoization?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "Tabulation is always slower.",
+      "Tabulation might compute states that are not needed for the final solution, but it avoids recursion overhead.",
+      "Tabulation always uses more memory.",
+      "Tabulation is harder to debug."
+    ],
+    "answer": "Tabulation might compute states that are not needed for the final solution, but it avoids recursion overhead.",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "A problem asks to burst a sequence of balloons, each with a value. The score for bursting balloon `i` is `value[i-1]*value[i]*value[i+1]`. To solve this with DP, the key insight is to define subproblems by deciding which balloon to burst ____ in an interval.",
+    "type": "FILL_BLANK",
+    "categories": ["DynamicProgramming"],
+    "options": ["first", "last", "in the middle", "randomly"],
+    "answer": "last",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "The state transition for a balloon bursting DP, `dp[left][right]`, involves iterating `i` from `left` to `right`. The cost for bursting `i` last is `nums[i]*nums[left-1]*nums[right+1] + dp[left][i-1] + _______`.",
+    "type": "FILL_BLANK",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "dp[i][right-1]",
+      "dp[i+1][right]",
+      "dp[left][right]",
+      "dp[i][i]"
+    ],
+    "answer": "dp[i+1][right]",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Given balloon values `[3, 1, 5, 8]` (with implicit 1s at the boundaries), what is the maximum score you can collect by bursting them?",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["DynamicProgramming"],
+    "options": ["144", "159", "167", "172"],
+    "answer": "167",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "A problem involves finding the maximum number of envelopes that can be nested inside each other (Russian doll style). After sorting the envelopes by one dimension, the problem reduces to finding the _______ on the other dimension.",
+    "type": "FILL_BLANK",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "Longest Increasing Subsequence",
+      "Longest Common Subsequence",
+      "Shortest Path",
+      "Maximum Subarray"
+    ],
+    "answer": "Longest Increasing Subsequence",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "A problem asks for the minimum number of perfect square numbers that sum up to a given integer `n`. For `n=12`, what is the result?",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "1 (12 is not a square)",
+      "2 (e.g. 4+8)",
+      "3 (e.g. 4+4+4)",
+      "4 (e.g. 9+1+1+1)"
+    ],
+    "answer": "3 (e.g. 4+4+4)",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "What is the primary benefit of using DP for problems with overlapping subproblems compared to simple recursion?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "It uses less memory.",
+      "It drastically reduces the time complexity, often from exponential to polynomial.",
+      "It is always easier to write.",
+      "It can handle larger inputs without changing the code."
+    ],
+    "answer": "It drastically reduces the time complexity, often from exponential to polynomial.",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "A DP state on a grid, `dp[i][j]`, depends on `dp[i-1][j]`, `dp[i][j-1]`, and `dp[i-1][j-1]`. What kind of problem could this recurrence represent?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "Counting unique paths with only right/down moves.",
+      "A problem involving diagonal transitions, like string edit distance.",
+      "Finding the minimum path sum with only right/down moves.",
+      "A knapsack-style problem on a grid."
+    ],
+    "answer": "A problem involving diagonal transitions, like string edit distance.",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "For a recurrence `dp[i] = dp[i-1] + dp[i-2]`, the space complexity can be optimized to O(1). How is this achieved?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "By using a hash map.",
+      "By realizing only the last two values are needed for the next computation, so a full array is unnecessary.",
+      "By using recursion.",
+      "This optimization is not possible."
+    ],
+    "answer": "By realizing only the last two values are needed for the next computation, so a full array is unnecessary.",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "If a DP problem has a state space of size `N x M` and each state transition takes `O(1)` time, what is the total time complexity?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": ["O(N + M)", "O(N * M)", "O(max(N, M))", "O(1)"],
+    "answer": "O(N * M)",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "How many ways can you make change for an amount of 4 using an unlimited supply of coins with denominations [1, 2, 3]?",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["DynamicProgramming"],
+    "options": ["3", "4", "5", "6"],
+    "answer": "4",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "If your DP state needs to track three distinct changing parameters, `(i, j, k)`, you will most likely need a ____ DP table.",
+    "type": "FILL_BLANK",
+    "categories": ["DynamicProgramming"],
+    "options": ["1D", "2D", "3D", "4D"],
+    "answer": "3D",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "A problem involves two agents moving on a grid to collect items. An efficient DP solution often requires a state that tracks the positions of ______.",
+    "type": "FILL_BLANK",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "one agent",
+      "both agents simultaneously",
+      "all items",
+      "all obstacles"
+    ],
+    "answer": "both agents simultaneously",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "A problem asks for a property of a subset of `N` items. If `N` is large (e.g., > 100), a bitmask DP approach with `2^N` states is likely ____.",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "optimal",
+      "computationally infeasible",
+      "the only possible way",
+      "memory efficient"
+    ],
+    "answer": "computationally infeasible",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "What is the length of the longest common *contiguous substring* (not subsequence) of `\"abcde\"` and `\"abfce\"`?",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["DynamicProgramming"],
+    "options": ["1", "2", "3", "4"],
+    "answer": "2",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "In the DP solution for the longest common *contiguous substring*, if `str1[i] != str2[j]`, what is the value of `dp[i][j]` (length of common substring ending at these indices)?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": ["dp[i-1][j-1]", "max(dp[i-1][j], dp[i][j-1])", "1", "0"],
+    "answer": "0",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Dynamic Programming can be succinctly described as recursion plus _______.",
+    "type": "FILL_BLANK",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "iteration",
+      "caching or memoization",
+      "sorting",
+      "greedy choices"
+    ],
+    "answer": "caching or memoization",
+    "difficulty": "EASY"
+  },
+
+  {
+    "text": "What is the primary purpose of a memoization table (or cache) in a top-down dynamic programming solution?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "To store the final answer.",
+      "To store the results of subproblems to avoid re-calculating them.",
+      "To store the input data in a more accessible format.",
+      "To keep track of the recursion depth."
+    ],
+    "answer": "To store the results of subproblems to avoid re-calculating them.",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Consider the following recursive pseudocode with memoization. What is the crucial missing step to make the memoization effective?\n```\nmemo = new map\nFUNCTION solve(n)\n  IF n is in memo\n    RETURN memo[n]\n  IF n <= 1\n    RETURN n\n  \n  result = solve(n-1) + solve(n-2)\n  // Missing step here\n  RETURN result\nENDFUNCTION\n```",
+    "type": "FILL_BLANK",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "memo[n] = result",
+      "memo[n] = n",
+      "RETURN memo[n]",
+      "clear(memo)"
+    ],
+    "answer": "memo[n] = result",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "A problem asks for the number of ways to tile a 3xN board with 2x1 dominoes. This is a complex DP problem. If `dp[n]` is the number of ways to tile a 3xn board, the state transition often depends on states smaller than `n-1`. Why?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "Because tiling patterns can leave gaps that need to be filled by patterns from two steps back.",
+      "It only depends on `n-1`.",
+      "Because the board has 3 rows.",
+      "This problem cannot be solved with DP."
+    ],
+    "answer": "Because tiling patterns can leave gaps that need to be filled by patterns from two steps back.",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "To find the length of the longest palindromic subsequence of a string `s`, the recurrence is `dp[i][j] = 2 + dp[i+1][j-1]` if `s[i] == s[j]`. What is the recurrence if `s[i] != s[j]`?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "dp[i+1][j-1]",
+      "1 + max(dp[i+1][j], dp[i][j-1])",
+      "max(dp[i+1][j], dp[i][j-1])",
+      "0"
+    ],
+    "answer": "max(dp[i+1][j], dp[i][j-1])",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "What is the length of the longest palindromic subsequence for the string `s = \"cbbd\"`?",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["DynamicProgramming"],
+    "options": ["1", "2", "3", "4"],
+    "answer": "2",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "If a problem asks to find the maximum value from a sequence of choices, but a choice at step `i` affects the possible choices at step `i+1`, this indicates the presence of which DP property?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "Overlapping Subproblems",
+      "Optimal Substructure",
+      "Greedy Choice Property",
+      "Memoization"
+    ],
+    "answer": "Optimal Substructure",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Given an array of positive integers, you want to find the number of subsets that sum up to a target `T`. The state `dp[i][j]` is the count of subsets using the first `i` items that sum to `j`. What is the value of `dp[i][j]` if you do not include the `i-th` item?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": ["dp[i-1][j]", "dp[i-1][j - nums[i-1]]", "dp[i][j-1]", "0"],
+    "answer": "dp[i-1][j]",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "For the subset sum count problem with `nums = [1, 2, 3]` and `target = 3`, how many subsets sum to the target?",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["DynamicProgramming"],
+    "options": ["0", "1", "2", "3"],
+    "answer": "2",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "A DP solution has a time complexity of O(N * W), where N is the number of items and W is a capacity. What is the most likely space complexity of a non-space-optimized tabulation approach?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": ["O(N)", "O(W)", "O(N * W)", "O(1)"],
+    "answer": "O(N * W)",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "The problem is to find the maximum profit from at most `k` stock transactions. The state is `dp[i][j]`, the max profit after `j` transactions on day `i`. This requires keeping track of an additional state. What is it?\n```\n// dp[i][j][state]\n```",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "The price on the previous day.",
+      "Whether you are currently holding a stock or not.",
+      "The number of stocks bought.",
+      "The minimum price seen so far."
+    ],
+    "answer": "Whether you are currently holding a stock or not.",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Given `prices = [3,2,6,5,0,3]` and `k = 2` transactions allowed, what is the maximum profit?",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["DynamicProgramming"],
+    "options": ["5", "6", "7", "8"],
+    "answer": "7",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "In a DP problem on a grid, if the allowed moves are down, right, and diagonally down-right, what would the recurrence for `dp[i][j]` be for a path counting problem?\n```\n// Pseudocode for path counting\ndp[i][j] = __________;\n```",
+    "type": "FILL_BLANK",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "dp[i-1][j] + dp[i][j-1]",
+      "dp[i-1][j] + dp[i][j-1] + dp[i-1][j-1]",
+      "max(dp[i-1][j], dp[i][j-1], dp[i-1][j-1])",
+      "1 + dp[i-1][j-1]"
+    ],
+    "answer": "dp[i-1][j] + dp[i][j-1] + dp[i-1][j-1]",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "If a problem asks for the minimum cost to reach a state, and all costs are positive, what is a safe value to initialize the DP table with?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": ["0", "-1", "Infinity", "1"],
+    "answer": "Infinity",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "In a problem to find the longest decreasing subsequence of `[5, 2, 8, 3, 4, 1]`, what is the length?",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["DynamicProgramming"],
+    "options": ["2", "3", "4", "5"],
+    "answer": "3",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "The problem of finding the longest decreasing subsequence can be solved by finding the longest *increasing* subsequence on the _________ array.",
+    "type": "FILL_BLANK",
+    "categories": ["DynamicProgramming"],
+    "options": ["sorted", "negated", "reversed", "squared"],
+    "answer": "negated",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "What happens if you apply a standard DP approach for the minimum path sum on a grid that contains negative values?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "The algorithm fails and gives an error.",
+      "The standard recurrence `dp[i][j] = grid[i][j] + min(dp[i-1][j], dp[i][j-1])` still works correctly.",
+      "The time complexity increases.",
+      "The result will always be negative."
+    ],
+    "answer": "The standard recurrence `dp[i][j] = grid[i][j] + min(dp[i-1][j], dp[i][j-1])` still works correctly.",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "A 'digit DP' problem typically asks to count numbers in a range `[A, B]` that have a certain property. The standard way to solve this is to find `count(B) - count(A-1)`. The `count(x)` function is built using DP. What do the states of this DP usually represent?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "The numbers themselves.",
+      "Properties like (current_index, current_sum, is_tight_constraint).",
+      "The length of the number.",
+      "The number of digits."
+    ],
+    "answer": "Properties like (current_index, current_sum, is_tight_constraint).",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Consider a game where two players take turns choosing numbers from the ends of an array. Each player wants to maximize their own score. The state for a DP solution `dp[i][j]` would represent the maximum score a player can get from the subarray `A[i...j]`. Why is this not enough to make a decision?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "Because you don't know the opponent's score.",
+      "Because you don't know whose turn it is.",
+      "Because the array can have negative numbers.",
+      "This state is sufficient."
+    ],
+    "answer": "Because you don't know whose turn it is.",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Given an array `[5, 3, 7, 10]` for the two-player optimal strategy game, what is the maximum score the first player can achieve?",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["DynamicProgramming"],
+    "options": ["10", "12", "13", "15"],
+    "answer": "15",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "A problem requires finding the number of `N`-digit numbers such that the sum of their digits is `S`. The DP state would be `dp(digits_left, current_sum)`. Fill in the blank in the recurrence.\n```\nFUNCTION solve(digits, sum)\n  // base cases\n  count = 0\n  FOR d FROM 0 TO 9\n    count = count + solve(________, sum - d)\n  ENDFOR\n  RETURN count\nENDFUNCTION\n```",
+    "type": "FILL_BLANK",
+    "categories": ["DynamicProgramming"],
+    "options": ["digits", "digits - 1", "digits + 1", "d"],
+    "answer": "digits - 1",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "What is the key difference between solving for the longest common subsequence and the longest common contiguous substring?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "There is no difference.",
+      "Subsequence allows non-contiguous elements, while substring requires them to be contiguous.",
+      "Substring is harder to solve.",
+      "Subsequence can be solved with a greedy approach."
+    ],
+    "answer": "Subsequence allows non-contiguous elements, while substring requires them to be contiguous.",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "In the DP solution for longest common substring, `dp[i][j]` is the length of the common substring ending at `s1[i]` and `s2[j]`. If `s1[i] != s2[j]`, what is `dp[i][j]`?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": ["1", "max(dp[i-1][j], dp[i][j-1])", "dp[i-1][j-1]", "0"],
+    "answer": "0",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "For strings `s1 = \"hish\"` and `s2 = \"fish\"`, what is the length of the longest common contiguous substring?",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["DynamicProgramming"],
+    "options": ["1", "2", "3", "4"],
+    "answer": "3",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "A problem asks for the minimum cost to climb stairs, where you can take 1 or 2 steps, and each step has an associated cost. If `cost[i]` is the cost of step `i`, what is the recurrence for `dp[i]`, the minimum cost to reach step `i`?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "dp[i] = cost[i] + min(dp[i-1], dp[i-2])",
+      "dp[i] = min(cost[i-1], cost[i-2])",
+      "dp[i] = cost[i] + max(dp[i-1], dp[i-2])",
+      "dp[i] = cost[i-1] + cost[i-2]"
+    ],
+    "answer": "dp[i] = cost[i] + min(dp[i-1], dp[i-2])",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "Given step costs `[10, 15, 20]` to climb a staircase (you can start at index 0 or 1), what is the minimum cost to reach the top (i.e., past the last step)?",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["DynamicProgramming"],
+    "options": ["10", "15", "20", "30"],
+    "answer": "15",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "The Fractional Knapsack problem, where you can take fractions of items, can be solved greedily. Why can't the 0/1 Knapsack problem be solved the same way?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "It can be solved greedily.",
+      "The choice to take an entire item is not always optimal, even if its value/weight ratio is highest.",
+      "The weights are integers.",
+      "The values are too large."
+    ],
+    "answer": "The choice to take an entire item is not always optimal, even if its value/weight ratio is highest.",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "If a DP state transition depends on all previous states (e.g., `dp[i] = sum(dp[j] for j < i)`), what is a likely time complexity for the solution with N states?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": ["O(N)", "O(N log N)", "O(N^2)", "O(2^N)"],
+    "answer": "O(N^2)",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "A problem is to find if a string `s` contains another string `t` as a subsequence. A DP approach is possible, but a simpler greedy two-pointer approach also works. What does this imply about the problem structure?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "The problem lacks optimal substructure.",
+      "The problem has a greedy choice property.",
+      "The subproblems do not overlap.",
+      "The strings are always sorted."
+    ],
+    "answer": "The problem has a greedy choice property.",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Is `t = \"ace\"` a subsequence of `s = \"abcde\"`?",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["DynamicProgramming"],
+    "options": ["Yes", "No", "They are equal", "Invalid Input"],
+    "answer": "Yes",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "A problem asks to break an integer `n` into a sum of at least two positive integers to maximize their product. For `n=10`, what is the maximum product?",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["DynamicProgramming"],
+    "options": ["25", "30", "36", "40"],
+    "answer": "36",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "The problem of maximizing the product of integer partitions of `n` can be solved with a DP state `dp[i]`, representing the max product for the integer `i`. The recurrence involves checking all possible first numbers `j` in the partition.\n```\n// Pseudocode for max product partition\ndp[i] = 0\nFOR j FROM 1 TO i-1\n  dp[i] = max(dp[i], j * (i-j), ________)\nENDFOR\n```",
+    "type": "FILL_BLANK",
+    "categories": ["DynamicProgramming"],
+    "options": ["j * dp[i-j]", "dp[j] * dp[i-j]", "j + dp[i-j]", "j + (i-j)"],
+    "answer": "j * dp[i-j]",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "When a problem can be solved by iterating over all contiguous subarrays and calculating a value, the brute force complexity is O(N^2) or O(N^3). A DP solution often reduces this by using previous calculations. A typical DP state `dp[i]` would represent the optimal value of a subarray _______ at index `i`.",
+    "type": "FILL_BLANK",
+    "categories": ["DynamicProgramming"],
+    "options": ["starting", "ending", "centered", "excluding"],
+    "answer": "ending",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "What is the primary difference in the DP state transition for an unbounded selection problem (like unbounded knapsack or coin change combinations) versus a 0/1 selection problem?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "There is no difference.",
+      "Unbounded problems use `min` while 0/1 problems use `max`.",
+      "The transition for an unbounded problem can reuse an item, so it refers to a state in the *current* row/iteration, not the previous one.",
+      "Unbounded problems require a 3D DP table."
+    ],
+    "answer": "The transition for an unbounded problem can reuse an item, so it refers to a state in the *current* row/iteration, not the previous one.",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "If a problem has an optimal solution that does not necessarily contain optimal solutions to all its subproblems, it lacks optimal substructure. What is an example of such a problem?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "Finding the shortest path in an unweighted graph.",
+      "Finding the longest path in a general graph (which may contain cycles).",
+      "Finding the minimum number of coins to make change.",
+      "Finding the longest common subsequence."
+    ],
+    "answer": "Finding the longest path in a general graph (which may contain cycles).",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "A problem asks for the minimum number of deletions to make a string a palindrome. This is equivalent to finding the length of the longest palindromic subsequence and subtracting it from the ______.",
+    "type": "FILL_BLANK",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "number of unique characters",
+      "original string length",
+      "half the string length",
+      "1"
+    ],
+    "answer": "original string length",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "For the string `s = \"mbadm\"`, how many deletions are needed to make it a palindrome?",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["DynamicProgramming"],
+    "options": ["0", "1", "2", "3"],
+    "answer": "2",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "If a DP algorithm has `k` nested loops, each running up to `N`, what is a rough estimate of its time complexity?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": ["O(k * N)", "O(N^k)", "O(N log k)", "O(k log N)"],
+    "answer": "O(N^k)",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "What does it mean for the state transitions in a DP problem to be 'dense'?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "The transition logic is very complex.",
+      "Most or all states need to be computed to find the solution.",
+      "The DP table is very large.",
+      "Only a few states are relevant to the final answer."
+    ],
+    "answer": "Most or all states need to be computed to find the solution.",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "For a problem with dense state transitions, which DP approach is generally more suitable and might have less overhead?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "Memoization (Top-Down)",
+      "Tabulation (Bottom-Up)",
+      "Both are equally suitable.",
+      "Neither is suitable."
+    ],
+    "answer": "Tabulation (Bottom-Up)",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "Given a sorted array of distinct integers, you need to form a binary search tree. The number of unique BSTs can be found using DP. For `n=3` nodes, how many unique BSTs can be formed?",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["DynamicProgramming"],
+    "options": ["3", "4", "5", "6"],
+    "answer": "5",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "If a problem requires finding the minimum or maximum of a value over a range, and the ranges can be of any length and position, it's a candidate for DP on ________.",
+    "type": "FILL_BLANK",
+    "categories": ["DynamicProgramming"],
+    "options": ["subsets", "intervals", "trees", "digits"],
+    "answer": "intervals",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "The time complexity for a typical DP on intervals solution, like matrix chain multiplication, is O(N^3). Why is it cubic?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "There are O(N^2) states (intervals) and each transition requires an O(N) loop to find the optimal split point.",
+      "There are three nested loops running from 1 to N.",
+      "The problem involves 3D matrices.",
+      "It's a typo; it should be O(N^2)."
+    ],
+    "answer": "There are O(N^2) states (intervals) and each transition requires an O(N) loop to find the optimal split point.",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "A problem asks for the minimum cost to merge a set of files. The cost to merge two files of size `A` and `B` is `A+B`. This problem is structurally similar to finding an optimal ________ for a set of items.",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "path",
+      "grouping",
+      "tree structure (like Huffman coding)",
+      "subsequence"
+    ],
+    "answer": "tree structure (like Huffman coding)",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Given file sizes `[10, 20, 30]`, what is the minimum cost to merge them all into one file?",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["DynamicProgramming"],
+    "options": ["60", "80", "90", "100"],
+    "answer": "90",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "If a DP solution is implemented using recursion without memoization, what is the most likely cause of a 'Time Limit Exceeded' error on large inputs?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "The base cases are incorrect.",
+      "The exponential number of repeated computations of the same subproblems.",
+      "Stack overflow.",
+      "The input size is too large for memory."
+    ],
+    "answer": "The exponential number of repeated computations of the same subproblems.",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "A problem asks for the number of distinct subsequences of a string `s` that are equal to another string `t`. Let `dp[i][j]` be the number of ways for `t`'s prefix of length `i` and `s`'s prefix of length `j`. If `t[i-1] != s[j-1]`, then `dp[i][j] = _______`.",
+    "type": "FILL_BLANK",
+    "categories": ["DynamicProgramming"],
+    "options": ["dp[i-1][j-1]", "dp[i][j-1]", "dp[i-1][j]", "0"],
+    "answer": "dp[i][j-1]",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "For `s = \"rabbbit\"` and `t = \"rabbit\"`, how many distinct subsequences of `s` are equal to `t`?",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["DynamicProgramming"],
+    "options": ["1", "2", "3", "4"],
+    "answer": "3",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "Can a problem that lacks the overlapping subproblems property be sped up by dynamic programming?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "Yes, significantly.",
+      "No, because there are no repeated computations to memoize or tabulate.",
+      "Yes, but only slightly.",
+      "Only if it has optimal substructure."
+    ],
+    "answer": "No, because there are no repeated computations to memoize or tabulate.",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "In a tabulated DP solution, the final answer is typically found in which part of the DP table?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "dp[0] or dp[0][0]",
+      "The middle of the table.",
+      "The cell corresponding to the original problem size, like dp[n] or dp[n][m].",
+      "It could be anywhere; the maximum value in the table must be found."
+    ],
+    "answer": "The cell corresponding to the original problem size, like dp[n] or dp[n][m].",
+    "difficulty": "EASY"
+  },
+
+  {
+    "text": "In a bottom-up DP approach to find the Nth Fibonacci number, the space complexity can be optimized from O(N) to O(1). Which pseudocode snippet correctly demonstrates this optimization?\n```\n// Correctly optimized code?\nFUNCTION fib(N)\n  IF N <= 1 RETURN N\n  a = 0, b = 1\n  FOR i FROM 2 TO N\n    temp = a + b\n    a = b\n    b = temp\n  ENDFOR\n  RETURN b\nENDFUNCTION\n```",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "The code is incorrect; it requires an array.",
+      "The code is correct and demonstrates O(1) space complexity.",
+      "The code has O(log N) space complexity.",
+      "The code is correct but has O(N) space complexity due to the loop."
+    ],
+    "answer": "The code is correct and demonstrates O(1) space complexity.",
+    "difficulty": "EASY"
+  },
+  {
+    "text": "What is the final value of `dp[3]` after this pseudocode runs?\n```\n// Pseudocode execution\ndp = new array of size 4 initialized to 0\nnums = [1, 1, 1]\ndp[0] = 1\n\nFOR i FROM 1 TO 3\n  FOR j FROM 0 TO length(nums)-1\n    IF i >= nums[j]\n      dp[i] = dp[i] + dp[i - nums[j]]\n    ENDIF\n  ENDFOR\nENDFOR\n```",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["DynamicProgramming"],
+    "options": ["1", "2", "3", "4"],
+    "answer": "4",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "The following pseudocode calculates the minimum number of coins for a given amount. Fill in the blank to correctly update the DP table.\n```\n// Pseudocode for min coins\nFUNCTION minCoins(coins, amount)\n  dp = new array of size (amount + 1) initialized to infinity\n  dp[0] = 0\n  \n  FOR i FROM 1 TO amount\n    FOR coin IN coins\n      IF i >= coin\n        dp[i] = min(dp[i], ________)\n      ENDIF\n    ENDFOR\n  ENDFOR\n  RETURN dp[amount]\nENDFUNCTION\n```",
+    "type": "FILL_BLANK",
+    "categories": ["DynamicProgramming"],
+    "options": ["dp[i - coin]", "1 + dp[i - coin]", "1 + dp[i-1]", "dp[coin]"],
+    "answer": "1 + dp[i - coin]",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "The state `dp[i]` in the following pseudocode represents the length of the longest increasing subsequence ending at index `i`. What value will be in `dp[3]` for the given input?\n```\n// Pseudocode for LIS\nFUNCTION LIS_length(nums)\n  n = length(nums)\n  dp = new array of size n initialized to 1\n  \n  FOR i FROM 1 TO n-1\n    FOR j FROM 0 TO i-1\n      IF nums[i] > nums[j]\n        dp[i] = max(dp[i], 1 + dp[j])\n      ENDIF\n    ENDFOR\n  ENDFOR\n  RETURN max(dp)\nENDFUNCTION\n\n// Input: nums = [10, 20, 5, 30]\n```",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["DynamicProgramming"],
+    "options": ["1", "2", "3", "4"],
+    "answer": "3",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "This pseudocode attempts to solve the 0/1 Knapsack problem using a 1D array for space optimization. What is the correct direction for the inner loop to ensure correctness?\n```\n// Space-optimized 0/1 Knapsack\nFUNCTION Knapsack(weights, values, W)\n  n = length(weights)\n  dp = new array of size (W+1) initialized to 0\n\n  FOR i FROM 1 TO n\n    // What is the correct loop for w?\n    ________\n      IF w >= weights[i-1]\n        dp[w] = max(dp[w], values[i-1] + dp[w - weights[i-1]])\n      ENDIF\n    ENDFOR\n  ENDFOR\n  RETURN dp[W]\nENDFUNCTION\n```",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "FOR w FROM 1 TO W",
+      "FOR w FROM W DOWNTO weights[i-1]",
+      "FOR w FROM 1 TO W with step 2",
+      "The direction does not matter."
+    ],
+    "answer": "FOR w FROM W DOWNTO weights[i-1]",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "What is the primary reason the inner loop in space-optimized 0/1 Knapsack must run backwards (from `W` down to `weight`)?",
+    "type": "MCQ",
+    "categories": ["DynamicProgramming"],
+    "options": [
+      "It is faster.",
+      "To prevent using the same item multiple times in the same iteration, as it would overwrite the `dp[w - weight]` value from the previous outer-loop iteration.",
+      "It is a programming convention.",
+      "It uses less memory than a forward loop."
+    ],
+    "answer": "To prevent using the same item multiple times in the same iteration, as it would overwrite the `dp[w - weight]` value from the previous outer-loop iteration.",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "A thief can rob houses with values `[5, 1, 2, 10]` but cannot rob adjacent ones. The DP solution uses `dp[i] = max(dp[i-1], nums[i] + dp[i-2])`. What is the maximum value the thief can rob?",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["DynamicProgramming"],
+    "options": ["10", "11", "12", "15"],
+    "answer": "15",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "This pseudocode finds the minimum edit distance between two strings. The `dp[i][j]` state stores the distance between the first `i` characters of `s1` and the first `j` characters of `s2`. Fill in the blank for the 'replace' operation case.\n```\n// Pseudocode for Edit Distance\nIF s1[i-1] == s2[j-1] THEN\n  dp[i][j] = dp[i-1][j-1]\nELSE\n  cost_delete = dp[i-1][j]\n  cost_insert = dp[i][j-1]\n  cost_replace = ________\n  dp[i][j] = 1 + min(cost_delete, cost_insert, cost_replace)\nENDIF\n```",
+    "type": "FILL_BLANK",
+    "categories": ["DynamicProgramming"],
+    "options": ["dp[i-1][j-1]", "dp[i][j]", "dp[i-1][j]", "dp[i][j-1]"],
+    "answer": "dp[i-1][j-1]",
+    "difficulty": "HARD"
+  },
+  {
+    "text": "What will be the value of `dp[2][2]` when computing the edit distance between `s1=\"cat\"` and `s2=\"car\"`?\n```\n// dp table for edit distance\n// Assume dp[0][..] and dp[..][0] are initialized.\n// s1 = \"cat\", s2 = \"car\"\n```",
+    "type": "PREDICT_OUTPUT",
+    "categories": ["DynamicProgramming"],
+    "options": ["0", "1", "2", "3"],
+    "answer": "0",
+    "difficulty": "MEDIUM"
+  },
+  {
+    "text": "The following pseudocode calculates the length of the longest common subsequence. What is the base case condition for the recursion?\n```\n// Recursive LCS\nFUNCTION LCS(s1, s2, i, j)\n  IF i == 0 OR j == 0 THEN // Base case\n    RETURN ________\n  ENDIF\n  \n  IF s1[i] == s2[j] THEN\n    RETURN 1 + LCS(s1, s2, i-1, j-1)\n  ELSE\n    RETURN max(LCS(s1, s2, i-1, j), LCS(s1, s2, i, j-1))\n  ENDIF\nENDFUNCTION\n```",
+    "type": "FILL_BLANK",
+    "categories": ["DynamicProgramming"],
+    "options": ["i", "j", "1", "0"],
+    "answer": "0",
+    "difficulty": "EASY"
+  }
+]
