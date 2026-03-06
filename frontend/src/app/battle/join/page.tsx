@@ -76,7 +76,7 @@ function JoinByCodeInner() {
             className="w-full px-4 py-3 rounded border border-neutral-700 bg-neutral-900/50"
           />
           <Button onClick={handleJoin} disabled={!code || joining} className="bg-lime-600 hover:bg-lime-500 text-center text-black hover:cursor-pointer">
-            Join
+            {joining ? "Joining..." : "Join"}
           </Button>
         </div>
       </div>

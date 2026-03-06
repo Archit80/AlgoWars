@@ -5,7 +5,7 @@ import { useUser } from "@/contexts/userContext";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Space_Grotesk } from "next/font/google";
-import { Swords, UserPlus, ArrowLeft, CheckCircle, Layers, Zap, Hash, Share2, KeyRound, ChevronsRightLeft, ArrowLeftRight, Crosshair, ListOrdered, RefreshCw, TreePine, Grid3X3 } from "lucide-react";
+import { Swords, UserPlus, ArrowLeft, CheckCircle, Layers, Zap, Hash, Share2, KeyRound, ChevronsRightLeft, ArrowLeftRight, Crosshair, ListOrdered, RefreshCw, TreePine, Grid3X3, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useUserStore } from "@/stores/userStore";
 import { useMatchStore } from "@/stores/matchStore";
@@ -256,9 +256,13 @@ export default function BattleSetup() {
         </motion.div>
 
         <div className="flex justify-center">
-          <Button onClick={startBattle} disabled={!mode || selectedTopics.length === 0 || loading} className={`inline-flex items-center gap-2 px-16 py-6 rounded-lg font-bold hover:cursor-pointer text-lg transition-all ${!mode || selectedTopics.length === 0 ? "bg-gray-600 text-gray-400" : "bg-lime-500 hover:bg-lime-400 text-black"}`}>
-            <Swords className="w-6 h-6" />
-            {mode === "friend" ? "Create Private Room" : mode === "random" ? "Find Match" : "Start"}
+          <Button onClick={startBattle} disabled={!mode || selectedTopics.length === 0 || loading} className={`inline-flex items-center gap-2 px-16 py-6 rounded-lg font-bold hover:cursor-pointer text-lg transition-all ${!mode || selectedTopics.length === 0 || loading ? "bg-gray-600 text-gray-400" : "bg-lime-500 hover:bg-lime-400 text-black"}`}>
+            {loading ? (
+              <><Loader2 className="w-6 h-6 animate-spin" /> Setting up...</>
+            ) : (
+              <><Swords className="w-6 h-6" />
+              {mode === "friend" ? "Create Private Room" : mode === "random" ? "Find Match" : "Start"}</>
+            )}
           </Button>
         </div>
       </div>

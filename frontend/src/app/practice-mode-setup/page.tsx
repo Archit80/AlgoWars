@@ -22,7 +22,8 @@ import {
   ListOrdered,
   RefreshCw,
   TreePine,
-  Grid3X3
+  Grid3X3,
+  Loader2
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import QuestionsService from "@/services/questionsService";
@@ -91,6 +92,7 @@ const PracticeModeSetup: React.FC = () => {
   const [selectedDifficulty, setSelectedDifficulty] = useState<string>("");
   const [selectedQuestionCount, setSelectedQuestionCount] = useState<number>(10);
   const [selectedMode, setSelectedMode] = useState<string>("");
+  const [loading, setLoading] = useState(false);
   const supabaseUser = useUserStore((state) => state.supabaseUser);
 
   // Route protection
@@ -113,7 +115,7 @@ const PracticeModeSetup: React.FC = () => {
 
   const startPractice = async () => {
     if (selectedTopics.length === 0 || !selectedMode || !selectedDifficulty) return;
-
+    setLoading(true);
     try {
       console.log("[Practice Setup] Starting practice with:", {
         topics: selectedTopics,
@@ -144,6 +146,8 @@ const PracticeModeSetup: React.FC = () => {
       console.error("[Practice Setup] Error:", err);
       const errorMessage = err instanceof Error ? err.message : "Unknown error occurred";
       alert("Something went wrong: " + errorMessage);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -395,15 +399,18 @@ const PracticeModeSetup: React.FC = () => {
         >
           <Button
             onClick={startPractice}
-            disabled={selectedTopics.length === 0 || !selectedMode || !selectedDifficulty}
+            disabled={selectedTopics.length === 0 || !selectedMode || !selectedDifficulty || loading}
             className={`inline-flex items-center gap-2 px-16 py-6 rounded-lg font-bold text-lg transition-all ${
-              selectedTopics.length > 0 && selectedMode && selectedDifficulty
+              selectedTopics.length > 0 && selectedMode && selectedDifficulty && !loading
                 ? "bg-lime-500 hover:bg-lime-400 text-black hover:scale-105"
                 : "bg-gray-600 text-gray-400 cursor-not-allowed"
             }`}
           >
-            <Play className="w-6 h-6" />
-            Start Practice Session
+            {loading ? (
+              <><Loader2 className="w-6 h-6 animate-spin" /> Loading Questions...</>
+            ) : (
+              <><Play className="w-6 h-6" /> Start Practice Session</>
+            )}
           </Button>
           {selectedTopics.length > 0 && selectedMode && selectedDifficulty && (
             <p className="text-sm text-gray-400 mt-3 font-mono">

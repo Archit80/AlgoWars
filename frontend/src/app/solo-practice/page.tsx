@@ -50,6 +50,7 @@ const SoloPractice = () => {
 
   // If all questions are done, show result
   const [isQuizComplete, setIsQuizComplete] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [sessionStats, setSessionStats] = useState<{
     score: number;
     total: number;
@@ -212,6 +213,7 @@ const SoloPractice = () => {
 
   const handleNext = useCallback(async () => {
     if (currentIndex === questions.length - 1) {
+      setSubmitting(true);
       try {
         // Simple: Total time since session started
         const totalDurationInSeconds = Math.floor((Date.now() - sessionStartTime) / 1000);
@@ -244,6 +246,8 @@ const SoloPractice = () => {
         });
       } catch (err) {
         console.error("Failed to end solo session:", err);
+      } finally {
+        setSubmitting(false);
       }
       setIsQuizComplete(true);
     } else {
@@ -415,20 +419,25 @@ const SoloPractice = () => {
             <>
               <button
                 onClick={handleSkip}
-                className="px-6 py-3 bg-neutral-600 hover:bg-neutral-500 rounded-xl font-semibold transition-all"
+                disabled={submitting}
+                className={`px-6 py-3 rounded-xl font-semibold transition-all ${
+                  submitting
+                    ? "bg-neutral-700 text-neutral-500 cursor-not-allowed"
+                    : "bg-neutral-600 hover:bg-neutral-500"
+                }`}
               >
-                Skip Question
+                {submitting ? "Finishing..." : "Skip Question"}
               </button>
               <button
                 onClick={handleSubmit}
-                disabled={selectedAnswer === null}
+                disabled={selectedAnswer === null || submitting}
                 className={`px-8 py-3 rounded-xl font-semibold transition-all ${
-                  selectedAnswer !== null
+                  selectedAnswer !== null && !submitting
                     ? "bg-lime-500 hover:bg-lime-400 text-black"
                     : "bg-neutral-600 text-neutral-400 cursor-not-allowed"
                 }`}
               >
-                Submit Answer
+                {submitting ? "Finishing..." : "Submit Answer"}
               </button>
             </>
           
