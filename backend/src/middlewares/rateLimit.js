@@ -1,4 +1,4 @@
-import rateLimit from 'express-rate-limit';
+import rateLimit, { ipKeyGenerator } from 'express-rate-limit';
 import redis from '../lib/redisClient.js';
 
 // General API rate limiter
@@ -15,7 +15,7 @@ export const matchActionLimit = rateLimit({
   windowMs: 60 * 1000, // 1 minute
   max: 30, // 30 actions per minute
   message: { error: 'Too many match actions, slow down' },
-  keyGenerator: (req) => `match_${req.user?.id || req.ip}`,
+  keyGenerator: (req) => `match_${req.user?.id || ipKeyGenerator(req)}`,
 });
 
 // Answer submission rate limit (prevent rapid fire)
@@ -23,7 +23,7 @@ export const answerSubmissionLimit = rateLimit({
   windowMs: 5 * 1000, // 5 seconds
   max: 1, // 1 answer per 5 seconds
   message: { error: 'Please wait before submitting another answer' },
-  keyGenerator: (req) => `answer_${req.user?.id}_${req.params.id}`,
+  keyGenerator: (req) => `answer_${req.user?.id || ipKeyGenerator(req)}_${req.params.id}`,
 });
 
 // Redis-based custom rate limiter for socket events

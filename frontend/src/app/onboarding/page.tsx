@@ -105,7 +105,7 @@ export default function OnboardingPage() {
       if (profilePic) {
         const fileExt = profilePic.name.split(".").pop();
         const fileName = `${supabaseUser?.id || Date.now()}.${fileExt}`;
-        const filePath = `PFPs/${fileName}`;
+        const filePath = fileName;
 
         const { error: uploadError } = await supabase.storage
           .from("PFPs")
