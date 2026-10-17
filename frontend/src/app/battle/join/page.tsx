@@ -32,8 +32,7 @@ function JoinByCodeInner() {
     if (!code) return;
     setJoining(true);
     try {
-      const userId = user?.id || "guest";
-      const res = await MatchService.joinByCode({ userId, roomCode: code });
+      const res = await MatchService.joinByCode({ roomCode: code });
       const match = res.match;
       // Store match data with usernames if available
       if (match) {

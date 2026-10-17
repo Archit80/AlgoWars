@@ -41,6 +41,14 @@ export const LazyOrb = dynamic(
   }
 );
 
+export const LazyPrism = dynamic(
+  () => import('./Prism/Prism'),
+  {
+    loading: () => <div className="absolute inset-0 bg-neutral-950" />,
+    ssr: false,
+  }
+);
+
 // Wrapper component with Suspense
 export function LazyComponentWrapper({ children }: { children: React.ReactNode }) {
   return (

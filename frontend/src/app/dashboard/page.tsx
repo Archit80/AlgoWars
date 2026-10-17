@@ -1,6 +1,7 @@
 "use client";
 import "./home.css";
-import Prism from "@/components/Prism/Prism";
+// WebGL background: loaded after the page renders, not part of the initial bundle
+import { LazyPrism as Prism } from "@/components/LazyComponents";
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import { useUser } from "@/contexts/userContext";

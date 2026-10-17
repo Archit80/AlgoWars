@@ -1,4 +1,5 @@
 import { io, Socket } from 'socket.io-client';
+import { supabase } from '@/lib/supabaseClient';
 
 let socket: Socket | null = null;
 
@@ -6,6 +7,12 @@ export function getSocket() {
   if (socket) return socket;
   socket = io(process.env.NEXT_PUBLIC_SOCKET_URL, {
     autoConnect: true,
+    // Called on every (re)connect, so the server always gets a fresh access token
+    auth: (cb) => {
+      supabase.auth.getSession()
+        .then(({ data: { session } }) => cb({ token: session?.access_token }))
+        .catch(() => cb({}));
+    },
     transports: ['websocket'],
     path: "/api/socket.io",
     // Built-in reconnection with exponential backoff
@@ -23,12 +30,17 @@ export function getSocket() {
   // Socket.IO v4: reconnect events are on the Manager (socket.io), not the Socket
   socket.io.on('reconnect', (attemptNumber: number) => {
     console.log(`[Socket] Reconnected after ${attemptNumber} attempts`);
-    // Re-join rooms on reconnect
-    if (pendingUserRoom) {
-      socket?.emit('user:join', { userId: pendingUserRoom });
-    }
+    // Re-join the match room on reconnect (the server re-adds the personal room itself)
     if (pendingMatchRoom) {
       socket?.emit('match:join', { matchId: pendingMatchRoom });
+    }
+  });
+
+  // A handshake rejected by the server's auth middleware is not retried automatically;
+  // connect again once a session exists.
+  supabase.auth.onAuthStateChange((event) => {
+    if ((event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') && socket && !socket.connected) {
+      socket.connect();
     }
   });
 
@@ -39,8 +51,7 @@ export function getSocket() {
   return socket;
 }
 
-// Track rooms to rejoin on reconnect
-let pendingUserRoom: string | null = null;
+// Track the match room to rejoin on reconnect
 let pendingMatchRoom: string | null = null;
 
 export function joinMatchRoom(matchId: string) {
@@ -52,19 +63,6 @@ export function joinMatchRoom(matchId: string) {
     // Queue the join for when connection is established
     s.once('connect', () => {
       s.emit('match:join', { matchId });
-    });
-  }
-}
-
-export function joinUserRoom(userId: string) {
-  pendingUserRoom = userId;
-  const s = getSocket();
-  if (s.connected) {
-    s.emit('user:join', { userId });
-  } else {
-    // Queue the join for when connection is established
-    s.once('connect', () => {
-      s.emit('user:join', { userId });
     });
   }
 }

@@ -61,7 +61,7 @@ export default function BattleResultPage() {
     async function fetchResult() {
       if (!matchId || !userId) return;
       try {
-        const data = await MatchService.getResult(matchId, userId);
+        const data = await MatchService.getResult(matchId);
         setResult(data);
         // Show confetti pop if winner
         if (data?.winner?.id === userId) {

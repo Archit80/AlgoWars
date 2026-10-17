@@ -1,170 +1,82 @@
 import prisma from "../db/prismaClient.js";
 
-export class AchievementService {
-  
-  // Check and update achievements for a user
-  static async checkAchievements(userId) {
-    try {
-      const user = await prisma.user.findUnique({
-        where: { id: userId },
-        include: {
-          userAchievements: {
-            include: {
-              achievement: true
-            }
-          },
-          soloSessions: true
-        }
-      });
+const DAY_MS = 24 * 60 * 60 * 1000;
+const utcDay = (date) => Math.floor(date.getTime() / DAY_MS);
 
-      if (!user) return;
+// Streak fields to write for activity happening `now` (days are UTC).
+// Call inside the activity's transaction, BEFORE that activity's lastMatchAt / endedAt is written,
+// so "last active" still reflects the previous activity. Returns {} when nothing changes.
+export async function streakUpdate(tx, userId, now, { excludeSoloSessionId } = {}) {
+  const [user, lastSolo] = await Promise.all([
+    tx.user.findUnique({ where: { id: userId }, select: { streak: true, longestStreak: true, lastMatchAt: true } }),
+    tx.soloSession.findFirst({
+      where: {
+        userId,
+        endedAt: { not: null },
+        ...(excludeSoloSessionId && { id: { not: excludeSoloSessionId } }),
+      },
+      orderBy: { endedAt: 'desc' },
+      select: { endedAt: true },
+    }),
+  ]);
+  if (!user) return {};
 
-      // Get all achievements
-      const allAchievements = await prisma.achievement.findMany();
-
-      for (const achievement of allAchievements) {
-        const existingUserAchievement = user.userAchievements.find(
-          ua => ua.achievementId === achievement.id
-        );
-
-        let progress = 0;
-
-        // Calculate progress based on achievement type
-        switch (achievement.type) {
-          case 'quiz':
-            // Big Brain: Score 100% in 5 quizzes
-            progress = user.soloSessions.filter(session => 
-              session.totalQuestions > 0 && 
-              session.correctAnswers === session.totalQuestions
-            ).length;
-            break;
-
-          case 'streak':
-            // Streak God: Maintain a 30-day login streak
-            progress = user.streak;
-            break;
-
-          case 'speed':
-            // Speed Demon: Solve 10 questions under 30 seconds
-            progress = user.soloSessions.filter(session => 
-              session.duration && session.totalQuestions > 0 &&
-              (session.duration / session.totalQuestions) < 30
-            ).length;
-            break;
-
-          case 'battle':
-            // Battle Royale: Get 25 wins in 1v1 coding battles
-            progress = user.matchesWon;
-            break;
-
-          default:
-            continue;
-        }
-
-        const isUnlocked = progress >= achievement.goal;
-
-        if (existingUserAchievement) {
-          // Update existing achievement progress
-          if (existingUserAchievement.progress !== progress || 
-              (isUnlocked && !existingUserAchievement.unlocked)) {
-            await prisma.userAchievement.update({
-              where: { id: existingUserAchievement.id },
-              data: {
-                progress,
-                unlocked: isUnlocked
-              }
-            });
-          }
-        } else {
-          // Create new user achievement
-          await prisma.userAchievement.create({
-            data: {
-              userId,
-              achievementId: achievement.id,
-              progress,
-              unlocked: isUnlocked
-            }
-          });
-        }
-      }
-
-    } catch (error) {
-      console.error('Error checking achievements:', error);
+  const lastActive = Math.max(user.lastMatchAt?.getTime() ?? 0, lastSolo?.endedAt?.getTime() ?? 0);
+  const today = utcDay(now);
+  let streak = 1;
+  if (lastActive) {
+    const lastDay = utcDay(new Date(lastActive));
+    if (lastDay === today) {
+      if (user.streak > 0) return {};
+    } else if (lastDay === today - 1) {
+      streak = user.streak + 1;
     }
   }
+  return { streak, longestStreak: Math.max(streak, user.longestStreak) };
+}
 
-  // Update streak tracking
-  static async updateUserStreak(userId) {
+export class AchievementService {
+
+  // Recompute achievement progress and persist only what changed. Unlocks are permanent.
+  static async checkAchievements(userId) {
     try {
-      const user = await prisma.user.findUnique({
-        where: { id: userId }
-      });
-
+      const [user, achievements, existing, [solo]] = await Promise.all([
+        prisma.user.findUnique({ where: { id: userId }, select: { longestStreak: true, matchesWon: true } }),
+        prisma.achievement.findMany(),
+        prisma.userAchievement.findMany({ where: { userId } }),
+        prisma.$queryRaw`
+          SELECT
+            COUNT(*) FILTER (WHERE "totalQuestions" > 0 AND "correctAnswers" = "totalQuestions") AS perfect,
+            COUNT(*) FILTER (WHERE "totalQuestions" > 0 AND duration IS NOT NULL
+                               AND duration < 30 * "totalQuestions") AS fast
+          FROM "SoloSession"
+          WHERE "userId" = ${userId} AND "endedAt" IS NOT NULL`,
+      ]);
       if (!user) return;
 
-      const now = new Date();
-      const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-      
-      // Get user's last login from lastMatchAt or use a separate lastLoginAt field if needed
-      const lastLogin = user.lastMatchAt ? new Date(user.lastMatchAt) : null;
-      const lastLoginDate = lastLogin ? 
-        new Date(lastLogin.getFullYear(), lastLogin.getMonth(), lastLogin.getDate()) : null;
+      const progressByType = {
+        quiz: Number(solo.perfect),    // Big Brain: 100% score in N solo sessions
+        speed: Number(solo.fast),      // Speed Demon: under 30s per question in N sessions
+        streak: user.longestStreak,    // Streak God: N-day activity streak
+        battle: user.matchesWon,       // Battle Royale: N battle wins
+      };
 
-      let newStreak = user.streak;
+      for (const achievement of achievements) {
+        const progress = progressByType[achievement.type];
+        if (progress === undefined) continue;
 
-      if (!lastLoginDate) {
-        // First login
-        newStreak = 1;
-      } else {
-        const daysDiff = Math.floor((today - lastLoginDate) / (1000 * 60 * 60 * 24));
-        
-        if (daysDiff === 0) {
-          // Same day, no change to streak
-          return;
-        } else if (daysDiff === 1) {
-          // Next day, increment streak
-          let newStreak = user.streak;
-          // ...existing code...
-          if (lastLogin) {
-            const lastLoginDate = new Date(lastLogin);
-            const today = new Date();
-            // ...existing code...
-            if (isSameDay(lastLoginDate, today)) {
-              // Same day, no change to streak
-            } else if (isNextDay(lastLoginDate, today)) {
-              // Next day, increment streak
-              newStreak = user.streak + 1;
-            } else {
-              // Streak broken, reset to 1
-              newStreak = 1;
-            }
-          } else {
-            newStreak = 1;
-          }
-          // Update user streak, longest streak, and last login
-          await prisma.user.update({
-            where: { id: userId },
-            data: {
-              streak: newStreak,
-              longestStreak: Math.max(newStreak, user.longestStreak ?? 0),
-              lastMatchAt: new Date(),
-            },
-          });
-        } else {
-          // Streak broken, reset to 1
-          newStreak = 1;
-          await prisma.user.update({
-            where: { id: userId },
-            data: {
-              streak: newStreak,
-              longestStreak: Math.max(newStreak, user.longestStreak ?? 0),
-              lastMatchAt: new Date(),
-            },
-          });
-        }
+        const prev = existing.find((ua) => ua.achievementId === achievement.id);
+        const unlocked = Boolean(prev?.unlocked) || progress >= achievement.goal;
+        if (prev && prev.progress === progress && prev.unlocked === unlocked) continue;
+
+        await prisma.userAchievement.upsert({
+          where: { userId_achievementId: { userId, achievementId: achievement.id } },
+          update: { progress, unlocked },
+          create: { userId, achievementId: achievement.id, progress, unlocked },
+        });
       }
     } catch (error) {
-      console.error('Error updating user streak:', error);
+      console.error('Error checking achievements:', error);
     }
   }
 
@@ -180,7 +92,7 @@ export class AchievementService {
 
       // Get all achievements and merge with user progress
       const allAchievements = await prisma.achievement.findMany();
-      
+
       return allAchievements.map(achievement => {
         const userAchievement = userAchievements.find(
           ua => ua.achievementId === achievement.id

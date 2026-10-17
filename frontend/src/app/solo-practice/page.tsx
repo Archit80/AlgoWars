@@ -26,7 +26,7 @@ const spaceGrotesk = Space_Grotesk({
 const SoloPractice = () => {
   const { supabaseUser } = useUser();
   const router = useRouter();
-  const { questions, currentIndex, submitAnswer, nextQuestion, soloSessionId, mode, userAnswers } = usePracticeStore();
+  const { questions, currentIndex, submitAnswer, nextQuestion, soloSessionId, mode } = usePracticeStore();
   
   // If questions are not loaded, redirect to setup page
   useEffect(() => {
@@ -38,7 +38,6 @@ const SoloPractice = () => {
 
   const currentQuestion = questions?.[currentIndex];
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
-  const [score, setScore] = useState(0);
   const [timeLeft, setTimeLeft] = useState(60);
 
   // Route protection
@@ -51,16 +50,8 @@ const SoloPractice = () => {
   // If all questions are done, show result
   const [isQuizComplete, setIsQuizComplete] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const [sessionStats, setSessionStats] = useState<{
-    score: number;
-    total: number;
-    duration?: number;
-    xpEarned?: number;
-    mode?: string;
-    difficulty?: string;
-  } | null>(null);
+  const [sessionStats, setSessionStats] = useState<React.ComponentProps<typeof Result> | null>(null);
 
-  const [sessionStartTime] = useState<number>(Date.now());
 
   // Enhanced function to detect and format code blocks with syntax highlighting
   const formatQuestionText = (text: string) => {
@@ -215,35 +206,14 @@ const SoloPractice = () => {
     if (currentIndex === questions.length - 1) {
       setSubmitting(true);
       try {
-        // Simple: Total time since session started
-        const totalDurationInSeconds = Math.floor((Date.now() - sessionStartTime) / 1000);
-
-        // Build question results for the result page
-        const questionResults = questions.map(question => {
-          const userAnswer = userAnswers.find(ua => ua.questionId === question.id);
-          return {
-            id: question.id,
-            text: question.text,
-            options: question.options,
-            correctAnswer: question.answer,
-            userAnswer: userAnswer?.selectedOption || null,
-            userCorrect: userAnswer?.isCorrect || false
-          };
-        });
-
-        const res = await QuestionsService.endSoloSession({
-          soloSessionId,
-          score,
-          total: questions.length,
-          duration: totalDurationInSeconds,
-          questionResults
-        } as any);
-        
-        // Add questionResults to the session stats for the result page
-        setSessionStats({
-          ...res,
-          questionResults
-        });
+        // Read from the store directly: the answer just submitted isn't in this render's closure
+        const answers = usePracticeStore.getState().userAnswers.map((ua) => ({
+          questionId: ua.questionId,
+          answer: ua.selectedOption,
+        }));
+        const res = await QuestionsService.endSoloSession({ soloSessionId: soloSessionId!, answers });
+        // Server response includes score, XP and per-question results for the result page
+        setSessionStats(res);
       } catch (err) {
         console.error("Failed to end solo session:", err);
       } finally {
@@ -257,7 +227,7 @@ const SoloPractice = () => {
       }
       nextQuestion();
     }
-  }, [currentIndex, questions, sessionStartTime, soloSessionId, score, nextQuestion, mode, userAnswers]);
+  }, [currentIndex, questions, soloSessionId, nextQuestion, mode]);
 
   useEffect(() => {
     if (mode === "timed" && timeLeft > 0) {
@@ -299,7 +269,7 @@ const SoloPractice = () => {
 
   if (isQuizComplete || currentIndex >= questions.length) {
     // If sessionStats is available, pass them to Result, else fallback to score/total
-    return <Result {...(sessionStats ? sessionStats : { score, total: questions.length })} />;
+    return <Result {...(sessionStats ? sessionStats : { score: 0, total: questions.length })} />;
   }
 
   const handleSkip = () => {
@@ -309,9 +279,6 @@ const SoloPractice = () => {
   const handleSubmit = () => {
     if (!selectedAnswer) return;
     submitAnswer(currentQuestion.id, selectedAnswer);
-    const correct = selectedAnswer === currentQuestion.answer;
-    if (correct) setScore((prev) => prev + 1);
-    console.log("score", score);
     handleNext();
   };
 

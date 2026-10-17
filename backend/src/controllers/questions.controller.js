@@ -1,145 +1,176 @@
 import prisma from '../db/prismaClient.js';
-import AchievementService from '../services/achievementService.js';
+import AchievementService, { streakUpdate } from '../services/achievementService.js';
+import { pickQuestionIds } from '../services/questionPool.js';
 
-export const endSoloSession = async (req, res) => {
-  try {
-    const { soloSessionId, score, total, duration, mode, questionResults } = req.body;
-    if (!soloSessionId || score == null || total == null) {
-      return res.status(400).json({ error: 'soloSessionId, score, and total are required' });
-    }
+const XP_PER_CORRECT = 20;
+const DIFFICULTY_MULTIPLIER = { easy: 1.0, medium: 1.5, hard: 2.0 };
+const TIMED_MODE_MULTIPLIER = 1.25;
 
-    // Calculate XP based on difficulty and mode
-    // Difficulty can be 'easy', 'medium', 'hard' (from frontend)
-    let difficultyMultiplier = 1.0;
-    if (req.body.difficulty) {
-      const diff = req.body.difficulty.toLowerCase();
-      if (diff === 'easy') difficultyMultiplier = 1.0;
-      else if (diff === 'medium') difficultyMultiplier = 1.5;
-      else if (diff === 'hard') difficultyMultiplier = 2.0;
-    }
-    let baseXP = score * 20 * difficultyMultiplier;
-    let xpMultiplier = mode === 'timed' ? 1.25 : 1.0; // 25% bonus for timed mode
-    const xpEarned = Math.floor(baseXP * xpMultiplier);
-
-    // Update the SoloSession
-    const updatedSession = await prisma.soloSession.update({
-      where: { id: soloSessionId },
-      data: {
-        correctAnswers: score,
-        endedAt: new Date(),
-        duration: duration || null,
-        xpEarned,
-      },
-    });
-
-    // Update user's XP and explicit counters
-    const user = await prisma.user.update({
-      where: { id: updatedSession.userId },
-      data: {
-        xp: { increment: xpEarned }, // Increment user's XP
-        correctAnswers: { increment: score }, // Update explicit counter
-        totalAnswers: { increment: total }, // Update explicit counter
-      }
-    });
-
-    // Update streak and check achievements after solo session completion
-    await AchievementService.updateUserStreak(updatedSession.userId);
-    await AchievementService.checkAchievements(updatedSession.userId);
-
-    // Return session stats with question results
-    res.status(200).json({
-      success: true,
-      soloSessionId,
-      correctAnswers: updatedSession.correctAnswers,
-      totalQuestions: updatedSession.totalQuestions,
-      duration: updatedSession.duration,
-      xpEarned: updatedSession.xpEarned,
-      mode: updatedSession.mode,
-      difficulty: updatedSession.difficulty,
-      categories: updatedSession.categories,
-      endedAt: updatedSession.endedAt,
-      questionResults: questionResults || [], // Include question-by-question results
-    });
-  } catch (error) {
-    console.error('Error ending solo session:', error);
-    res.status(500).json({ error: 'Server error' });
+function shuffle(items) {
+  const a = [...items];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
   }
-};
+  return a;
+}
 
+// Starts a solo session. The served questions are recorded as SoloAnswer rows (with the correct
+// answer server-side), so grading at the end never trusts the client.
 export const getSoloPracticeQuestions = async (req, res) => {
   try {
-    const { categories, mode, userId, difficulty, questionCount } = req.query;
+    const userId = req.user.id;
+    const { categories, mode, difficulty, questionCount } = req.query; // validated by middleware
+    const categoryList = [...new Set(categories.split(',').map((c) => c.trim()).filter(Boolean))];
 
-    if (!categories || !mode || !userId || !difficulty) {
-      return res.status(400).json({ error: 'Categories, mode, userId, and difficulty are required' });
-    }
-
-    // Parse categories if it's a string (comma-separated)
-    const categoryArray = typeof categories === 'string' ? categories.split(',') : categories;
-    const questionsPerCategory = Math.ceil((questionCount || 10) / categoryArray.length);
-
-    console.log('[Backend] Fetching questions for:', { categoryArray, mode, difficulty, questionCount });
-
-    // Fetch questions from all selected categories
-    const allQuestions = [];
-    for (const category of categoryArray) {
-      const questions = await prisma.question.findMany({
-        where: { 
-          categories: { has: category.trim() },
-          difficulty: difficulty.toUpperCase()  
-        },
-        take: questionsPerCategory * 2, // Get more to allow for better shuffling
-      });
-      allQuestions.push(...questions);
-    }
-
-    if (!allQuestions.length) {
+    const ids = shuffle(await pickQuestionIds({
+      categories: categoryList,
+      difficulty: difficulty.toUpperCase(),
+      count: questionCount,
+    }));
+    if (!ids.length) {
       return res.status(404).json({ error: 'No questions found for selected categories' });
     }
 
-    // Shuffle and select the requested number of questions
-    const shuffled = allQuestions.sort(() => 0.5 - Math.random());
-    const selected = shuffled.slice(0, questionCount || 10);
+    const byId = new Map((await prisma.question.findMany({ where: { id: { in: ids } } })).map((q) => [q.id, q]));
+    const questions = ids.map((id) => byId.get(id)).filter(Boolean);
 
-    // Map mode from frontend to backend enum
-    const modeMapping = {
-      'timed': 'TIMED',
-      'accuracy': 'ACCURACY'
-    };
-
-    // Create a new SoloSession with enhanced data
-    const soloSession = await prisma.soloSession.create({
-      data: {
-        userId,
-        totalQuestions: selected.length,
-        correctAnswers: 0,
-        duration: null,
-        mode: modeMapping[mode] || 'ACCURACY',
-        difficulty: difficulty,
-        categories: categoryArray,
-        xpEarned: 0,
-      },
+    const session = await prisma.$transaction(async (tx) => {
+      const created = await tx.soloSession.create({
+        data: {
+          userId,
+          totalQuestions: questions.length,
+          correctAnswers: 0,
+          mode: mode === 'timed' ? 'TIMED' : 'ACCURACY',
+          difficulty: difficulty.toLowerCase(),
+          categories: categoryList,
+        },
+      });
+      const base = Date.now();
+      await tx.soloAnswer.createMany({
+        data: questions.map((q, i) => ({
+          soloSessionId: created.id,
+          questionId: q.id,
+          questionText: q.text,
+          questionOptions: q.options,
+          correctAnswer: q.answer,
+          correct: false,
+          createdAt: new Date(base + i), // preserves the served order
+        })),
+      });
+      return created;
     });
-
-    console.log('[Backend] Created solo session:', soloSession);
 
     res.status(200).json({
       success: true,
       mode,
-      categories: categoryArray,
+      categories: categoryList,
       difficulty,
-      soloSessionId: soloSession.id,
-      questions: selected.map(q => ({
+      soloSessionId: session.id,
+      // No answers: grading happens server-side in endSoloSession
+      questions: questions.map((q) => ({
         id: q.id,
         text: q.text,
         options: q.options,
-        answer: q.answer,
         type: q.type,
         categories: q.categories,
+        difficulty: q.difficulty,
       })),
     });
   } catch (error) {
     console.error('Error fetching questions:', error);
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+
+export const endSoloSession = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { soloSessionId, answers } = req.body; // validated by middleware
+
+    const session = await prisma.soloSession.findUnique({
+      where: { id: soloSessionId },
+      include: { answers: { orderBy: { createdAt: 'asc' } } },
+    });
+    if (!session || session.userId !== userId) {
+      return res.status(404).json({ error: 'Session not found' });
+    }
+    if (session.endedAt) {
+      return res.status(409).json({ error: 'Session already ended' });
+    }
+    if (session.answers.length === 0) {
+      // Created before server-side grading existed; nothing to grade against
+      return res.status(409).json({ error: 'Session expired, please start a new one' });
+    }
+
+    const submitted = new Map(answers.map((a) => [a.questionId, a.answer]));
+    const graded = session.answers.map((row) => {
+      const userAnswer = submitted.get(row.questionId) ?? null;
+      return { row, userAnswer, correct: userAnswer !== null && userAnswer === row.correctAnswer };
+    });
+    const score = graded.filter((g) => g.correct).length;
+    const answeredCount = graded.filter((g) => g.userAnswer !== null).length;
+
+    const now = new Date();
+    const duration = Math.round((now.getTime() - session.startedAt.getTime()) / 1000);
+    const xpEarned = Math.floor(
+      score * XP_PER_CORRECT
+      * (DIFFICULTY_MULTIPLIER[session.difficulty.toLowerCase()] ?? 1)
+      * (session.mode === 'TIMED' ? TIMED_MODE_MULTIPLIER : 1)
+    );
+
+    const ended = await prisma.$transaction(async (tx) => {
+      // Conditional on endedAt so concurrent requests can't both award XP
+      const { count } = await tx.soloSession.updateMany({
+        where: { id: session.id, endedAt: null },
+        data: { correctAnswers: score, endedAt: now, duration, xpEarned },
+      });
+      if (count === 0) return false;
+
+      for (const g of graded) {
+        if (g.userAnswer === null) continue;
+        await tx.soloAnswer.update({ where: { id: g.row.id }, data: { userAnswer: g.userAnswer, correct: g.correct } });
+      }
+      const streak = await streakUpdate(tx, userId, now, { excludeSoloSessionId: session.id });
+      await tx.user.update({
+        where: { id: userId },
+        data: {
+          ...streak,
+          xp: { increment: xpEarned },
+          correctAnswers: { increment: score },
+          totalAnswers: { increment: answeredCount },
+        },
+      });
+      return true;
+    }, { timeout: 15_000 });
+    if (!ended) {
+      return res.status(409).json({ error: 'Session already ended' });
+    }
+
+    await AchievementService.checkAchievements(userId);
+
+    res.status(200).json({
+      success: true,
+      soloSessionId: session.id,
+      correctAnswers: score,
+      totalQuestions: session.totalQuestions,
+      duration,
+      xpEarned,
+      mode: session.mode,
+      difficulty: session.difficulty,
+      categories: session.categories,
+      endedAt: now,
+      questionResults: graded.map((g) => ({
+        id: g.row.questionId,
+        text: g.row.questionText,
+        options: g.row.questionOptions,
+        correctAnswer: g.row.correctAnswer,
+        userAnswer: g.userAnswer,
+        userCorrect: g.correct,
+      })),
+    });
+  } catch (error) {
+    console.error('Error ending solo session:', error);
     res.status(500).json({ error: 'Server error' });
   }
 };

@@ -20,19 +20,6 @@ export const getXPForLevel = (level) => {
 };
 
 /**
- * Calculate total XP required to reach a specific level
- * @param {number} targetLevel - Target level (1-based)
- * @returns {number} Total XP needed to reach that level
- */
-export const getTotalXPForLevel = (targetLevel) => {
-  let total = 0;
-  for (let i = 1; i < targetLevel; i++) {
-    total += getXPForLevel(i);
-  }
-  return total;
-};
-
-/**
  * Calculate current level and progress from total XP
  * @param {number} totalXP - User's total XP
  * @returns {Object} Level info: { level, currentLevelXP, xpToNext, totalXPForNextLevel, progress }
@@ -104,25 +91,4 @@ export const getTimeToNextLevel = (xpToNext, dailyXPAverage = 50) => {
   const months = Math.ceil(days / 30);
   
   return { days, weeks, months };
-};
-
-/**
- * Legacy compatibility - old linear system calculation
- * @deprecated Use getLevelFromXP instead
- * @param {number} xp - User's XP
- * @returns {Object} Level info using old system
- */
-export const getLevelFromXPLegacy = (xp) => {
-  const level = Math.floor(xp / 100) + 1;
-  const currentLevelXP = xp % 100;
-  const xpToNext = 100 - currentLevelXP;
-  const totalXPForNextLevel = xp + xpToNext;
-  
-  return {
-    level,
-    currentLevelXP,
-    xpToNext,
-    totalXPForNextLevel,
-    progress: currentLevelXP
-  };
 };

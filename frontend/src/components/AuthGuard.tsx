@@ -1,49 +1,43 @@
 "use client";
 import Loader from "@/components/ui/Loader";
 import { useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { useUser } from "@/contexts/userContext";
+import { usePathname, useRouter } from "next/navigation";
 import { useUserStore } from "@/stores/userStore";
 
-const publicPaths = ["/", "/login"];
+const publicPaths = ["/", "/login", "/auth/callback"];
+const isPublicPath = (path: string) => publicPaths.includes(path) || path.startsWith("/profile/");
 
 export default function AuthGuard({ children }: { children: React.ReactNode }) {
   const router = useRouter();
-  const { supabaseUser, initialized } = useUser();
-  const { isOnboarded, userDataFetched, loading } = useUserStore();
+  const pathname = usePathname();
+  const { supabaseUser, isOnboarded, userDataFetched, loading } = useUserStore();
+  const isPublic = isPublicPath(pathname);
 
   useEffect(() => {
-    // Wait for auth initialization
-    if (!initialized || loading) return;
+    // Wait for the (local) session check
+    if (loading) return;
 
-    const currentPath = window.location.pathname;
-    const isPublic = publicPaths.includes(currentPath) || currentPath.startsWith("/profile/");
-
-    // Not authenticated and not on a public path
-    if (!supabaseUser && !isPublic) {
-      router.replace("/login");
+    if (!supabaseUser) {
+      if (!isPublic) router.replace("/login");
       return;
     }
 
-    // User exists and data fetched
-    if (supabaseUser && userDataFetched) {
-      // Not onboarded - send to onboarding (unless already there)
-      if (!isOnboarded && currentPath !== "/onboarding") {
-        router.replace("/onboarding");
-      } 
-      // Onboarded but on login/onboarding pages - send to dashboard
-      else if (isOnboarded && (currentPath === "/login" || currentPath === "/onboarding")) {
-        router.replace("/dashboard");
-      }
+    // Onboarding status comes from the backend profile
+    if (!userDataFetched) return;
+    if (!isOnboarded && pathname !== "/onboarding") {
+      router.replace("/onboarding");
+    } else if (isOnboarded && (pathname === "/login" || pathname === "/onboarding")) {
+      router.replace("/dashboard");
     }
-  }, [supabaseUser, initialized, isOnboarded, userDataFetched, loading, router]);
+  }, [supabaseUser, isOnboarded, userDataFetched, loading, pathname, isPublic, router]);
 
-  // Show loading while auth is initializing
-  if (!initialized || loading) {
+  // Public pages render immediately. Protected pages wait for the local session check and,
+  // on a first sign-in only, for the profile (it decides whether onboarding is needed).
+  const waiting = !isPublic && (loading || !supabaseUser || !userDataFetched);
+  if (waiting) {
     return (
       <div className="min-h-screen bg-zinc-950 flex items-center justify-center">
         <div className="text-white">
-          {/* Common Loader component */}
           <Loader />
         </div>
       </div>

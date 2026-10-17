@@ -1,22 +1,3 @@
-import { getSocket } from './socket';
-
-// Add token to socket auth — only reconnect if token actually changed
-export function authenticateSocket(token: string) {
-  const socket = getSocket();
-  const currentToken = (socket.auth as { token?: string })?.token;
-  
-  // Skip if token hasn't changed
-  if (currentToken === token) return;
-  
-  socket.auth = { token };
-  
-  if (socket.connected) {
-    // Disconnect and reconnect with new auth
-    socket.disconnect();
-    socket.connect();
-  }
-}
-
 // Enhanced error handling for API calls
 export async function apiRequest(url: string, options: RequestInit = {}) {
   try {

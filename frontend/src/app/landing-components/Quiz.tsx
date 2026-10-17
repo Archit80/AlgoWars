@@ -4,11 +4,15 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Brain, CheckCircle, Trophy, Badge, Swords } from "lucide-react";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+// Light build + only the language used here (the full build bundles every language)
+import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
+import cpp from "react-syntax-highlighter/dist/esm/languages/prism/cpp";
 import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { Space_Grotesk } from "next/font/google";
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"] });
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+
+SyntaxHighlighter.registerLanguage("cpp", cpp);
 
 const Quiz = () => {
   const mcqQuestions = [

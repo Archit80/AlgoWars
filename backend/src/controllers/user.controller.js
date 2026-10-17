@@ -2,307 +2,184 @@ import prisma from "../db/prismaClient.js";
 import AchievementService from "../services/achievementService.js";
 import { getLevelFromXP, getLevelTier, isMilestoneLevel, getTimeToNextLevel } from "../utils/levelSystem.js";
 
-export const getUserById = async (req, res) => {
-  try {
-    const userId = req.params.id;
+const percent = (part, whole) => (whole > 0 ? Math.round((part / whole) * 100) : 0);
 
-    // Validate that userId is provided
-    if (!userId) {
-      return res.status(400).json({
-        message: "User ID is required",
-        error: "Missing userId parameter in route",
-      });
-    }
+// Full public profile, shared by the id- and username-based routes.
+async function buildProfile(where) {
+  const user = await prisma.user.findUnique({
+    where,
+    include: { userAchievements: { include: { achievement: true } } },
+  });
+  if (!user) return null;
 
-    const user = await prisma.user.findUnique({
-      where: { id: userId },
-      include: {
-        userAchievements: {
-          include: {
-            achievement: true,
-          },
-        },
-      },
-    });
-
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
-    // Fetch 3 latest solo sessions separately
-    const soloSessions = await prisma.soloSession.findMany({
-      where: { userId },
-      orderBy: { startedAt: "desc" },
-      take: 5,
-    });
-
-    // Fetch all solo sessions for calculations
-    const allSoloSessions = await prisma.soloSession.findMany({
-      where: { userId },
-    });
-
-    // Use fast database counters instead of expensive queries
-    const battlesWon = user.matchesWon;
-    const totalBattles = user.totalMatches;
-
-    // Calculate stats - use fast database counters when available
-    const totalCorrectAnswers = allSoloSessions.reduce((sum, session) => sum + session.correctAnswers, 0);
-    const totalQuestions = allSoloSessions.reduce((sum, session) => sum + session.totalQuestions, 0);
-    
-    // Use database accuracy counters if available, fallback to solo session calculation
-    const accuracy = user.totalAnswers > 0 ? 
-      Math.round((user.correctAnswers / user.totalAnswers) * 100) :
-      totalQuestions > 0 ? Math.round((totalCorrectAnswers / totalQuestions) * 100) : 0;
-    
-    // New exponential level calculation with milestone bonuses
-    const levelInfo = getLevelFromXP(user.xp);
-    const tierInfo = getLevelTier(levelInfo.level);
-    const isAtMilestone = isMilestoneLevel(levelInfo.level);
-
-    // Fetch all achievements
-    const allAchievements = await prisma.achievement.findMany();
-
-    // Map user's achievements by achievementId for quick lookup
-    const userAchievementMap = {};
-    user.userAchievements.forEach(ua => {
-      userAchievementMap[ua.achievementId] = ua;
-    });
-
-    // Build userAchievements array with all achievements
-    const mergedUserAchievements = allAchievements.map(achievement => {
-      const ua = userAchievementMap[achievement.id];
-      if (ua) {
-        // User has this achievement
-        return {
-          id: ua.id,
-          progress: ua.progress,
-          unlocked: ua.unlocked,
-          updatedAt: ua.updatedAt,
-          achievement,
-        };
-      } else {
-        // User does not have this achievement yet
-        return {
-          id: null,
-          progress: 0,
-          unlocked: false,
-          updatedAt: null,
-          achievement,
-        };
-      }
-    });
-
-    // Fetch recent battles (latest 5 matches where user is user1 or user2)
-    const recentBattles = await prisma.match.findMany({
-      where: {
-        OR: [
-          { user1Id: userId },
-          { user2Id: userId }
-        ],
-        status: 'COMPLETED'
-      },
-      orderBy: { createdAt: 'desc' },
+  const [soloSessions, soloTotals, allAchievements, recentBattles] = await Promise.all([
+    prisma.soloSession.findMany({ where: { userId: user.id }, orderBy: { startedAt: "desc" }, take: 5 }),
+    prisma.soloSession.aggregate({
+      where: { userId: user.id },
+      _count: true,
+      _sum: { correctAnswers: true, totalQuestions: true },
+    }),
+    prisma.achievement.findMany(),
+    prisma.match.findMany({
+      where: { OR: [{ user1Id: user.id }, { user2Id: user.id }], status: "COMPLETED" },
+      orderBy: { createdAt: "desc" },
       take: 5,
       include: {
         user1: { select: { id: true, username: true } },
         user2: { select: { id: true, username: true } },
-        questions: true
-      }
-    });
-
-    // Then merge them manually
-    const userWithLatestSessions = {
-      ...user,
-      soloSessions,
-      userAchievements: mergedUserAchievements,
-      // New exponential level system data
-      level: levelInfo.level,
-      currentXP: user.xp,
-      currentLevelXP: levelInfo.currentLevelXP,
-      xpToNext: levelInfo.xpToNext,
-      totalXPForNextLevel: levelInfo.totalXPForNextLevel,
-      xpRequiredForCurrentLevel: levelInfo.xpRequiredForCurrentLevel,
-      progress: levelInfo.progress, // Percentage progress (0-100)
-      // Tier information
-      tier: tierInfo.tier,
-      tierName: tierInfo.tierName,
-      tierColor: tierInfo.color,
-      tierEmoji: tierInfo.emoji,
-      isAtMilestone: isAtMilestone,
-      // Legacy compatibility
-      totalXP: levelInfo.totalXPForNextLevel, // For backward compatibility
-      accuracy,
-      battlesWon,
-      totalBattles,
-      // Fast database counters
-      matchesWon: user.matchesWon,
-      matchesLost: user.matchesLost,
-      totalMatches: user.totalMatches,
-      correctAnswers: user.correctAnswers,
-      totalAnswers: user.totalAnswers,
-      // Additional stats
-      stats: {
-        totalSoloSessions: allSoloSessions.length,
-        totalCorrectAnswers,
-        totalQuestions,
-        winRate: totalBattles > 0 ? Math.round((battlesWon / totalBattles) * 100) : 0
       },
-      // Attach recent battles for frontend profile
-      recentBattles,
-      // Onboarding status
-      isOnboarded: user.isOnboarded
+    }),
+  ]);
+
+  const totalCorrectAnswers = soloTotals._sum.correctAnswers ?? 0;
+  const totalQuestions = soloTotals._sum.totalQuestions ?? 0;
+  // Prefer the all-modes counters; fall back to solo totals for users with none yet
+  const accuracy = user.totalAnswers > 0
+    ? percent(user.correctAnswers, user.totalAnswers)
+    : percent(totalCorrectAnswers, totalQuestions);
+
+  const levelInfo = getLevelFromXP(user.xp);
+  const tierInfo = getLevelTier(levelInfo.level);
+
+  // Every achievement, with the user's progress where they have any
+  const userAchievementMap = new Map(user.userAchievements.map((ua) => [ua.achievementId, ua]));
+  const mergedUserAchievements = allAchievements.map((achievement) => {
+    const ua = userAchievementMap.get(achievement.id);
+    return {
+      id: ua?.id ?? null,
+      progress: ua?.progress ?? 0,
+      unlocked: ua?.unlocked ?? false,
+      updatedAt: ua?.updatedAt ?? null,
+      achievement,
     };
-    // Return user data
-    res.status(200).json({
-      success: true,
-      data: userWithLatestSessions,
-    });
+  });
 
-    // return userWithLatestSessions;
-  } catch (error) {
-    console.error("Error fetching user data:", error);
-    return res.status(500).json({ message: "Internal server error" });
-  }
-};
+  // Email is private — never include it in profile responses
+  const { email: _email, ...publicUser } = user;
+  return {
+    ...publicUser,
+    soloSessions,
+    userAchievements: mergedUserAchievements,
+    level: levelInfo.level,
+    currentXP: user.xp,
+    currentLevelXP: levelInfo.currentLevelXP,
+    xpToNext: levelInfo.xpToNext,
+    totalXPForNextLevel: levelInfo.totalXPForNextLevel,
+    xpRequiredForCurrentLevel: levelInfo.xpRequiredForCurrentLevel,
+    progress: levelInfo.progress, // 0-100
+    tier: tierInfo.tier,
+    tierName: tierInfo.tierName,
+    tierColor: tierInfo.color,
+    tierEmoji: tierInfo.emoji,
+    isAtMilestone: isMilestoneLevel(levelInfo.level),
+    totalXP: levelInfo.totalXPForNextLevel, // legacy alias
+    accuracy,
+    battlesWon: user.matchesWon,
+    totalBattles: user.totalMatches,
+    stats: {
+      totalSoloSessions: soloTotals._count,
+      totalCorrectAnswers,
+      totalQuestions,
+      winRate: percent(user.matchesWon, user.totalMatches),
+    },
+    recentBattles,
+  };
+}
 
-export const updateUserOnboarding = async (req, res) => {
+// Lightweight counters, shared by the id- and username-based routes.
+async function buildStats(where) {
+  const user = await prisma.user.findUnique({
+    where,
+    select: {
+      id: true,
+      username: true,
+      xp: true,
+      streak: true,
+      longestStreak: true,
+      totalMatches: true,
+      matchesWon: true,
+      matchesLost: true,
+      correctAnswers: true,
+      totalAnswers: true,
+      lastMatchAt: true,
+    },
+  });
+  if (!user) return null;
+  return {
+    ...user,
+    winRate: percent(user.matchesWon, user.totalMatches),
+    accuracy: percent(user.correctAnswers, user.totalAnswers),
+    matchesDrawn: user.totalMatches - user.matchesWon - user.matchesLost,
+  };
+}
+
+const sendProfile = (where) => async (req, res) => {
   try {
-    const userId = req.params.id;
-    const { username, profilePic } = req.body;
-
-    if (!userId) {
-      return res.status(400).json({ message: "User ID is required" });
-    }
-
-    // Update user info and set isOnboarded true
-    const updatedUser = await prisma.user.update({
-      where: { id: userId },
-      data: {
-        username,
-        profilePic,
-        isOnboarded: true
-      }
-    });
-
-    res.status(200).json({ success: true, data: updatedUser });
+    const profile = await buildProfile(where(req));
+    if (!profile) return res.status(404).json({ message: "User not found" });
+    res.status(200).json({ success: true, data: profile });
   } catch (error) {
-    console.error("Error updating onboarding info:", error);
+    console.error("Error fetching user profile:", error);
     res.status(500).json({ message: "Internal server error" });
   }
 };
 
-// Get user stats for fast access (uses explicit counters)
-export const getUserStats = async (req, res) => {
+const sendStats = (where) => async (req, res) => {
   try {
-    const userId = req.params.id;
-    
-    if (!userId) {
-      return res.status(400).json({ error: "User ID is required" });
-    }
-
-    const userStats = await prisma.user.findUnique({
-      where: { id: userId },
-      select: {
-        id: true,
-        username: true,
-        xp: true,
-        streak: true,
-        totalMatches: true,
-        matchesWon: true,
-        matchesLost: true,
-        correctAnswers: true,
-        totalAnswers: true,
-        lastMatchAt: true
-      }
-    });
-
-    if (!userStats) {
-      return res.status(404).json({ error: "User not found" });
-    }
-
-    // Calculate derived stats
-    const winRate = userStats.totalMatches > 0 ? 
-      Math.round((userStats.matchesWon / userStats.totalMatches) * 100) : 0;
-    const accuracy = userStats.totalAnswers > 0 ? 
-      Math.round((userStats.correctAnswers / userStats.totalAnswers) * 100) : 0;
-    const matchesDrawn = userStats.totalMatches - userStats.matchesWon - userStats.matchesLost;
-
-    res.json({
-      success: true,
-      stats: {
-        ...userStats,
-        longestStreak: userStats.longestStreak,
-        winRate,
-        accuracy,
-        matchesDrawn
-      }
-    });
+    const stats = await buildStats(where(req));
+    if (!stats) return res.status(404).json({ error: "User not found" });
+    res.json({ success: true, stats });
   } catch (error) {
     console.error("Error fetching user stats:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 };
 
+export const getUserById = sendProfile((req) => ({ id: req.params.id }));
+export const getUserByUsername = sendProfile((req) => ({ username: req.params.username }));
+export const getUserStats = sendStats((req) => ({ id: req.params.id }));
+export const getUserStatsByUsername = sendStats((req) => ({ username: req.params.username }));
+
+export const updateUserOnboarding = async (req, res) => {
+  try {
+    const { username, profilePic } = req.body; // validated by middleware
+    const updatedUser = await prisma.user.update({
+      where: { id: req.params.id },
+      data: { username, profilePic: profilePic || null, isOnboarded: true },
+    });
+    res.status(200).json({ success: true, data: updatedUser });
+  } catch (error) {
+    if (error.code === "P2002") {
+      return res.status(409).json({ message: "Username already taken" });
+    }
+    console.error("Error updating onboarding info:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 export const getUserAchievements = async (req, res) => {
   try {
-    const { id } = req.params;
-
-    if (!id) {
-      return res.status(400).json({
-        success: false,
-        error: "User ID is required"
-      });
-    }
-
-    const achievements = await AchievementService.getUserAchievements(id);
-
-    res.status(200).json({
-      success: true,
-      data: achievements
-    });
-
+    const achievements = await AchievementService.getUserAchievements(req.params.id);
+    res.status(200).json({ success: true, data: achievements });
   } catch (error) {
     console.error("Get user achievements error:", error);
-    res.status(500).json({ 
-      success: false, 
-      error: "Something went wrong." 
-    });
+    res.status(500).json({ success: false, error: "Something went wrong." });
   }
 };
 
 // Get detailed level information for a user
 export const getUserLevelInfo = async (req, res) => {
   try {
-    const { id } = req.params;
-
-    if (!id) {
-      return res.status(400).json({ 
-        success: false, 
-        error: "User ID is required" 
-      });
-    }
-
     const user = await prisma.user.findUnique({
-      where: { id },
-      select: {
-        id: true,
-        username: true,
-        xp: true
-      }
+      where: { id: req.params.id },
+      select: { id: true, username: true, xp: true },
     });
-
     if (!user) {
-      return res.status(404).json({ 
-        success: false, 
-        error: "User not found" 
-      });
+      return res.status(404).json({ success: false, error: "User not found" });
     }
 
-    // Calculate level information
     const levelInfo = getLevelFromXP(user.xp);
     const tierInfo = getLevelTier(levelInfo.level);
-    const timeEstimate = getTimeToNextLevel(levelInfo.xpToNext);
-    const isAtMilestone = isMilestoneLevel(levelInfo.level);
 
     res.json({
       success: true,
@@ -310,254 +187,24 @@ export const getUserLevelInfo = async (req, res) => {
         userId: user.id,
         username: user.username,
         totalXP: user.xp,
-        
-        // Current level info
         level: levelInfo.level,
         currentLevelXP: levelInfo.currentLevelXP,
         xpRequiredForCurrentLevel: levelInfo.xpRequiredForCurrentLevel,
-        progress: levelInfo.progress, // 0-100 percentage
-        
-        // Next level info
+        progress: levelInfo.progress, // 0-100
         xpToNext: levelInfo.xpToNext,
         totalXPForNextLevel: levelInfo.totalXPForNextLevel,
-        
-        // Tier information
         tier: {
           level: tierInfo.tier,
           name: tierInfo.tierName,
           color: tierInfo.color,
-          emoji: tierInfo.emoji
+          emoji: tierInfo.emoji,
         },
-        
-        // Special status
-        isAtMilestone,
-        
-        // Time estimates
-        timeToNextLevel: timeEstimate
-      }
+        isAtMilestone: isMilestoneLevel(levelInfo.level),
+        timeToNextLevel: getTimeToNextLevel(levelInfo.xpToNext),
+      },
     });
-
   } catch (error) {
     console.error("Get user level info error:", error);
-    res.status(500).json({ 
-      success: false, 
-      error: "Internal server error" 
-    });
-  }
-};
-
-// Get user by username
-export const getUserByUsername = async (req, res) => {
-  try {
-    const username = req.params.username;
-
-    // Validate that username is provided
-    if (!username) {
-      return res.status(400).json({
-        message: "Username is required",
-        error: "Missing username parameter in route",
-      });
-    }
-
-    const user = await prisma.user.findUnique({
-      where: { username: username },
-      include: {
-        userAchievements: {
-          include: {
-            achievement: true,
-          },
-        },
-      },
-    });
-
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
-    // Fetch 3 latest solo sessions separately
-    const soloSessions = await prisma.soloSession.findMany({
-      where: { userId: user.id },
-      orderBy: { startedAt: "desc" },
-      take: 5,
-    });
-
-    // Fetch all solo sessions for calculations
-    const allSoloSessions = await prisma.soloSession.findMany({
-      where: { userId: user.id },
-    });
-
-    // Use fast database counters instead of expensive queries
-    const battlesWon = user.matchesWon;
-    const totalBattles = user.totalMatches;
-
-    // Calculate stats - use fast database counters when available
-    const totalCorrectAnswers = allSoloSessions.reduce((sum, session) => sum + session.correctAnswers, 0);
-    const totalQuestions = allSoloSessions.reduce((sum, session) => sum + session.totalQuestions, 0);
-    
-    // Use database accuracy counters if available, fallback to solo session calculation
-    const accuracy = user.totalAnswers > 0 ? 
-      Math.round((user.correctAnswers / user.totalAnswers) * 100) :
-      totalQuestions > 0 ? Math.round((totalCorrectAnswers / totalQuestions) * 100) : 0;
-    
-    // New exponential level calculation with milestone bonuses
-    const levelInfo = getLevelFromXP(user.xp);
-    const tierInfo = getLevelTier(levelInfo.level);
-    const isAtMilestone = isMilestoneLevel(levelInfo.level);
-
-    // Fetch all achievements
-    const allAchievements = await prisma.achievement.findMany();
-
-    // Map user's achievements by achievementId for quick lookup
-    const userAchievementMap = {};
-    user.userAchievements.forEach(ua => {
-      userAchievementMap[ua.achievementId] = ua;
-    });
-
-    // Build userAchievements array with all achievements
-    const mergedUserAchievements = allAchievements.map(achievement => {
-      const ua = userAchievementMap[achievement.id];
-      if (ua) {
-        // User has this achievement
-        return {
-          id: ua.id,
-          progress: ua.progress,
-          unlocked: ua.unlocked,
-          updatedAt: ua.updatedAt,
-          achievement,
-        };
-      } else {
-        // User does not have this achievement yet
-        return {
-          id: null,
-          progress: 0,
-          unlocked: false,
-          updatedAt: null,
-          achievement,
-        };
-      }
-    });
-
-    // Fetch recent battles (latest 5 matches where user is user1 or user2)
-    const recentBattles = await prisma.match.findMany({
-      where: {
-        OR: [
-          { user1Id: user.id },
-          { user2Id: user.id }
-        ],
-        status: 'COMPLETED'
-      },
-      orderBy: { createdAt: 'desc' },
-      take: 5,
-      include: {
-        user1: { select: { id: true, username: true } },
-        user2: { select: { id: true, username: true } },
-        questions: true
-      }
-    });
-
-    // Then merge them manually
-    const userWithLatestSessions = {
-      ...user,
-      soloSessions,
-      userAchievements: mergedUserAchievements,
-      // New exponential level system data
-      level: levelInfo.level,
-      currentXP: user.xp,
-      currentLevelXP: levelInfo.currentLevelXP,
-      xpToNext: levelInfo.xpToNext,
-      totalXPForNextLevel: levelInfo.totalXPForNextLevel,
-      xpRequiredForCurrentLevel: levelInfo.xpRequiredForCurrentLevel,
-      progress: levelInfo.progress, // Percentage progress (0-100)
-      // Tier information
-      tier: tierInfo.tier,
-      tierName: tierInfo.tierName,
-      tierColor: tierInfo.color,
-      tierEmoji: tierInfo.emoji,
-      isAtMilestone: isAtMilestone,
-      // Legacy compatibility
-      totalXP: levelInfo.totalXPForNextLevel, // For backward compatibility
-      accuracy,
-      battlesWon,
-      totalBattles,
-      // Fast database counters
-      matchesWon: user.matchesWon,
-      matchesLost: user.matchesLost,
-      totalMatches: user.totalMatches,
-      correctAnswers: user.correctAnswers,
-      totalAnswers: user.totalAnswers,
-      // Additional stats
-      stats: {
-        totalSoloSessions: allSoloSessions.length,
-        totalCorrectAnswers,
-        totalQuestions,
-        winRate: totalBattles > 0 ? Math.round((battlesWon / totalBattles) * 100) : 0
-      },
-      // Attach recent battles for frontend profile
-      recentBattles,
-      // Onboarding status
-      isOnboarded: user.isOnboarded
-    };
-    // Return user data
-    res.status(200).json({
-      success: true,
-      data: userWithLatestSessions,
-    });
-
-    // return userWithLatestSessions;
-  } catch (error) {
-    console.error("Error fetching user data by username:", error);
-    return res.status(500).json({ message: "Internal server error" });
-  }
-};
-
-// Get user stats by username for fast access
-export const getUserStatsByUsername = async (req, res) => {
-  try {
-    const username = req.params.username;
-    
-    if (!username) {
-      return res.status(400).json({ error: "Username is required" });
-    }
-
-    const userStats = await prisma.user.findUnique({
-      where: { username: username },
-      select: {
-        id: true,
-        username: true,
-        xp: true,
-        streak: true,
-        totalMatches: true,
-        matchesWon: true,
-        matchesLost: true,
-        correctAnswers: true,
-        totalAnswers: true,
-        lastMatchAt: true
-      }
-    });
-
-    if (!userStats) {
-      return res.status(404).json({ error: "User not found" });
-    }
-
-    // Calculate derived stats
-    const winRate = userStats.totalMatches > 0 ? 
-      Math.round((userStats.matchesWon / userStats.totalMatches) * 100) : 0;
-    const accuracy = userStats.totalAnswers > 0 ? 
-      Math.round((userStats.correctAnswers / userStats.totalAnswers) * 100) : 0;
-    const matchesDrawn = userStats.totalMatches - userStats.matchesWon - userStats.matchesLost;
-
-    res.json({
-      success: true,
-      stats: {
-        ...userStats,
-        longestStreak: userStats.longestStreak,
-        winRate,
-        accuracy,
-        matchesDrawn
-      }
-    });
-  } catch (error) {
-    console.error("Error fetching user stats by username:", error);
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ success: false, error: "Internal server error" });
   }
 };

@@ -1,12 +1,20 @@
 
 import { PrismaClient } from "@prisma/client";
+import pg from 'pg';
+import { PrismaPg } from '@prisma/adapter-pg';
 import fs from "fs";
 import path from "path";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
+import dotenv from 'dotenv';
+dotenv.config();
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const prisma = new PrismaClient();
+
+const pool = new pg.Pool({ connectionString: process.env.DATABASE_URL });
+const adapter = new PrismaPg(pool);
+const prisma = new PrismaClient({ adapter });
+
 const questionsPath = path.join(__dirname, "../src/db/leetcode_mcq_questions.json");
 const questions = JSON.parse(fs.readFileSync(questionsPath, "utf8"));
 

@@ -5,7 +5,6 @@ export type Question = {
   id: string;
   text: string;
   options: string[];
-  answer: string;
   type: string;
   categories: string[];
   difficulty: string;
@@ -14,7 +13,6 @@ export type Question = {
 export type UserAnswer = {
   questionId: string;
   selectedOption: string;
-  isCorrect: boolean;
 };
 
 export type PracticeStore = {
@@ -47,17 +45,15 @@ export const usePracticeStore = create<PracticeStore>((set, get) => ({
   setSoloSessionId: (id) => set({ soloSessionId: id }),
 
   submitAnswer: (questionId, selectedOption) => {
-    const question = get().questions.find((q) => q.id === questionId);
-    if (!question) return;
-
-    const isCorrect = question.answer === selectedOption;
+    // Answers are graded server-side when the session ends
+    if (!get().questions.some((q) => q.id === questionId)) return;
     const alreadyAnswered = get().userAnswers.some((ua) => ua.questionId === questionId);
     if (alreadyAnswered) return;
 
     set((state) => ({
       userAnswers: [
         ...state.userAnswers,
-        { questionId, selectedOption, isCorrect },
+        { questionId, selectedOption },
       ],
     }));
   },

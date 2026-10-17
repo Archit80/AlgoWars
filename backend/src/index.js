@@ -1,8 +1,10 @@
+import 'dotenv/config'; // first: later modules read env vars at import time
 import app from './app.js';
 import { createServer } from 'http';
 import { initIO } from './sockets/io.js';
 import { connectRedis } from './lib/redisClient.js';
-import { initCronJobs } from './services/cronService.js';
+import { initMatchEngine } from './services/matchEngine.js';
+import { allowedOrigins } from './config.js';
 
 const httpServer = createServer(app);
 
@@ -13,16 +15,8 @@ async function start() {
   // Connect Redis first
   await connectRedis();
 
-  // Initialize Socket.IO (CORS: allow frontend origin if provided)
-  const allowedOrigins = [
-    'http://localhost:3000',
-    'https://algo-wars.vercel.app',
-    process.env.FRONTEND_ORIGIN
-  ].filter(Boolean);
-  initIO(httpServer, allowedOrigins);
-
-  // Initialize Wake Tasks (cron jobs)
-  initCronJobs();
+  const io = initIO(httpServer, allowedOrigins);
+  initMatchEngine(io);
 
   httpServer.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);

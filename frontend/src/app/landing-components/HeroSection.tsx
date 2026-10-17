@@ -3,7 +3,8 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Swords, ArrowRight, Brain } from "lucide-react";
 import { Space_Grotesk } from "next/font/google";
-import FaultyTerminal from "@/components/FaultyTerminal/FaultyTerminal";
+// WebGL background: loaded after the page renders, not part of the initial bundle
+import { LazyFaultyTerminal as FaultyTerminal } from "@/components/LazyComponents";
 import { useUser } from "@/contexts/userContext";
 // import { useEffect } from "react";
 

@@ -7,7 +7,6 @@ import Link from "next/link";
 import { Space_Grotesk } from "next/font/google";
 import { Swords, UserPlus, ArrowLeft, CheckCircle, Layers, Zap, Hash, Share2, KeyRound, ChevronsRightLeft, ArrowLeftRight, Crosshair, ListOrdered, RefreshCw, TreePine, Grid3X3, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useUserStore } from "@/stores/userStore";
 import { useMatchStore } from "@/stores/matchStore";
 import MatchService from "@/services/matchService";
 
@@ -39,7 +38,6 @@ const difficulties = [
 export default function BattleSetup() {
   const { supabaseUser } = useUser();
   const router = useRouter();
-  const { userStats } = useUserStore();
   const { setMatchData } = useMatchStore();
   const [mode, setMode] = useState<"friend" | "random" | null>(null);
   const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
@@ -65,9 +63,8 @@ export default function BattleSetup() {
     if (!mode || selectedTopics.length === 0) return;
     setLoading(true);
     try {
-      const userId = (supabaseUser as { id: string } | null)?.id || "guest"; // Adjust if auth is required
       if (mode === "friend") {
-        const res = await MatchService.createFriendMatch({ userId, topics: selectedTopics, difficulty });
+        const res = await MatchService.createFriendMatch({ topics: selectedTopics, difficulty });
         const id = res.matchId || res.match?.id;
         
         // Store match data just like in random match
@@ -89,11 +86,9 @@ export default function BattleSetup() {
         router.push(`/battle/waiting/${id}`);
       } else {
         // Random match logic
-        const res = await MatchService.createOrJoinRandomMatch({ 
-          userId, 
-          topics: selectedTopics, 
+        const res = await MatchService.createOrJoinRandomMatch({
+          topics: selectedTopics,
           difficulty,
-          xp: userStats?.xp || 0 
         });
         
         if (res.success) {

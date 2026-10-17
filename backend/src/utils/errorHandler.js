@@ -56,6 +56,12 @@ export const errorHandler = (err, req, res, next) => {
     error = new NotFoundError();
   }
 
+  // Client errors raised by Express/body-parser (e.g. malformed JSON) keep their 4xx status
+  if (err.expose && err.statusCode < 500) {
+    error.isOperational = true;
+    error.statusCode = err.statusCode;
+  }
+
   // Default to 500 server error
   if (!error.isOperational) {
     error.statusCode = 500;

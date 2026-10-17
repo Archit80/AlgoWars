@@ -1,16 +1,8 @@
-import axios from "axios";
-import { supabase } from "@/lib/supabaseClient";
-
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
+import api from "@/lib/apiClient";
 
 // Simple in-memory cache for match data (shorter TTL since it's more dynamic)
 const matchCache = new Map<string, { data: any; timestamp: number }>();
 const CACHE_TTL = 10000; // 10 seconds for match data
-
-const api = axios.create({
-  baseURL: API_BASE_URL,
-  headers: { "Content-Type": "application/json" },
-});
 
 // Cache helper functions
 const getCached = (key: string) => {
@@ -25,34 +17,21 @@ const setCache = (key: string, data: any) => {
   matchCache.set(key, { data, timestamp: Date.now() });
 };
 
-// Add auth interceptor to include Supabase JWT token
-api.interceptors.request.use(async (config) => {
-  try {
-    const { data: { session } } = await supabase.auth.getSession();
-    if (session?.access_token) {
-      config.headers.Authorization = `Bearer ${session.access_token}`;
-    }
-  } catch (error) {
-    console.error('Error getting auth session:', error);
-  }
-  return config;
-});
-
 export type BattleMode = "friend" | "random";
 
 
 const MatchService = {
-  createFriendMatch: async ({ userId, topics, difficulty }: { userId: string; topics: string[]; difficulty: string }) => {
-    const res = await api.post("/match/friend", { userId, topics, difficulty });
+  createFriendMatch: async ({ topics, difficulty }: { topics: string[]; difficulty: string }) => {
+    const res = await api.post("/match/friend", { topics, difficulty });
     return res.data;
   },
-  joinByCode: async ({ userId, roomCode }: { userId: string; roomCode: string }) => {
-    const res = await api.post("/match/join-by-code", { userId, roomCode });
+  joinByCode: async ({ roomCode }: { roomCode: string }) => {
+    const res = await api.post("/match/join-by-code", { roomCode });
     console.log("Join by code response:", res.data);
     return res.data;
   },
-  createOrJoinRandomMatch: async ({ userId, topics, difficulty, xp }: { userId: string; topics: string[]; difficulty: string; xp?: number }) => {
-    const res = await api.post("/match/random", { userId, topics, difficulty, xp });
+  createOrJoinRandomMatch: async ({ topics, difficulty }: { topics: string[]; difficulty: string }) => {
+    const res = await api.post("/match/random", { topics, difficulty });
     return res.data;
   },
   getStatus: async (matchId: string) => {
@@ -73,7 +52,16 @@ const MatchService = {
     setCache(cacheKey, res.data);
     return res.data;
   },
-  submitAnswer: async (matchId: string, payload: { userId: string; questionId: string; answer: string }) => {
+  // Polling fallback for the waiting player in case the socket missed match:found
+  getRandomStatus: async (): Promise<{ status: "matched" | "waiting"; matchId: string | null }> => {
+    const res = await api.get("/match/random/status");
+    return res.data;
+  },
+  leaveRandomQueue: async () => {
+    const res = await api.delete("/match/random");
+    return res.data;
+  },
+  submitAnswer: async (matchId: string, payload: { questionId: string; answer: string }) => {
     const res = await api.post(`/match/${matchId}/answer`, payload);
     return res.data;
   },
@@ -85,8 +73,8 @@ const MatchService = {
     const res = await api.get(`/match/${matchId}/usernames`);
     return res.data;
   },
-  getResult: async (matchId: string, userId: string) => {
-    const res = await api.get(`/match/${matchId}/result?userId=${userId}`);
+  getResult: async (matchId: string) => {
+    const res = await api.get(`/match/${matchId}/result`);
     return res.data;
   }
 };

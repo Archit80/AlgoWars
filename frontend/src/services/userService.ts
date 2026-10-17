@@ -1,17 +1,8 @@
-import axios from "axios";
-
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
+import api from "@/lib/apiClient";
 
 // Simple in-memory cache for user data
 const userCache = new Map<string, { data: any; timestamp: number }>();
 const CACHE_TTL = 60000; // 1 minute
-
-const api = axios.create({
-  baseURL: API_BASE_URL,
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
 
 // Cache helper functions
 const getCached = (key: string) => {
@@ -71,7 +62,6 @@ interface UserAchievement {
 
 export interface UserData {
   id: string;
-  email?: string;
   username: string | null;
   profilePic?: string;
   isOnboarded: boolean;

@@ -49,88 +49,78 @@ export const useUserStore = create<UserStore>()(
         loading: true,
       };
 
-  // Listen for auth state changes (singleton pattern)
-  // Extend Window type to include __userStoreAuthListener
+  // Fetch profile + stats from the backend; concurrent callers share one request
+  let inFlight: Promise<void> | null = null;
+  const loadUserData = (userId: string) => {
+    if (inFlight) return inFlight;
+    inFlight = (async () => {
+      try {
+        const [userData, userStatsRaw] = await Promise.all([
+          userService.getUserData(userId),
+          userService.getUserStats(userId),
+        ]);
+        const raw = userStatsRaw as Partial<UserStats>;
+        set({
+          isOnboarded: userData.isOnboarded,
+          userStats: {
+            xp: raw?.xp ?? 0,
+            level: raw?.level ?? 0,
+            streak: raw?.streak ?? 0,
+            totalBattles: raw?.totalBattles ?? 0,
+            wins: raw?.wins ?? 0,
+            losses: raw?.losses ?? 0,
+            accuracy: raw?.accuracy ?? 0,
+          },
+          userDataFetched: true,
+        });
+      } catch (error) {
+        console.error('Failed to fetch user data:', error);
+        set({ userDataFetched: true });
+      } finally {
+        inFlight = null;
+      }
+    })();
+    return inFlight;
+  };
+
+  // Singleton auth wiring (the store module can be evaluated more than once in dev)
   interface WindowWithAuthListener extends Window {
     __userStoreAuthListener?: boolean;
   }
 
   if (typeof window !== 'undefined' && !(window as WindowWithAuthListener).__userStoreAuthListener) {
     (window as WindowWithAuthListener).__userStoreAuthListener = true;
-    
-    // Initial auth check
-      supabase.auth.getUser().then(async ({ data }) => {
-        const user = data?.user || null;
-        const currentState = useUserStore.getState();
-        set({ supabaseUser: user });
-        // Only fetch user data if not already fetched and persisted
-        if (user?.id && !currentState.userDataFetched) {
-          try {
-            // Centralized data fetching: fetch profile and stats in parallel
-            const [userData, userStatsRaw] = await Promise.all([
-              userService.getUserData(user.id),
-              userService.getUserStats ? userService.getUserStats(user.id) : Promise.resolve({}),
-            ]);
-            // Ensure userStats always matches UserStats interface
-            const userStats: UserStats = {
-              xp: (userStatsRaw as Partial<UserStats>)?.xp ?? 0,
-              level: (userStatsRaw as Partial<UserStats>)?.level ?? 0,
-              streak: (userStatsRaw as Partial<UserStats>)?.streak ?? 0,
-              totalBattles: (userStatsRaw as Partial<UserStats>)?.totalBattles ?? 0,
-              wins: (userStatsRaw as Partial<UserStats>)?.wins ?? 0,
-              losses: (userStatsRaw as Partial<UserStats>)?.losses ?? 0,
-              accuracy: (userStatsRaw as Partial<UserStats>)?.accuracy ?? 0,
-            };
-            set({
-              isOnboarded: userData.isOnboarded,
-              userStats,
-              userDataFetched: true,
-              loading: false,
-            });
-          } catch (error) {
-            console.error('Failed to fetch user data:', error);
-            set({ userDataFetched: true, loading: false });
-          }
-        } else {
+
+    // getSession reads the stored session locally (network only if the token needs refreshing),
+    // so pages render right away. Backend data loads in the background, and only when missing.
+    supabase.auth.getSession()
+      .then(({ data }) => {
+        const user = data?.session?.user ?? null;
+        const state = useUserStore.getState();
+        if (!user) {
+          if (state.supabaseUser) state.clearUserData();
           set({ loading: false });
+          return;
         }
-      });
-    
-    // Listen for auth state changes
-    supabase.auth.onAuthStateChange(async (_event, session) => {
-      const user = session?.user || null;
-      const { clearUserData } = useUserStore.getState();
-      
-      if (user?.id) {
-        set({ supabaseUser: user });
-        try {
-          // Centralized data fetching: fetch profile and stats in parallel
-          const [userData, userStatsRaw] = await Promise.all([
-            userService.getUserData(user.id),
-            userService.getUserStats ? userService.getUserStats(user.id) : Promise.resolve({}),
-          ]);
-          const userStats: UserStats = {
-            xp: (userStatsRaw as Partial<UserStats>)?.xp ?? 0,
-            level: (userStatsRaw as Partial<UserStats>)?.level ?? 0,
-            streak: (userStatsRaw as Partial<UserStats>)?.streak ?? 0,
-            totalBattles: (userStatsRaw as Partial<UserStats>)?.totalBattles ?? 0,
-            wins: (userStatsRaw as Partial<UserStats>)?.wins ?? 0,
-            losses: (userStatsRaw as Partial<UserStats>)?.losses ?? 0,
-            accuracy: (userStatsRaw as Partial<UserStats>)?.accuracy ?? 0,
-          };
-          set({
-            isOnboarded: userData.isOnboarded,
-            userStats,
-            userDataFetched: true,
-            loading: false,
-          });
-        } catch (error) {
-          console.error('Failed to fetch user data:', error);
-          set({ userDataFetched: true, loading: false });
-        }
-      } else {
-        // Clear all user data when user logs out
-        clearUserData();
+        const sameUser = state.supabaseUser?.id === user.id;
+        set({ supabaseUser: user, loading: false, ...(sameUser ? {} : { userDataFetched: false, isOnboarded: false }) });
+        if (!sameUser || !state.userDataFetched) loadUserData(user.id);
+      })
+      .catch(() => set({ loading: false }));
+
+    // Only react to real sign-in/sign-out changes; token refreshes don't refetch the profile.
+    // (No awaiting inside this callback: supabase-js warns that it can deadlock.)
+    supabase.auth.onAuthStateChange((event, session) => {
+      const user = session?.user ?? null;
+      const state = useUserStore.getState();
+      if (!user) {
+        if (event === 'SIGNED_OUT' || state.supabaseUser) state.clearUserData();
+        return;
+      }
+      if (state.supabaseUser?.id !== user.id) {
+        // A different account signed in: drop the previous account's cached data
+        set({ supabaseUser: user, userDataFetched: false, isOnboarded: false, loading: false });
+        loadUserData(user.id);
       }
     });
   }
@@ -158,31 +148,12 @@ export const useUserStore = create<UserStore>()(
       loading: false,
     }),
 
+    // Force a re-fetch, e.g. after onboarding or an OAuth callback
     refreshUser: async () => {
-      const { data } = await supabase.auth.getUser();
-      set({ supabaseUser: data?.user || null, loading: false });
-      
-      // Fetch user data and stats from backend
-      if (data?.user?.id) {
-        try {
-          const [userData, userStatsRaw] = await Promise.all([
-            userService.getUserData(data.user.id),
-            userService.getUserStats ? userService.getUserStats(data.user.id) : Promise.resolve({}),
-          ]);
-          const userStats: UserStats = {
-            xp: (userStatsRaw as Partial<UserStats>)?.xp ?? 0,
-            level: (userStatsRaw as Partial<UserStats>)?.level ?? 0,
-            streak: (userStatsRaw as Partial<UserStats>)?.streak ?? 0,
-            totalBattles: (userStatsRaw as Partial<UserStats>)?.totalBattles ?? 0,
-            wins: (userStatsRaw as Partial<UserStats>)?.wins ?? 0,
-            losses: (userStatsRaw as Partial<UserStats>)?.losses ?? 0,
-            accuracy: (userStatsRaw as Partial<UserStats>)?.accuracy ?? 0,
-          };
-          set({ isOnboarded: userData.isOnboarded, userStats, userDataFetched: true });
-        } catch (error) {
-          console.error('Failed to fetch user data:', error);
-        }
-      }
+      const { data } = await supabase.auth.getSession();
+      const user = data?.session?.user ?? null;
+      set({ supabaseUser: user, loading: false });
+      if (user?.id) await loadUserData(user.id);
     },
 
     updateXP: (newXP: number) => {

@@ -4,7 +4,8 @@ import { useRouter } from "next/navigation";
 import { useUser } from "@/contexts/userContext";
 import { Space_Grotesk } from "next/font/google";
 import { Users, ArrowLeft } from "lucide-react";
-import { getSocket, joinUserRoom } from "@/lib/socket";
+import { getSocket } from "@/lib/socket";
+import MatchService from "@/services/matchService";
 import { useUserStore } from "@/stores/userStore";
 import { useMatchStore } from "@/stores/matchStore";
 
@@ -40,95 +41,60 @@ export default function RandomWaitingRoom() {
     };
   }, []); // Empty dependency array - timer runs independently
 
-  // Separate useEffect for socket setup - only depends on stable user ID
+  const matchedRef = React.useRef(false);
+
+  // Wait for match:found; poll as a fallback in case the socket missed the event
   useEffect(() => {
-    if (!supabaseUser || !(supabaseUser as any)?.id) {
-      console.log('[Random Waiting] No user ID available, skipping socket setup');
-      return;
-    }
+    const userId = (supabaseUser as { id?: string } | null)?.id;
+    if (!userId || timedOut) return;
 
-    console.log(`[Random Waiting] Setting up socket for user: ${(supabaseUser as any).id}`);
+    const goToMatch = (matchId: string, opponent?: { userId: string; username: string }) => {
+      if (matchedRef.current) return;
+      matchedRef.current = true;
+      setStatus("Match found! Redirecting...");
+      // The waiting player is always user1; the play page backfills anything missing here
+      setMatchData({
+        matchId,
+        user1Id: userId,
+        user2Id: opponent?.userId ?? "",
+        user1Username: username,
+        user2Username: opponent?.username,
+        user1Score: 0,
+        user2Score: 0,
+        currentIndex: 0,
+        status: "ONGOING",
+      });
+      setTimeout(() => router.push(`/battle/play/${matchId}`), 1000);
+    };
 
-    // Get socket and ensure it's connected
     const socket = getSocket();
-    
-    const setupSocket = () => {
-      // Join user-specific room for notifications
-      console.log(`[Random Waiting] Joining user room: ${(supabaseUser as any).id}`);
-      joinUserRoom((supabaseUser as any).id);
-      
-      const handleMatchFound = (data: { matchId: string; opponent: { userId: string; username: string; xp: number } }) => {
-        console.log('[Random Waiting] Match found:', data);
-        setStatus("Match found! Redirecting...");
-        
-        // Store match data in Zustand with usernames
-        setMatchData({
-          matchId: data.matchId,
-          user1Id: (supabaseUser as any).id,
-          user2Id: data.opponent.userId,
-                user1Username: username || 'You',
-          user2Username: data.opponent.username,
-          user1Score: 0,
-          user2Score: 0,
-          currentIndex: 0,
-          status: 'ONGOING'
-        });
-        
-        setTimeout(() => {
-          router.push(`/battle/play/${data.matchId}`);
-        }, 1000);
-      };
+    const onMatchFound = (data: { matchId: string; opponent: { userId: string; username: string } }) =>
+      goToMatch(data.matchId, data.opponent);
+    socket.on("match:found", onMatchFound);
 
-      socket.on('match:found', handleMatchFound);
-      console.log(`[Random Waiting] Socket listener added for match:found`);
-
-      return handleMatchFound;
-    };
-
-    // If socket is already connected, setup immediately
-    let handleMatchFound;
-    if (socket.connected) {
-      console.log(`[Random Waiting] Socket already connected`);
-      handleMatchFound = setupSocket();
-    } else {
-      // Wait for connection before setting up
-      console.log(`[Random Waiting] Waiting for socket connection...`);
-      const onConnect = () => {
-        console.log(`[Random Waiting] Socket connected, setting up...`);
-        handleMatchFound = setupSocket();
-      };
-      socket.on('connect', onConnect);
-      
-      // Cleanup connect listener
-      const cleanupConnect = () => socket.off('connect', onConnect);
-      return cleanupConnect;
-    }
-
-    // Cleanup
-    return () => {
-      if (handleMatchFound) {
-        socket.off('match:found', handleMatchFound);
+    const poll = setInterval(async () => {
+      try {
+        const res = await MatchService.getRandomStatus();
+        if (res.status === "matched" && res.matchId) goToMatch(res.matchId);
+      } catch {
+        // transient; next poll retries
       }
-      console.log(`[Random Waiting] Socket cleanup completed for user: ${(supabaseUser as { id?: string })?.id || 'unknown'}`);
-    };
-  }, [router, supabaseUser, setMatchData, username]);
+    }, 3000);
 
-  // Timeout logic: after 90s without match, show fallback UI
+    return () => {
+      socket.off("match:found", onMatchFound);
+      clearInterval(poll);
+    };
+  }, [router, supabaseUser, setMatchData, username, timedOut]);
+
+  // Timeout logic: after 90s without match, show fallback UI and leave the queue
   useEffect(() => {
-    if (!timedOut && waitingTime >= 90 && status !== 'Match found! Redirecting...') {
+    if (!timedOut && waitingTime >= 90 && !matchedRef.current) {
       setTimedOut(true);
       setStatus('No player(s) found.');
-      // Optionally disconnect or stop listening to conserve resources
-      try {
-        const socket = getSocket();
-        if (socket?.connected) {
-          socket.off('match:found');
-        }
-      } catch {
-        // swallow
-      }
+      MatchService.leaveRandomQueue().catch(() => {});
     }
-  }, [waitingTime, timedOut, status]);
+  }, [waitingTime, timedOut]);
 
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
@@ -171,10 +137,7 @@ export default function RandomWaitingRoom() {
               type="button"
               className="absolute top-6 left-6 p-3 bg-neutral-800 hover:bg-neutral-700 rounded-xl transition-all"
               onClick={() => {
-                const socket = getSocket();
-                if (socket && socket.connected) {
-                  socket.disconnect();
-                }
+                if (!matchedRef.current) MatchService.leaveRandomQueue().catch(() => {});
                 router.push('/battle');
               }}
             >

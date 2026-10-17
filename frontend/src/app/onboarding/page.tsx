@@ -4,7 +4,8 @@ import { useUser } from "../../contexts/userContext";
 import { useUserStore } from "../../stores/userStore";
 import userService from "../../services/userService";
 import { supabase } from "@/lib/supabaseClient";
-import Orb from "@/components/Orb/Orb";
+// WebGL background: loaded after the page renders, not part of the initial bundle
+import { LazyOrb as Orb } from "@/components/LazyComponents";
 import Header from "../landing-components/Header";
 import { Space_Grotesk } from "next/font/google";
 import Image from "next/image";

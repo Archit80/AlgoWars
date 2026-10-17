@@ -249,8 +249,8 @@ const ProfilePage: React.FC = () => {
         battle.user1Id === userData.id ? battle.user1Score : battle.user2Score;
       const xp =
         battle.user1Id === userData.id
-          ? battle.user1Score * 27 + 50 + (result === "win" ? 100 : 0)
-          : battle.user2Score * 27 + 50 + (result === "win" ? 100 : 0);
+          ? battle.user1Score * 25 + 50 + (result === "win" ? 100 : 0)
+          : battle.user2Score * 25 + 50 + (result === "win" ? 100 : 0);
 
       return {
         opponent,

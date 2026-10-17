@@ -3,11 +3,8 @@ import prisma from '../db/prismaClient.js';
 // Toggle save/unsave a question - Simple and clean
 export const toggleSaveQuestion = async (req, res) => {
   try {
-  const { userId, questionId, savedFrom, userAnswer, wasCorrect } = req.body;
-    
-    if (!userId || !questionId) {
-      return res.status(400).json({ error: 'userId and questionId are required' });
-    }
+    const userId = req.user.id;
+    const { questionId, savedFrom, userAnswer, wasCorrect } = req.body; // validated by middleware
 
     // Check if question exists
     const question = await prisma.question.findUnique({ where: { id: questionId } });
@@ -15,26 +12,19 @@ export const toggleSaveQuestion = async (req, res) => {
       return res.status(404).json({ error: 'Question not found' });
     }
 
-    // Check if already saved
-    const existingSaved = await prisma.savedQuestion.findUnique({
-      where: { userId_questionId: { userId, questionId } }
-    });
-
-    if (existingSaved) {
-      // UNSAVE: Remove from saved questions
-      await prisma.savedQuestion.delete({
-        where: { id: existingSaved.id }
-      });
-
+    // Unsave if present; deleteMany is atomic, so a double-click can't race into a 500
+    const { count } = await prisma.savedQuestion.deleteMany({ where: { userId, questionId } });
+    if (count > 0) {
       return res.json({
         success: true,
         action: 'unsaved',
         isSaved: false,
         message: 'Question removed from saved collection'
       });
-    } else {
-      // SAVE: Add to saved questions
-      const savedQuestion = await prisma.savedQuestion.create({
+    }
+
+    try {
+      await prisma.savedQuestion.create({
         data: {
           userId,
           questionId,
@@ -43,14 +33,16 @@ export const toggleSaveQuestion = async (req, res) => {
           wasCorrect: wasCorrect || false
         }
       });
-
-      return res.json({
-        success: true,
-        action: 'saved',
-        isSaved: true,
-        message: 'Question saved successfully'
-      });
+    } catch (e) {
+      if (e.code !== 'P2002') throw e; // a concurrent request saved it first
     }
+
+    return res.json({
+      success: true,
+      action: 'saved',
+      isSaved: true,
+      message: 'Question saved successfully'
+    });
 
   } catch (error) {
     console.error('toggleSaveQuestion error:', error);
@@ -96,9 +88,9 @@ export const checkMultipleSaved = async (req, res) => {
 export const getSavedQuestions = async (req, res) => {
   try {
     const { userId } = req.params;
-    const { page = 1, limit = 20 } = req.query;
-
-    const skip = (parseInt(page) - 1) * parseInt(limit);
+    const page = Math.max(1, parseInt(req.query.page) || 1);
+    const limit = Math.min(100, Math.max(1, parseInt(req.query.limit) || 20));
+    const skip = (page - 1) * limit;
 
     const [savedQuestions, totalCount] = await Promise.all([
       prisma.savedQuestion.findMany({
@@ -118,7 +110,7 @@ export const getSavedQuestions = async (req, res) => {
         },
         orderBy: { createdAt: 'desc' },
         skip,
-        take: parseInt(limit)
+        take: limit
       }),
       prisma.savedQuestion.count({ where: { userId } })
     ]);
@@ -127,8 +119,8 @@ export const getSavedQuestions = async (req, res) => {
       success: true,
       savedQuestions,
       pagination: {
-        currentPage: parseInt(page),
-        totalPages: Math.ceil(totalCount / parseInt(limit)),
+        currentPage: page,
+        totalPages: Math.ceil(totalCount / limit),
         totalCount
       }
     });

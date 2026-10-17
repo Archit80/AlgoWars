@@ -10,10 +10,20 @@ import "prismjs/components/prism-java";
 import "prismjs/components/prism-clike";
 import MatchService from "@/services/matchService";
 import { getSocket, joinMatchRoom, leaveMatchRoom } from "@/lib/socket";
-import { useUserStore } from "@/stores/userStore";
 import { useMatchStore } from "@/stores/matchStore";
 import { useUser } from "@/contexts/userContext";
 import { useParams, useRouter } from "next/navigation";
+
+const QUESTION_SECONDS = 60;
+
+// Sent once per question by the server; the countdown is derived locally from endsAt
+interface QuestionClock {
+  matchId: string;
+  index: number;
+  startsAt: number;
+  endsAt: number;
+  serverNow: number;
+}
 
 //TODO: opponent name -> {matchData?.user2Id} kinda like Archit vs Bob
 export default function BattlePlayPage() {
@@ -92,7 +102,31 @@ export default function BattlePlayPage() {
   const [isQuizComplete, setIsQuizComplete] = useState(false);
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [isWaitingForOpponent, setIsWaitingForOpponent] = useState(false);
-  const [serverTimeLeft, setServerTimeLeft] = useState<number | null>(null);
+  const [clock, setClock] = useState<{ index: number; startsAt: number; endsAt: number; offset: number } | null>(null);
+  const [now, setNow] = useState(() => Date.now());
+  const [waitingForOpponentJoin, setWaitingForOpponentJoin] = useState(false);
+  const clockIndexRef = React.useRef<number | null>(null);
+
+  // Re-render a few times a second while a question is live
+  useEffect(() => {
+    if (!clock) return;
+    const t = setInterval(() => setNow(Date.now()), 250);
+    return () => clearInterval(t);
+  }, [clock]);
+
+  const applyQuestion = React.useCallback((q: QuestionClock) => {
+    // Reset the answer UI only when the question actually changes (not on reconnect re-sync)
+    if (clockIndexRef.current !== q.index) {
+      clockIndexRef.current = q.index;
+      setSelectedAnswer(null);
+      setHasSubmitted(false);
+      setIsWaitingForOpponent(false);
+    }
+    setWaitingForOpponentJoin(false);
+    // offset corrects for client/server clock skew
+    setClock({ index: q.index, startsAt: q.startsAt, endsAt: q.endsAt, offset: q.serverNow - Date.now() });
+    setCurrentIndex(q.index);
+  }, []);
 
   // Use match store instead of local state
   const { currentMatch, setMatchData, updateMatchData, clearMatch } =
@@ -104,10 +138,12 @@ export default function BattlePlayPage() {
     console.log("Current match from store:", currentMatch);
   }, [currentMatch]);
 
-  // Use server time if available, otherwise fallback to local timer
-  const displayTimeLeft = serverTimeLeft !== null ? serverTimeLeft : 60;
+  const serverNow = now + (clock?.offset ?? 0);
+  const startsIn = clock ? Math.max(0, Math.ceil((clock.startsAt - serverNow) / 1000)) : 0;
+  const displayTimeLeft = clock
+    ? Math.max(0, Math.ceil((clock.endsAt - Math.max(serverNow, clock.startsAt)) / 1000))
+    : QUESTION_SECONDS;
   // const [reveal, setReveal] = React.useState<{questionId: string} | null>(null); // future use for showing correct answer
-  const userId = useUserStore((state) => state.supabaseUser?.id);
   const router = useRouter();
 
   // Route protection
@@ -158,6 +194,7 @@ export default function BattlePlayPage() {
         const state = await MatchService.getState(matchId);
         if (state.success) {
           setCurrentIndex(state.currentIndex);
+          if (state.clock) applyQuestion(state.clock);
           // Use updateMatchData to preserve existing usernames
           const matchInfo = state.match || state;
           updateMatchData({
@@ -186,7 +223,7 @@ export default function BattlePlayPage() {
       } catch {}
     }
     init();
-  }, [matchId, setMatchData, updateMatchData]);
+  }, [matchId, setMatchData, updateMatchData, applyQuestion]);
 
   // Socket handlers in separate useEffect
   React.useEffect(() => {
@@ -196,36 +233,8 @@ export default function BattlePlayPage() {
     joinMatchRoom(matchId);
     const s = getSocket();
 
-    s.on(
-      "match:state",
-      (d: {
-        currentIndex?: number;
-        user1Score?: number;
-        user2Score?: number;
-        status?: string;
-      }) => {
-        if (d.currentIndex != null) {
-          setSelectedAnswer(null);
-          setHasSubmitted(false);
-          setIsWaitingForOpponent(false);
-          setCurrentIndex(d.currentIndex);
-          setServerTimeLeft(60);
-        }
-        // Update match data while preserving usernames
-        updateMatchData({
-          currentIndex: d.currentIndex,
-          user1Score: d.user1Score,
-          user2Score: d.user2Score,
-          status: d.status,
-        });
-      }
-    );
-
-    s.on("match:timer", (d: { timeLeft?: number }) => {
-      if (d.timeLeft != null) {
-        setServerTimeLeft(d.timeLeft);
-      }
-    });
+    s.on("match:question", applyQuestion);
+    s.on("match:waiting", () => setWaitingForOpponentJoin(true));
 
     s.on("match:completed", () => {
       setIsQuizComplete(true);
@@ -238,13 +247,11 @@ export default function BattlePlayPage() {
 
     return () => {
       if (matchId) leaveMatchRoom(matchId);
-      s.off("match:state");
-      s.off("match:timer");
-      s.off("match:answer");
-      s.off("match:reveal");
+      s.off("match:question", applyQuestion);
+      s.off("match:waiting");
       s.off("match:completed");
     };
-  }, [matchId, router, updateMatchData, clearMatch]);
+  }, [matchId, router, clearMatch, applyQuestion]);
 
   // Backfill usernames if missing by calling the lightweight endpoint once
   React.useEffect(() => {
@@ -298,7 +305,6 @@ export default function BattlePlayPage() {
     try {
       const q = questions[currentIndex];
       await MatchService.submitAnswer(matchId, {
-        userId,
         questionId: q.id,
         answer: selectedAnswer,
       });
@@ -356,6 +362,23 @@ export default function BattlePlayPage() {
   // Show nothing while redirecting to login
   if (!supabaseUser) {
     return null;
+  }
+
+  if (!clock || startsIn > 0) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#0E0E0E] text-white">
+        <div className="text-center">
+          <p className="text-neutral-400 mb-2">
+            {waitingForOpponentJoin
+              ? "Waiting for your opponent to join..."
+              : !clock
+                ? "Connecting to match..."
+                : "Get ready"}
+          </p>
+          {clock && <p className="text-6xl font-bold text-lime-400">{startsIn}</p>}
+        </div>
+      </div>
+    );
   }
 
   return (
