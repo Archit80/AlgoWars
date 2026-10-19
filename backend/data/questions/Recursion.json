@@ -1,0 +1,942 @@
+[
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "What is the job of the base case in a recursive function?",
+    "options": [
+      "It returns a result directly, without another recursive call, so the recursion stops",
+      "It makes the first recursive call",
+      "It handles the largest possible input",
+      "It stores the results of earlier calls"
+    ],
+    "answer": "It returns a result directly, without another recursive call, so the recursion stops"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "A recursive function has no base case that its inputs can ever reach. What happens when it runs?",
+    "options": [
+      "It returns `0` automatically after the deepest call",
+      "It keeps calling itself until the call stack overflows",
+      "It loops forever without using any extra memory",
+      "It stops after exactly one recursive call"
+    ],
+    "answer": "It keeps calling itself until the call stack overflows"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "Which structure does the runtime use to keep track of recursive calls that have started but not yet returned?",
+    "options": [
+      "A queue",
+      "A hash table",
+      "The call stack",
+      "A priority queue"
+    ],
+    "answer": "The call stack"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "`fact(n)` returns `1` when `n == 0`, otherwise `n * fact(n - 1)`. How many calls are made in total (counting the first one) when you evaluate `fact(5)`?",
+    "options": [
+      "5",
+      "4",
+      "7",
+      "6"
+    ],
+    "answer": "6",
+    "verify": "calls = 0\ndef fact(n):\n    global calls\n    calls += 1\n    if n == 0:\n        return 1\n    return n * fact(n - 1)\nfact(5)\nprint(calls)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "What is the minimum number of moves needed to solve the Tower of Hanoi with 3 disks?",
+    "options": [
+      "7",
+      "8",
+      "6",
+      "9"
+    ],
+    "answer": "7"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "`is_even(n)` calls `is_odd(n - 1)`, and `is_odd(n)` calls `is_even(n - 1)`. What is this pattern called?",
+    "options": [
+      "Tail recursion",
+      "Mutual (indirect) recursion",
+      "Tree recursion",
+      "Memoization"
+    ],
+    "answer": "Mutual (indirect) recursion"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "A recursive function lowers `n` by 1 on each call and stops at `n == 0`. How deep does the call stack get for input `n`?",
+    "options": [
+      "O(1)",
+      "O(log n)",
+      "O(n)",
+      "O(2^n)"
+    ],
+    "answer": "O(n)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "`total(n)` should return `1 + 2 + ... + n`, with `total(0) = 0`. Which recursive case is correct?",
+    "options": [
+      "total(n) = n + total(n)",
+      "total(n) = n * total(n - 1)",
+      "total(n) = total(n - 1) - n",
+      "total(n) = n + total(n - 1)"
+    ],
+    "answer": "total(n) = n + total(n - 1)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "Pseudocode:\n```\ndef fact(n):\n    if n == 0:\n        return 1\n    return n * fact(n - 1)\nprint(fact(4))\n```\nWhat is printed?",
+    "options": [
+      "24",
+      "6",
+      "120",
+      "10"
+    ],
+    "answer": "24",
+    "verify": "def fact(n):\n    if n == 0:\n        return 1\n    return n * fact(n - 1)\nprint(fact(4))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "The print happens before the recursive call:\n```\ndef countdown(n):\n    if n == 0:\n        return\n    print(n, end=\" \")\n    countdown(n - 1)\ncountdown(3)\n```\nWhat is printed?",
+    "options": [
+      "1 2 3",
+      "3 2 1",
+      "3 2 1 0",
+      "0 1 2 3"
+    ],
+    "answer": "3 2 1",
+    "verify": "def countdown(n):\n    if n == 0:\n        return\n    print(n, end=\" \")\n    countdown(n - 1)\ncountdown(3)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "The print happens after the recursive call returns:\n```\ndef show(n):\n    if n == 0:\n        return\n    show(n - 1)\n    print(n, end=\" \")\nshow(3)\n```\nWhat is printed?",
+    "options": [
+      "3 2 1",
+      "0 1 2 3",
+      "1 2 3",
+      "1 2"
+    ],
+    "answer": "1 2 3",
+    "verify": "def show(n):\n    if n == 0:\n        return\n    show(n - 1)\n    print(n, end=\" \")\nshow(3)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "Sum of digits:\n```\ndef digit_sum(n):\n    if n == 0:\n        return 0\n    return n % 10 + digit_sum(n // 10)\nprint(digit_sum(472))\n```\nWhat is printed?",
+    "options": [
+      "9",
+      "11",
+      "2",
+      "13"
+    ],
+    "answer": "13",
+    "verify": "def digit_sum(n):\n    if n == 0:\n        return 0\n    return n % 10 + digit_sum(n // 10)\nprint(digit_sum(472))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "Pseudocode:\n```\ndef power(x, n):\n    if n == 0:\n        return 1\n    return x * power(x, n - 1)\nprint(power(2, 5))\n```\nWhat is printed?",
+    "options": [
+      "32",
+      "16",
+      "64",
+      "10"
+    ],
+    "answer": "32",
+    "verify": "def power(x, n):\n    if n == 0:\n        return 1\n    return x * power(x, n - 1)\nprint(power(2, 5))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "Reversing a string recursively:\n```\ndef rev(s):\n    if s == \"\":\n        return \"\"\n    return rev(s[1:]) + s[0]\nprint(rev(\"abc\"))\n```\nWhat is printed?",
+    "options": [
+      "abc",
+      "cba",
+      "bca",
+      "cab"
+    ],
+    "answer": "cba",
+    "verify": "def rev(s):\n    if s == \"\":\n        return \"\"\n    return rev(s[1:]) + s[0]\nprint(rev(\"abc\"))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "Pseudocode:\n```\ndef length(lst):\n    if lst == []:\n        return 0\n    return 1 + length(lst[1:])\nprint(length([5, 8, 2, 9]))\n```\nWhat is printed?",
+    "options": [
+      "3",
+      "5",
+      "4",
+      "0"
+    ],
+    "answer": "4",
+    "verify": "def length(lst):\n    if lst == []:\n        return 0\n    return 1 + length(lst[1:])\nprint(length([5, 8, 2, 9]))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "Two functions that call each other:\n```\ndef is_even(n):\n    if n == 0:\n        return True\n    return is_odd(n - 1)\ndef is_odd(n):\n    if n == 0:\n        return False\n    return is_even(n - 1)\nprint(is_even(5))\n```\nWhat is printed?",
+    "options": [
+      "True",
+      "None",
+      "An error",
+      "False"
+    ],
+    "answer": "False",
+    "verify": "def is_even(n):\n    if n == 0:\n        return True\n    return is_odd(n - 1)\ndef is_odd(n):\n    if n == 0:\n        return False\n    return is_even(n - 1)\nprint(is_even(5))"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "EASY",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "Fill the base case so `fact(n)` is correct for every `n >= 0`, including `fact(0) = 1`:\n```\ndef fact(n):\n    if ____:\n        return 1\n    return n * fact(n - 1)\n```\nWhat goes in the blank?",
+    "options": [
+      "n == 0",
+      "n == 1",
+      "n < 0",
+      "n > 0"
+    ],
+    "answer": "n == 0",
+    "verify": "import sys\nsys.setrecursionlimit(200)\ndef fact(n):\n    if __BLANK__:\n        return 1\n    return n * fact(n - 1)\ntry:\n    ok = fact(0) == 1 and fact(1) == 1 and fact(5) == 120\nexcept RecursionError:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "EASY",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "`total(n)` returns `1 + 2 + ... + n`:\n```\ndef total(n):\n    if n == 0:\n        return 0\n    return n + ____\n```\nWhat goes in the blank?",
+    "options": [
+      "total(n)",
+      "total(n - 1)",
+      "total(n - 2)",
+      "total(n + 1)"
+    ],
+    "answer": "total(n - 1)",
+    "verify": "import sys\nsys.setrecursionlimit(200)\ndef total(n):\n    if n == 0:\n        return 0\n    return n + __BLANK__\ntry:\n    ok = total(4) == 10 and total(5) == 15\nexcept RecursionError:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "EASY",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "Reverse a string recursively:\n```\ndef reverse(s):\n    if len(s) <= 1:\n        return s\n    return reverse(s[1:]) + ____\n```\nWhat goes in the blank?",
+    "options": [
+      "s[-1]",
+      "s[1:]",
+      "s[0]",
+      "s"
+    ],
+    "answer": "s[0]",
+    "verify": "import sys\nsys.setrecursionlimit(200)\ndef reverse(s):\n    if len(s) <= 1:\n        return s\n    return reverse(s[1:]) + __BLANK__\ntry:\n    ok = reverse(\"abcd\") == \"dcba\" and reverse(\"xy\") == \"yx\"\nexcept RecursionError:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "EASY",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "Count the digits of a non-negative integer:\n```\ndef count_digits(n):\n    if n < 10:\n        return 1\n    return 1 + count_digits(____)\n```\nWhat goes in the blank?",
+    "options": [
+      "n % 10",
+      "n - 10",
+      "n // 100",
+      "n // 10"
+    ],
+    "answer": "n // 10",
+    "verify": "import sys\nsys.setrecursionlimit(200)\ndef count_digits(n):\n    if n < 10:\n        return 1\n    return 1 + count_digits(__BLANK__)\ntry:\n    ok = count_digits(7) == 1 and count_digits(345) == 3 and count_digits(1000) == 4\nexcept RecursionError:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "Naive Fibonacci: `fib(n)` returns `n` if `n < 2`, otherwise `fib(n - 1) + fib(n - 2)`. How many calls in total (counting the first) does `fib(5)` make?",
+    "options": [
+      "15",
+      "5",
+      "8",
+      "9"
+    ],
+    "answer": "15",
+    "verify": "calls = 0\ndef fib(n):\n    global calls\n    calls += 1\n    if n < 2:\n        return n\n    return fib(n - 1) + fib(n - 2)\nfib(5)\nprint(calls)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "What is the minimum number of moves to solve the Tower of Hanoi with `n` disks?",
+    "options": [
+      "2n - 1",
+      "2^n - 1",
+      "n^2",
+      "2^(n-1)"
+    ],
+    "answer": "2^n - 1"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "What is the time complexity of the naive recursive Fibonacci `fib(n) = fib(n - 1) + fib(n - 2)`?",
+    "options": [
+      "O(n)",
+      "O(n^2)",
+      "O(2^n)",
+      "O(n log n)"
+    ],
+    "answer": "O(2^n)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "When is a recursive function called tail-recursive?",
+    "options": [
+      "When it calls itself exactly once per call",
+      "When its base case is written at the end of the function",
+      "When it recurses on the tail of a list",
+      "When the recursive call is the very last action, with nothing left to do after it returns"
+    ],
+    "answer": "When the recursive call is the very last action, with nothing left to do after it returns"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "`sum_to(n)` returns `n + sum_to(n - 1)` and has a correct base case at `n == 0`. In Python, `sum_to(100000)` raises `RecursionError`. Why?",
+    "options": [
+      "Each call adds a stack frame, and 100000 nested calls exceed the interpreter's recursion limit",
+      "The base case is never reached for large inputs",
+      "The running sum overflows a 32-bit integer",
+      "Python only allows recursion on inputs below 1000"
+    ],
+    "answer": "Each call adds a stack frame, and 100000 nested calls exceed the interpreter's recursion limit"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "A recursive generator makes an include/exclude choice for each element of a list of 4 distinct elements, and records the result at the end of each branch. How many subsets does it produce?",
+    "options": [
+      "8",
+      "16",
+      "15",
+      "24"
+    ],
+    "answer": "16",
+    "verify": "def subsets(items):\n    if not items:\n        return [[]]\n    rest = subsets(items[1:])\n    return rest + [[items[0]] + s for s in rest]\nprint(len(subsets([1, 2, 3, 4])))"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "What is the space complexity of the plain recursive factorial `fact(n) = n * fact(n - 1)`, counting the call stack?",
+    "options": [
+      "O(1)",
+      "O(log n)",
+      "O(n)",
+      "O(n^2)"
+    ],
+    "answer": "O(n)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "Recursive binary search halves the range on each call. What is the maximum recursion depth on a sorted list of `n` elements?",
+    "options": [
+      "O(n)",
+      "O(1)",
+      "O(n log n)",
+      "O(log n)"
+    ],
+    "answer": "O(log n)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "Printing both before and after the recursive call:\n```\ndef f(n):\n    if n == 0:\n        return\n    print(n, end=\" \")\n    f(n - 1)\n    print(n, end=\" \")\nf(3)\n```\nWhat is printed?",
+    "options": [
+      "3 2 1 1 2 3",
+      "3 2 1 0 1 2 3",
+      "1 2 3 3 2 1",
+      "3 2 1 3 2 1"
+    ],
+    "answer": "3 2 1 1 2 3",
+    "verify": "def f(n):\n    if n == 0:\n        return\n    print(n, end=\" \")\n    f(n - 1)\n    print(n, end=\" \")\nf(3)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "Counting the calls made by naive Fibonacci:\n```\ncalls = 0\ndef fib(n):\n    global calls\n    calls += 1\n    if n < 2:\n        return n\n    return fib(n - 1) + fib(n - 2)\nfib(4)\nprint(calls)\n```\nWhat is printed?",
+    "options": [
+      "3",
+      "9",
+      "5",
+      "7"
+    ],
+    "answer": "9",
+    "verify": "calls = 0\ndef fib(n):\n    global calls\n    calls += 1\n    if n < 2:\n        return n\n    return fib(n - 1) + fib(n - 2)\nfib(4)\nprint(calls)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "Building all subsets recursively:\n```\ndef subsets(items):\n    if not items:\n        return [[]]\n    rest = subsets(items[1:])\n    return rest + [[items[0]] + s for s in rest]\nresult = subsets([1, 2, 3])\nprint(len(result), result[-1])\n```\nWhat is printed?",
+    "options": [
+      "7 [1, 2, 3]",
+      "8 [3]",
+      "8 [1, 2, 3]",
+      "6 [1, 2, 3]"
+    ],
+    "answer": "8 [1, 2, 3]",
+    "verify": "def subsets(items):\n    if not items:\n        return [[]]\n    rest = subsets(items[1:])\n    return rest + [[items[0]] + s for s in rest]\nresult = subsets([1, 2, 3])\nprint(len(result), result[-1])"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "Printing a number in binary:\n```\ndef to_binary(n):\n    if n < 2:\n        print(n, end=\"\")\n        return\n    to_binary(n // 2)\n    print(n % 2, end=\"\")\nto_binary(6)\n```\nWhat is printed?",
+    "options": [
+      "011",
+      "0110",
+      "11",
+      "110"
+    ],
+    "answer": "110",
+    "verify": "def to_binary(n):\n    if n < 2:\n        print(n, end=\"\")\n        return\n    to_binary(n // 2)\n    print(n % 2, end=\"\")\nto_binary(6)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "Tower of Hanoi, counting moves:\n```\nmoves = 0\ndef hanoi(n, src, dst, via):\n    global moves\n    if n == 0:\n        return\n    hanoi(n - 1, src, via, dst)\n    moves += 1\n    hanoi(n - 1, via, dst, src)\nhanoi(4, \"A\", \"C\", \"B\")\nprint(moves)\n```\nWhat is printed?",
+    "options": [
+      "15",
+      "16",
+      "8",
+      "7"
+    ],
+    "answer": "15",
+    "verify": "moves = 0\ndef hanoi(n, src, dst, via):\n    global moves\n    if n == 0:\n        return\n    hanoi(n - 1, src, via, dst)\n    moves += 1\n    hanoi(n - 1, via, dst, src)\nhanoi(4, \"A\", \"C\", \"B\")\nprint(moves)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "Euclid's algorithm, printing each first argument:\n```\ndef gcd(a, b):\n    print(a, end=\" \")\n    if b == 0:\n        return a\n    return gcd(b, a % b)\ngcd(48, 18)\n```\nWhat is printed?",
+    "options": [
+      "48 18 12 6 0",
+      "48 18 12 6",
+      "18 12 6",
+      "48 30 12 6"
+    ],
+    "answer": "48 18 12 6",
+    "verify": "def gcd(a, b):\n    print(a, end=\" \")\n    if b == 0:\n        return a\n    return gcd(b, a % b)\ngcd(48, 18)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "Recursive palindrome check:\n```\ndef is_pal(s):\n    if len(s) <= 1:\n        return True\n    if s[0] != s[-1]:\n        return False\n    return is_pal(s[1:-1])\nprint(is_pal(\"racecar\"), is_pal(\"abca\"))\n```\nWhat is printed?",
+    "options": [
+      "True True",
+      "False False",
+      "True False",
+      "False True"
+    ],
+    "answer": "True False",
+    "verify": "def is_pal(s):\n    if len(s) <= 1:\n        return True\n    if s[0] != s[-1]:\n        return False\n    return is_pal(s[1:-1])\nprint(is_pal(\"racecar\"), is_pal(\"abca\"))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "Flattening a nested list:\n```\ndef flatten(x):\n    if not isinstance(x, list):\n        return [x]\n    out = []\n    for item in x:\n        out += flatten(item)\n    return out\nprint(flatten([1, [2, [3, 4]], 5]))\n```\nWhat is printed?",
+    "options": [
+      "[1, [2, [3, 4]], 5]",
+      "[1, 2, [3, 4], 5]",
+      "[1, 5, 2, 3, 4]",
+      "[1, 2, 3, 4, 5]"
+    ],
+    "answer": "[1, 2, 3, 4, 5]",
+    "verify": "def flatten(x):\n    if not isinstance(x, list):\n        return [x]\n    out = []\n    for item in x:\n        out += flatten(item)\n    return out\nprint(flatten([1, [2, [3, 4]], 5]))"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "Tower of Hanoi: move `n` disks from `src` to `dst` using `via`:\n```\ndef hanoi(n, src, dst, via, moves):\n    if n == 0:\n        return\n    hanoi(n - 1, src, via, dst, moves)\n    moves.append((src, dst))\n    hanoi(n - 1, ____, moves)\n```\nWhat goes in the blank?",
+    "options": [
+      "via, dst, src",
+      "src, dst, via",
+      "src, via, dst",
+      "dst, via, src"
+    ],
+    "answer": "via, dst, src",
+    "verify": "import sys\nsys.setrecursionlimit(200)\ndef hanoi(n, src, dst, via, moves):\n    if n == 0:\n        return\n    hanoi(n - 1, src, via, dst, moves)\n    moves.append((src, dst))\n    hanoi(n - 1, __BLANK__, moves)\ndef solves(n):\n    moves = []\n    hanoi(n, \"A\", \"C\", \"B\", moves)\n    pegs = {\"A\": list(range(n, 0, -1)), \"B\": [], \"C\": []}\n    for a, b in moves:\n        if not pegs[a] or (pegs[b] and pegs[b][-1] < pegs[a][-1]):\n            return False\n        pegs[b].append(pegs[a].pop())\n    return pegs[\"C\"] == list(range(n, 0, -1)) and len(moves) == 2 ** n - 1\ntry:\n    ok = solves(3) and solves(4)\nexcept RecursionError:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "Backtracking: generate every subset by choosing to include or exclude `nums[i]`:\n```\ndef subsets(nums, i, current, out):\n    if i == len(nums):\n        out.append(current[:])\n        return\n    current.append(nums[i])\n    subsets(nums, i + 1, current, out)\n    ____\n    subsets(nums, i + 1, current, out)\n```\nWhich line goes in the blank?",
+    "options": [
+      "current.pop(0)",
+      "current.pop()",
+      "current.clear()",
+      "out.pop()"
+    ],
+    "answer": "current.pop()",
+    "verify": "import sys\nsys.setrecursionlimit(200)\ndef subsets(nums, i, current, out):\n    if i == len(nums):\n        out.append(current[:])\n        return\n    current.append(nums[i])\n    subsets(nums, i + 1, current, out)\n    __BLANK__\n    subsets(nums, i + 1, current, out)\nout = []\ntry:\n    subsets([1, 2, 3], 0, [], out)\n    expected = [[], [1], [2], [3], [1, 2], [1, 3], [2, 3], [1, 2, 3]]\n    ok = sorted(out) == sorted(expected)\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "Mutual recursion for parity of a non-negative integer:\n```\ndef is_even(n):\n    if n == 0:\n        return True\n    return is_odd(n - 1)\ndef is_odd(n):\n    if n == 0:\n        return ____\n    return is_even(n - 1)\n```\nWhat goes in the blank?",
+    "options": [
+      "True",
+      "is_even(n)",
+      "False",
+      "n"
+    ],
+    "answer": "False",
+    "verify": "import sys\nsys.setrecursionlimit(200)\ndef is_even(n):\n    if n == 0:\n        return True\n    return is_odd(n - 1)\ndef is_odd(n):\n    if n == 0:\n        return __BLANK__\n    return is_even(n - 1)\ntry:\n    ok = is_odd(3) is True and is_even(3) is False and is_odd(4) is False and is_even(4) is True\nexcept RecursionError:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "All permutations of a string of distinct characters:\n```\ndef permute(s):\n    if len(s) <= 1:\n        return [s]\n    out = []\n    for i in range(len(s)):\n        for p in permute(____):\n            out.append(s[i] + p)\n    return out\n```\nWhat goes in the blank?",
+    "options": [
+      "s[i+1:]",
+      "s[1:]",
+      "s[:i]",
+      "s[:i] + s[i+1:]"
+    ],
+    "answer": "s[:i] + s[i+1:]",
+    "verify": "import sys\nfrom itertools import permutations\nsys.setrecursionlimit(200)\ndef permute(s):\n    if len(s) <= 1:\n        return [s]\n    out = []\n    for i in range(len(s)):\n        for p in permute(__BLANK__):\n            out.append(s[i] + p)\n    return out\ntry:\n    ok = sorted(permute(\"abcd\")) == sorted(\"\".join(p) for p in permutations(\"abcd\"))\nexcept RecursionError:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "Fast exponentiation computes `half = power(x, n // 2)` once, then returns `half * half` (times `x` when `n` is odd). How many recursive calls does it make, as a function of `n`?",
+    "options": [
+      "O(log n)",
+      "O(n)",
+      "O(sqrt n)",
+      "O(n log n)"
+    ],
+    "answer": "O(log n)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "A buggy fast power returns `power(x, n // 2) * power(x, n // 2)` for even `n`, calling itself twice instead of storing the result. What is its time complexity?",
+    "options": [
+      "O(log n)",
+      "O(n)",
+      "O(n log n)",
+      "O(2^n)"
+    ],
+    "answer": "O(n)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "In a backtracking search, what happens when the partial solution breaks a constraint?",
+    "options": [
+      "The search restarts from the empty solution",
+      "The partial solution keeps growing in case it becomes valid later",
+      "That branch is abandoned and the last choice is undone, so the next option can be tried",
+      "It is saved and checked again after all branches finish"
+    ],
+    "answer": "That branch is abandoned and the last choice is undone, so the next option can be tried"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "A divide-and-conquer function makes two recursive calls on halves of the input and does `O(n)` extra work per call: `T(n) = 2T(n/2) + O(n)`. What is its running time?",
+    "options": [
+      "O(n)",
+      "O(n^2)",
+      "O(log n)",
+      "O(n log n)"
+    ],
+    "answer": "O(n log n)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "`total(lst)` returns `lst[0] + total(lst[1:])`, and each slice `lst[1:]` copies the rest of the list. What is the total running time for a list of length `n`?",
+    "options": [
+      "O(n^2)",
+      "O(n)",
+      "O(n log n)",
+      "O(2^n)"
+    ],
+    "answer": "O(n^2)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "Does CPython optimize tail calls in a tail-recursive function?",
+    "options": [
+      "Yes, the interpreter reuses the current frame automatically",
+      "No; every call still uses its own stack frame, so deep recursion can still hit the limit",
+      "Only when the recursive call passes the same arguments",
+      "Only when the function has a single base case"
+    ],
+    "answer": "No; every call still uses its own stack frame, so deep recursion can still hit the limit"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "`f(n)` returns immediately when `n == 0`; otherwise it calls `f(n - 1)` three times. How many calls in total (counting the first) does `f(3)` make?",
+    "options": [
+      "27",
+      "9",
+      "40",
+      "81"
+    ],
+    "answer": "40",
+    "verify": "calls = 0\ndef f(n):\n    global calls\n    calls += 1\n    if n == 0:\n        return\n    for _ in range(3):\n        f(n - 1)\nf(3)\nprint(calls)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "Naive `fib(n)` makes about `O(2^n)` calls in total. What is the maximum depth its call stack reaches?",
+    "options": [
+      "O(2^n)",
+      "O(log n)",
+      "O(n^2)",
+      "O(n)"
+    ],
+    "answer": "O(n)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "Fast exponentiation with a call counter:\n```\ncalls = 0\ndef power(x, n):\n    global calls\n    calls += 1\n    if n == 0:\n        return 1\n    half = power(x, n // 2)\n    if n % 2 == 1:\n        return half * half * x\n    return half * half\nprint(power(3, 5), calls)\n```\nWhat is printed?",
+    "options": [
+      "243 4",
+      "243 5",
+      "243 3",
+      "125 4"
+    ],
+    "answer": "243 4",
+    "verify": "calls = 0\ndef power(x, n):\n    global calls\n    calls += 1\n    if n == 0:\n        return 1\n    half = power(x, n // 2)\n    if n % 2 == 1:\n        return half * half * x\n    return half * half\nprint(power(3, 5), calls)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "Counting N-queens solutions by backtracking:\n```\ndef solve(n, row, cols, d1, d2):\n    if row == n:\n        return 1\n    count = 0\n    for c in range(n):\n        if c in cols or row - c in d1 or row + c in d2:\n            continue\n        cols.add(c); d1.add(row - c); d2.add(row + c)\n        count += solve(n, row + 1, cols, d1, d2)\n        cols.remove(c); d1.remove(row - c); d2.remove(row + c)\n    return count\nprint(solve(4, 0, set(), set(), set()))\n```\nWhat is printed?",
+    "options": [
+      "0",
+      "2",
+      "1",
+      "4"
+    ],
+    "answer": "2",
+    "verify": "def solve(n, row, cols, d1, d2):\n    if row == n:\n        return 1\n    count = 0\n    for c in range(n):\n        if c in cols or row - c in d1 or row + c in d2:\n            continue\n        cols.add(c); d1.add(row - c); d2.add(row + c)\n        count += solve(n, row + 1, cols, d1, d2)\n        cols.remove(c); d1.remove(row - c); d2.remove(row + c)\n    return count\nprint(solve(4, 0, set(), set(), set()))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "Combination sum: count the ways to reach `target` (each candidate may be reused):\n```\ndef count(cands, target, start):\n    if target == 0:\n        return 1\n    if target < 0:\n        return 0\n    total = 0\n    for i in range(start, len(cands)):\n        total += count(cands, target - cands[i], i)\n    return total\nprint(count([2, 3, 5], 8, 0))\n```\nWhat is printed?",
+    "options": [
+      "2",
+      "4",
+      "3",
+      "6"
+    ],
+    "answer": "3",
+    "verify": "def count(cands, target, start):\n    if target == 0:\n        return 1\n    if target < 0:\n        return 0\n    total = 0\n    for i in range(start, len(cands)):\n        total += count(cands, target - cands[i], i)\n    return total\nprint(count([2, 3, 5], 8, 0))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "Two recursive calls with a print between them:\n```\ndef f(n):\n    if n == 0:\n        return\n    f(n - 1)\n    print(n, end=\" \")\n    f(n - 1)\nf(3)\n```\nWhat is printed?",
+    "options": [
+      "3 2 1 1 2 1 1",
+      "1 1 2 1 1 2 3",
+      "1 2 1 3",
+      "1 2 1 3 1 2 1"
+    ],
+    "answer": "1 2 1 3 1 2 1",
+    "verify": "def f(n):\n    if n == 0:\n        return\n    f(n - 1)\n    print(n, end=\" \")\n    f(n - 1)\nf(3)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "Generating permutations by backtracking:\n```\ndef perms(prefix, rest, out):\n    if not rest:\n        out.append(prefix)\n        return\n    for i in range(len(rest)):\n        perms(prefix + rest[i], rest[:i] + rest[i+1:], out)\nout = []\nperms(\"\", \"abc\", out)\nprint(len(out), out[3])\n```\nWhat is printed?",
+    "options": [
+      "6 bca",
+      "6 bac",
+      "6 cab",
+      "9 bca"
+    ],
+    "answer": "6 bca",
+    "verify": "def perms(prefix, rest, out):\n    if not rest:\n        out.append(prefix)\n        return\n    for i in range(len(rest)):\n        perms(prefix + rest[i], rest[:i] + rest[i+1:], out)\nout = []\nperms(\"\", \"abc\", out)\nprint(len(out), out[3])"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "Tracking the deepest call of naive Fibonacci (the first call has depth `1`):\n```\nmax_depth = 0\ndef fib(n, depth):\n    global max_depth\n    max_depth = max(max_depth, depth)\n    if n < 2:\n        return n\n    return fib(n - 1, depth + 1) + fib(n - 2, depth + 1)\nfib(6, 1)\nprint(max_depth)\n```\nWhat is printed?",
+    "options": [
+      "7",
+      "6",
+      "8",
+      "25"
+    ],
+    "answer": "6",
+    "verify": "max_depth = 0\ndef fib(n, depth):\n    global max_depth\n    max_depth = max(max_depth, depth)\n    if n < 2:\n        return n\n    return fib(n - 1, depth + 1) + fib(n - 2, depth + 1)\nfib(6, 1)\nprint(max_depth)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "Generating balanced parentheses:\n```\ndef gen(opened, closed, n, s, out):\n    if len(s) == 2 * n:\n        out.append(s)\n        return\n    if opened < n:\n        gen(opened + 1, closed, n, s + \"(\", out)\n    if closed < opened:\n        gen(opened, closed + 1, n, s + \")\", out)\nout = []\ngen(0, 0, 3, \"\", out)\nprint(len(out), out[1])\n```\nWhat is printed?",
+    "options": [
+      "6 (()())",
+      "5 ((()))",
+      "5 (()())",
+      "5 (())()"
+    ],
+    "answer": "5 (()())",
+    "verify": "def gen(opened, closed, n, s, out):\n    if len(s) == 2 * n:\n        out.append(s)\n        return\n    if opened < n:\n        gen(opened + 1, closed, n, s + \"(\", out)\n    if closed < opened:\n        gen(opened, closed + 1, n, s + \")\", out)\nout = []\ngen(0, 0, 3, \"\", out)\nprint(len(out), out[1])"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "A tail-recursive function with an accumulator:\n```\ndef f(n, acc):\n    if n == 0:\n        return acc\n    return f(n - 1, acc * 10 + n)\nprint(f(4, 0))\n```\nWhat is printed?",
+    "options": [
+      "1234",
+      "432",
+      "10",
+      "4321"
+    ],
+    "answer": "4321",
+    "verify": "def f(n, acc):\n    if n == 0:\n        return acc\n    return f(n - 1, acc * 10 + n)\nprint(f(4, 0))"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "HARD",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "Fast exponentiation in `O(log n)` multiplications:\n```\ndef power(x, n):\n    if n == 0:\n        return 1\n    half = power(x, n // 2)\n    if n % 2 == 0:\n        return ____\n    return half * half * x\n```\nWhat goes in the blank?",
+    "options": [
+      "half * half",
+      "half * half * x",
+      "half * x",
+      "half + half"
+    ],
+    "answer": "half * half",
+    "verify": "import sys\nsys.setrecursionlimit(200)\ndef power(x, n):\n    if n == 0:\n        return 1\n    half = power(x, n // 2)\n    if n % 2 == 0:\n        return __BLANK__\n    return half * half * x\ntry:\n    ok = all(power(x, n) == x ** n for x in (2, 3, 5) for n in range(0, 12))\nexcept RecursionError:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "HARD",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "N-queens: `queens[r]` is the column of the queen already placed in row `r`. Check whether a new queen at (`row`, `col`) is safe:\n```\ndef safe(queens, row, col):\n    for r, c in enumerate(queens):\n        if c == col or ____:\n            return False\n    return True\n```\nWhat goes in the blank?",
+    "options": [
+      "c - col == r - row",
+      "abs(c - col) == abs(r - row)",
+      "abs(c - col) == 1",
+      "r == row"
+    ],
+    "answer": "abs(c - col) == abs(r - row)",
+    "verify": "import sys\nsys.setrecursionlimit(200)\ndef safe(queens, row, col):\n    for r, c in enumerate(queens):\n        if c == col or __BLANK__:\n            return False\n    return True\ndef count(n, queens):\n    if len(queens) == n:\n        return 1\n    return sum(count(n, queens + [c]) for c in range(n) if safe(queens, len(queens), c))\ntry:\n    ok = count(4, []) == 2 and count(5, []) == 10 and count(6, []) == 4\nexcept RecursionError:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "HARD",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "Combination sum: each candidate may be reused any number of times, and each combination must appear only once:\n```\ndef combos(cands, target, start, cur, out):\n    if target == 0:\n        out.append(cur[:])\n        return\n    for i in range(start, len(cands)):\n        if cands[i] > target:\n            continue\n        cur.append(cands[i])\n        combos(cands, target - cands[i], ____, cur, out)\n        cur.pop()\n```\nWhat goes in the blank?",
+    "options": [
+      "i + 1",
+      "start",
+      "i",
+      "0"
+    ],
+    "answer": "i",
+    "verify": "import sys\nsys.setrecursionlimit(200)\ndef combos(cands, target, start, cur, out):\n    if target == 0:\n        out.append(cur[:])\n        return\n    for i in range(start, len(cands)):\n        if cands[i] > target:\n            continue\n        cur.append(cands[i])\n        combos(cands, target - cands[i], __BLANK__, cur, out)\n        cur.pop()\nout = []\ntry:\n    combos([2, 3, 6, 7], 7, 0, [], out)\n    ok = sorted(out) == [[2, 2, 3], [7]]\nexcept RecursionError:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "HARD",
+    "categories": [
+      "Recursion"
+    ],
+    "text": "A tail-recursive factorial that carries the running product in `acc`:\n```\ndef fact(n, acc=1):\n    if n == 0:\n        return acc\n    return fact(n - 1, ____)\n```\nWhat goes in the blank?",
+    "options": [
+      "acc",
+      "n",
+      "acc * (n - 1)",
+      "acc * n"
+    ],
+    "answer": "acc * n",
+    "verify": "import sys\nsys.setrecursionlimit(200)\ndef fact(n, acc=1):\n    if n == 0:\n        return acc\n    return fact(n - 1, __BLANK__)\ntry:\n    ok = fact(0) == 1 and fact(1) == 1 and fact(5) == 120\nexcept RecursionError:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  }
+]

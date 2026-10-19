@@ -1,0 +1,940 @@
+[
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "Bubble sort stops as soon as a full pass makes no swaps. What is its running time on an array that is already sorted?",
+    "options": [
+      "O(n)",
+      "O(n^2)",
+      "O(n log n)",
+      "O(1)"
+    ],
+    "answer": "O(n)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "Which of these sorting algorithms is stable in its standard form?",
+    "options": [
+      "Selection sort",
+      "Merge sort",
+      "Quicksort with Lomuto partition",
+      "Heap sort"
+    ],
+    "answer": "Merge sort"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "What is the maximum number of swaps selection sort performs on an array of `n` elements?",
+    "options": [
+      "n(n-1)/2",
+      "n",
+      "n - 1",
+      "n log n"
+    ],
+    "answer": "n - 1"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "Every element of an array is at most two positions away from where it belongs. Which algorithm sorts it fastest?",
+    "options": [
+      "Selection sort",
+      "Heap sort",
+      "Quicksort that always picks the first element as pivot",
+      "Insertion sort"
+    ],
+    "answer": "Insertion sort"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "In Python, what is the difference between `sorted(nums)` and `nums.sort()`?",
+    "options": [
+      "`sorted` returns a new list and leaves `nums` unchanged; `nums.sort()` sorts in place and returns `None`",
+      "`sorted` sorts in place and returns `None`; `nums.sort()` returns a new list",
+      "Both return a new sorted list and leave `nums` unchanged",
+      "`sorted` only works on lists of numbers; `nums.sort()` works on any list"
+    ],
+    "answer": "`sorted` returns a new list and leaves `nums` unchanged; `nums.sort()` sorts in place and returns `None`"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "What is the worst-case time complexity of merge sort?",
+    "options": [
+      "O(n^2)",
+      "O(n log n)",
+      "O(n)",
+      "O(log n)"
+    ],
+    "answer": "O(n log n)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "What does it mean for a sorting algorithm to be stable?",
+    "options": [
+      "It uses only O(1) extra memory",
+      "It always runs in O(n log n) time",
+      "Elements with equal keys keep their original relative order",
+      "Its running time is the same for every input of size `n`"
+    ],
+    "answer": "Elements with equal keys keep their original relative order"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "Which of these algorithms needs O(n) extra memory in its usual array implementation?",
+    "options": [
+      "Insertion sort",
+      "Heap sort",
+      "Selection sort",
+      "Merge sort"
+    ],
+    "answer": "Merge sort"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "One pass of bubble sort:\n```\na = [5, 1, 4, 2, 8]\nfor j in range(len(a) - 1):\n    if a[j] > a[j + 1]:\n        a[j], a[j + 1] = a[j + 1], a[j]\nprint(a)\n```\nWhat is printed?",
+    "options": [
+      "[1, 4, 2, 5, 8]",
+      "[1, 2, 4, 5, 8]",
+      "[1, 5, 4, 2, 8]",
+      "[1, 4, 5, 2, 8]"
+    ],
+    "answer": "[1, 4, 2, 5, 8]",
+    "verify": "a = [5, 1, 4, 2, 8]\nfor j in range(len(a) - 1):\n    if a[j] > a[j + 1]:\n        a[j], a[j + 1] = a[j + 1], a[j]\nprint(a)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "The first pass of selection sort:\n```\na = [64, 25, 12, 22, 11]\nm = 0\nfor j in range(1, len(a)):\n    if a[j] < a[m]:\n        m = j\na[0], a[m] = a[m], a[0]\nprint(a)\n```\nWhat is printed?",
+    "options": [
+      "[11, 64, 25, 12, 22]",
+      "[11, 25, 12, 22, 64]",
+      "[11, 12, 22, 25, 64]",
+      "[25, 12, 22, 11, 64]"
+    ],
+    "answer": "[11, 25, 12, 22, 64]",
+    "verify": "a = [64, 25, 12, 22, 11]\nm = 0\nfor j in range(1, len(a)):\n    if a[j] < a[m]:\n        m = j\na[0], a[m] = a[m], a[0]\nprint(a)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "Inserting the last element into the sorted prefix (one step of insertion sort):\n```\na = [2, 5, 9, 4]\nkey = a[3]\ni = 2\nwhile i >= 0 and a[i] > key:\n    a[i + 1] = a[i]\n    i -= 1\na[i + 1] = key\nprint(a)\n```\nWhat is printed?",
+    "options": [
+      "[2, 5, 4, 9]",
+      "[4, 2, 5, 9]",
+      "[2, 4, 5, 9]",
+      "[2, 5, 9, 9]"
+    ],
+    "answer": "[2, 4, 5, 9]",
+    "verify": "a = [2, 5, 9, 4]\nkey = a[3]\ni = 2\nwhile i >= 0 and a[i] > key:\n    a[i + 1] = a[i]\n    i -= 1\na[i + 1] = key\nprint(a)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "Sorting with a key function:\n```\nwords = [\"pear\", \"fig\", \"banana\", \"kiwi\"]\nresult = sorted(words, key=len)\nprint(result)\n```\nWhat is printed?",
+    "options": [
+      "['fig', 'kiwi', 'pear', 'banana']",
+      "['banana', 'pear', 'kiwi', 'fig']",
+      "['banana', 'fig', 'kiwi', 'pear']",
+      "['fig', 'pear', 'kiwi', 'banana']"
+    ],
+    "answer": "['fig', 'pear', 'kiwi', 'banana']",
+    "verify": "words = [\"pear\", \"fig\", \"banana\", \"kiwi\"]\nresult = sorted(words, key=len)\nprint(result)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "Full bubble sort, counting swaps:\n```\na = [4, 3, 1, 2]\nswaps = 0\nfor i in range(len(a) - 1):\n    for j in range(len(a) - 1 - i):\n        if a[j] > a[j + 1]:\n            a[j], a[j + 1] = a[j + 1], a[j]\n            swaps += 1\nprint(swaps)\n```\nWhat is printed?",
+    "options": [
+      "5",
+      "4",
+      "6",
+      "3"
+    ],
+    "answer": "5",
+    "verify": "a = [4, 3, 1, 2]\nswaps = 0\nfor i in range(len(a) - 1):\n    for j in range(len(a) - 1 - i):\n        if a[j] > a[j + 1]:\n            a[j], a[j + 1] = a[j + 1], a[j]\n            swaps += 1\nprint(swaps)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "The counting step of counting sort (values are in `0..3`):\n```\na = [3, 1, 3, 0, 1, 3]\ncount = [0] * 4\nfor x in a:\n    count[x] += 1\nprint(count)\n```\nWhat is printed?",
+    "options": [
+      "[1, 2, 3]",
+      "[1, 2, 0, 3]",
+      "[3, 2, 0, 1]",
+      "[0, 1, 2, 3]"
+    ],
+    "answer": "[1, 2, 0, 3]",
+    "verify": "a = [3, 1, 3, 0, 1, 3]\ncount = [0] * 4\nfor x in a:\n    count[x] += 1\nprint(count)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "A merge loop from merge sort:\n```\na = [1, 4, 7]\nb = [2, 3, 9]\ni = j = 0\nout = []\nwhile i < len(a) and j < len(b):\n    if a[i] <= b[j]:\n        out.append(a[i])\n        i += 1\n    else:\n        out.append(b[j])\n        j += 1\nprint(out)\n```\nWhat is printed?",
+    "options": [
+      "[1, 2, 3, 4, 7, 9]",
+      "[1, 2, 3, 4]",
+      "[1, 2, 3, 4, 7]",
+      "[1, 2, 3, 4, 9]"
+    ],
+    "answer": "[1, 2, 3, 4, 7]",
+    "verify": "a = [1, 4, 7]\nb = [2, 3, 9]\ni = j = 0\nout = []\nwhile i < len(a) and j < len(b):\n    if a[i] <= b[j]:\n        out.append(a[i])\n        i += 1\n    else:\n        out.append(b[j])\n        j += 1\nprint(out)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "Bubble sort with early exit, counting passes:\n```\na = [2, 1, 3, 4, 5]\npasses = 0\nfor i in range(len(a) - 1):\n    passes += 1\n    swapped = False\n    for j in range(len(a) - 1 - i):\n        if a[j] > a[j + 1]:\n            a[j], a[j + 1] = a[j + 1], a[j]\n            swapped = True\n    if not swapped:\n        break\nprint(passes)\n```\nWhat is printed?",
+    "options": [
+      "1",
+      "4",
+      "3",
+      "2"
+    ],
+    "answer": "2",
+    "verify": "a = [2, 1, 3, 4, 5]\npasses = 0\nfor i in range(len(a) - 1):\n    passes += 1\n    swapped = False\n    for j in range(len(a) - 1 - i):\n        if a[j] > a[j + 1]:\n            a[j], a[j + 1] = a[j + 1], a[j]\n            swapped = True\n    if not swapped:\n        break\nprint(passes)"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "EASY",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "Bubble sort: after pass `i`, the last `i + 1` elements are already in place.\n```\ndef bubble_sort(a):\n    for i in range(len(a) - 1):\n        for j in range(____):\n            if a[j] > a[j + 1]:\n                a[j], a[j + 1] = a[j + 1], a[j]\n    return a\n```\nWhat goes in the blank?",
+    "options": [
+      "len(a) - 1 - i",
+      "len(a) - i",
+      "len(a) - 2 - i",
+      "i"
+    ],
+    "answer": "len(a) - 1 - i",
+    "verify": "def bubble_sort(a):\n    for i in range(len(a) - 1):\n        for j in range(__BLANK__):\n            if a[j] > a[j + 1]:\n                a[j], a[j + 1] = a[j + 1], a[j]\n    return a\ntests = [[3, 2, 1], [5, 1, 4, 2, 8], [2, 2, 1, 1], [1, 2, 3], [4, 1, 3, 1, 2], []]\ntry:\n    ok = all(bubble_sort(list(t)) == sorted(t) for t in tests)\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "EASY",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "Selection sort: find the smallest element of `a[i:]` and swap it into position `i`.\n```\ndef selection_sort(a):\n    for i in range(len(a)):\n        m = i\n        for j in range(i + 1, len(a)):\n            if a[j] < a[____]:\n                m = j\n        a[i], a[m] = a[m], a[i]\n    return a\n```\nWhat goes in the blank?",
+    "options": [
+      "i",
+      "m",
+      "j - 1",
+      "0"
+    ],
+    "answer": "m",
+    "verify": "def selection_sort(a):\n    for i in range(len(a)):\n        m = i\n        for j in range(i + 1, len(a)):\n            if a[j] < a[__BLANK__]:\n                m = j\n        a[i], a[m] = a[m], a[i]\n    return a\ntests = [[3, 1, 2], [4, 1, 3, 2], [5, 5, 1, 3, 1], [1, 2, 3, 4], [9, 7, 8, 2, 6, 1]]\ntry:\n    ok = all(selection_sort(list(t)) == sorted(t) for t in tests)\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "EASY",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "Insertion sort shifts larger elements one step right to make room for `key`:\n```\ndef insertion_sort(a):\n    for i in range(1, len(a)):\n        key = a[i]\n        j = i - 1\n        while j >= 0 and ____:\n            a[j + 1] = a[j]\n            j -= 1\n        a[j + 1] = key\n    return a\n```\nWhich condition goes in the blank?",
+    "options": [
+      "a[j] < key",
+      "a[j] > a[j + 1]",
+      "a[j] > key",
+      "a[i] > key"
+    ],
+    "answer": "a[j] > key",
+    "verify": "def insertion_sort(a):\n    for i in range(1, len(a)):\n        key = a[i]\n        j = i - 1\n        while j >= 0 and __BLANK__:\n            a[j + 1] = a[j]\n            j -= 1\n        a[j + 1] = key\n    return a\ntests = [[3, 4, 1], [5, 2, 4, 6, 1, 3], [2, 2, 1, 1], [1, 2, 3, 4], [4, 3, 2, 1]]\ntry:\n    ok = all(insertion_sort(list(t)) == sorted(t) for t in tests)\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "EASY",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "Counting sort for integers in the range `0..k-1`:\n```\ndef counting_sort(a, k):\n    count = [0] * k\n    for x in a:\n        count[x] += 1\n    out = []\n    for v in range(k):\n        out.extend([v] * ____)\n    return out\n```\nWhat goes in the blank?",
+    "options": [
+      "v",
+      "count[v] - 1",
+      "count[x]",
+      "count[v]"
+    ],
+    "answer": "count[v]",
+    "verify": "def counting_sort(a, k):\n    count = [0] * k\n    for x in a:\n        count[x] += 1\n    out = []\n    for v in range(k):\n        out.extend([v] * __BLANK__)\n    return out\ntests = [([3, 1, 3, 0, 1, 3], 4), ([2, 0, 2, 1], 3), ([0, 1, 2, 3], 4), ([4, 4, 4], 5)]\ntry:\n    ok = all(counting_sort(list(t), k) == sorted(t) for t, k in tests)\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "A quicksort always uses the last element as its pivot. Which input triggers its O(n^2) worst case?",
+    "options": [
+      "An array that is already sorted",
+      "A random shuffle of distinct values",
+      "An array whose length is a power of two",
+      "An array where each pivot lands in the middle"
+    ],
+    "answer": "An array that is already sorted"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "Merge sort halves the array at each level of recursion. For `n = 1024`, how many levels of halving are needed before every sub-array has one element?",
+    "options": [
+      "1024",
+      "10",
+      "512",
+      "20"
+    ],
+    "answer": "10",
+    "verify": "n, levels = 1024, 0\nwhile n > 1:\n    n //= 2\n    levels += 1\nprint(levels)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "What is the time complexity of counting sort on `n` integers whose values lie in the range `0..k-1`?",
+    "options": [
+      "O(n log n)",
+      "O(n * k)",
+      "O(n + k)",
+      "O(k log k)"
+    ],
+    "answer": "O(n + k)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "When does counting sort beat comparison-based sorts like merge sort?",
+    "options": [
+      "When the keys are floating-point numbers with many distinct values",
+      "When the array is already nearly sorted",
+      "When memory is very limited",
+      "When the keys are integers from a range that is small compared to `n`"
+    ],
+    "answer": "When the keys are integers from a range that is small compared to `n`"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "To sort employees by department, and by name within each department, you sort by name first and then by department. Why must the second sort be stable?",
+    "options": [
+      "So employees with the same department stay in the name order produced by the first sort",
+      "So the second sort runs in O(n) time",
+      "So departments end up in alphabetical order",
+      "So the sort can be done in place"
+    ],
+    "answer": "So employees with the same department stay in the name order produced by the first sort"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "After heap sort builds a max-heap, what does each step of its second phase do?",
+    "options": [
+      "Removes the smallest leaf and appends it to the output",
+      "Swaps the root with the last heap element, shrinks the heap by one, and sifts the new root down",
+      "Swaps the root with its larger child until the array is sorted",
+      "Rebuilds the whole heap from scratch and removes the root"
+    ],
+    "answer": "Swaps the root with the last heap element, shrinks the heap by one, and sifts the new root down"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "What is the worst-case time of insertion sort, and which input causes it?",
+    "options": [
+      "O(n^2), on an already sorted array",
+      "O(n log n), on a reverse-sorted array",
+      "O(n^2), on a reverse-sorted array",
+      "O(n), on a reverse-sorted array"
+    ],
+    "answer": "O(n^2), on a reverse-sorted array"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "Which algorithm is both in-place (O(1) extra memory) and stable?",
+    "options": [
+      "Merge sort on arrays",
+      "Heap sort",
+      "Quicksort",
+      "Insertion sort"
+    ],
+    "answer": "Insertion sort"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "One Lomuto partition with the last element as pivot:\n```\na = [7, 2, 9, 4, 3, 8, 5]\npivot = a[-1]\ni = 0\nfor j in range(len(a) - 1):\n    if a[j] < pivot:\n        a[i], a[j] = a[j], a[i]\n        i += 1\na[i], a[-1] = a[-1], a[i]\nprint(a)\n```\nWhat is printed?",
+    "options": [
+      "[2, 4, 3, 5, 9, 8, 7]",
+      "[2, 4, 3, 5, 7, 8, 9]",
+      "[2, 3, 4, 5, 7, 8, 9]",
+      "[2, 4, 3, 7, 9, 8, 5]"
+    ],
+    "answer": "[2, 4, 3, 5, 9, 8, 7]",
+    "verify": "a = [7, 2, 9, 4, 3, 8, 5]\npivot = a[-1]\ni = 0\nfor j in range(len(a) - 1):\n    if a[j] < pivot:\n        a[i], a[j] = a[j], a[i]\n        i += 1\na[i], a[-1] = a[-1], a[i]\nprint(a)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "Insertion sort on a nearly-sorted array, counting comparisons:\n```\na = [1, 2, 4, 3, 5, 6]\ncomparisons = 0\nfor i in range(1, len(a)):\n    key = a[i]\n    j = i - 1\n    while j >= 0:\n        comparisons += 1\n        if a[j] <= key:\n            break\n        a[j + 1] = a[j]\n        j -= 1\n    a[j + 1] = key\nprint(comparisons)\n```\nWhat is printed?",
+    "options": [
+      "15",
+      "6",
+      "5",
+      "7"
+    ],
+    "answer": "6",
+    "verify": "a = [1, 2, 4, 3, 5, 6]\ncomparisons = 0\nfor i in range(1, len(a)):\n    key = a[i]\n    j = i - 1\n    while j >= 0:\n        comparisons += 1\n        if a[j] <= key:\n            break\n        a[j + 1] = a[j]\n        j -= 1\n    a[j + 1] = key\nprint(comparisons)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "This function splits an array the same way merge sort does:\n```\ncalls = 0\ndef split(a):\n    global calls\n    calls += 1\n    if len(a) <= 1:\n        return\n    mid = len(a) // 2\n    split(a[:mid])\n    split(a[mid:])\nsplit([5, 2, 8, 1, 9, 3])\nprint(calls)\n```\nWhat is printed?",
+    "options": [
+      "6",
+      "12",
+      "11",
+      "7"
+    ],
+    "answer": "11",
+    "verify": "calls = 0\ndef split(a):\n    global calls\n    calls += 1\n    if len(a) <= 1:\n        return\n    mid = len(a) // 2\n    split(a[:mid])\n    split(a[mid:])\nsplit([5, 2, 8, 1, 9, 3])\nprint(calls)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "Python's `sort` is stable:\n```\npeople = [(\"Ann\", 30), (\"Bob\", 25), (\"Cid\", 30), (\"Dee\", 25)]\npeople.sort(key=lambda p: p[1])\nprint([p[0] for p in people])\n```\nWhat is printed?",
+    "options": [
+      "['Dee', 'Bob', 'Ann', 'Cid']",
+      "['Bob', 'Dee', 'Cid', 'Ann']",
+      "['Ann', 'Cid', 'Bob', 'Dee']",
+      "['Bob', 'Dee', 'Ann', 'Cid']"
+    ],
+    "answer": "['Bob', 'Dee', 'Ann', 'Cid']",
+    "verify": "people = [(\"Ann\", 30), (\"Bob\", 25), (\"Cid\", 30), (\"Dee\", 25)]\npeople.sort(key=lambda p: p[1])\nprint([p[0] for p in people])"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "Sorting by two keys with a tuple:\n```\nscores = [(\"amy\", 90), (\"bo\", 85), (\"cal\", 90), (\"di\", 85)]\nranked = sorted(scores, key=lambda s: (-s[1], s[0]))\nprint([s[0] for s in ranked])\n```\nWhat is printed?",
+    "options": [
+      "['amy', 'cal', 'bo', 'di']",
+      "['bo', 'di', 'amy', 'cal']",
+      "['cal', 'amy', 'di', 'bo']",
+      "['amy', 'bo', 'cal', 'di']"
+    ],
+    "answer": "['amy', 'cal', 'bo', 'di']",
+    "verify": "scores = [(\"amy\", 90), (\"bo\", 85), (\"cal\", 90), (\"di\", 85)]\nranked = sorted(scores, key=lambda s: (-s[1], s[0]))\nprint([s[0] for s in ranked])"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "Selection sort that only swaps when needed:\n```\na = [4, 3, 2, 1]\nswaps = 0\nfor i in range(len(a)):\n    m = i\n    for j in range(i + 1, len(a)):\n        if a[j] < a[m]:\n            m = j\n    if m != i:\n        a[i], a[m] = a[m], a[i]\n        swaps += 1\nprint(swaps)\n```\nWhat is printed?",
+    "options": [
+      "6",
+      "2",
+      "3",
+      "4"
+    ],
+    "answer": "2",
+    "verify": "a = [4, 3, 2, 1]\nswaps = 0\nfor i in range(len(a)):\n    m = i\n    for j in range(i + 1, len(a)):\n        if a[j] < a[m]:\n            m = j\n    if m != i:\n        a[i], a[m] = a[m], a[i]\n        swaps += 1\nprint(swaps)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "Two passes of bubble sort:\n```\na = [6, 3, 8, 1, 5]\nfor i in range(2):\n    for j in range(len(a) - 1 - i):\n        if a[j] > a[j + 1]:\n            a[j], a[j + 1] = a[j + 1], a[j]\nprint(a)\n```\nWhat is printed?",
+    "options": [
+      "[3, 6, 1, 5, 8]",
+      "[1, 3, 5, 6, 8]",
+      "[3, 1, 5, 6, 8]",
+      "[3, 1, 6, 5, 8]"
+    ],
+    "answer": "[3, 1, 5, 6, 8]",
+    "verify": "a = [6, 3, 8, 1, 5]\nfor i in range(2):\n    for j in range(len(a) - 1 - i):\n        if a[j] > a[j + 1]:\n            a[j], a[j + 1] = a[j + 1], a[j]\nprint(a)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "Sorting by absolute value:\n```\nnums = [-3, 2, -1, 4, 1]\nresult = sorted(nums, key=abs)\nprint(result)\n```\nWhat is printed?",
+    "options": [
+      "[1, -1, 2, -3, 4]",
+      "[-3, -1, 1, 2, 4]",
+      "[4, -3, 2, -1, 1]",
+      "[-1, 1, 2, -3, 4]"
+    ],
+    "answer": "[-1, 1, 2, -3, 4]",
+    "verify": "nums = [-3, 2, -1, 4, 1]\nresult = sorted(nums, key=abs)\nprint(result)"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "The merge step of merge sort. Records are compared by `rec[0]` only, and the sort must be stable:\n```\ndef merge(left, right):\n    out, i, j = [], 0, 0\n    while i < len(left) and j < len(right):\n        if left[i][0] ____ right[j][0]:\n            out.append(left[i])\n            i += 1\n        else:\n            out.append(right[j])\n            j += 1\n    return out + left[i:] + right[j:]\n```\nWhich operator goes in the blank?",
+    "options": [
+      "<=",
+      "<",
+      ">=",
+      ">"
+    ],
+    "answer": "<=",
+    "verify": "def merge(left, right):\n    out, i, j = [], 0, 0\n    while i < len(left) and j < len(right):\n        if left[i][0] __BLANK__ right[j][0]:\n            out.append(left[i])\n            i += 1\n        else:\n            out.append(right[j])\n            j += 1\n    return out + left[i:] + right[j:]\ndef merge_sort(a):\n    if len(a) <= 1:\n        return a\n    mid = len(a) // 2\n    return merge(merge_sort(a[:mid]), merge_sort(a[mid:]))\ntests = [\n    [(2, \"a\"), (1, \"b\"), (2, \"c\"), (1, \"d\"), (3, \"e\"), (2, \"f\")],\n    [(1, \"a\"), (1, \"b\"), (1, \"c\"), (1, \"d\")],\n    [(1, \"a\"), (2, \"b\"), (3, \"c\")],\n    [(5, \"a\"), (4, \"b\"), (4, \"c\"), (0, \"d\")],\n]\nok = all(merge_sort(list(t)) == sorted(t, key=lambda r: r[0]) for t in tests)\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "Lomuto partition of `a[lo..hi]`, used by quicksort on sub-arrays:\n```\ndef partition(a, lo, hi):\n    pivot = a[hi]\n    i = ____\n    for j in range(lo, hi):\n        if a[j] < pivot:\n            a[i], a[j] = a[j], a[i]\n            i += 1\n    a[i], a[hi] = a[hi], a[i]\n    return i\n```\nWhat goes in the blank?",
+    "options": [
+      "0",
+      "lo",
+      "lo - 1",
+      "hi"
+    ],
+    "answer": "lo",
+    "verify": "def partition(a, lo, hi):\n    pivot = a[hi]\n    i = __BLANK__\n    for j in range(lo, hi):\n        if a[j] < pivot:\n            a[i], a[j] = a[j], a[i]\n            i += 1\n    a[i], a[hi] = a[hi], a[i]\n    return i\ndef quicksort(a, lo, hi):\n    if lo < hi:\n        p = partition(a, lo, hi)\n        quicksort(a, lo, p - 1)\n        quicksort(a, p + 1, hi)\n    return a\ntests = [[7, 2, 9, 4, 3, 8, 5], [3, 3, 1, 2, 1], [1, 2, 3, 4, 5], [5, 4, 3, 2, 1], [9, 1, 8, 2, 7, 3]]\ntry:\n    ok = all(quicksort(list(t), 0, len(t) - 1) == sorted(t) for t in tests)\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "Bubble sort that stops early once the array is sorted:\n```\ndef bubble_sort(a):\n    for i in range(len(a) - 1):\n        swapped = False\n        for j in range(len(a) - 1 - i):\n            if a[j] > a[j + 1]:\n                a[j], a[j + 1] = a[j + 1], a[j]\n                swapped = True\n        if ____:\n            break\n    return a\n```\nWhich condition goes in the blank so the result is always sorted and a sorted input takes one pass?",
+    "options": [
+      "swapped",
+      "i == 0",
+      "not swapped",
+      "a[0] < a[1]"
+    ],
+    "answer": "not swapped",
+    "verify": "passes = 0\ndef bubble_sort(a):\n    global passes\n    passes = 0\n    for i in range(len(a) - 1):\n        passes += 1\n        swapped = False\n        for j in range(len(a) - 1 - i):\n            if a[j] > a[j + 1]:\n                a[j], a[j + 1] = a[j + 1], a[j]\n                swapped = True\n        if __BLANK__:\n            break\n    return a\ntests = [[3, 2, 1], [1, 4, 3, 2], [5, 1, 4, 2, 8], [2, 2, 1, 1], [4, 3, 2, 1, 0]]\ntry:\n    ok = all(bubble_sort(list(t)) == sorted(t) for t in tests)\n    bubble_sort([1, 2, 3, 4, 5])\n    ok = ok and passes == 1\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "Rank students by grade (highest first), breaking ties by name (A to Z):\n```\nstudents = [(\"ana\", 88), (\"ben\", 92), (\"cy\", 88), (\"dot\", 92)]\nranked = sorted(students, key=lambda s: ____)\n# expected order: ben, dot, ana, cy\n```\nWhat goes in the blank?",
+    "options": [
+      "(s[1], s[0])",
+      "(s[0], -s[1])",
+      "(-s[1], -s[0])",
+      "(-s[1], s[0])"
+    ],
+    "answer": "(-s[1], s[0])",
+    "verify": "def rank(students):\n    return sorted(students, key=lambda s: __BLANK__)\ntry:\n    ok = rank([(\"ana\", 88), (\"ben\", 92), (\"cy\", 88), (\"dot\", 92)]) == [(\"ben\", 92), (\"dot\", 92), (\"ana\", 88), (\"cy\", 88)]\n    ok = ok and rank([(\"zed\", 70), (\"amy\", 70), (\"kim\", 95)]) == [(\"kim\", 95), (\"amy\", 70), (\"zed\", 70)]\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "Every comparison-based sort needs Ω(n log n) comparisons in the worst case. What is the core of the proof?",
+    "options": [
+      "A decision tree that sorts must have at least n! leaves, so its height is at least log2(n!) = Θ(n log n)",
+      "Each comparison can place at most one element in its final position",
+      "Merge sort is optimal, so no algorithm can use fewer comparisons than it",
+      "Every element must be compared with every other element at least once"
+    ],
+    "answer": "A decision tree that sorts must have at least n! leaves, so its height is at least log2(n!) = Θ(n log n)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "By the decision-tree lower bound, at least how many comparisons does any comparison sort need in the worst case to sort 5 distinct elements?",
+    "options": [
+      "5",
+      "7",
+      "10",
+      "12"
+    ],
+    "answer": "7",
+    "verify": "import math\nprint(math.ceil(math.log2(math.factorial(5))))"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "When counting inversions with merge sort, `right[j]` is placed into the output while `left[i:]` still has elements. How many inversions does that step add?",
+    "options": [
+      "1, for the single pair being compared",
+      "len(right) - j, the number of elements still waiting in the right half",
+      "len(left) - i, the number of elements still waiting in the left half",
+      "j - i"
+    ],
+    "answer": "len(left) - i, the number of elements still waiting in the left half"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "What are the expected and worst-case running times of quickselect (find the kth smallest) with a random pivot?",
+    "options": [
+      "O(n log n) expected, O(n log n) worst case",
+      "O(log n) expected, O(n) worst case",
+      "O(n) expected, O(n log n) worst case",
+      "O(n) expected, O(n^2) worst case"
+    ],
+    "answer": "O(n) expected, O(n^2) worst case"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "Radix sort can sort `n` fixed-width integers in O(n) time. Why doesn't this contradict the Ω(n log n) lower bound?",
+    "options": [
+      "The lower bound only applies to sorts that learn about the order by comparing pairs of keys; radix sort distributes keys by their digits",
+      "Radix sort is actually O(n log n) because of its recursion",
+      "The lower bound only applies to in-place sorts",
+      "The lower bound only applies to arrays with duplicate values"
+    ],
+    "answer": "The lower bound only applies to sorts that learn about the order by comparing pairs of keys; radix sort distributes keys by their digits"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "Quicksort uses Lomuto partition, where only elements with `a[j] < pivot` move left. What is its running time on an array of `n` equal values?",
+    "options": [
+      "O(n), because no swaps are needed",
+      "O(n^2), because every partition leaves all remaining elements on one side",
+      "O(n log n), because the pivot lands in the middle",
+      "O(n log n), the same as for a random array"
+    ],
+    "answer": "O(n^2), because every partition leaves all remaining elements on one side"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "Which algorithm guarantees O(n log n) worst-case time while using only O(1) extra memory?",
+    "options": [
+      "Merge sort",
+      "Quicksort",
+      "Heap sort",
+      "Insertion sort"
+    ],
+    "answer": "Heap sort"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "A quicksort recurses only into the smaller partition and handles the larger one with a loop. What is its worst-case recursion depth?",
+    "options": [
+      "O(n)",
+      "O(1)",
+      "O(sqrt(n))",
+      "O(log n)"
+    ],
+    "answer": "O(log n)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "The merge step of a merge-sort inversion counter, counting pairs `(x, y)` with `x` in `left`, `y` in `right` and `x > y`:\n```\nleft = [2, 5, 8]\nright = [1, 3, 9]\ni = j = inv = 0\nwhile i < len(left) and j < len(right):\n    if left[i] <= right[j]:\n        i += 1\n    else:\n        inv += len(left) - i\n        j += 1\nprint(inv)\n```\nWhat is printed?",
+    "options": [
+      "5",
+      "2",
+      "3",
+      "6"
+    ],
+    "answer": "5",
+    "verify": "left = [2, 5, 8]\nright = [1, 3, 9]\ni = j = inv = 0\nwhile i < len(left) and j < len(right):\n    if left[i] <= right[j]:\n        i += 1\n    else:\n        inv += len(left) - i\n        j += 1\nprint(inv)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "Quickselect (k is 0-indexed):\n```\ndef quickselect(a, k):\n    pivot = a[-1]\n    smaller = [x for x in a if x < pivot]\n    equal = [x for x in a if x == pivot]\n    larger = [x for x in a if x > pivot]\n    if k < len(smaller):\n        return quickselect(smaller, k)\n    if k < len(smaller) + len(equal):\n        return pivot\n    return quickselect(larger, k - len(smaller) - len(equal))\nprint(quickselect([7, 10, 4, 3, 20, 15], 2))\n```\nWhat is printed?",
+    "options": [
+      "4",
+      "7",
+      "10",
+      "15"
+    ],
+    "answer": "7",
+    "verify": "def quickselect(a, k):\n    pivot = a[-1]\n    smaller = [x for x in a if x < pivot]\n    equal = [x for x in a if x == pivot]\n    larger = [x for x in a if x > pivot]\n    if k < len(smaller):\n        return quickselect(smaller, k)\n    if k < len(smaller) + len(equal):\n        return pivot\n    return quickselect(larger, k - len(smaller) - len(equal))\nprint(quickselect([7, 10, 4, 3, 20, 15], 2))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "Hoare partition with the first element as pivot:\n```\na = [5, 3, 8, 4, 2, 7, 1, 6]\npivot = a[0]\ni, j = -1, len(a)\nwhile True:\n    i += 1\n    while a[i] < pivot:\n        i += 1\n    j -= 1\n    while a[j] > pivot:\n        j -= 1\n    if i >= j:\n        break\n    a[i], a[j] = a[j], a[i]\nprint(a, j)\n```\nWhat is printed?",
+    "options": [
+      "[1, 3, 2, 4, 8, 7, 5, 6] 4",
+      "[4, 3, 2, 1, 5, 7, 8, 6] 4",
+      "[1, 3, 2, 4, 8, 7, 5, 6] 3",
+      "[1, 3, 2, 4, 5, 8, 7, 6] 4"
+    ],
+    "answer": "[1, 3, 2, 4, 8, 7, 5, 6] 3",
+    "verify": "a = [5, 3, 8, 4, 2, 7, 1, 6]\npivot = a[0]\ni, j = -1, len(a)\nwhile True:\n    i += 1\n    while a[i] < pivot:\n        i += 1\n    j -= 1\n    while a[j] > pivot:\n        j -= 1\n    if i >= j:\n        break\n    a[i], a[j] = a[j], a[i]\nprint(a, j)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "Quicksort (Lomuto, last-element pivot) that returns how many comparisons it made, run on sorted input:\n```\ndef quicksort(a, lo, hi):\n    if lo >= hi:\n        return 0\n    pivot, i = a[hi], lo\n    for j in range(lo, hi):\n        if a[j] < pivot:\n            a[i], a[j] = a[j], a[i]\n            i += 1\n    a[i], a[hi] = a[hi], a[i]\n    return (hi - lo) + quicksort(a, lo, i - 1) + quicksort(a, i + 1, hi)\nprint(quicksort([1, 2, 3, 4, 5, 6], 0, 5))\n```\nWhat is printed?",
+    "options": [
+      "21",
+      "36",
+      "12",
+      "15"
+    ],
+    "answer": "15",
+    "verify": "def quicksort(a, lo, hi):\n    if lo >= hi:\n        return 0\n    pivot, i = a[hi], lo\n    for j in range(lo, hi):\n        if a[j] < pivot:\n            a[i], a[j] = a[j], a[i]\n            i += 1\n    a[i], a[hi] = a[hi], a[i]\n    return (hi - lo) + quicksort(a, lo, i - 1) + quicksort(a, i + 1, hi)\nprint(quicksort([1, 2, 3, 4, 5, 6], 0, 5))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "Stable counting sort with prefix sums (keys are `0..2`):\n```\na = [(2, \"a\"), (0, \"b\"), (2, \"c\"), (1, \"d\"), (0, \"e\")]\ncount = [0, 0, 0]\nfor k, _ in a:\n    count[k] += 1\nfor v in range(1, 3):\n    count[v] += count[v - 1]\nout = [None] * len(a)\nfor k, tag in reversed(a):\n    count[k] -= 1\n    out[count[k]] = tag\nprint(\"\".join(out))\n```\nWhat is printed?",
+    "options": [
+      "bedac",
+      "ebdca",
+      "bedca",
+      "ebdac"
+    ],
+    "answer": "bedac",
+    "verify": "a = [(2, \"a\"), (0, \"b\"), (2, \"c\"), (1, \"d\"), (0, \"e\")]\ncount = [0, 0, 0]\nfor k, _ in a:\n    count[k] += 1\nfor v in range(1, 3):\n    count[v] += count[v - 1]\nout = [None] * len(a)\nfor k, tag in reversed(a):\n    count[k] -= 1\n    out[count[k]] = tag\nprint(\"\".join(out))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "Selection sort on records, comparing only the number:\n```\na = [(3, \"x\"), (3, \"y\"), (1, \"z\")]\nfor i in range(len(a)):\n    m = i\n    for j in range(i + 1, len(a)):\n        if a[j][0] < a[m][0]:\n            m = j\n    a[i], a[m] = a[m], a[i]\nprint([t for _, t in a])\n```\nWhat is printed?",
+    "options": [
+      "['z', 'x', 'y']",
+      "['z', 'y', 'x']",
+      "['x', 'y', 'z']",
+      "['y', 'x', 'z']"
+    ],
+    "answer": "['z', 'y', 'x']",
+    "verify": "a = [(3, \"x\"), (3, \"y\"), (1, \"z\")]\nfor i in range(len(a)):\n    m = i\n    for j in range(i + 1, len(a)):\n        if a[j][0] < a[m][0]:\n            m = j\n    a[i], a[m] = a[m], a[i]\nprint([t for _, t in a])"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "One extraction step of heap sort on a max-heap:\n```\na = [9, 7, 8, 3, 5, 6]\nn = len(a) - 1\na[0], a[n] = a[n], a[0]\ni = 0\nwhile 2 * i + 1 < n:\n    c = 2 * i + 1\n    if c + 1 < n and a[c + 1] > a[c]:\n        c += 1\n    if a[i] >= a[c]:\n        break\n    a[i], a[c] = a[c], a[i]\n    i = c\nprint(a)\n```\nWhat is printed?",
+    "options": [
+      "[7, 6, 8, 3, 5, 9]",
+      "[8, 7, 9, 3, 5, 6]",
+      "[8, 7, 6, 3, 5, 9]",
+      "[6, 7, 8, 3, 5, 9]"
+    ],
+    "answer": "[8, 7, 6, 3, 5, 9]",
+    "verify": "a = [9, 7, 8, 3, 5, 6]\nn = len(a) - 1\na[0], a[n] = a[n], a[0]\ni = 0\nwhile 2 * i + 1 < n:\n    c = 2 * i + 1\n    if c + 1 < n and a[c + 1] > a[c]:\n        c += 1\n    if a[i] >= a[c]:\n        break\n    a[i], a[c] = a[c], a[i]\n    i = c\nprint(a)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "Two stable sorts in a row:\n```\nrows = [(\"b\", 2), (\"a\", 1), (\"b\", 1), (\"a\", 2)]\nrows.sort(key=lambda r: r[1])\nrows.sort(key=lambda r: r[0])\nprint(rows)\n```\nWhat is printed?",
+    "options": [
+      "[('a', 1), ('b', 1), ('a', 2), ('b', 2)]",
+      "[('a', 2), ('a', 1), ('b', 2), ('b', 1)]",
+      "[('a', 1), ('a', 2), ('b', 2), ('b', 1)]",
+      "[('a', 1), ('a', 2), ('b', 1), ('b', 2)]"
+    ],
+    "answer": "[('a', 1), ('a', 2), ('b', 1), ('b', 2)]",
+    "verify": "rows = [(\"b\", 2), (\"a\", 1), (\"b\", 1), (\"a\", 2)]\nrows.sort(key=lambda r: r[1])\nrows.sort(key=lambda r: r[0])\nprint(rows)"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "HARD",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "The merge step of an inversion counter (`left` and `right` are sorted halves):\n```\ndef merge_count(left, right):\n    out, inv, i, j = [], 0, 0, 0\n    while i < len(left) and j < len(right):\n        if left[i] <= right[j]:\n            out.append(left[i])\n            i += 1\n        else:\n            out.append(right[j])\n            j += 1\n            inv += ____\n    return out + left[i:] + right[j:], inv\n```\nWhat goes in the blank?",
+    "options": [
+      "len(left) - i",
+      "1",
+      "len(right) - j",
+      "i"
+    ],
+    "answer": "len(left) - i",
+    "verify": "def merge_count(left, right):\n    out, inv, i, j = [], 0, 0, 0\n    while i < len(left) and j < len(right):\n        if left[i] <= right[j]:\n            out.append(left[i])\n            i += 1\n        else:\n            out.append(right[j])\n            j += 1\n            inv += __BLANK__\n    return out + left[i:] + right[j:], inv\ndef count(a):\n    if len(a) <= 1:\n        return a, 0\n    mid = len(a) // 2\n    left, x = count(a[:mid])\n    right, y = count(a[mid:])\n    merged, z = merge_count(left, right)\n    return merged, x + y + z\ndef brute(a):\n    return sum(a[p] > a[q] for p in range(len(a)) for q in range(p + 1, len(a)))\ntests = [[3, 1, 4, 2, 5, 0], [2, 2, 1, 1], [1, 2, 3, 4], [5, 4, 3, 2, 1], [1, 5, 2, 4, 3, 3]]\nok = all(count(t)[1] == brute(t) for t in tests)\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "HARD",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "Iterative quickselect. `partition(a, lo, hi)` is Lomuto partition and returns the pivot's final index.\n```\ndef kth_smallest(a, k):\n    lo, hi = 0, len(a) - 1\n    while lo <= hi:\n        p = partition(a, lo, hi)\n        if p == k:\n            return a[p]\n        if k < p:\n            hi = p - 1\n        else:\n            ____\n```\nWhich line goes in the blank?",
+    "options": [
+      "hi = p - 1",
+      "lo = p + 1",
+      "hi = p + 1",
+      "k = k - p - 1"
+    ],
+    "answer": "lo = p + 1",
+    "verify": "def partition(a, lo, hi):\n    pivot = a[hi]\n    i = lo\n    for j in range(lo, hi):\n        if a[j] < pivot:\n            a[i], a[j] = a[j], a[i]\n            i += 1\n    a[i], a[hi] = a[hi], a[i]\n    return i\ndef kth_smallest(a, k):\n    lo, hi = 0, len(a) - 1\n    steps = 0\n    while lo <= hi and steps < 200:\n        steps += 1\n        p = partition(a, lo, hi)\n        if p == k:\n            return a[p]\n        if k < p:\n            hi = p - 1\n        else:\n            __BLANK__\n    return None\ntests = [[7, 10, 4, 3, 20, 15], [3, 3, 1, 2, 1], [1, 2, 3, 4, 5], [5, 4, 3, 2, 1], [9, 1, 8, 2, 7, 3, 6]]\ntry:\n    ok = all(kth_smallest(list(t), k) == sorted(t)[k] for t in tests for k in range(len(t)))\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "HARD",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "Heap sort. `sift_down(a, i, size)` restores the max-heap property within `a[0:size]`.\n```\ndef heap_sort(a):\n    n = len(a)\n    for i in range(n // 2 - 1, -1, -1):\n        sift_down(a, i, n)\n    for end in range(n - 1, 0, -1):\n        a[0], a[end] = a[end], a[0]\n        sift_down(a, 0, ____)\n    return a\n```\nWhat goes in the blank?",
+    "options": [
+      "end + 1",
+      "n",
+      "end",
+      "end - 1"
+    ],
+    "answer": "end",
+    "verify": "def sift_down(a, i, size):\n    while 2 * i + 1 < size:\n        c = 2 * i + 1\n        if c + 1 < size and a[c + 1] > a[c]:\n            c += 1\n        if a[i] >= a[c]:\n            break\n        a[i], a[c] = a[c], a[i]\n        i = c\ndef heap_sort(a):\n    n = len(a)\n    for i in range(n // 2 - 1, -1, -1):\n        sift_down(a, i, n)\n    for end in range(n - 1, 0, -1):\n        a[0], a[end] = a[end], a[0]\n        sift_down(a, 0, __BLANK__)\n    return a\ntests = [[9, 7, 8, 3, 5, 6], [3, 3, 1, 2, 1], [1, 2, 3, 4, 5], [5, 4, 3, 2, 1], [4, 10, 3, 5, 1, 8, 2]]\ntry:\n    ok = all(heap_sort(list(t)) == sorted(t) for t in tests)\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "HARD",
+    "categories": [
+      "Sorting"
+    ],
+    "text": "Hoare partition with the middle element as pivot. Quicksort then recurses on `a[lo..p]` and `a[p+1..hi]`.\n```\ndef partition(a, lo, hi):\n    pivot = a[(lo + hi) // 2]\n    i, j = lo - 1, hi + 1\n    while True:\n        i += 1\n        while a[i] ____ pivot:\n            i += 1\n        j -= 1\n        while a[j] > pivot:\n            j -= 1\n        if i >= j:\n            return j\n        a[i], a[j] = a[j], a[i]\n```\nWhich operator goes in the blank?",
+    "options": [
+      "<=",
+      ">",
+      "!=",
+      "<"
+    ],
+    "answer": "<",
+    "verify": "def partition(a, lo, hi):\n    pivot = a[(lo + hi) // 2]\n    i, j = lo - 1, hi + 1\n    while True:\n        i += 1\n        while a[i] __BLANK__ pivot:\n            i += 1\n        j -= 1\n        while a[j] > pivot:\n            j -= 1\n        if i >= j:\n            return j\n        a[i], a[j] = a[j], a[i]\ndef quicksort(a, lo, hi):\n    if lo < hi:\n        p = partition(a, lo, hi)\n        quicksort(a, lo, p)\n        quicksort(a, p + 1, hi)\n    return a\ntests = [[5, 3, 8, 4, 2, 7, 1, 6], [3, 3, 1, 2, 1], [1, 2, 3, 4, 5], [5, 4, 3, 2, 1], [2, 2, 2, 2], [9, 1]]\ntry:\n    ok = all(quicksort(list(t), 0, len(t) - 1) == sorted(t) for t in tests)\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  }
+]

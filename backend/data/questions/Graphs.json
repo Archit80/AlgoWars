@@ -1,0 +1,939 @@
+[
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "A simple undirected graph has `n` vertices. What is the maximum number of edges it can have?",
+    "options": [
+      "n(n-1)/2",
+      "n(n-1)",
+      "n^2",
+      "n-1"
+    ],
+    "answer": "n(n-1)/2"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "Which data structure does breadth-first search (BFS) use to decide which vertex to visit next?",
+    "options": [
+      "A stack (last in, first out)",
+      "A queue (first in, first out)",
+      "A priority queue ordered by degree",
+      "A sorted array of vertices"
+    ],
+    "answer": "A queue (first in, first out)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "How much memory does an adjacency matrix use for a graph with `V` vertices and `E` edges?",
+    "options": [
+      "O(V + E)",
+      "O(E)",
+      "O(V^2)",
+      "O(V log V)"
+    ],
+    "answer": "O(V^2)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "A tree is a connected graph with no cycles. If a tree has `n` vertices, how many edges does it have?",
+    "options": [
+      "n",
+      "n + 1",
+      "2n - 1",
+      "n - 1"
+    ],
+    "answer": "n - 1"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "An undirected graph has `E` edges. What is the sum of the degrees of all its vertices?",
+    "options": [
+      "2E",
+      "E",
+      "E / 2",
+      "E + V"
+    ],
+    "answer": "2E"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "You need the path with the fewest edges between two vertices in an unweighted graph. Which algorithm finds it directly?",
+    "options": [
+      "Depth-first search",
+      "Breadth-first search",
+      "Kruskal's algorithm",
+      "Topological sort"
+    ],
+    "answer": "Breadth-first search"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "In a directed graph, what does the in-degree of a vertex count?",
+    "options": [
+      "The number of edges leaving it",
+      "The number of vertices reachable from it",
+      "The number of edges pointing into it",
+      "The length of the longest path ending at it"
+    ],
+    "answer": "The number of edges pointing into it"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "Which representation lets you list all neighbours of a vertex in time proportional to its degree?",
+    "options": [
+      "Adjacency matrix",
+      "Edge list sorted by weight",
+      "Incidence matrix",
+      "Adjacency list"
+    ],
+    "answer": "Adjacency list"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "Pseudocode:\n```\ngraph = {0: [1, 2], 1: [0, 2, 3], 2: [0, 1], 3: [1]}\nprint(len(graph[1]))\n```\nWhat is printed?",
+    "options": [
+      "3",
+      "2",
+      "4",
+      "1"
+    ],
+    "answer": "3",
+    "verify": "graph = {0: [1, 2], 1: [0, 2, 3], 2: [0, 1], 3: [1]}\nprint(len(graph[1]))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "Pseudocode:\n```\ngraph = {\"A\": [\"B\", \"C\"], \"B\": [\"A\"], \"C\": [\"A\", \"D\"], \"D\": [\"C\"]}\ntotal = 0\nfor node in graph:\n    total += len(graph[node])\nprint(total // 2)\n```\nThis graph is undirected. What is printed?",
+    "options": [
+      "6",
+      "3",
+      "4",
+      "2"
+    ],
+    "answer": "3",
+    "verify": "graph = {\"A\": [\"B\", \"C\"], \"B\": [\"A\"], \"C\": [\"A\", \"D\"], \"D\": [\"C\"]}\ntotal = 0\nfor node in graph:\n    total += len(graph[node])\nprint(total // 2)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "Breadth-first search from vertex `0`:\n```\ngraph = {0: [1, 2], 1: [3], 2: [3], 3: []}\nvisited = [0]\nqueue = [0]\nwhile queue:\n    node = queue.pop(0)\n    for nxt in graph[node]:\n        if nxt not in visited:\n            visited.append(nxt)\n            queue.append(nxt)\nprint(visited)\n```\nWhat is printed?",
+    "options": [
+      "[0, 1, 3, 2]",
+      "[0, 2, 1, 3]",
+      "[0, 1, 2, 3]",
+      "[0, 1, 2, 3, 3]"
+    ],
+    "answer": "[0, 1, 2, 3]",
+    "verify": "graph = {0: [1, 2], 1: [3], 2: [3], 3: []}\nvisited = [0]\nqueue = [0]\nwhile queue:\n    node = queue.pop(0)\n    for nxt in graph[node]:\n        if nxt not in visited:\n            visited.append(nxt)\n            queue.append(nxt)\nprint(visited)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "An adjacency matrix:\n```\nm = [[0, 1, 1],\n     [1, 0, 0],\n     [1, 0, 0]]\nprint(sum(m[0]))\n```\nWhat is printed?",
+    "options": [
+      "1",
+      "3",
+      "0",
+      "2"
+    ],
+    "answer": "2",
+    "verify": "m = [[0, 1, 1],\n     [1, 0, 0],\n     [1, 0, 0]]\nprint(sum(m[0]))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "Directed edges as `(from, to)` pairs:\n```\nedges = [(0, 1), (0, 2), (1, 2), (3, 2)]\nindeg = [0, 0, 0, 0]\nfor u, v in edges:\n    indeg[v] += 1\nprint(indeg)\n```\nWhat is printed?",
+    "options": [
+      "[0, 1, 3, 0]",
+      "[2, 1, 0, 1]",
+      "[0, 1, 2, 0]",
+      "[1, 1, 3, 0]"
+    ],
+    "answer": "[0, 1, 3, 0]",
+    "verify": "edges = [(0, 1), (0, 2), (1, 2), (3, 2)]\nindeg = [0, 0, 0, 0]\nfor u, v in edges:\n    indeg[v] += 1\nprint(indeg)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "Recursive depth-first search:\n```\ngraph = {1: [2, 3], 2: [4], 3: [], 4: []}\norder = []\ndef dfs(node):\n    order.append(node)\n    for nxt in graph[node]:\n        dfs(nxt)\ndfs(1)\nprint(order)\n```\nWhat is printed?",
+    "options": [
+      "[1, 2, 3, 4]",
+      "[1, 2, 4, 3]",
+      "[1, 3, 2, 4]",
+      "[4, 2, 3, 1]"
+    ],
+    "answer": "[1, 2, 4, 3]",
+    "verify": "graph = {1: [2, 3], 2: [4], 3: [], 4: []}\norder = []\ndef dfs(node):\n    order.append(node)\n    for nxt in graph[node]:\n        dfs(nxt)\ndfs(1)\nprint(order)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "Pseudocode:\n```\ngraph = {\"A\": [\"B\"], \"B\": [\"A\", \"C\"], \"C\": [\"B\"]}\nprint(\"C\" in graph[\"A\"])\n```\nWhat is printed?",
+    "options": [
+      "True",
+      "None",
+      "False",
+      "C"
+    ],
+    "answer": "False",
+    "verify": "graph = {\"A\": [\"B\"], \"B\": [\"A\", \"C\"], \"C\": [\"B\"]}\nprint(\"C\" in graph[\"A\"])"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "Pseudocode:\n```\ngraph = {0: [1], 1: [0], 2: [], 3: []}\ncount = 0\nfor node in graph:\n    if len(graph[node]) == 0:\n        count += 1\nprint(count)\n```\nWhat is printed?",
+    "options": [
+      "0",
+      "1",
+      "4",
+      "2"
+    ],
+    "answer": "2",
+    "verify": "graph = {0: [1], 1: [0], 2: [], 3: []}\ncount = 0\nfor node in graph:\n    if len(graph[node]) == 0:\n        count += 1\nprint(count)"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "EASY",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "Fill the blank so that BFS never adds the same vertex to the queue twice:\n```\ndef bfs(graph, start):\n    visited = {start}\n    queue = [start]\n    order = []\n    while queue:\n        node = queue.pop(0)\n        order.append(node)\n        for nxt in graph[node]:\n            if nxt not in visited:\n                ____\n                queue.append(nxt)\n    return order\n```\nWhich line goes in the blank?",
+    "options": [
+      "visited.add(nxt)",
+      "visited.add(node)",
+      "order.append(nxt)",
+      "queue.pop(0)"
+    ],
+    "answer": "visited.add(nxt)",
+    "verify": "def bfs(graph, start):\n    visited = {start}\n    queue = [start]\n    order = []\n    while queue and len(order) < 20:\n        node = queue.pop(0)\n        order.append(node)\n        for nxt in graph[node]:\n            if nxt not in visited:\n                __BLANK__\n                queue.append(nxt)\n    return order\ng = {0: [1, 2], 1: [0, 3], 2: [0, 3], 3: [1, 2]}\nprint(\"OK\" if bfs(g, 0) == [0, 1, 2, 3] else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "EASY",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "This function counts the edges of an undirected graph from its adjacency matrix:\n```\ndef count_edges(m):\n    total = 0\n    for row in m:\n        total += sum(row)\n    return ____\n```\nWhat goes in the blank?",
+    "options": [
+      "total",
+      "total // 2",
+      "total * 2",
+      "len(m)"
+    ],
+    "answer": "total // 2",
+    "verify": "def count_edges(m):\n    total = 0\n    for row in m:\n        total += sum(row)\n    return __BLANK__\na = [[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]]\nb = [[0, 1, 1], [1, 0, 1], [1, 1, 0]]\nprint(\"OK\" if count_edges(a) == 2 and count_edges(b) == 3 else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "EASY",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "Return the degree of `node` in an adjacency-list graph:\n```\ndef degree(graph, node):\n    return ____\n```\nWhat goes in the blank?",
+    "options": [
+      "len(graph)",
+      "sum(graph[node])",
+      "len(graph[node])",
+      "graph[node]"
+    ],
+    "answer": "len(graph[node])",
+    "verify": "def degree(graph, node):\n    return __BLANK__\ng = {0: [1, 2], 1: [0], 2: [0]}\nprint(\"OK\" if degree(g, 0) == 2 and degree(g, 1) == 1 else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "EASY",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "Recursive DFS on a graph that may contain cycles:\n```\ndef dfs(graph, node, visited):\n    if ____:\n        return\n    visited.add(node)\n    for nxt in graph[node]:\n        dfs(graph, nxt, visited)\n```\nWhat condition goes in the blank so the search terminates and visits every reachable vertex once?",
+    "options": [
+      "node not in visited",
+      "len(visited) == 0",
+      "visited",
+      "node in visited"
+    ],
+    "answer": "node in visited",
+    "verify": "def dfs(graph, node, visited):\n    if __BLANK__:\n        return\n    visited.add(node)\n    for nxt in graph[node]:\n        dfs(graph, nxt, visited)\nseen = set()\ndfs({0: [1], 1: [2], 2: [0]}, 0, seen)\nprint(\"OK\" if seen == {0, 1, 2} else \"NO\")"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "What is the time complexity of BFS on a graph stored as an adjacency list with `V` vertices and `E` edges?",
+    "options": [
+      "O(V + E)",
+      "O(V^2)",
+      "O(E log V)",
+      "O(V * E)"
+    ],
+    "answer": "O(V + E)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "A directed graph has a topological ordering if and only if it...",
+    "options": [
+      "is strongly connected",
+      "has no directed cycles",
+      "has exactly one vertex with in-degree 0",
+      "has no vertex with out-degree 0"
+    ],
+    "answer": "has no directed cycles"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "Why can Dijkstra's algorithm return wrong distances on some graphs?",
+    "options": [
+      "It cannot handle cycles",
+      "It only works on undirected graphs",
+      "It assumes no edge has a negative weight",
+      "It fails when the graph is disconnected"
+    ],
+    "answer": "It assumes no edge has a negative weight"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "Kahn's algorithm for topological sorting starts by putting which vertices in the queue?",
+    "options": [
+      "All vertices with out-degree 0",
+      "The vertex with the highest degree",
+      "One arbitrary vertex",
+      "All vertices with in-degree 0"
+    ],
+    "answer": "All vertices with in-degree 0"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "During DFS on an undirected graph, which observation proves the graph has a cycle?",
+    "options": [
+      "Reaching an already-visited neighbour that is not the current vertex's parent",
+      "Reaching any already-visited neighbour",
+      "Finding a vertex with degree greater than 2",
+      "Finishing DFS with more than one tree"
+    ],
+    "answer": "Reaching an already-visited neighbour that is not the current vertex's parent"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "What does path compression do in a union-find (disjoint set) structure?",
+    "options": [
+      "Merges the two smallest sets first",
+      "Points each visited node directly at its root during find, so later finds are faster",
+      "Removes nodes that belong to only one set",
+      "Stores every set as a sorted array"
+    ],
+    "answer": "Points each visited node directly at its root during find, so later finds are faster"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "Which technique checks whether a graph is bipartite?",
+    "options": [
+      "Running Dijkstra from every vertex",
+      "Computing a minimum spanning tree",
+      "Two-colouring the vertices with BFS or DFS",
+      "Topological sorting"
+    ],
+    "answer": "Two-colouring the vertices with BFS or DFS"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "In what order does Kruskal's algorithm consider edges?",
+    "options": [
+      "Decreasing weight",
+      "BFS order from the root",
+      "The order they were added to the graph",
+      "Increasing weight"
+    ],
+    "answer": "Increasing weight"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "Counting connected components with an explicit stack:\n```\ngraph = {0: [1], 1: [0], 2: [3], 3: [2], 4: []}\nseen = set()\ncomponents = 0\nfor start in graph:\n    if start in seen:\n        continue\n    components += 1\n    stack = [start]\n    while stack:\n        node = stack.pop()\n        if node in seen:\n            continue\n        seen.add(node)\n        stack.extend(graph[node])\nprint(components)\n```\nWhat is printed?",
+    "options": [
+      "3",
+      "2",
+      "5",
+      "4"
+    ],
+    "answer": "3",
+    "verify": "graph = {0: [1], 1: [0], 2: [3], 3: [2], 4: []}\nseen = set()\ncomponents = 0\nfor start in graph:\n    if start in seen:\n        continue\n    components += 1\n    stack = [start]\n    while stack:\n        node = stack.pop()\n        if node in seen:\n            continue\n        seen.add(node)\n        stack.extend(graph[node])\nprint(components)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "BFS that records the number of steps from `A`:\n```\ngraph = {\"A\": [\"B\", \"C\"], \"B\": [\"D\"], \"C\": [\"D\", \"E\"],\n         \"D\": [\"F\"], \"E\": [\"F\"], \"F\": []}\ndist = {\"A\": 0}\nqueue = [\"A\"]\nwhile queue:\n    node = queue.pop(0)\n    for nxt in graph[node]:\n        if nxt not in dist:\n            dist[nxt] = dist[node] + 1\n            queue.append(nxt)\nprint(dist[\"F\"])\n```\nWhat is printed?",
+    "options": [
+      "4",
+      "3",
+      "2",
+      "5"
+    ],
+    "answer": "3",
+    "verify": "graph = {\"A\": [\"B\", \"C\"], \"B\": [\"D\"], \"C\": [\"D\", \"E\"],\n         \"D\": [\"F\"], \"E\": [\"F\"], \"F\": []}\ndist = {\"A\": 0}\nqueue = [\"A\"]\nwhile queue:\n    node = queue.pop(0)\n    for nxt in graph[node]:\n        if nxt not in dist:\n            dist[nxt] = dist[node] + 1\n            queue.append(nxt)\nprint(dist[\"F\"])"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "Kahn's topological sort:\n```\ngraph = {\"a\": [\"c\"], \"b\": [\"c\", \"d\"], \"c\": [\"e\"], \"d\": [\"e\"], \"e\": []}\nindeg = {n: 0 for n in graph}\nfor n in graph:\n    for m in graph[n]:\n        indeg[m] += 1\nqueue = [n for n in graph if indeg[n] == 0]\norder = []\nwhile queue:\n    n = queue.pop(0)\n    order.append(n)\n    for m in graph[n]:\n        indeg[m] -= 1\n        if indeg[m] == 0:\n            queue.append(m)\nprint(\"\".join(order))\n```\nWhat is printed?",
+    "options": [
+      "abdce",
+      "bacde",
+      "abcde",
+      "abced"
+    ],
+    "answer": "abcde",
+    "verify": "graph = {\"a\": [\"c\"], \"b\": [\"c\", \"d\"], \"c\": [\"e\"], \"d\": [\"e\"], \"e\": []}\nindeg = {n: 0 for n in graph}\nfor n in graph:\n    for m in graph[n]:\n        indeg[m] += 1\nqueue = [n for n in graph if indeg[n] == 0]\norder = []\nwhile queue:\n    n = queue.pop(0)\n    order.append(n)\n    for m in graph[n]:\n        indeg[m] -= 1\n        if indeg[m] == 0:\n            queue.append(m)\nprint(\"\".join(order))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "Dijkstra's algorithm with a min-heap:\n```\nimport heapq\ngraph = {\"S\": [(\"A\", 4), (\"B\", 1)], \"B\": [(\"A\", 2), (\"C\", 5)],\n         \"A\": [(\"C\", 1)], \"C\": []}\ndist = {\"S\": 0}\nheap = [(0, \"S\")]\nwhile heap:\n    d, node = heapq.heappop(heap)\n    if d > dist[node]:\n        continue\n    for nxt, w in graph[node]:\n        nd = d + w\n        if nxt not in dist or nd < dist[nxt]:\n            dist[nxt] = nd\n            heapq.heappush(heap, (nd, nxt))\nprint(dist[\"C\"])\n```\nWhat is printed?",
+    "options": [
+      "5",
+      "6",
+      "3",
+      "4"
+    ],
+    "answer": "4",
+    "verify": "import heapq\ngraph = {\"S\": [(\"A\", 4), (\"B\", 1)], \"B\": [(\"A\", 2), (\"C\", 5)],\n         \"A\": [(\"C\", 1)], \"C\": []}\ndist = {\"S\": 0}\nheap = [(0, \"S\")]\nwhile heap:\n    d, node = heapq.heappop(heap)\n    if d > dist[node]:\n        continue\n    for nxt, w in graph[node]:\n        nd = d + w\n        if nxt not in dist or nd < dist[nxt]:\n            dist[nxt] = nd\n            heapq.heappush(heap, (nd, nxt))\nprint(dist[\"C\"])"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "Cycle detection in a directed graph using three states:\n```\ngraph = {0: [1], 1: [2], 2: [0], 3: [2]}\nstate = {n: 0 for n in graph}   # 0 = new, 1 = in progress, 2 = done\ndef has_cycle(n):\n    state[n] = 1\n    for m in graph[n]:\n        if state[m] == 1:\n            return True\n        if state[m] == 0 and has_cycle(m):\n            return True\n    state[n] = 2\n    return False\nprint(has_cycle(3))\n```\nWhat is printed?",
+    "options": [
+      "True",
+      "False",
+      "None",
+      "An error"
+    ],
+    "answer": "True",
+    "verify": "graph = {0: [1], 1: [2], 2: [0], 3: [2]}\nstate = {n: 0 for n in graph}   # 0 = new, 1 = in progress, 2 = done\ndef has_cycle(n):\n    state[n] = 1\n    for m in graph[n]:\n        if state[m] == 1:\n            return True\n        if state[m] == 0 and has_cycle(m):\n            return True\n    state[n] = 2\n    return False\nprint(has_cycle(3))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "Union-find without any optimisations:\n```\nparent = list(range(6))\ndef find(x):\n    while parent[x] != x:\n        x = parent[x]\n    return x\ndef union(a, b):\n    parent[find(a)] = find(b)\nfor a, b in [(0, 1), (1, 2), (3, 4)]:\n    union(a, b)\nprint(len({find(x) for x in range(6)}))\n```\nWhat is printed?",
+    "options": [
+      "4",
+      "3",
+      "2",
+      "6"
+    ],
+    "answer": "3",
+    "verify": "parent = list(range(6))\ndef find(x):\n    while parent[x] != x:\n        x = parent[x]\n    return x\ndef union(a, b):\n    parent[find(a)] = find(b)\nfor a, b in [(0, 1), (1, 2), (3, 4)]:\n    union(a, b)\nprint(len({find(x) for x in range(6)}))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "Counting islands of `1`s (connected up, down, left, right):\n```\ngrid = [\"11000\",\n        \"11000\",\n        \"00100\",\n        \"00011\"]\nseen = set()\ndef fill(r, c):\n    if not (0 <= r < len(grid) and 0 <= c < len(grid[0])):\n        return\n    if grid[r][c] == \"0\" or (r, c) in seen:\n        return\n    seen.add((r, c))\n    for dr, dc in [(1, 0), (-1, 0), (0, 1), (0, -1)]:\n        fill(r + dr, c + dc)\nislands = 0\nfor r in range(len(grid)):\n    for c in range(len(grid[0])):\n        if grid[r][c] == \"1\" and (r, c) not in seen:\n            islands += 1\n            fill(r, c)\nprint(islands)\n```\nWhat is printed?",
+    "options": [
+      "4",
+      "2",
+      "3",
+      "5"
+    ],
+    "answer": "3",
+    "verify": "grid = [\"11000\",\n        \"11000\",\n        \"00100\",\n        \"00011\"]\nseen = set()\ndef fill(r, c):\n    if not (0 <= r < len(grid) and 0 <= c < len(grid[0])):\n        return\n    if grid[r][c] == \"0\" or (r, c) in seen:\n        return\n    seen.add((r, c))\n    for dr, dc in [(1, 0), (-1, 0), (0, 1), (0, -1)]:\n        fill(r + dr, c + dc)\nislands = 0\nfor r in range(len(grid)):\n    for c in range(len(grid[0])):\n        if grid[r][c] == \"1\" and (r, c) not in seen:\n            islands += 1\n            fill(r, c)\nprint(islands)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "Bipartite check by two-colouring with BFS:\n```\ngraph = {0: [1, 3], 1: [0, 2], 2: [1, 3], 3: [0, 2]}\ncolor = {0: 0}\nqueue = [0]\nok = True\nwhile queue:\n    node = queue.pop(0)\n    for nxt in graph[node]:\n        if nxt not in color:\n            color[nxt] = 1 - color[node]\n            queue.append(nxt)\n        elif color[nxt] == color[node]:\n            ok = False\nprint(ok)\n```\nWhat is printed?",
+    "options": [
+      "False",
+      "None",
+      "An error",
+      "True"
+    ],
+    "answer": "True",
+    "verify": "graph = {0: [1, 3], 1: [0, 2], 2: [1, 3], 3: [0, 2]}\ncolor = {0: 0}\nqueue = [0]\nok = True\nwhile queue:\n    node = queue.pop(0)\n    for nxt in graph[node]:\n        if nxt not in color:\n            color[nxt] = 1 - color[node]\n            queue.append(nxt)\n        elif color[nxt] == color[node]:\n            ok = False\nprint(ok)"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "Kahn's topological sort:\n```\ndef topo_sort(graph):\n    indeg = {n: 0 for n in graph}\n    for n in graph:\n        for m in graph[n]:\n            indeg[m] += 1\n    queue = [n for n in graph if indeg[n] == 0]\n    order = []\n    while queue:\n        n = queue.pop(0)\n        order.append(n)\n        for m in graph[n]:\n            indeg[m] -= 1\n            if ____:\n                queue.append(m)\n    return order\n```\nWhich condition goes in the blank?",
+    "options": [
+      "indeg[m] == 0",
+      "indeg[m] == 1",
+      "indeg[n] == 0",
+      "m not in order"
+    ],
+    "answer": "indeg[m] == 0",
+    "verify": "def topo_sort(graph):\n    indeg = {n: 0 for n in graph}\n    for n in graph:\n        for m in graph[n]:\n            indeg[m] += 1\n    queue = [n for n in graph if indeg[n] == 0]\n    order = []\n    while queue and len(order) < 50:\n        n = queue.pop(0)\n        order.append(n)\n        for m in graph[n]:\n            indeg[m] -= 1\n            if __BLANK__:\n                queue.append(m)\n    return order\ng = {\"a\": [\"c\", \"d\"], \"b\": [\"d\"], \"c\": [\"e\"], \"d\": [\"e\"], \"e\": []}\norder = topo_sort(g)\nvalid = sorted(order) == sorted(g) and all(order.index(u) < order.index(v) for u in g for v in g[u])\nprint(\"OK\" if valid else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "Dijkstra's algorithm skips heap entries that are out of date:\n```\nimport heapq\ndef dijkstra(graph, src):\n    dist = {src: 0}\n    heap = [(0, src)]\n    while heap:\n        d, node = heapq.heappop(heap)\n        if ____:\n            continue\n        for nxt, w in graph[node]:\n            if nxt not in dist or d + w < dist[nxt]:\n                dist[nxt] = d + w\n                heapq.heappush(heap, (d + w, nxt))\n    return dist\n```\nWhich condition goes in the blank so each vertex is expanded only once?",
+    "options": [
+      "d < dist[node]",
+      "d > dist[node]",
+      "node in dist",
+      "d == dist[node]"
+    ],
+    "answer": "d > dist[node]",
+    "verify": "import heapq\nexpanded = []\ndef dijkstra(graph, src):\n    dist = {src: 0}\n    heap = [(0, src)]\n    while heap:\n        d, node = heapq.heappop(heap)\n        if __BLANK__:\n            continue\n        expanded.append(node)\n        for nxt, w in graph[node]:\n            if nxt not in dist or d + w < dist[nxt]:\n                dist[nxt] = d + w\n                heapq.heappush(heap, (d + w, nxt))\n    return dist\ng = {\"S\": [(\"A\", 4), (\"B\", 1)], \"B\": [(\"A\", 2)], \"A\": [(\"C\", 1)], \"C\": []}\ndist = dijkstra(g, \"S\")\nprint(\"OK\" if dist == {\"S\": 0, \"B\": 1, \"A\": 3, \"C\": 4} and len(expanded) == 4 else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "Union-find `find` with path compression:\n```\ndef find(parent, x):\n    if parent[x] != x:\n        parent[x] = ____\n    return parent[x]\n```\nWhat goes in the blank?",
+    "options": [
+      "parent[x]",
+      "x",
+      "find(parent, parent[x])",
+      "find(parent, x)"
+    ],
+    "answer": "find(parent, parent[x])",
+    "verify": "def find(parent, x):\n    if parent[x] != x:\n        parent[x] = __BLANK__\n    return parent[x]\np = [0, 0, 1, 2, 3]\nroot = find(p, 4)\nprint(\"OK\" if root == 0 and p[4] == 0 and p[3] == 0 else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "Counting islands in a grid with BFS (cells connect up, down, left and right):\n```\ndef islands(grid):\n    rows, cols = len(grid), len(grid[0])\n    seen = set()\n    count = 0\n    for r in range(rows):\n        for c in range(cols):\n            if grid[r][c] != \"1\" or (r, c) in seen:\n                continue\n            count += 1\n            queue = [(r, c)]\n            seen.add((r, c))\n            while queue:\n                cr, cc = queue.pop(0)\n                for dr, dc in ____:\n                    nr, nc = cr + dr, cc + dc\n                    if 0 <= nr < rows and 0 <= nc < cols and grid[nr][nc] == \"1\" and (nr, nc) not in seen:\n                        seen.add((nr, nc))\n                        queue.append((nr, nc))\n    return count\n```\nWhat goes in the blank?",
+    "options": [
+      "[(1, 1), (-1, -1), (1, -1), (-1, 1)]",
+      "[(1, 0), (0, 1)]",
+      "[(0, 0)]",
+      "[(1, 0), (-1, 0), (0, 1), (0, -1)]"
+    ],
+    "answer": "[(1, 0), (-1, 0), (0, 1), (0, -1)]",
+    "verify": "def islands(grid):\n    rows, cols = len(grid), len(grid[0])\n    seen = set()\n    count = 0\n    for r in range(rows):\n        for c in range(cols):\n            if grid[r][c] != \"1\" or (r, c) in seen:\n                continue\n            count += 1\n            queue = [(r, c)]\n            seen.add((r, c))\n            while queue:\n                cr, cc = queue.pop(0)\n                for dr, dc in __BLANK__:\n                    nr, nc = cr + dr, cc + dc\n                    if 0 <= nr < rows and 0 <= nc < cols and grid[nr][nc] == \"1\" and (nr, nc) not in seen:\n                        seen.add((nr, nc))\n                        queue.append((nr, nc))\n    return count\nprint(\"OK\" if islands([\"110\", \"010\", \"101\"]) == 3 and islands([\"01\", \"11\"]) == 1 else \"NO\")"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "What is the running time of Dijkstra's algorithm using a binary heap and an adjacency list?",
+    "options": [
+      "O((V + E) log V)",
+      "O(V^2)",
+      "O(V + E)",
+      "O(V * E)"
+    ],
+    "answer": "O((V + E) log V)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "How does Bellman-Ford detect a negative cycle reachable from the source?",
+    "options": [
+      "Some vertex ends with a negative distance",
+      "After V - 1 rounds of relaxation, some edge can still be relaxed",
+      "A vertex is relaxed twice in the same round",
+      "The algorithm needs more than E rounds to finish"
+    ],
+    "answer": "After V - 1 rounds of relaxation, some edge can still be relaxed"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "What is the time complexity of the Floyd-Warshall all-pairs shortest path algorithm?",
+    "options": [
+      "O(V^2 log V)",
+      "O(V * E)",
+      "O(V^3)",
+      "O(E log E)"
+    ],
+    "answer": "O(V^3)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "On a dense graph stored as an adjacency matrix, which minimum spanning tree approach is asymptotically best?",
+    "options": [
+      "Kruskal's algorithm, in O(E log E)",
+      "Running Dijkstra from every vertex",
+      "Bellman-Ford from any vertex",
+      "Prim's algorithm with an array, in O(V^2)"
+    ],
+    "answer": "Prim's algorithm with an array, in O(V^2)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "A DAG has vertices `a`, `b`, `c`, `d` and edges `a -> c`, `b -> c`, `c -> d`. How many distinct topological orderings does it have?",
+    "options": [
+      "2",
+      "1",
+      "4",
+      "6"
+    ],
+    "answer": "2",
+    "verify": "from itertools import permutations\nedges = [(\"a\", \"c\"), (\"b\", \"c\"), (\"c\", \"d\")]\ncount = sum(all(p.index(u) < p.index(v) for u, v in edges) for p in permutations(\"abcd\"))\nprint(count)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "Kosaraju's algorithm finds strongly connected components with two DFS passes. What does the second pass do?",
+    "options": [
+      "Runs DFS on the original graph, in increasing order of finish times",
+      "Runs DFS on the reversed graph, in decreasing order of first-pass finish times",
+      "Runs BFS from every vertex with in-degree 0",
+      "Repeats the first pass with the edges sorted by weight"
+    ],
+    "answer": "Runs DFS on the reversed graph, in decreasing order of first-pass finish times"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "Which statement is the cut property used to prove MST algorithms correct?",
+    "options": [
+      "The heaviest edge of every cycle is in every minimum spanning tree",
+      "Every minimum spanning tree contains the globally lightest edge twice",
+      "For any cut, a minimum-weight edge crossing it belongs to some minimum spanning tree",
+      "Removing any edge from a minimum spanning tree leaves it connected"
+    ],
+    "answer": "For any cut, a minimum-weight edge crossing it belongs to some minimum spanning tree"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "In 0-1 BFS (edge weights are only 0 or 1), where is a neighbour reached through a weight-0 edge placed?",
+    "options": [
+      "At the back of the deque",
+      "In a separate min-heap",
+      "Nowhere, since weight-0 edges are skipped",
+      "At the front of the deque"
+    ],
+    "answer": "At the front of the deque"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "Bellman-Ford with a negative edge:\n```\nedges = [(\"S\", \"A\", 4), (\"S\", \"B\", 5), (\"B\", \"A\", -3), (\"A\", \"C\", 2)]\nnodes = [\"S\", \"A\", \"B\", \"C\"]\ndist = {n: float(\"inf\") for n in nodes}\ndist[\"S\"] = 0\nfor _ in range(len(nodes) - 1):\n    for u, v, w in edges:\n        if dist[u] + w < dist[v]:\n            dist[v] = dist[u] + w\nprint(dist[\"C\"])\n```\nWhat is printed?",
+    "options": [
+      "4",
+      "6",
+      "3",
+      "2"
+    ],
+    "answer": "4",
+    "verify": "edges = [(\"S\", \"A\", 4), (\"S\", \"B\", 5), (\"B\", \"A\", -3), (\"A\", \"C\", 2)]\nnodes = [\"S\", \"A\", \"B\", \"C\"]\ndist = {n: float(\"inf\") for n in nodes}\ndist[\"S\"] = 0\nfor _ in range(len(nodes) - 1):\n    for u, v, w in edges:\n        if dist[u] + w < dist[v]:\n            dist[v] = dist[u] + w\nprint(dist[\"C\"])"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "Counting shortest paths with BFS:\n```\ngraph = {0: [1, 2], 1: [3], 2: [3], 3: [4, 5], 4: [6], 5: [6], 6: []}\ndist = {0: 0}\nways = {0: 1}\nqueue = [0]\nwhile queue:\n    u = queue.pop(0)\n    for v in graph[u]:\n        if v not in dist:\n            dist[v] = dist[u] + 1\n            ways[v] = ways[u]\n            queue.append(v)\n        elif dist[v] == dist[u] + 1:\n            ways[v] += ways[u]\nprint(ways[6])\n```\nWhat is printed?",
+    "options": [
+      "2",
+      "4",
+      "3",
+      "8"
+    ],
+    "answer": "4",
+    "verify": "graph = {0: [1, 2], 1: [3], 2: [3], 3: [4, 5], 4: [6], 5: [6], 6: []}\ndist = {0: 0}\nways = {0: 1}\nqueue = [0]\nwhile queue:\n    u = queue.pop(0)\n    for v in graph[u]:\n        if v not in dist:\n            dist[v] = dist[u] + 1\n            ways[v] = ways[u]\n            queue.append(v)\n        elif dist[v] == dist[u] + 1:\n            ways[v] += ways[u]\nprint(ways[6])"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "Kruskal's algorithm with union-find:\n```\nedges = sorted([(4, \"A\", \"B\"), (1, \"A\", \"C\"), (3, \"B\", \"C\"),\n                (2, \"C\", \"D\"), (5, \"B\", \"D\")])\nparent = {n: n for n in \"ABCD\"}\ndef find(x):\n    while parent[x] != x:\n        x = parent[x]\n    return x\ntotal = 0\nfor w, u, v in edges:\n    ru, rv = find(u), find(v)\n    if ru != rv:\n        parent[ru] = rv\n        total += w\nprint(total)\n```\nWhat is printed?",
+    "options": [
+      "7",
+      "10",
+      "6",
+      "5"
+    ],
+    "answer": "6",
+    "verify": "edges = sorted([(4, \"A\", \"B\"), (1, \"A\", \"C\"), (3, \"B\", \"C\"),\n                (2, \"C\", \"D\"), (5, \"B\", \"D\")])\nparent = {n: n for n in \"ABCD\"}\ndef find(x):\n    while parent[x] != x:\n        x = parent[x]\n    return x\ntotal = 0\nfor w, u, v in edges:\n    ru, rv = find(u), find(v)\n    if ru != rv:\n        parent[ru] = rv\n        total += w\nprint(total)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "Floyd-Warshall on a directed graph (`INF` means no edge):\n```\nINF = 99\nd = [[0,   3,   INF, 7],\n     [8,   0,   2,   INF],\n     [5,   INF, 0,   1],\n     [2,   INF, INF, 0]]\nn = 4\nfor k in range(n):\n    for i in range(n):\n        for j in range(n):\n            if d[i][k] + d[k][j] < d[i][j]:\n                d[i][j] = d[i][k] + d[k][j]\nprint(d[1][3], d[3][1])\n```\nWhat is printed?",
+    "options": [
+      "99 99",
+      "3 10",
+      "4 5",
+      "3 5"
+    ],
+    "answer": "3 5",
+    "verify": "INF = 99\nd = [[0,   3,   INF, 7],\n     [8,   0,   2,   INF],\n     [5,   INF, 0,   1],\n     [2,   INF, INF, 0]]\nn = 4\nfor k in range(n):\n    for i in range(n):\n        for j in range(n):\n            if d[i][k] + d[k][j] < d[i][j]:\n                d[i][j] = d[i][k] + d[k][j]\nprint(d[1][3], d[3][1])"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "Kahn's algorithm, always taking the smallest available vertex:\n```\nimport heapq\ngraph = {3: [1], 2: [1, 0], 1: [0], 0: [], 4: [0]}\nindeg = {n: 0 for n in graph}\nfor u in graph:\n    for v in graph[u]:\n        indeg[v] += 1\nheap = [n for n in graph if indeg[n] == 0]\nheapq.heapify(heap)\norder = []\nwhile heap:\n    u = heapq.heappop(heap)\n    order.append(u)\n    for v in graph[u]:\n        indeg[v] -= 1\n        if indeg[v] == 0:\n            heapq.heappush(heap, v)\nprint(order)\n```\nWhat is printed?",
+    "options": [
+      "[2, 3, 1, 4, 0]",
+      "[2, 3, 4, 1, 0]",
+      "[3, 2, 4, 1, 0]",
+      "[2, 1, 3, 4, 0]"
+    ],
+    "answer": "[2, 3, 1, 4, 0]",
+    "verify": "import heapq\ngraph = {3: [1], 2: [1, 0], 1: [0], 0: [], 4: [0]}\nindeg = {n: 0 for n in graph}\nfor u in graph:\n    for v in graph[u]:\n        indeg[v] += 1\nheap = [n for n in graph if indeg[n] == 0]\nheapq.heapify(heap)\norder = []\nwhile heap:\n    u = heapq.heappop(heap)\n    order.append(u)\n    for v in graph[u]:\n        indeg[v] -= 1\n        if indeg[v] == 0:\n            heapq.heappush(heap, v)\nprint(order)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "0-1 BFS (edges are `(neighbour, weight)`):\n```\nfrom collections import deque\ngraph = {0: [(1, 1), (2, 0)], 1: [(3, 0)], 2: [(1, 0), (3, 1)], 3: []}\ndist = {0: 0}\ndq = deque([0])\nwhile dq:\n    u = dq.popleft()\n    for v, w in graph[u]:\n        nd = dist[u] + w\n        if v not in dist or nd < dist[v]:\n            dist[v] = nd\n            if w == 0:\n                dq.appendleft(v)\n            else:\n                dq.append(v)\nprint(dist[3])\n```\nWhat is printed?",
+    "options": [
+      "1",
+      "0",
+      "2",
+      "3"
+    ],
+    "answer": "0",
+    "verify": "from collections import deque\ngraph = {0: [(1, 1), (2, 0)], 1: [(3, 0)], 2: [(1, 0), (3, 1)], 3: []}\ndist = {0: 0}\ndq = deque([0])\nwhile dq:\n    u = dq.popleft()\n    for v, w in graph[u]:\n        nd = dist[u] + w\n        if v not in dist or nd < dist[v]:\n            dist[v] = nd\n            if w == 0:\n                dq.appendleft(v)\n            else:\n                dq.append(v)\nprint(dist[3])"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "Cycle check on an undirected graph:\n```\ngraph = {0: [1, 2], 1: [0, 3], 2: [0], 3: [1]}\ndef has_cycle(node, parent, seen):\n    seen.add(node)\n    for nxt in graph[node]:\n        if nxt not in seen:\n            if has_cycle(nxt, node, seen):\n                return True\n        elif nxt != parent:\n            return True\n    return False\nprint(has_cycle(0, -1, set()))\n```\nWhat is printed?",
+    "options": [
+      "True",
+      "None",
+      "False",
+      "An error"
+    ],
+    "answer": "False",
+    "verify": "graph = {0: [1, 2], 1: [0, 3], 2: [0], 3: [1]}\ndef has_cycle(node, parent, seen):\n    seen.add(node)\n    for nxt in graph[node]:\n        if nxt not in seen:\n            if has_cycle(nxt, node, seen):\n                return True\n        elif nxt != parent:\n            return True\n    return False\nprint(has_cycle(0, -1, set()))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "Expanding a BFS frontier exactly two levels:\n```\ngraph = {0: [1, 2], 1: [3], 2: [3, 4], 3: [5], 4: [5], 5: [0]}\nfrontier = {0}\nseen = {0}\nfor _ in range(2):\n    nxt = set()\n    for u in frontier:\n        for v in graph[u]:\n            if v not in seen:\n                seen.add(v)\n                nxt.add(v)\n    frontier = nxt\nprint(sorted(seen))\n```\nWhat is printed?",
+    "options": [
+      "[0, 1, 2, 3, 4, 5]",
+      "[1, 2, 3, 4]",
+      "[0, 1, 2]",
+      "[0, 1, 2, 3, 4]"
+    ],
+    "answer": "[0, 1, 2, 3, 4]",
+    "verify": "graph = {0: [1, 2], 1: [3], 2: [3, 4], 3: [5], 4: [5], 5: [0]}\nfrontier = {0}\nseen = {0}\nfor _ in range(2):\n    nxt = set()\n    for u in frontier:\n        for v in graph[u]:\n            if v not in seen:\n                seen.add(v)\n                nxt.add(v)\n    frontier = nxt\nprint(sorted(seen))"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "HARD",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "After `V - 1` rounds of Bellman-Ford relaxation, one more pass checks for a negative cycle:\n```\ndef has_negative_cycle(nodes, edges, src):\n    dist = {n: float(\"inf\") for n in nodes}\n    dist[src] = 0\n    for _ in range(len(nodes) - 1):\n        for u, v, w in edges:\n            if dist[u] + w < dist[v]:\n                dist[v] = dist[u] + w\n    for u, v, w in edges:\n        if ____:\n            return True\n    return False\n```\nWhat condition goes in the blank?",
+    "options": [
+      "dist[u] + w < dist[v]",
+      "dist[u] + w > dist[v]",
+      "dist[v] < 0",
+      "w < 0"
+    ],
+    "answer": "dist[u] + w < dist[v]",
+    "verify": "def has_negative_cycle(nodes, edges, src):\n    dist = {n: float(\"inf\") for n in nodes}\n    dist[src] = 0\n    for _ in range(len(nodes) - 1):\n        for u, v, w in edges:\n            if dist[u] + w < dist[v]:\n                dist[v] = dist[u] + w\n    for u, v, w in edges:\n        if __BLANK__:\n            return True\n    return False\ncyc = has_negative_cycle(\"SAB\", [(\"S\", \"A\", 1), (\"A\", \"B\", -2), (\"B\", \"A\", 1)], \"S\")\nneg_edge_only = has_negative_cycle(\"SAB\", [(\"S\", \"A\", 2), (\"A\", \"B\", -5), (\"S\", \"B\", 4)], \"S\")\nprint(\"OK\" if cyc and not neg_edge_only else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "HARD",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "The Floyd-Warshall update for a directed graph:\n```\ndef floyd_warshall(d):\n    n = len(d)\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                d[i][j] = min(d[i][j], ____)\n    return d\n```\nWhat goes in the blank?",
+    "options": [
+      "d[i][k] + d[j][k]",
+      "d[i][k] + d[k][j]",
+      "d[k][i] + d[k][j]",
+      "d[i][j] + d[k][k]"
+    ],
+    "answer": "d[i][k] + d[k][j]",
+    "verify": "def floyd_warshall(d):\n    n = len(d)\n    for k in range(n):\n        for i in range(n):\n            for j in range(n):\n                d[i][j] = min(d[i][j], __BLANK__)\n    return d\nINF = 99\nd = floyd_warshall([[0, 3, INF, 7], [8, 0, 2, INF], [5, INF, 0, 1], [2, INF, INF, 0]])\nprint(\"OK\" if d == [[0, 3, 5, 6], [5, 0, 2, 3], [3, 6, 0, 1], [2, 5, 7, 0]] else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "HARD",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "Prim's algorithm for the total weight of a minimum spanning tree:\n```\nimport heapq\ndef prim(graph, start):\n    seen = set()\n    heap = [(0, start)]\n    total = 0\n    while heap:\n        cost, u = heapq.heappop(heap)\n        if u in seen:\n            continue\n        seen.add(u)\n        total += cost\n        for v, w in graph[u]:\n            if v not in seen:\n                heapq.heappush(heap, (____, v))\n    return total\n```\nWhat goes in the blank? (Hint: this is where Prim differs from Dijkstra.)",
+    "options": [
+      "cost + w",
+      "-w",
+      "w",
+      "0"
+    ],
+    "answer": "w",
+    "verify": "import heapq\ndef prim(graph, start):\n    seen = set()\n    heap = [(0, start)]\n    total = 0\n    while heap:\n        cost, u = heapq.heappop(heap)\n        if u in seen:\n            continue\n        seen.add(u)\n        total += cost\n        for v, w in graph[u]:\n            if v not in seen:\n                heapq.heappush(heap, (__BLANK__, v))\n    return total\ng = {\"A\": [(\"B\", 2), (\"C\", 3)], \"B\": [(\"A\", 2), (\"C\", 2)], \"C\": [(\"A\", 3), (\"B\", 2)]}\nprint(\"OK\" if prim(g, \"A\") == 4 else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "HARD",
+    "categories": [
+      "Graphs"
+    ],
+    "text": "Topological sort with DFS: the result is `order` reversed.\n```\ndef topo_sort(graph):\n    seen = set()\n    order = []\n    def dfs(node):\n        seen.add(node)\n        for nxt in graph[node]:\n            if nxt not in seen:\n                dfs(nxt)\n        ____\n    for node in graph:\n        if node not in seen:\n            dfs(node)\n    return order[::-1]\n```\nWhich line goes in the blank?",
+    "options": [
+      "order.insert(0, node)",
+      "seen.remove(node)",
+      "order.append(graph[node])",
+      "order.append(node)"
+    ],
+    "answer": "order.append(node)",
+    "verify": "def topo_sort(graph):\n    seen = set()\n    order = []\n    def dfs(node):\n        seen.add(node)\n        for nxt in graph[node]:\n            if nxt not in seen:\n                dfs(nxt)\n        __BLANK__\n    for node in graph:\n        if node not in seen:\n            dfs(node)\n    return order[::-1]\ng = {\"a\": [\"c\"], \"b\": [\"c\", \"d\"], \"c\": [\"e\"], \"d\": [\"e\"], \"e\": []}\ntry:\n    order = topo_sort(g)\n    ok = sorted(order) == sorted(g) and all(order.index(u) < order.index(v) for u in g for v in g[u])\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  }
+]

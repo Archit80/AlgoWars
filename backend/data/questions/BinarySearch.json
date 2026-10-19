@@ -1,0 +1,941 @@
+[
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "What must be true of an array before you can run binary search on it?",
+    "options": [
+      "It must be sorted",
+      "It must contain no duplicates",
+      "Its length must be a power of two",
+      "It must be stored as a linked list"
+    ],
+    "answer": "It must be sorted"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "What is the worst-case time complexity of binary search on a sorted array of `n` elements?",
+    "options": [
+      "O(n)",
+      "O(log n)",
+      "O(n log n)",
+      "O(1)"
+    ],
+    "answer": "O(log n)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "A sorted array has 1000 elements. In the worst case, how many elements does binary search compare against the target?",
+    "options": [
+      "1000",
+      "500",
+      "10",
+      "32"
+    ],
+    "answer": "10",
+    "verify": "def worst(n):\n    return 0 if n == 0 else 1 + worst(n // 2)\nprint(worst(1000))"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "After comparing the target with the middle element (and not finding it), how much of the remaining range does binary search discard?",
+    "options": [
+      "Exactly one element",
+      "About a third",
+      "About a quarter",
+      "About half"
+    ],
+    "answer": "About half"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "In languages with fixed-size integers (Java, C++), why is `mid = low + (high - low) / 2` preferred over `mid = (low + high) / 2`?",
+    "options": [
+      "`low + high` can overflow when both indices are large",
+      "It always rounds up instead of down",
+      "It is needed when the array holds negative numbers",
+      "It makes the loop run fewer iterations"
+    ],
+    "answer": "`low + high` can overflow when both indices are large"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "What is the extra space complexity of an iterative binary search?",
+    "options": [
+      "O(log n)",
+      "O(1)",
+      "O(n)",
+      "O(n log n)"
+    ],
+    "answer": "O(1)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "An iterative binary search uses `while low <= high`. If the target is not in the array, when does the loop stop?",
+    "options": [
+      "When `low` equals `high`",
+      "When `mid` reaches index `0`",
+      "When `low` becomes greater than `high`",
+      "Never: it loops forever"
+    ],
+    "answer": "When `low` becomes greater than `high`"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "Why is binary search a poor fit for a sorted singly linked list?",
+    "options": [
+      "A linked list cannot be kept in sorted order",
+      "It needs O(n) extra memory on a linked list",
+      "Linked-list nodes cannot be compared with each other",
+      "Reaching the middle node takes O(n) time, so there is no speed-up"
+    ],
+    "answer": "Reaching the middle node takes O(n) time, so there is no speed-up"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "Classic iterative binary search:\n```\narr = [2, 5, 8, 12, 16, 23, 38]\ntarget = 23\nlow, high = 0, len(arr) - 1\nresult = -1\nwhile low <= high:\n    mid = (low + high) // 2\n    if arr[mid] == target:\n        result = mid\n        break\n    elif arr[mid] < target:\n        low = mid + 1\n    else:\n        high = mid - 1\nprint(result)\n```\nWhat is printed?",
+    "options": [
+      "5",
+      "4",
+      "6",
+      "-1"
+    ],
+    "answer": "5",
+    "verify": "arr = [2, 5, 8, 12, 16, 23, 38]\ntarget = 23\nlow, high = 0, len(arr) - 1\nresult = -1\nwhile low <= high:\n    mid = (low + high) // 2\n    if arr[mid] == target:\n        result = mid\n        break\n    elif arr[mid] < target:\n        low = mid + 1\n    else:\n        high = mid - 1\nprint(result)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "Counting loop iterations:\n```\narr = [1, 3, 5, 7, 9, 11, 13]\ntarget = 11\nlow, high = 0, len(arr) - 1\nsteps = 0\nwhile low <= high:\n    steps += 1\n    mid = (low + high) // 2\n    if arr[mid] == target:\n        break\n    elif arr[mid] < target:\n        low = mid + 1\n    else:\n        high = mid - 1\nprint(steps)\n```\nWhat is printed?",
+    "options": [
+      "3",
+      "2",
+      "1",
+      "4"
+    ],
+    "answer": "2",
+    "verify": "arr = [1, 3, 5, 7, 9, 11, 13]\ntarget = 11\nlow, high = 0, len(arr) - 1\nsteps = 0\nwhile low <= high:\n    steps += 1\n    mid = (low + high) // 2\n    if arr[mid] == target:\n        break\n    elif arr[mid] < target:\n        low = mid + 1\n    else:\n        high = mid - 1\nprint(steps)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "Recording every `mid` that binary search checks:\n```\narr = [10, 20, 30, 40, 50, 60, 70, 80]\ntarget = 70\nlow, high = 0, len(arr) - 1\nmids = []\nwhile low <= high:\n    mid = (low + high) // 2\n    mids.append(mid)\n    if arr[mid] == target:\n        break\n    elif arr[mid] < target:\n        low = mid + 1\n    else:\n        high = mid - 1\nprint(mids)\n```\nWhat is printed?",
+    "options": [
+      "[4, 6]",
+      "[3, 5]",
+      "[3, 5, 6]",
+      "[3, 5, 6, 7]"
+    ],
+    "answer": "[3, 5, 6]",
+    "verify": "arr = [10, 20, 30, 40, 50, 60, 70, 80]\ntarget = 70\nlow, high = 0, len(arr) - 1\nmids = []\nwhile low <= high:\n    mid = (low + high) // 2\n    mids.append(mid)\n    if arr[mid] == target:\n        break\n    elif arr[mid] < target:\n        low = mid + 1\n    else:\n        high = mid - 1\nprint(mids)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "Searching for a value that is not in the array:\n```\narr = [2, 4, 6, 8, 10]\ntarget = 7\nlow, high = 0, len(arr) - 1\nwhile low <= high:\n    mid = (low + high) // 2\n    if arr[mid] < target:\n        low = mid + 1\n    else:\n        high = mid - 1\nprint(low)\n```\nWhat is printed?",
+    "options": [
+      "2",
+      "4",
+      "-1",
+      "3"
+    ],
+    "answer": "3",
+    "verify": "arr = [2, 4, 6, 8, 10]\ntarget = 7\nlow, high = 0, len(arr) - 1\nwhile low <= high:\n    mid = (low + high) // 2\n    if arr[mid] < target:\n        low = mid + 1\n    else:\n        high = mid - 1\nprint(low)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "Pseudocode:\n```\nlow, high = 3, 8\nmid = low + (high - low) // 2\nprint(mid)\n```\nWhat is printed?",
+    "options": [
+      "5",
+      "5.5",
+      "6",
+      "2"
+    ],
+    "answer": "5",
+    "verify": "low, high = 3, 8\nmid = low + (high - low) // 2\nprint(mid)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "Python's `bisect` module does binary search on sorted lists:\n```\nfrom bisect import bisect_left, bisect_right\narr = [1, 2, 2, 2, 5]\nprint(bisect_left(arr, 2), bisect_right(arr, 2))\n```\nWhat is printed?",
+    "options": [
+      "1 3",
+      "1 4",
+      "2 4",
+      "0 4"
+    ],
+    "answer": "1 4",
+    "verify": "from bisect import bisect_left, bisect_right\narr = [1, 2, 2, 2, 5]\nprint(bisect_left(arr, 2), bisect_right(arr, 2))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "Binary search on an array sorted in descending order:\n```\narr = [50, 40, 30, 20, 10]\ntarget = 20\nlow, high = 0, len(arr) - 1\nwhile low <= high:\n    mid = (low + high) // 2\n    if arr[mid] == target:\n        print(mid)\n        break\n    elif arr[mid] > target:\n        low = mid + 1\n    else:\n        high = mid - 1\n```\nWhat is printed?",
+    "options": [
+      "1",
+      "4",
+      "3",
+      "Nothing is printed"
+    ],
+    "answer": "3",
+    "verify": "arr = [50, 40, 30, 20, 10]\ntarget = 20\nlow, high = 0, len(arr) - 1\nwhile low <= high:\n    mid = (low + high) // 2\n    if arr[mid] == target:\n        print(mid)\n        break\n    elif arr[mid] > target:\n        low = mid + 1\n    else:\n        high = mid - 1"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "How many times can a range of 64 be halved?\n```\nn = 64\nsteps = 0\nwhile n > 1:\n    n = n // 2\n    steps += 1\nprint(steps)\n```\nWhat is printed?",
+    "options": [
+      "7",
+      "32",
+      "5",
+      "6"
+    ],
+    "answer": "6",
+    "verify": "n = 64\nsteps = 0\nwhile n > 1:\n    n = n // 2\n    steps += 1\nprint(steps)"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "EASY",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "Fill the blank so this search finds every element, including in a one-element array:\n```\ndef search(arr, target):\n    low, high = 0, len(arr) - 1\n    while ____:\n        mid = (low + high) // 2\n        if arr[mid] == target:\n            return mid\n        elif arr[mid] < target:\n            low = mid + 1\n        else:\n            high = mid - 1\n    return -1\n```\nWhat condition goes in the blank?",
+    "options": [
+      "low <= high",
+      "low < high",
+      "low != high",
+      "high < low"
+    ],
+    "answer": "low <= high",
+    "verify": "def search(arr, target):\n    low, high = 0, len(arr) - 1\n    steps = 0\n    while __BLANK__ and steps < 100:\n        steps += 1\n        mid = (low + high) // 2\n        if arr[mid] == target:\n            return mid\n        elif arr[mid] < target:\n            low = mid + 1\n        else:\n            high = mid - 1\n    return -1\ntry:\n    ok = True\n    for arr in [[5], [1, 3], [1, 3, 5, 7, 9], [2, 4, 6, 8, 10, 12]]:\n        for i, v in enumerate(arr):\n            ok = ok and search(arr, v) == i\n        for v in [arr[0] - 1, arr[-1] + 1] + [x + 0.5 for x in arr]:\n            ok = ok and search(arr, v) == -1\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "EASY",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "Iterative binary search:\n```\ndef search(arr, target):\n    low, high = 0, len(arr) - 1\n    while low <= high:\n        mid = (low + high) // 2\n        if arr[mid] == target:\n            return mid\n        elif arr[mid] < target:\n            ____\n        else:\n            high = mid - 1\n    return -1\n```\nWhich line goes in the blank?",
+    "options": [
+      "low = mid",
+      "low = mid + 1",
+      "high = mid - 1",
+      "low = mid - 1"
+    ],
+    "answer": "low = mid + 1",
+    "verify": "def search(arr, target):\n    low, high = 0, len(arr) - 1\n    steps = 0\n    while low <= high and steps < 100:\n        steps += 1\n        mid = (low + high) // 2\n        if arr[mid] == target:\n            return mid\n        elif arr[mid] < target:\n            __BLANK__\n        else:\n            high = mid - 1\n    return -1\ntry:\n    ok = True\n    for arr in [[5], [1, 3], [1, 3, 5, 7, 9], [2, 4, 6, 8, 10, 12]]:\n        for i, v in enumerate(arr):\n            ok = ok and search(arr, v) == i\n        for v in [arr[0] - 1, arr[-1] + 1] + [x + 0.5 for x in arr]:\n            ok = ok and search(arr, v) == -1\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "EASY",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "Computing the middle index without risking overflow:\n```\ndef search(arr, target):\n    low, high = 0, len(arr) - 1\n    while low <= high:\n        mid = ____\n        if arr[mid] == target:\n            return mid\n        elif arr[mid] < target:\n            low = mid + 1\n        else:\n            high = mid - 1\n    return -1\n```\nWhat goes in the blank?",
+    "options": [
+      "(high - low) // 2",
+      "low + (high - low) / 2",
+      "low + (high - low) // 2",
+      "low + high // 2"
+    ],
+    "answer": "low + (high - low) // 2",
+    "verify": "def search(arr, target):\n    low, high = 0, len(arr) - 1\n    steps = 0\n    while low <= high and steps < 100:\n        steps += 1\n        mid = __BLANK__\n        if arr[mid] == target:\n            return mid\n        elif arr[mid] < target:\n            low = mid + 1\n        else:\n            high = mid - 1\n    return -1\ntry:\n    ok = True\n    for arr in [[5], [1, 3], [1, 3, 5, 7, 9], [2, 4, 6, 8, 10, 12, 14, 16]]:\n        for i, v in enumerate(arr):\n            ok = ok and search(arr, v) == i\n        for v in [arr[0] - 1, arr[-1] + 1] + [x + 0.5 for x in arr]:\n            ok = ok and search(arr, v) == -1\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "EASY",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "`insert_pos` returns the index where `target` should be inserted to keep `arr` sorted:\n```\ndef insert_pos(arr, target):\n    low, high = 0, len(arr) - 1\n    while low <= high:\n        mid = (low + high) // 2\n        if arr[mid] < target:\n            low = mid + 1\n        else:\n            high = mid - 1\n    return ____\n```\nWhat goes in the blank?",
+    "options": [
+      "high",
+      "mid",
+      "-1",
+      "low"
+    ],
+    "answer": "low",
+    "verify": "from bisect import bisect_left\ndef insert_pos(arr, target):\n    low, high = 0, len(arr) - 1\n    mid = 0\n    steps = 0\n    while low <= high and steps < 100:\n        steps += 1\n        mid = (low + high) // 2\n        if arr[mid] < target:\n            low = mid + 1\n        else:\n            high = mid - 1\n    return __BLANK__\narr = [10, 20, 30, 40, 50]\nok = all(insert_pos(arr, t) == bisect_left(arr, t) for t in [5, 10, 15, 25, 30, 45, 50, 60])\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "For a sorted array `arr`, what does `lower_bound(arr, x)` (Python's `bisect_left`) return?",
+    "options": [
+      "The first index whose value is `>= x`",
+      "The first index whose value is `> x`",
+      "The last index whose value is `<= x`",
+      "The index of any occurrence of `x`, or `-1`"
+    ],
+    "answer": "The first index whose value is `>= x`"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "How can you count the occurrences of `x` in a sorted array in O(log n) time?",
+    "options": [
+      "`upper_bound(x) - lower_bound(x) + 1`",
+      "`upper_bound(x) - lower_bound(x)`",
+      "`lower_bound(x) - upper_bound(x)`",
+      "`upper_bound(x) + lower_bound(x)`"
+    ],
+    "answer": "`upper_bound(x) - lower_bound(x)`"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "\"Binary search on the answer\" (e.g. the smallest speed that finishes a job in time) works only when the feasibility check is...",
+    "options": [
+      "true for exactly one candidate",
+      "computable in O(1) time",
+      "monotonic: once a candidate passes, every larger candidate also passes",
+      "applied to a sorted input array"
+    ],
+    "answer": "monotonic: once a candidate passes, every larger candidate also passes"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "What is the maximum number of comparisons binary search needs on a sorted array of 1,000,000 elements?",
+    "options": [
+      "1000",
+      "500000",
+      "6",
+      "20"
+    ],
+    "answer": "20",
+    "verify": "def worst(n):\n    return 0 if n == 0 else 1 + worst(n // 2)\nprint(worst(1000000))"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "When looking for a peak element (one not smaller than its neighbours), you find `arr[mid] < arr[mid + 1]`. What can you conclude?",
+    "options": [
+      "A peak exists at index `mid + 1` or later",
+      "A peak exists at index `mid - 1` or earlier",
+      "`mid` is a peak",
+      "Nothing; both halves must still be searched"
+    ],
+    "answer": "A peak exists at index `mid + 1` or later"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "If a sorted array doubles in size, how does the worst-case number of binary search comparisons change?",
+    "options": [
+      "It doubles",
+      "It grows by about one",
+      "It grows by about `log n`",
+      "It stays exactly the same"
+    ],
+    "answer": "It grows by about one"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "To find the FIRST occurrence of `target` in a sorted array with duplicates, what should the loop do when `arr[mid] == target`?",
+    "options": [
+      "Return `mid` immediately",
+      "Record `mid` and keep searching right with `low = mid + 1`",
+      "Record `mid` and keep searching left with `high = mid - 1`",
+      "Scan left from `mid` one element at a time"
+    ],
+    "answer": "Record `mid` and keep searching left with `high = mid - 1`"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "You must search a sorted stream whose length is unknown. Which strategy costs O(log p), where `p` is the target's position?",
+    "options": [
+      "Scan from the start until the target is found",
+      "Binary search the range `[0, max_int]` directly",
+      "Jump ahead by a fixed block of 100 each step, then scan",
+      "Double a bound (1, 2, 4, 8, ...) until it passes the target, then binary search that range"
+    ],
+    "answer": "Double a bound (1, 2, 4, 8, ...) until it passes the target, then binary search that range"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "Finding the first occurrence:\n```\narr = [1, 2, 2, 2, 3, 4]\ntarget = 2\nlow, high = 0, len(arr) - 1\nresult = -1\nwhile low <= high:\n    mid = (low + high) // 2\n    if arr[mid] == target:\n        result = mid\n        high = mid - 1\n    elif arr[mid] < target:\n        low = mid + 1\n    else:\n        high = mid - 1\nprint(result)\n```\nWhat is printed?",
+    "options": [
+      "1",
+      "3",
+      "2",
+      "-1"
+    ],
+    "answer": "1",
+    "verify": "arr = [1, 2, 2, 2, 3, 4]\ntarget = 2\nlow, high = 0, len(arr) - 1\nresult = -1\nwhile low <= high:\n    mid = (low + high) // 2\n    if arr[mid] == target:\n        result = mid\n        high = mid - 1\n    elif arr[mid] < target:\n        low = mid + 1\n    else:\n        high = mid - 1\nprint(result)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "Finding the last occurrence:\n```\narr = [1, 3, 3, 3, 3, 7, 9]\ntarget = 3\nlow, high = 0, len(arr) - 1\nresult = -1\nwhile low <= high:\n    mid = (low + high) // 2\n    if arr[mid] == target:\n        result = mid\n        low = mid + 1\n    elif arr[mid] < target:\n        low = mid + 1\n    else:\n        high = mid - 1\nprint(result)\n```\nWhat is printed?",
+    "options": [
+      "1",
+      "4",
+      "3",
+      "5"
+    ],
+    "answer": "4",
+    "verify": "arr = [1, 3, 3, 3, 3, 7, 9]\ntarget = 3\nlow, high = 0, len(arr) - 1\nresult = -1\nwhile low <= high:\n    mid = (low + high) // 2\n    if arr[mid] == target:\n        result = mid\n        low = mid + 1\n    elif arr[mid] < target:\n        low = mid + 1\n    else:\n        high = mid - 1\nprint(result)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "Counting occurrences with two bounds:\n```\nfrom bisect import bisect_left, bisect_right\narr = [1, 2, 4, 4, 4, 4, 6, 8]\nleft = bisect_left(arr, 4)\nright = bisect_right(arr, 4)\nprint(left, right, right - left)\n```\nWhat is printed?",
+    "options": [
+      "2 5 3",
+      "2 6 5",
+      "2 6 4",
+      "3 6 3"
+    ],
+    "answer": "2 6 4",
+    "verify": "from bisect import bisect_left, bisect_right\narr = [1, 2, 4, 4, 4, 4, 6, 8]\nleft = bisect_left(arr, 4)\nright = bisect_right(arr, 4)\nprint(left, right, right - left)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "Integer square root by binary search on the answer:\n```\nn = 50\nlow, high = 0, n\nans = 0\nwhile low <= high:\n    mid = (low + high) // 2\n    if mid * mid <= n:\n        ans = mid\n        low = mid + 1\n    else:\n        high = mid - 1\nprint(ans)\n```\nWhat is printed?",
+    "options": [
+      "8",
+      "6",
+      "25",
+      "7"
+    ],
+    "answer": "7",
+    "verify": "n = 50\nlow, high = 0, n\nans = 0\nwhile low <= high:\n    mid = (low + high) // 2\n    if mid * mid <= n:\n        ans = mid\n        low = mid + 1\n    else:\n        high = mid - 1\nprint(ans)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "Counting iterations for a target larger than every element:\n```\narr = list(range(0, 32, 2))    # [0, 2, 4, ..., 30]\ntarget = 31\nlow, high = 0, len(arr) - 1\nsteps = 0\nwhile low <= high:\n    steps += 1\n    mid = (low + high) // 2\n    if arr[mid] == target:\n        break\n    elif arr[mid] < target:\n        low = mid + 1\n    else:\n        high = mid - 1\nprint(steps)\n```\nWhat is printed?",
+    "options": [
+      "5",
+      "4",
+      "16",
+      "6"
+    ],
+    "answer": "5",
+    "verify": "arr = list(range(0, 32, 2))    # [0, 2, 4, ..., 30]\ntarget = 31\nlow, high = 0, len(arr) - 1\nsteps = 0\nwhile low <= high:\n    steps += 1\n    mid = (low + high) // 2\n    if arr[mid] == target:\n        break\n    elif arr[mid] < target:\n        low = mid + 1\n    else:\n        high = mid - 1\nprint(steps)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "A half-open `lower_bound` over `[low, high)`:\n```\ndef lower_bound(arr, x):\n    low, high = 0, len(arr)\n    while low < high:\n        mid = (low + high) // 2\n        if arr[mid] < x:\n            low = mid + 1\n        else:\n            high = mid\n    return low\narr = [10, 20, 30, 40]\nprint([lower_bound(arr, x) for x in [5, 20, 35, 50]])\n```\nWhat is printed?",
+    "options": [
+      "[0, 2, 3, 4]",
+      "[0, 1, 3, 4]",
+      "[0, 1, 3, 3]",
+      "[0, 1, 2, 4]"
+    ],
+    "answer": "[0, 1, 3, 4]",
+    "verify": "def lower_bound(arr, x):\n    low, high = 0, len(arr)\n    while low < high:\n        mid = (low + high) // 2\n        if arr[mid] < x:\n            low = mid + 1\n        else:\n            high = mid\n    return low\narr = [10, 20, 30, 40]\nprint([lower_bound(arr, x) for x in [5, 20, 35, 50]])"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "An `upper_bound` that returns the first index whose value is greater than `x`:\n```\ndef upper_bound(arr, x):\n    low, high = 0, len(arr)\n    while low < high:\n        mid = (low + high) // 2\n        if arr[mid] <= x:\n            low = mid + 1\n        else:\n            high = mid\n    return low\nprint(upper_bound([1, 2, 2, 2, 3], 2), upper_bound([1, 2, 2, 2, 3], 0))\n```\nWhat is printed?",
+    "options": [
+      "3 0",
+      "4 -1",
+      "4 0",
+      "1 0"
+    ],
+    "answer": "4 0",
+    "verify": "def upper_bound(arr, x):\n    low, high = 0, len(arr)\n    while low < high:\n        mid = (low + high) // 2\n        if arr[mid] <= x:\n            low = mid + 1\n        else:\n            high = mid\n    return low\nprint(upper_bound([1, 2, 2, 2, 3], 2), upper_bound([1, 2, 2, 2, 3], 0))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "Finding a peak element:\n```\narr = [1, 3, 20, 4, 1, 0]\nlow, high = 0, len(arr) - 1\nwhile low < high:\n    mid = (low + high) // 2\n    if arr[mid] < arr[mid + 1]:\n        low = mid + 1\n    else:\n        high = mid\nprint(low)\n```\nWhat is printed?",
+    "options": [
+      "20",
+      "1",
+      "3",
+      "2"
+    ],
+    "answer": "2",
+    "verify": "arr = [1, 3, 20, 4, 1, 0]\nlow, high = 0, len(arr) - 1\nwhile low < high:\n    mid = (low + high) // 2\n    if arr[mid] < arr[mid + 1]:\n        low = mid + 1\n    else:\n        high = mid\nprint(low)"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "Finding the first occurrence of `target`:\n```\ndef first_occurrence(arr, target):\n    low, high = 0, len(arr) - 1\n    result = -1\n    while low <= high:\n        mid = (low + high) // 2\n        if arr[mid] == target:\n            result = mid\n            ____\n        elif arr[mid] < target:\n            low = mid + 1\n        else:\n            high = mid - 1\n    return result\n```\nWhich line goes in the blank?",
+    "options": [
+      "high = mid - 1",
+      "low = mid + 1",
+      "break",
+      "high = mid"
+    ],
+    "answer": "high = mid - 1",
+    "verify": "def first_occurrence(arr, target):\n    low, high = 0, len(arr) - 1\n    result = -1\n    steps = 0\n    while low <= high:\n        steps += 1\n        if steps > 100:\n            return None\n        mid = (low + high) // 2\n        if arr[mid] == target:\n            result = mid\n            __BLANK__\n        elif arr[mid] < target:\n            low = mid + 1\n        else:\n            high = mid - 1\n    return result\ntests = [([1, 2, 2, 2, 3, 4], 2, 1), ([5, 5, 5, 5, 5], 5, 0), ([1, 1, 2, 3, 3, 3, 3, 9], 3, 3),\n         ([1, 2, 3], 4, -1), ([7], 7, 0)]\nprint(\"OK\" if all(first_occurrence(a, t) == r for a, t, r in tests) else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "`lower_bound` over the half-open range `[low, high)`:\n```\ndef lower_bound(arr, x):\n    low, high = 0, len(arr)\n    while low < high:\n        mid = (low + high) // 2\n        if arr[mid] < x:\n            low = mid + 1\n        else:\n            high = ____\n    return low\n```\nWhat goes in the blank?",
+    "options": [
+      "mid - 1",
+      "mid",
+      "mid + 1",
+      "len(arr)"
+    ],
+    "answer": "mid",
+    "verify": "from bisect import bisect_left\ndef lower_bound(arr, x):\n    low, high = 0, len(arr)\n    steps = 0\n    while low < high and steps < 100:\n        steps += 1\n        mid = (low + high) // 2\n        if arr[mid] < x:\n            low = mid + 1\n        else:\n            high = __BLANK__\n    return low\nok = True\nfor arr in [[1, 2, 2, 2, 5], [10, 20, 30, 40], [3, 3, 3], [1, 4, 9, 16, 25, 36]]:\n    for x in range(0, 40):\n        ok = ok and lower_bound(arr, x) == bisect_left(arr, x)\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "Integer square root (the largest `r` with `r * r <= n`):\n```\ndef isqrt(n):\n    low, high = 0, n\n    ans = 0\n    while low <= high:\n        mid = (low + high) // 2\n        if ____:\n            ans = mid\n            low = mid + 1\n        else:\n            high = mid - 1\n    return ans\n```\nWhat condition goes in the blank?",
+    "options": [
+      "mid * mid < n",
+      "mid * mid >= n",
+      "mid * mid <= n",
+      "mid <= n // 2"
+    ],
+    "answer": "mid * mid <= n",
+    "verify": "import math\ndef isqrt(n):\n    low, high = 0, n\n    ans = 0\n    steps = 0\n    while low <= high and steps < 200:\n        steps += 1\n        mid = (low + high) // 2\n        if __BLANK__:\n            ans = mid\n            low = mid + 1\n        else:\n            high = mid - 1\n    return ans\nprint(\"OK\" if all(isqrt(n) == math.isqrt(n) for n in range(0, 200)) else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "Finding the index of a peak element (neighbours outside the array count as minus infinity):\n```\ndef find_peak(arr):\n    low, high = 0, len(arr) - 1\n    while low < high:\n        mid = (low + high) // 2\n        if arr[mid] < arr[mid + 1]:\n            ____\n        else:\n            high = mid\n    return low\n```\nWhich line goes in the blank?",
+    "options": [
+      "low = mid",
+      "high = mid - 1",
+      "high = mid + 1",
+      "low = mid + 1"
+    ],
+    "answer": "low = mid + 1",
+    "verify": "def find_peak(arr):\n    low, high = 0, len(arr) - 1\n    steps = 0\n    while low < high and steps < 100:\n        steps += 1\n        mid = (low + high) // 2\n        if arr[mid] < arr[mid + 1]:\n            __BLANK__\n        else:\n            high = mid\n    return low\ndef is_peak(arr, i):\n    left = arr[i - 1] if i > 0 else float(\"-inf\")\n    right = arr[i + 1] if i + 1 < len(arr) else float(\"-inf\")\n    return 0 <= i < len(arr) and arr[i] >= left and arr[i] >= right\ntry:\n    tests = [[1, 3, 20, 4, 1, 0], [1, 2, 3, 4, 5], [5, 4, 3, 2, 1], [1, 2], [2, 1], [1, 5, 2, 8, 9, 3]]\n    ok = all(is_peak(a, find_peak(a)) for a in tests)\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "What is the worst-case time to search a rotated sorted array that may contain duplicates?",
+    "options": [
+      "O(n), because when `arr[low] == arr[mid] == arr[high]` you cannot tell which half is sorted",
+      "O(log n), the same as without duplicates",
+      "O(log^2 n)",
+      "O(n log n)"
+    ],
+    "answer": "O(n), because when `arr[low] == arr[mid] == arr[high]` you cannot tell which half is sorted"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "Which fact makes O(log n) search possible in a rotated sorted array of distinct values?",
+    "options": [
+      "The middle element is always the minimum",
+      "At least one of the halves `[low, mid]` and `[mid, high]` is always sorted",
+      "Both halves are always sorted",
+      "The rotation point is always at index `n // 2`"
+    ],
+    "answer": "At least one of the halves `[low, mid]` and `[mid, high]` is always sorted"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "To find the minimum of a rotated sorted array (distinct values), you compare `arr[mid]` with `arr[high]`. If `arr[mid] > arr[high]`, where is the minimum?",
+    "options": [
+      "In `low .. mid`",
+      "In `low .. mid - 1`",
+      "In `mid + 1 .. high`",
+      "At index `mid`"
+    ],
+    "answer": "In `mid + 1 .. high`"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "To find the smallest ship capacity that delivers all `weights` (in order) within `D` days, what is the correct search range for the capacity?",
+    "options": [
+      "`1` to `max(weights)`",
+      "`min(weights)` to `max(weights)`",
+      "`0` to `len(weights)`",
+      "`max(weights)` to `sum(weights)`"
+    ],
+    "answer": "`max(weights)` to `sum(weights)`"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "Koko eats bananas from `n` piles; the largest pile has `M` bananas. Binary searching her minimum eating speed costs how much time overall?",
+    "options": [
+      "O(n log M)",
+      "O(M log n)",
+      "O(n * M)",
+      "O(log(n * M))"
+    ],
+    "answer": "O(n log M)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "A \"last true\" search uses `while low < high`, `mid = (low + high) // 2`, and `if ok(mid): low = mid else: high = mid - 1`. It can loop forever. What is the standard fix?",
+    "options": [
+      "Change the loop to `while low <= high`",
+      "Round the midpoint up: `mid = (low + high + 1) // 2`",
+      "Change `high = mid - 1` to `high = mid`",
+      "Start with `high = len(arr)` instead of `len(arr) - 1`"
+    ],
+    "answer": "Round the midpoint up: `mid = (low + high + 1) // 2`"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "When binary searching over real numbers (e.g. a cube root to 6 decimal places), how should the loop terminate?",
+    "options": [
+      "When `low <= high` becomes false",
+      "When `mid * mid * mid == n` exactly",
+      "After a fixed number of iterations, or once `high - low` is below a small epsilon",
+      "When `mid` stops changing as an integer"
+    ],
+    "answer": "After a fixed number of iterations, or once `high - low` is below a small epsilon"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "A sorted array has 127 elements. Using `while low <= high`, how many comparisons does an unsuccessful search make?",
+    "options": [
+      "6, for every missing target",
+      "8, for every missing target",
+      "Between 1 and 127, depending on the target",
+      "7, for every missing target"
+    ],
+    "answer": "7, for every missing target",
+    "verify": "def probes(n, target):\n    low, high, count = 0, n - 1, 0\n    while low <= high:\n        mid = (low + high) // 2\n        count += 1\n        if mid < target:\n            low = mid + 1\n        else:\n            high = mid - 1\n    return count\ncounts = {probes(127, t + 0.5) for t in range(-1, 127)}\nprint(f\"{counts.pop()}, for every missing target\" if len(counts) == 1 else \"varies\")"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "Searching a rotated sorted array:\n```\narr = [15, 18, 22, 3, 6, 9, 12]\ntarget = 6\nlow, high = 0, len(arr) - 1\nwhile low <= high:\n    mid = (low + high) // 2\n    if arr[mid] == target:\n        break\n    if arr[low] <= arr[mid]:\n        if arr[low] <= target < arr[mid]: high = mid - 1\n        else: low = mid + 1\n    else:\n        if arr[mid] < target <= arr[high]: low = mid + 1\n        else: high = mid - 1\nprint(mid)\n```\nWhat is printed?",
+    "options": [
+      "4",
+      "5",
+      "3",
+      "6"
+    ],
+    "answer": "4",
+    "verify": "arr = [15, 18, 22, 3, 6, 9, 12]\ntarget = 6\nlow, high = 0, len(arr) - 1\nwhile low <= high:\n    mid = (low + high) // 2\n    if arr[mid] == target:\n        break\n    if arr[low] <= arr[mid]:\n        if arr[low] <= target < arr[mid]: high = mid - 1\n        else: low = mid + 1\n    else:\n        if arr[mid] < target <= arr[high]: low = mid + 1\n        else: high = mid - 1\nprint(mid)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "Finding the minimum of a rotated sorted array:\n```\narr = [4, 5, 6, 7, 0, 1, 2]\nlow, high = 0, len(arr) - 1\nwhile low < high:\n    mid = (low + high) // 2\n    if arr[mid] > arr[high]:\n        low = mid + 1\n    else:\n        high = mid\nprint(low, arr[low])\n```\nWhat is printed?",
+    "options": [
+      "0 4",
+      "4 0",
+      "5 1",
+      "3 7"
+    ],
+    "answer": "4 0",
+    "verify": "arr = [4, 5, 6, 7, 0, 1, 2]\nlow, high = 0, len(arr) - 1\nwhile low < high:\n    mid = (low + high) // 2\n    if arr[mid] > arr[high]:\n        low = mid + 1\n    else:\n        high = mid\nprint(low, arr[low])"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "Smallest ship capacity that delivers all packages (in order) within 3 days:\n```\nweights = [3, 2, 2, 4, 1, 4]\ndef days_needed(cap):\n    d, load = 1, 0\n    for w in weights:\n        if load + w > cap:\n            d, load = d + 1, 0\n        load += w\n    return d\nlow, high = max(weights), sum(weights)\nwhile low < high:\n    mid = (low + high) // 2\n    if days_needed(mid) <= 3:\n        high = mid\n    else:\n        low = mid + 1\nprint(low)\n```\nWhat is printed?",
+    "options": [
+      "5",
+      "4",
+      "6",
+      "8"
+    ],
+    "answer": "6",
+    "verify": "weights = [3, 2, 2, 4, 1, 4]\ndef days_needed(cap):\n    d, load = 1, 0\n    for w in weights:\n        if load + w > cap:\n            d, load = d + 1, 0\n        load += w\n    return d\nlow, high = max(weights), sum(weights)\nwhile low < high:\n    mid = (low + high) // 2\n    if days_needed(mid) <= 3:\n        high = mid\n    else:\n        low = mid + 1\nprint(low)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "Minimum eating speed so all piles are finished within 8 hours:\n```\npiles = [3, 6, 7, 11]\ndef hours(k):\n    return sum((p + k - 1) // k for p in piles)\nlow, high = 1, max(piles)\nwhile low < high:\n    mid = (low + high) // 2\n    if hours(mid) <= 8:\n        high = mid\n    else:\n        low = mid + 1\nprint(low)\n```\nWhat is printed?",
+    "options": [
+      "3",
+      "5",
+      "6",
+      "4"
+    ],
+    "answer": "4",
+    "verify": "piles = [3, 6, 7, 11]\ndef hours(k):\n    return sum((p + k - 1) // k for p in piles)\nlow, high = 1, max(piles)\nwhile low < high:\n    mid = (low + high) // 2\n    if hours(mid) <= 8:\n        high = mid\n    else:\n        low = mid + 1\nprint(low)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "A search that uses `low = mid` (with a safety cap on the steps):\n```\narr = [1, 2, 3, 4, 5]\nlow, high = 0, 4\nsteps = 0\nwhile low < high and steps < 10:\n    steps += 1\n    mid = (low + high) // 2\n    if arr[mid] <= 4:\n        low = mid\n    else:\n        high = mid - 1\nprint(low, high, steps)\n```\nWhat is printed?",
+    "options": [
+      "3 4 10",
+      "3 3 3",
+      "4 4 3",
+      "3 4 3"
+    ],
+    "answer": "3 4 10",
+    "verify": "arr = [1, 2, 3, 4, 5]\nlow, high = 0, 4\nsteps = 0\nwhile low < high and steps < 10:\n    steps += 1\n    mid = (low + high) // 2\n    if arr[mid] <= 4:\n        low = mid\n    else:\n        high = mid - 1\nprint(low, high, steps)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "Worst-case comparisons over every successful search, with `arr[i] == i`:\n```\ndef probes(n, target):\n    low, high, count = 0, n - 1, 0\n    while low <= high:\n        mid = (low + high) // 2\n        count += 1\n        if mid == target:\n            return count\n        if mid < target:\n            low = mid + 1\n        else:\n            high = mid - 1\n    return count\nprint(max(probes(100, t) for t in range(100)))\n```\nWhat is printed?",
+    "options": [
+      "6",
+      "7",
+      "8",
+      "50"
+    ],
+    "answer": "7",
+    "verify": "def probes(n, target):\n    low, high, count = 0, n - 1, 0\n    while low <= high:\n        mid = (low + high) // 2\n        count += 1\n        if mid == target:\n            return count\n        if mid < target:\n            low = mid + 1\n        else:\n            high = mid - 1\n    return count\nprint(max(probes(100, t) for t in range(100)))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "Finding the first bad version while counting calls to `is_bad`:\n```\ncalls = 0\ndef is_bad(v):\n    global calls\n    calls += 1\n    return v >= 37\nlow, high = 1, 100\nwhile low < high:\n    mid = (low + high) // 2\n    if is_bad(mid):\n        high = mid\n    else:\n        low = mid + 1\nprint(low, calls)\n```\nWhat is printed?",
+    "options": [
+      "37 6",
+      "36 7",
+      "37 7",
+      "38 7"
+    ],
+    "answer": "37 7",
+    "verify": "calls = 0\ndef is_bad(v):\n    global calls\n    calls += 1\n    return v >= 37\nlow, high = 1, 100\nwhile low < high:\n    mid = (low + high) // 2\n    if is_bad(mid):\n        high = mid\n    else:\n        low = mid + 1\nprint(low, calls)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "Finding the `k`-th positive integer missing from a sorted array:\n```\narr = [2, 3, 4, 7, 11]\nk = 5\nlow, high = 0, len(arr)\nwhile low < high:\n    mid = (low + high) // 2\n    if arr[mid] - (mid + 1) < k:\n        low = mid + 1\n    else:\n        high = mid\nprint(low + k)\n```\nWhat is printed?",
+    "options": [
+      "8",
+      "10",
+      "6",
+      "9"
+    ],
+    "answer": "9",
+    "verify": "arr = [2, 3, 4, 7, 11]\nk = 5\nlow, high = 0, len(arr)\nwhile low < high:\n    mid = (low + high) // 2\n    if arr[mid] - (mid + 1) < k:\n        low = mid + 1\n    else:\n        high = mid\nprint(low + k)"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "HARD",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "Searching a rotated sorted array of distinct values:\n```\ndef search(arr, target):\n    low, high = 0, len(arr) - 1\n    while low <= high:\n        mid = (low + high) // 2\n        if arr[mid] == target:\n            return mid\n        if arr[low] <= arr[mid]:\n            if ____: high = mid - 1\n            else: low = mid + 1\n        else:\n            if arr[mid] < target <= arr[high]: low = mid + 1\n            else: high = mid - 1\n    return -1\n```\nWhat condition goes in the blank?",
+    "options": [
+      "arr[low] <= target < arr[mid]",
+      "arr[low] < target < arr[mid]",
+      "arr[mid] < target <= arr[high]",
+      "target < arr[mid]"
+    ],
+    "answer": "arr[low] <= target < arr[mid]",
+    "verify": "def search(arr, target):\n    low, high = 0, len(arr) - 1\n    steps = 0\n    while low <= high and steps < 100:\n        steps += 1\n        mid = (low + high) // 2\n        if arr[mid] == target:\n            return mid\n        if arr[low] <= arr[mid]:\n            if __BLANK__: high = mid - 1\n            else: low = mid + 1\n        else:\n            if arr[mid] < target <= arr[high]: low = mid + 1\n            else: high = mid - 1\n    return -1\nok = True\nbase = [1, 3, 5, 7, 9, 11, 13]\nfor r in range(len(base)):\n    arr = base[r:] + base[:r]\n    for i, v in enumerate(arr):\n        ok = ok and search(arr, v) == i\n    for v in [0, 4, 14]:\n        ok = ok and search(arr, v) == -1\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "HARD",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "Finding the minimum of a rotated sorted array of distinct values:\n```\ndef find_min(arr):\n    low, high = 0, len(arr) - 1\n    while low < high:\n        mid = (low + high) // 2\n        if arr[mid] > ____:\n            low = mid + 1\n        else:\n            high = mid\n    return arr[low]\n```\nWhat goes in the blank?",
+    "options": [
+      "arr[low]",
+      "arr[high]",
+      "arr[0]",
+      "arr[mid + 1]"
+    ],
+    "answer": "arr[high]",
+    "verify": "def find_min(arr):\n    low, high = 0, len(arr) - 1\n    steps = 0\n    while low < high and steps < 100:\n        steps += 1\n        mid = (low + high) // 2\n        if arr[mid] > __BLANK__:\n            low = mid + 1\n        else:\n            high = mid\n    return arr[low]\nok = True\nfor n in range(1, 9):\n    base = list(range(1, n + 1))\n    for r in range(n):\n        ok = ok and find_min(base[r:] + base[:r]) == 1\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "HARD",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "Counting the days needed to ship `weights` in order with a given capacity (every weight fits in `cap`):\n```\ndef days_needed(weights, cap):\n    days, load = 1, 0\n    for w in weights:\n        if ____:\n            days += 1\n            load = 0\n        load += w\n    return days\n```\nWhat condition goes in the blank?",
+    "options": [
+      "load + w >= cap",
+      "load > cap",
+      "load + w > cap",
+      "w > cap"
+    ],
+    "answer": "load + w > cap",
+    "verify": "from itertools import product\ndef days_needed(weights, cap):\n    days, load = 1, 0\n    for w in weights:\n        if __BLANK__:\n            days += 1\n            load = 0\n        load += w\n    return days\ndef brute(weights, cap):\n    days, load = 1, 0\n    for w in weights:\n        if load + w <= cap:\n            load += w\n        else:\n            days, load = days + 1, w\n    return days\nok = True\nfor ws in product([1, 2, 3, 4], repeat=4):\n    for cap in range(max(ws), sum(ws) + 1):\n        ok = ok and days_needed(list(ws), cap) == brute(list(ws), cap)\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "HARD",
+    "categories": [
+      "BinarySearch"
+    ],
+    "text": "`last_leq` returns the last index whose value is `<= x` (assume `arr[0] <= x`):\n```\ndef last_leq(arr, x):\n    low, high = 0, len(arr) - 1\n    while low < high:\n        mid = ____\n        if arr[mid] <= x:\n            low = mid\n        else:\n            high = mid - 1\n    return low\n```\nWhat goes in the blank so the loop always terminates?",
+    "options": [
+      "(low + high) // 2",
+      "(low + high - 1) // 2",
+      "low + (high - low) // 2",
+      "(low + high + 1) // 2"
+    ],
+    "answer": "(low + high + 1) // 2",
+    "verify": "from bisect import bisect_right\ndef last_leq(arr, x):\n    low, high = 0, len(arr) - 1\n    steps = 0\n    while low < high:\n        steps += 1\n        if steps > 100:\n            return None\n        mid = __BLANK__\n        if arr[mid] <= x:\n            low = mid\n        else:\n            high = mid - 1\n    return low\nok = True\nfor arr in [[1, 2, 2, 4, 7], [1, 3, 5, 7, 9, 11], [2, 2, 2]]:\n    for x in range(arr[0], 15):\n        ok = ok and last_leq(arr, x) == bisect_right(arr, x) - 1\nprint(\"OK\" if ok else \"NO\")"
+  }
+]

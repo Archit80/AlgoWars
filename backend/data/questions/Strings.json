@@ -1,0 +1,943 @@
+[
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "Strings"
+    ],
+    "text": "Strings are immutable. What happens when you run `s = \"cat\"` followed by `s[0] = \"b\"`?",
+    "options": [
+      "It raises an error, because a string's characters cannot be assigned",
+      "`s` becomes `\"bat\"`",
+      "A new string `\"bat\"` is created and stored in `s`",
+      "The assignment is silently ignored and `s` stays `\"cat\"`"
+    ],
+    "answer": "It raises an error, because a string's characters cannot be assigned"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "Strings"
+    ],
+    "text": "What is the time complexity of checking whether a string of length `n` is a palindrome with two pointers moving inward?",
+    "options": [
+      "O(n^2)",
+      "O(n)",
+      "O(log n)",
+      "O(1)"
+    ],
+    "answer": "O(n)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "Strings"
+    ],
+    "text": "What does `ord(\"a\")` return?",
+    "options": [
+      "65",
+      "1",
+      "97",
+      "0"
+    ],
+    "answer": "97",
+    "verify": "print(ord(\"a\"))"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "Strings"
+    ],
+    "text": "Two strings are anagrams of each other when...",
+    "options": [
+      "they have the same length",
+      "one is the other written backwards",
+      "they start and end with the same character",
+      "they contain the same characters with the same counts"
+    ],
+    "answer": "they contain the same characters with the same counts"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "Strings"
+    ],
+    "text": "Which slice returns the string `s` reversed?",
+    "options": [
+      "`s[::-1]`",
+      "`s[-1:]`",
+      "`s[-1:0:-1]`",
+      "`s[::1]`"
+    ],
+    "answer": "`s[::-1]`"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "Strings"
+    ],
+    "text": "Strings compare character by character using character codes. Which comparison is `True`?",
+    "options": [
+      "`\"a\" < \"Z\"`",
+      "`\"Z\" < \"a\"`",
+      "`\"b\" < \"B\"`",
+      "`\"z\" < \"A\"`"
+    ],
+    "answer": "`\"Z\" < \"a\"`"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "Strings"
+    ],
+    "text": "Given `s = \"a,b,c\"`, which expression produces the list `[\"a\", \"b\", \"c\"]`?",
+    "options": [
+      "`\",\".join(s)`",
+      "`list(s)`",
+      "`s.split(\",\")`",
+      "`s.strip(\",\")`"
+    ],
+    "answer": "`s.split(\",\")`"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "Strings"
+    ],
+    "text": "You count lowercase English letters with `counts[ord(ch) - ord(\"a\")] += 1`. What is the smallest size `counts` can have?",
+    "options": [
+      "25",
+      "27",
+      "52",
+      "26"
+    ],
+    "answer": "26"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "Strings"
+    ],
+    "text": "Pseudocode:\n```\ns = \"algorithm\"\nprint(s[2:5])\n```\nWhat is printed?",
+    "options": [
+      "gor",
+      "gori",
+      "lgo",
+      "go"
+    ],
+    "answer": "gor",
+    "verify": "s = \"algorithm\"\nprint(s[2:5])"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "Strings"
+    ],
+    "text": "Negative indexing:\n```\ns = \"python\"\nprint(s[-2])\n```\nWhat is printed?",
+    "options": [
+      "h",
+      "o",
+      "n",
+      "t"
+    ],
+    "answer": "o",
+    "verify": "s = \"python\"\nprint(s[-2])"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "Strings"
+    ],
+    "text": "Palindrome check by reversing:\n```\ns = \"racecar\"\nt = \"Racecar\"\nprint(s == s[::-1], t == t[::-1])\n```\nWhat is printed?",
+    "options": [
+      "True True",
+      "False False",
+      "True False",
+      "False True"
+    ],
+    "answer": "True False",
+    "verify": "s = \"racecar\"\nt = \"Racecar\"\nprint(s == s[::-1], t == t[::-1])"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "Strings"
+    ],
+    "text": "Counting vowels:\n```\ns = \"Education\"\ncount = 0\nfor ch in s:\n    if ch in \"aeiou\":\n        count += 1\nprint(count)\n```\nWhat is printed?",
+    "options": [
+      "5",
+      "3",
+      "6",
+      "4"
+    ],
+    "answer": "4",
+    "verify": "s = \"Education\"\ncount = 0\nfor ch in s:\n    if ch in \"aeiou\":\n        count += 1\nprint(count)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "Strings"
+    ],
+    "text": "Splitting a sentence into words:\n```\nwords = \"the quick brown fox\".split()\nprint(len(words), words[-1])\n```\nWhat is printed?",
+    "options": [
+      "4 fox",
+      "3 fox",
+      "4 brown",
+      "19 x"
+    ],
+    "answer": "4 fox",
+    "verify": "words = \"the quick brown fox\".split()\nprint(len(words), words[-1])"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "Strings"
+    ],
+    "text": "Strings are immutable:\n```\ns = \"abc\"\nt = s\ns += \"d\"\nprint(s, t)\n```\nWhat is printed?",
+    "options": [
+      "abcd abcd",
+      "abcd abc",
+      "abc abc",
+      "abc abcd"
+    ],
+    "answer": "abcd abc",
+    "verify": "s = \"abc\"\nt = s\ns += \"d\"\nprint(s, t)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "Strings"
+    ],
+    "text": "Pseudocode:\n```\ns = \"banana\"\nprint(s.count(\"a\"), s.find(\"n\"))\n```\nWhat is printed?",
+    "options": [
+      "3 3",
+      "2 2",
+      "3 2",
+      "3 1"
+    ],
+    "answer": "3 2",
+    "verify": "s = \"banana\"\nprint(s.count(\"a\"), s.find(\"n\"))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "Strings"
+    ],
+    "text": "Character codes:\n```\nprint(chr(ord(\"a\") + 2), ord(\"b\") - ord(\"a\"))\n```\nWhat is printed?",
+    "options": [
+      "b 1",
+      "c 2",
+      "99 1",
+      "c 1"
+    ],
+    "answer": "c 1",
+    "verify": "print(chr(ord(\"a\") + 2), ord(\"b\") - ord(\"a\"))"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "EASY",
+    "categories": [
+      "Strings"
+    ],
+    "text": "Reverse a string by building a new one:\n```\ndef reverse(s):\n    result = \"\"\n    for ch in s:\n        result = ____\n    return result\n```\nWhat goes in the blank?",
+    "options": [
+      "ch + result",
+      "result + ch",
+      "result + s[-1]",
+      "ch"
+    ],
+    "answer": "ch + result",
+    "verify": "def reverse(s):\n    result = \"\"\n    for ch in s:\n        result = __BLANK__\n    return result\nprint(\"OK\" if reverse(\"abc\") == \"cba\" and reverse(\"hello\") == \"olleh\" else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "EASY",
+    "categories": [
+      "Strings"
+    ],
+    "text": "Two-pointer palindrome check:\n```\ndef is_palindrome(s):\n    i, j = 0, len(s) - 1\n    while i < j:\n        if s[i] != s[j]:\n            return False\n        i += 1\n        ____\n    return True\n```\nWhich line goes in the blank?",
+    "options": [
+      "j += 1",
+      "j -= 1",
+      "i += 1",
+      "break"
+    ],
+    "answer": "j -= 1",
+    "verify": "def is_palindrome(s):\n    i, j = 0, len(s) - 1\n    steps = 0\n    while i < j and steps < 100:\n        steps += 1\n        if s[i] != s[j]:\n            return False\n        i += 1\n        __BLANK__\n    return True\ntry:\n    ok = (is_palindrome(\"racecar\") and is_palindrome(\"abba\") and is_palindrome(\"a\")\n          and not is_palindrome(\"abca\") and not is_palindrome(\"abaa\") and not is_palindrome(\"ab\"))\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "EASY",
+    "categories": [
+      "Strings"
+    ],
+    "text": "Count how many times each character appears:\n```\ndef char_counts(s):\n    counts = {}\n    for ch in s:\n        counts[ch] = ____\n    return counts\n```\nWhat goes in the blank?",
+    "options": [
+      "counts[ch] + 1",
+      "counts.get(ch, 1)",
+      "counts.get(ch, 0) + 1",
+      "counts.get(ch, 0)"
+    ],
+    "answer": "counts.get(ch, 0) + 1",
+    "verify": "def char_counts(s):\n    counts = {}\n    for ch in s:\n        counts[ch] = __BLANK__\n    return counts\ntry:\n    ok = char_counts(\"hello\") == {\"h\": 1, \"e\": 1, \"l\": 2, \"o\": 1}\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "EASY",
+    "categories": [
+      "Strings"
+    ],
+    "text": "Count vowels, treating upper and lower case the same:\n```\ndef count_vowels(s):\n    count = 0\n    for ch in s:\n        if ____ in \"aeiou\":\n            count += 1\n    return count\n```\nWhat goes in the blank?",
+    "options": [
+      "ch",
+      "ch.upper()",
+      "s.lower()",
+      "ch.lower()"
+    ],
+    "answer": "ch.lower()",
+    "verify": "def count_vowels(s):\n    count = 0\n    for ch in s:\n        if __BLANK__ in \"aeiou\":\n            count += 1\n    return count\nprint(\"OK\" if count_vowels(\"AppLE pie\") == 4 and count_vowels(\"xyz\") == 0 else \"NO\")"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Strings"
+    ],
+    "text": "Why is `\"\".join(parts)` preferred over `s += part` in a loop when building a long string?",
+    "options": [
+      "Each `+=` may copy the whole string built so far, giving O(n^2) total work, while `join` copies each character once",
+      "`join` sorts the parts first, which makes the result faster to search",
+      "`+=` stops working once the string passes a fixed length",
+      "`join` edits the first part in place, because strings are mutable"
+    ],
+    "answer": "Each `+=` may copy the whole string built so far, giving O(n^2) total work, while `join` copies each character once"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Strings"
+    ],
+    "text": "Both strings contain only lowercase letters. Which anagram check runs in O(n) time and is always correct?",
+    "options": [
+      "Sort both strings and compare them",
+      "Count letters in two 26-slot arrays and compare the arrays",
+      "For each character of `a`, find and remove it from `b`",
+      "Compare the sums of `ord` values of the two strings"
+    ],
+    "answer": "Count letters in two 26-slot arrays and compare the arrays"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Strings"
+    ],
+    "text": "What is the longest common prefix of `[\"flower\", \"flow\", \"flight\"]`?",
+    "options": [
+      "`\"flo\"`",
+      "`\"f\"`",
+      "`\"fl\"`",
+      "`\"\"` (empty)"
+    ],
+    "answer": "`\"fl\"`",
+    "verify": "import os\nprint(\"`\\\"\" + os.path.commonprefix([\"flower\", \"flow\", \"flight\"]) + \"\\\"`\")"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Strings"
+    ],
+    "text": "Which expression applies a Caesar shift of `k` to a lowercase letter `c`, wrapping from `z` back to `a`?",
+    "options": [
+      "`chr(ord(c) + k % 26)`",
+      "`chr((ord(c) + k) % 26)`",
+      "`chr((ord(c) - ord(\"a\") + k) % 25 + ord(\"a\"))`",
+      "`chr((ord(c) - ord(\"a\") + k) % 26 + ord(\"a\"))`"
+    ],
+    "answer": "`chr((ord(c) - ord(\"a\") + k) % 26 + ord(\"a\"))`"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Strings"
+    ],
+    "text": "Run-length encoding writes each run of equal characters as the character followed by the run's length. What is the encoding of `\"aabcccaa\"`?",
+    "options": [
+      "`a2b1c3a2`",
+      "`a4b1c3`",
+      "`a2b1c3`",
+      "`a2bc3a2`"
+    ],
+    "answer": "`a2b1c3a2`",
+    "verify": "from itertools import groupby\nprint(\"`\" + \"\".join(k + str(len(list(g))) for k, g in groupby(\"aabcccaa\")) + \"`\")"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Strings"
+    ],
+    "text": "Why does `\"10\" < \"9\"` evaluate to `True`?",
+    "options": [
+      "Python converts both to numbers and `10 < 9` is treated as an overflow",
+      "Strings compare character by character, and `\"1\"` comes before `\"9\"`",
+      "The shorter string always compares as larger",
+      "Strings are compared by length first, then by content"
+    ],
+    "answer": "Strings compare character by character, and `\"1\"` comes before `\"9\"`"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Strings"
+    ],
+    "text": "How many non-empty substrings does a string of length `n` have, counting each start and end position separately?",
+    "options": [
+      "n^2",
+      "2^n",
+      "n(n+1)/2",
+      "n(n-1)/2"
+    ],
+    "answer": "n(n+1)/2"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Strings"
+    ],
+    "text": "Naive substring search tries every alignment of a pattern of length `m` against a text of length `n`. What is its worst-case time?",
+    "options": [
+      "O(n + m)",
+      "O(n log m)",
+      "O(m)",
+      "O(n * m)"
+    ],
+    "answer": "O(n * m)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Strings"
+    ],
+    "text": "Slicing with a step:\n```\ns = \"abcdefgh\"\nprint(s[1:7:2], s[::-3])\n```\nWhat is printed?",
+    "options": [
+      "bdf heb",
+      "bdfh heb",
+      "ace heb",
+      "bdf hda"
+    ],
+    "answer": "bdf heb",
+    "verify": "s = \"abcdefgh\"\nprint(s[1:7:2], s[::-3])"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Strings"
+    ],
+    "text": "Two ways to split:\n```\ns = \" a  b \"\nprint(s.split(), s.split(\" \"))\n```\nWhat is printed?",
+    "options": [
+      "['a', 'b'] ['a', 'b']",
+      "['a', 'b'] ['', 'a', '', 'b', '']",
+      "['a', 'b'] ['', 'a', 'b', '']",
+      "['', 'a', '', 'b', ''] ['a', 'b']"
+    ],
+    "answer": "['a', 'b'] ['', 'a', '', 'b', '']",
+    "verify": "s = \" a  b \"\nprint(s.split(), s.split(\" \"))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Strings"
+    ],
+    "text": "Run-length encoding:\n```\ndef rle(s):\n    out = \"\"\n    i = 0\n    while i < len(s):\n        j = i\n        while j < len(s) and s[j] == s[i]:\n            j += 1\n        out += s[i] + str(j - i)\n        i = j\n    return out\nprint(rle(\"wwwbbwa\"))\n```\nWhat is printed?",
+    "options": [
+      "w4b2a1",
+      "w3b2wa",
+      "w3b2w1a1",
+      "w3b2w1a"
+    ],
+    "answer": "w3b2w1a1",
+    "verify": "def rle(s):\n    out = \"\"\n    i = 0\n    while i < len(s):\n        j = i\n        while j < len(s) and s[j] == s[i]:\n            j += 1\n        out += s[i] + str(j - i)\n        i = j\n    return out\nprint(rle(\"wwwbbwa\"))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Strings"
+    ],
+    "text": "Caesar shift on lowercase letters (`97` is `ord(\"a\")`):\n```\ndef shift(s, k):\n    out = []\n    for ch in s:\n        out.append(chr((ord(ch) - 97 + k) % 26 + 97))\n    return \"\".join(out)\nprint(shift(\"xyz\", 3))\n```\nWhat is printed?",
+    "options": [
+      "{|}",
+      "uvw",
+      "bcd",
+      "abc"
+    ],
+    "answer": "abc",
+    "verify": "def shift(s, k):\n    out = []\n    for ch in s:\n        out.append(chr((ord(ch) - 97 + k) % 26 + 97))\n    return \"\".join(out)\nprint(shift(\"xyz\", 3))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Strings"
+    ],
+    "text": "Anagram check by sorting:\n```\nprint(sorted(\"listen\") == sorted(\"silent\"),\n      sorted(\"Listen\") == sorted(\"silent\"))\n```\nWhat is printed?",
+    "options": [
+      "True False",
+      "True True",
+      "False False",
+      "False True"
+    ],
+    "answer": "True False",
+    "verify": "print(sorted(\"listen\") == sorted(\"silent\"),\n      sorted(\"Listen\") == sorted(\"silent\"))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Strings"
+    ],
+    "text": "Sorting strings:\n```\nwords = [\"banana\", \"Apple\", \"cherry\", \"apple\"]\nprint(sorted(words))\n```\nWhat is printed?",
+    "options": [
+      "['apple', 'Apple', 'banana', 'cherry']",
+      "['Apple', 'apple', 'banana', 'cherry']",
+      "['apple', 'banana', 'cherry', 'Apple']",
+      "['cherry', 'banana', 'apple', 'Apple']"
+    ],
+    "answer": "['Apple', 'apple', 'banana', 'cherry']",
+    "verify": "words = [\"banana\", \"Apple\", \"cherry\", \"apple\"]\nprint(sorted(words))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Strings"
+    ],
+    "text": "Longest common prefix by shrinking:\n```\nwords = [\"interview\", \"internet\", \"interval\"]\nprefix = words[0]\nfor w in words[1:]:\n    while not w.startswith(prefix):\n        prefix = prefix[:-1]\nprint(prefix)\n```\nWhat is printed?",
+    "options": [
+      "interv",
+      "int",
+      "inter",
+      "intern"
+    ],
+    "answer": "inter",
+    "verify": "words = [\"interview\", \"internet\", \"interval\"]\nprefix = words[0]\nfor w in words[1:]:\n    while not w.startswith(prefix):\n        prefix = prefix[:-1]\nprint(prefix)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Strings"
+    ],
+    "text": "Most frequent character (`max` returns the first maximum it meets):\n```\ns = \"mississippi\"\ncounts = {}\nfor ch in s:\n    counts[ch] = counts.get(ch, 0) + 1\nbest = max(counts, key=counts.get)\nprint(best, counts[best])\n```\nWhat is printed?",
+    "options": [
+      "s 4",
+      "i 3",
+      "s 3",
+      "i 4"
+    ],
+    "answer": "i 4",
+    "verify": "s = \"mississippi\"\ncounts = {}\nfor ch in s:\n    counts[ch] = counts.get(ch, 0) + 1\nbest = max(counts, key=counts.get)\nprint(best, counts[best])"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Strings"
+    ],
+    "text": "Anagram check with one count array (lowercase letters only):\n```\ndef is_anagram(a, b):\n    counts = [0] * 26\n    for ch in a:\n        counts[ord(ch) - ord(\"a\")] += 1\n    for ch in b:\n        counts[ord(ch) - ord(\"a\")] -= 1\n    return ____\n```\nWhat goes in the blank?",
+    "options": [
+      "all(c == 0 for c in counts)",
+      "sum(counts) == 0",
+      "len(a) == len(b)",
+      "counts[0] == 0"
+    ],
+    "answer": "all(c == 0 for c in counts)",
+    "verify": "def is_anagram(a, b):\n    counts = [0] * 26\n    for ch in a:\n        counts[ord(ch) - ord(\"a\")] += 1\n    for ch in b:\n        counts[ord(ch) - ord(\"a\")] -= 1\n    return __BLANK__\nok = (is_anagram(\"listen\", \"silent\") and not is_anagram(\"ab\", \"cc\")\n      and not is_anagram(\"aab\", \"abb\") and not is_anagram(\"bc\", \"bd\"))\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Strings"
+    ],
+    "text": "Longest common prefix by scanning columns:\n```\ndef lcp(words):\n    for i in range(len(words[0])):\n        ch = words[0][i]\n        for w in words[1:]:\n            if ____:\n                return words[0][:i]\n    return words[0]\n```\nWhich condition goes in the blank?",
+    "options": [
+      "w[i] != ch",
+      "i == len(w) or w[i] != ch",
+      "w[i] != ch or i == len(w)",
+      "i == len(w) and w[i] != ch"
+    ],
+    "answer": "i == len(w) or w[i] != ch",
+    "verify": "def lcp(words):\n    for i in range(len(words[0])):\n        ch = words[0][i]\n        for w in words[1:]:\n            if __BLANK__:\n                return words[0][:i]\n    return words[0]\ntry:\n    ok = (lcp([\"flower\", \"flow\", \"flight\"]) == \"fl\" and lcp([\"dog\", \"racecar\"]) == \"\"\n          and lcp([\"abc\", \"ab\"]) == \"ab\")\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Strings"
+    ],
+    "text": "Caesar cipher that keeps case and leaves non-letters alone:\n```\ndef caesar(s, k):\n    out = \"\"\n    for ch in s:\n        if ch.isalpha():\n            base = ____\n            ch = chr((ord(ch) - base + k) % 26 + base)\n        out += ch\n    return out\n```\nWhat goes in the blank?",
+    "options": [
+      "ord(\"a\")",
+      "ord(ch)",
+      "ord(\"A\") if ch.isupper() else ord(\"a\")",
+      "ord(\"A\") if ch.islower() else ord(\"a\")"
+    ],
+    "answer": "ord(\"A\") if ch.isupper() else ord(\"a\")",
+    "verify": "def caesar(s, k):\n    out = \"\"\n    for ch in s:\n        if ch.isalpha():\n            base = __BLANK__\n            ch = chr((ord(ch) - base + k) % 26 + base)\n        out += ch\n    return out\nprint(\"OK\" if caesar(\"Hello, Zz!\", 3) == \"Khoor, Cc!\" else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Strings"
+    ],
+    "text": "Run-length encoding (`\"aaabcc\"` becomes `\"a3b1c2\"`):\n```\ndef rle(s):\n    out = \"\"\n    count = 1\n    for i in range(1, len(s) + 1):\n        if i < len(s) and s[i] == s[i - 1]:\n            count += 1\n        else:\n            out += s[i - 1] + str(count)\n            ____\n    return out\n```\nWhich line goes in the blank?",
+    "options": [
+      "count = 0",
+      "count += 1",
+      "out = \"\"",
+      "count = 1"
+    ],
+    "answer": "count = 1",
+    "verify": "def rle(s):\n    out = \"\"\n    count = 1\n    for i in range(1, len(s) + 1):\n        if i < len(s) and s[i] == s[i - 1]:\n            count += 1\n        else:\n            out += s[i - 1] + str(count)\n            __BLANK__\n    return out\nprint(\"OK\" if rle(\"aaabcc\") == \"a3b1c2\" and rle(\"abbb\") == \"a1b3\" else \"NO\")"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "Strings"
+    ],
+    "text": "What is the worst-case time of KMP string matching for a pattern of length `m` in a text of length `n`?",
+    "options": [
+      "O(n + m)",
+      "O(n * m)",
+      "O(n log m)",
+      "O(m^2 + n)"
+    ],
+    "answer": "O(n + m)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "Strings"
+    ],
+    "text": "In KMP, what does the prefix function value `pi[i]` store?",
+    "options": [
+      "The length of the longest prefix of `pattern[0..i]` that is also a suffix, allowing the whole substring",
+      "The length of the longest proper prefix of `pattern[0..i]` that is also a suffix of it",
+      "How many times `pattern[i]` appeared before position `i`",
+      "The index where `pattern[i]` next appears"
+    ],
+    "answer": "The length of the longest proper prefix of `pattern[0..i]` that is also a suffix of it"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "Strings"
+    ],
+    "text": "How many distinct non-empty substrings does `\"aaaa\"` have?",
+    "options": [
+      "10",
+      "6",
+      "4",
+      "1"
+    ],
+    "answer": "4",
+    "verify": "s = \"aaaa\"\nprint(len({s[i:j] for i in range(len(s)) for j in range(i + 1, len(s) + 1)}))"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "Strings"
+    ],
+    "text": "How many palindromic substrings does `\"abba\"` have, counting each occurrence by its position?",
+    "options": [
+      "4",
+      "5",
+      "7",
+      "6"
+    ],
+    "answer": "6",
+    "verify": "s = \"abba\"\nprint(sum(s[i:j] == s[i:j][::-1] for i in range(len(s)) for j in range(i + 1, len(s) + 1)))"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "Strings"
+    ],
+    "text": "Counting palindromes by expanding around centres uses `2n - 1` centres for a string of length `n`. Why?",
+    "options": [
+      "Odd-length palindromes centre on a character and even-length ones centre between two adjacent characters",
+      "Each character is expanded twice to double-check the result",
+      "The first and last characters each need an extra centre",
+      "Half of the centres scan left and the other half scan right"
+    ],
+    "answer": "Odd-length palindromes centre on a character and even-length ones centre between two adjacent characters"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "Strings"
+    ],
+    "text": "What is the worst-case running time of Rabin-Karp matching, and when does it happen?",
+    "options": [
+      "O(n + m) always, because every hash comparison is O(1)",
+      "O(n * m), when many windows share the pattern's hash and must be compared character by character",
+      "O(n log m), when the pattern contains repeated characters",
+      "O(m^2), when the pattern is longer than the text"
+    ],
+    "answer": "O(n * m), when many windows share the pattern's hash and must be compared character by character"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "Strings"
+    ],
+    "text": "You sort `n` strings, each up to `m` characters long, with a comparison sort. What is the worst-case time?",
+    "options": [
+      "O(n log n)",
+      "O(n * m)",
+      "O(m * n log n)",
+      "O(m log n)"
+    ],
+    "answer": "O(m * n log n)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "Strings"
+    ],
+    "text": "You collect every substring of a length-`n` string into a hash set by slicing. What is the total time?",
+    "options": [
+      "O(n^2)",
+      "O(n)",
+      "O(n log n)",
+      "O(n^3)"
+    ],
+    "answer": "O(n^3)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "Strings"
+    ],
+    "text": "KMP prefix function:\n```\np = \"aabaaab\"\npi = [0] * len(p)\nk = 0\nfor i in range(1, len(p)):\n    while k > 0 and p[i] != p[k]:\n        k = pi[k - 1]\n    if p[i] == p[k]:\n        k += 1\n    pi[i] = k\nprint(pi)\n```\nWhat is printed?",
+    "options": [
+      "[0, 1, 0, 1, 2, 2, 3]",
+      "[0, 1, 0, 1, 2, 1, 0]",
+      "[0, 1, 0, 1, 2, 3, 4]",
+      "[1, 2, 0, 1, 2, 2, 3]"
+    ],
+    "answer": "[0, 1, 0, 1, 2, 2, 3]",
+    "verify": "p = \"aabaaab\"\npi = [0] * len(p)\nk = 0\nfor i in range(1, len(p)):\n    while k > 0 and p[i] != p[k]:\n        k = pi[k - 1]\n    if p[i] == p[k]:\n        k += 1\n    pi[i] = k\nprint(pi)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "Strings"
+    ],
+    "text": "Built-in `count` versus a naive scan:\n```\ntext, pat = \"abababab\", \"abab\"\nnaive = 0\nfor i in range(len(text) - len(pat) + 1):\n    if text[i:i + len(pat)] == pat:\n        naive += 1\nprint(text.count(pat), naive)\n```\nWhat is printed?",
+    "options": [
+      "3 3",
+      "2 3",
+      "2 2",
+      "3 2"
+    ],
+    "answer": "2 3",
+    "verify": "text, pat = \"abababab\", \"abab\"\nnaive = 0\nfor i in range(len(text) - len(pat) + 1):\n    if text[i:i + len(pat)] == pat:\n        naive += 1\nprint(text.count(pat), naive)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "Strings"
+    ],
+    "text": "Counting palindromic substrings by expanding around centres:\n```\ns = \"abaab\"\ncount = 0\nfor c in range(2 * len(s) - 1):\n    l, r = c // 2, c // 2 + c % 2\n    while l >= 0 and r < len(s) and s[l] == s[r]:\n        count += 1\n        l -= 1\n        r += 1\nprint(count)\n```\nWhat is printed?",
+    "options": [
+      "5",
+      "7",
+      "8",
+      "6"
+    ],
+    "answer": "8",
+    "verify": "s = \"abaab\"\ncount = 0\nfor c in range(2 * len(s) - 1):\n    l, r = c // 2, c // 2 + c % 2\n    while l >= 0 and r < len(s) and s[l] == s[r]:\n        count += 1\n        l -= 1\n        r += 1\nprint(count)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "Strings"
+    ],
+    "text": "Distinct substrings with a set:\n```\ns = \"aabaa\"\nsubs = set()\nfor i in range(len(s)):\n    for j in range(i + 1, len(s) + 1):\n        subs.add(s[i:j])\nprint(len(subs))\n```\nWhat is printed?",
+    "options": [
+      "15",
+      "10",
+      "12",
+      "11"
+    ],
+    "answer": "11",
+    "verify": "s = \"aabaa\"\nsubs = set()\nfor i in range(len(s)):\n    for j in range(i + 1, len(s) + 1):\n        subs.add(s[i:j])\nprint(len(subs))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "Strings"
+    ],
+    "text": "Longest palindromic substring:\n```\ndef expand(s, l, r):\n    while l >= 0 and r < len(s) and s[l] == s[r]:\n        l -= 1\n        r += 1\n    return s[l + 1:r]\ns = \"cabbad\"\nbest = \"\"\nfor i in range(len(s)):\n    for cand in (expand(s, i, i), expand(s, i, i + 1)):\n        if len(cand) > len(best):\n            best = cand\nprint(best)\n```\nWhat is printed?",
+    "options": [
+      "abba",
+      "bb",
+      "c",
+      "cabba"
+    ],
+    "answer": "abba",
+    "verify": "def expand(s, l, r):\n    while l >= 0 and r < len(s) and s[l] == s[r]:\n        l -= 1\n        r += 1\n    return s[l + 1:r]\ns = \"cabbad\"\nbest = \"\"\nfor i in range(len(s)):\n    for cand in (expand(s, i, i), expand(s, i, i + 1)):\n        if len(cand) > len(best):\n            best = cand\nprint(best)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "Strings"
+    ],
+    "text": "Sorting by length, then alphabetically:\n```\nwords = [\"app\", \"apple\", \"Apple\", \"ap\"]\nprint(sorted(words, key=lambda w: (len(w), w)))\n```\nWhat is printed?",
+    "options": [
+      "['ap', 'app', 'apple', 'Apple']",
+      "['ap', 'app', 'Apple', 'apple']",
+      "['Apple', 'ap', 'app', 'apple']",
+      "['apple', 'Apple', 'app', 'ap']"
+    ],
+    "answer": "['ap', 'app', 'Apple', 'apple']",
+    "verify": "words = [\"app\", \"apple\", \"Apple\", \"ap\"]\nprint(sorted(words, key=lambda w: (len(w), w)))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "Strings"
+    ],
+    "text": "Counting character copies when `+=` copies the old string every time:\n```\ncopies = 0\ns = \"\"\nfor i in range(10):\n    copies += len(s) + 1\n    s += \"x\"\nprint(copies)\n```\nWhat is printed?",
+    "options": [
+      "10",
+      "45",
+      "55",
+      "100"
+    ],
+    "answer": "55",
+    "verify": "copies = 0\ns = \"\"\nfor i in range(10):\n    copies += len(s) + 1\n    s += \"x\"\nprint(copies)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "Strings"
+    ],
+    "text": "Rotation check using a doubled string:\n```\na = \"waterbottle\"\nfor b in [\"erbottlewat\", \"bottlewater\", \"erbottlewta\"]:\n    print(len(a) == len(b) and b in a + a, end=\" \")\n```\nWhat is printed?",
+    "options": [
+      "True False False",
+      "False True False",
+      "True True True",
+      "True True False"
+    ],
+    "answer": "True True False",
+    "verify": "a = \"waterbottle\"\nfor b in [\"erbottlewat\", \"bottlewater\", \"erbottlewta\"]:\n    print(len(a) == len(b) and b in a + a, end=\" \")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "HARD",
+    "categories": [
+      "Strings"
+    ],
+    "text": "KMP prefix function:\n```\ndef prefix_function(p):\n    pi = [0] * len(p)\n    k = 0\n    for i in range(1, len(p)):\n        while k > 0 and ____:\n            k = pi[k - 1]\n        if p[i] == p[k]:\n            k += 1\n        pi[i] = k\n    return pi\n```\nWhich condition goes in the blank?",
+    "options": [
+      "p[i] != p[k]",
+      "p[i] == p[k]",
+      "p[i] != p[k - 1]",
+      "p[i] != p[0]"
+    ],
+    "answer": "p[i] != p[k]",
+    "verify": "def prefix_function(p):\n    pi = [0] * len(p)\n    k = 0\n    for i in range(1, len(p)):\n        guard = 0\n        while k > 0 and __BLANK__ and guard < 100:\n            guard += 1\n            k = pi[k - 1]\n        if p[i] == p[k]:\n            k += 1\n        pi[i] = k\n    return pi\ndef brute(p):\n    return [max(L for L in range(i + 1) if L <= i and p[:L] == p[i + 1 - L:i + 1]) for i in range(len(p))]\ntry:\n    ok = all(prefix_function(p) == brute(p) for p in [\"aabaaab\", \"abacabab\", \"aaaa\", \"abcab\", \"ababcabab\"])\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "HARD",
+    "categories": [
+      "Strings"
+    ],
+    "text": "KMP search that counts overlapping matches (`pi` is the pattern's prefix function):\n```\ndef kmp_count(text, pat, pi):\n    count = k = 0\n    for ch in text:\n        while k > 0 and ch != pat[k]:\n            k = pi[k - 1]\n        if ch == pat[k]:\n            k += 1\n        if k == len(pat):\n            count += 1\n            k = ____\n    return count\n```\nWhat goes in the blank?",
+    "options": [
+      "0",
+      "pi[k - 1]",
+      "k - 1",
+      "len(pat)"
+    ],
+    "answer": "pi[k - 1]",
+    "verify": "def kmp_count(text, pat, pi):\n    count = k = 0\n    for ch in text:\n        while k > 0 and ch != pat[k]:\n            k = pi[k - 1]\n        if ch == pat[k]:\n            k += 1\n        if k == len(pat):\n            count += 1\n            k = __BLANK__\n    return count\ntry:\n    ok = kmp_count(\"abababab\", \"abab\", [0, 0, 1, 2]) == 3 and kmp_count(\"aaaa\", \"aa\", [0, 1]) == 3\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "HARD",
+    "categories": [
+      "Strings"
+    ],
+    "text": "Counting palindromic substrings by expanding around every centre:\n```\ndef count_palindromes(s):\n    count = 0\n    for c in range(____):\n        l, r = c // 2, c // 2 + c % 2\n        while l >= 0 and r < len(s) and s[l] == s[r]:\n            count += 1\n            l -= 1\n            r += 1\n    return count\n```\nWhat goes in the blank?",
+    "options": [
+      "len(s)",
+      "len(s) - 1",
+      "2 * len(s) - 1",
+      "2 * len(s) - 2"
+    ],
+    "answer": "2 * len(s) - 1",
+    "verify": "def count_palindromes(s):\n    count = 0\n    for c in range(__BLANK__):\n        l, r = c // 2, c // 2 + c % 2\n        while l >= 0 and r < len(s) and s[l] == s[r]:\n            count += 1\n            l -= 1\n            r += 1\n    return count\nprint(\"OK\" if count_palindromes(\"abaab\") == 8 and count_palindromes(\"aaa\") == 6 else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "HARD",
+    "categories": [
+      "Strings"
+    ],
+    "text": "Count the distinct non-empty substrings of `s`:\n```\ndef distinct_substrings(s):\n    subs = set()\n    for i in range(len(s)):\n        for j in range(____):\n            subs.add(s[i:j])\n    return len(subs)\n```\nWhat goes in the blank?",
+    "options": [
+      "i, len(s)",
+      "i + 1, len(s)",
+      "i, len(s) + 1",
+      "i + 1, len(s) + 1"
+    ],
+    "answer": "i + 1, len(s) + 1",
+    "verify": "def distinct_substrings(s):\n    subs = set()\n    for i in range(len(s)):\n        for j in range(__BLANK__):\n            subs.add(s[i:j])\n    return len(subs)\nprint(\"OK\" if distinct_substrings(\"aabaa\") == 11 and distinct_substrings(\"abc\") == 6 else \"NO\")"
+  }
+]

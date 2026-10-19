@@ -1,0 +1,940 @@
+[
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "Trees"
+    ],
+    "text": "Height is measured in edges. The longest root-to-leaf path in a binary tree contains 4 nodes. What is the tree's height?",
+    "options": [
+      "3",
+      "4",
+      "5",
+      "2"
+    ],
+    "answer": "3"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "Trees"
+    ],
+    "text": "In a binary tree, what is a leaf?",
+    "options": [
+      "A node with exactly one child",
+      "A node with no children",
+      "The root node",
+      "Any node on the deepest level, whether or not it has children"
+    ],
+    "answer": "A node with no children"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "Trees"
+    ],
+    "text": "Which statement defines a full binary tree?",
+    "options": [
+      "Every node has exactly 2 children",
+      "Every level is filled except possibly the last",
+      "Every node has either 0 or 2 children",
+      "All leaves are at the same depth and every node has 2 children"
+    ],
+    "answer": "Every node has either 0 or 2 children"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "Trees"
+    ],
+    "text": "Which traversal of a binary search tree visits the keys in sorted (ascending) order?",
+    "options": [
+      "Preorder",
+      "Postorder",
+      "Level-order",
+      "Inorder"
+    ],
+    "answer": "Inorder"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "Trees"
+    ],
+    "text": "The root is at level `0`. What is the maximum number of nodes a binary tree can have on level `k`?",
+    "options": [
+      "2^k",
+      "2^(k+1) - 1",
+      "k + 1",
+      "2k"
+    ],
+    "answer": "2^k"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "Trees"
+    ],
+    "text": "In a binary search tree with distinct keys, where are all keys smaller than a node's key stored?",
+    "options": [
+      "In that node's right subtree",
+      "In that node's left subtree",
+      "Only in that node's left child",
+      "In that node's ancestors"
+    ],
+    "answer": "In that node's left subtree"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "Trees"
+    ],
+    "text": "Where is the minimum key of a non-empty binary search tree?",
+    "options": [
+      "At the root",
+      "At the leftmost leaf on the deepest level",
+      "At the node reached by following left pointers from the root until there is no left child",
+      "At the first leaf found by a level-order traversal"
+    ],
+    "answer": "At the node reached by following left pointers from the root until there is no left child"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "Trees"
+    ],
+    "text": "A binary heap is stored in a 0-indexed array. What are the indices of the children of index `i`?",
+    "options": [
+      "2i and 2i + 1",
+      "i + 1 and i + 2",
+      "2i - 1 and 2i",
+      "2i + 1 and 2i + 2"
+    ],
+    "answer": "2i + 1 and 2i + 2"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "Trees"
+    ],
+    "text": "A tree node is a tuple `(value, left, right)`, with `None` for an empty subtree:\n```\ndef N(v, l=None, r=None): return (v, l, r)\nroot = N(1, N(2, N(4), N(5)), N(3))\ndef pre(t):\n    if t is None:\n        return []\n    v, l, r = t\n    return [v] + pre(l) + pre(r)\nprint(pre(root))\n```\nWhat is printed?",
+    "options": [
+      "[1, 2, 4, 5, 3]",
+      "[4, 2, 5, 1, 3]",
+      "[4, 5, 2, 3, 1]",
+      "[1, 2, 3, 4, 5]"
+    ],
+    "answer": "[1, 2, 4, 5, 3]",
+    "verify": "def N(v, l=None, r=None): return (v, l, r)\nroot = N(1, N(2, N(4), N(5)), N(3))\ndef pre(t):\n    if t is None:\n        return []\n    v, l, r = t\n    return [v] + pre(l) + pre(r)\nprint(pre(root))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "Trees"
+    ],
+    "text": "Inorder traversal (`N` builds a `(value, left, right)` tuple):\n```\ndef N(v, l=None, r=None): return (v, l, r)\nroot = N(\"M\", N(\"K\", None, N(\"Q\")), N(\"A\"))\ndef inorder(t):\n    if t is None:\n        return \"\"\n    return inorder(t[1]) + t[0] + inorder(t[2])\nprint(inorder(root))\n```\nWhat is printed?",
+    "options": [
+      "MKQA",
+      "KQMA",
+      "QKAM",
+      "AKMQ"
+    ],
+    "answer": "KQMA",
+    "verify": "def N(v, l=None, r=None): return (v, l, r)\nroot = N(\"M\", N(\"K\", None, N(\"Q\")), N(\"A\"))\ndef inorder(t):\n    if t is None:\n        return \"\"\n    return inorder(t[1]) + t[0] + inorder(t[2])\nprint(inorder(root))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "Trees"
+    ],
+    "text": "Postorder traversal (`N` builds a `(value, left, right)` tuple):\n```\ndef N(v, l=None, r=None): return (v, l, r)\nroot = N(1, N(2, None, N(4)), N(3, N(5), N(6)))\nout = []\ndef post(t):\n    if t is None:\n        return\n    post(t[1])\n    post(t[2])\n    out.append(t[0])\npost(root)\nprint(out)\n```\nWhat is printed?",
+    "options": [
+      "[1, 2, 4, 3, 5, 6]",
+      "[2, 4, 1, 5, 3, 6]",
+      "[4, 2, 5, 6, 3, 1]",
+      "[6, 5, 3, 4, 2, 1]"
+    ],
+    "answer": "[4, 2, 5, 6, 3, 1]",
+    "verify": "def N(v, l=None, r=None): return (v, l, r)\nroot = N(1, N(2, None, N(4)), N(3, N(5), N(6)))\nout = []\ndef post(t):\n    if t is None:\n        return\n    post(t[1])\n    post(t[2])\n    out.append(t[0])\npost(root)\nprint(out)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "Trees"
+    ],
+    "text": "Height counted in nodes (`N` builds a `(value, left, right)` tuple):\n```\ndef N(v, l=None, r=None): return (v, l, r)\nroot = N(1, N(2, N(4, N(7))), N(3))\ndef height(t):\n    if t is None:\n        return 0\n    return 1 + max(height(t[1]), height(t[2]))\nprint(height(root))\n```\nWhat is printed?",
+    "options": [
+      "3",
+      "5",
+      "2",
+      "4"
+    ],
+    "answer": "4",
+    "verify": "def N(v, l=None, r=None): return (v, l, r)\nroot = N(1, N(2, N(4, N(7))), N(3))\ndef height(t):\n    if t is None:\n        return 0\n    return 1 + max(height(t[1]), height(t[2]))\nprint(height(root))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "Trees"
+    ],
+    "text": "Counting nodes (`N` builds a `(value, left, right)` tuple):\n```\ndef N(v, l=None, r=None): return (v, l, r)\nroot = N(5, N(3, N(1), N(4)), N(8, None, N(9)))\ndef count(t):\n    if t is None:\n        return 0\n    return 1 + count(t[1]) + count(t[2])\nprint(count(root))\n```\nWhat is printed?",
+    "options": [
+      "6",
+      "5",
+      "3",
+      "7"
+    ],
+    "answer": "6",
+    "verify": "def N(v, l=None, r=None): return (v, l, r)\nroot = N(5, N(3, N(1), N(4)), N(8, None, N(9)))\ndef count(t):\n    if t is None:\n        return 0\n    return 1 + count(t[1]) + count(t[2])\nprint(count(root))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "Trees"
+    ],
+    "text": "Counting leaves (`N` builds a `(value, left, right)` tuple):\n```\ndef N(v, l=None, r=None): return (v, l, r)\nroot = N(1, N(2, N(4), None), N(3, N(5), N(6)))\ndef leaves(t):\n    if t is None:\n        return 0\n    if t[1] is None and t[2] is None:\n        return 1\n    return leaves(t[1]) + leaves(t[2])\nprint(leaves(root))\n```\nWhat is printed?",
+    "options": [
+      "6",
+      "3",
+      "2",
+      "4"
+    ],
+    "answer": "3",
+    "verify": "def N(v, l=None, r=None): return (v, l, r)\nroot = N(1, N(2, N(4), None), N(3, N(5), N(6)))\ndef leaves(t):\n    if t is None:\n        return 0\n    if t[1] is None and t[2] is None:\n        return 1\n    return leaves(t[1]) + leaves(t[2])\nprint(leaves(root))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "Trees"
+    ],
+    "text": "Searching a binary search tree (`N` builds a `(value, left, right)` tuple):\n```\ndef N(v, l=None, r=None): return (v, l, r)\nt = N(8, N(3, N(1), N(6)), N(10, None, N(14)))\nkey, path = 6, []\nwhile t is not None:\n    path.append(t[0])\n    if key == t[0]:\n        break\n    t = t[1] if key < t[0] else t[2]\nprint(path)\n```\nWhat is printed?",
+    "options": [
+      "[8, 3, 1, 6]",
+      "[8, 10, 14]",
+      "[8, 3, 6]",
+      "[3, 6]"
+    ],
+    "answer": "[8, 3, 6]",
+    "verify": "def N(v, l=None, r=None): return (v, l, r)\nt = N(8, N(3, N(1), N(6)), N(10, None, N(14)))\nkey, path = 6, []\nwhile t is not None:\n    path.append(t[0])\n    if key == t[0]:\n        break\n    t = t[1] if key < t[0] else t[2]\nprint(path)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "Trees"
+    ],
+    "text": "A min-heap stored in a 0-indexed array:\n```\nheap = [2, 5, 3, 9, 6, 4]\ni = 4\nprint(heap[(i - 1) // 2])\n```\nWhat is printed?",
+    "options": [
+      "3",
+      "2",
+      "9",
+      "5"
+    ],
+    "answer": "5",
+    "verify": "heap = [2, 5, 3, 9, 6, 4]\ni = 4\nprint(heap[(i - 1) // 2])"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "EASY",
+    "categories": [
+      "Trees"
+    ],
+    "text": "Count all nodes in a tree of `(value, left, right)` tuples:\n```\ndef size(t):\n    if t is None:\n        return 0\n    return 1 + ____\n```\nWhat goes in the blank?",
+    "options": [
+      "size(t[1]) + size(t[2])",
+      "size(t[1])",
+      "max(size(t[1]), size(t[2]))",
+      "size(t[1]) * size(t[2])"
+    ],
+    "answer": "size(t[1]) + size(t[2])",
+    "verify": "def size(t):\n    if t is None:\n        return 0\n    return 1 + __BLANK__\ndef N(v, l=None, r=None): return (v, l, r)\nroot = N(1, N(2, N(4), N(5)), N(3))\nprint(\"OK\" if size(root) == 5 and size(N(7)) == 1 else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "EASY",
+    "categories": [
+      "Trees"
+    ],
+    "text": "Height counted in edges, so a single node has height `0`:\n```\ndef height(t):\n    if t is None:\n        return ____\n    return 1 + max(height(t[1]), height(t[2]))\n```\nWhat goes in the blank?",
+    "options": [
+      "0",
+      "-1",
+      "1",
+      "None"
+    ],
+    "answer": "-1",
+    "verify": "def height(t):\n    if t is None:\n        return __BLANK__\n    return 1 + max(height(t[1]), height(t[2]))\ndef N(v, l=None, r=None): return (v, l, r)\ntry:\n    ok = height(N(1)) == 0 and height(N(1, N(2, N(3)))) == 2\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "EASY",
+    "categories": [
+      "Trees"
+    ],
+    "text": "Inorder traversal collecting values into `out`:\n```\ndef inorder(t, out):\n    if t is None:\n        return\n    inorder(t[1], out)\n    ____\n    inorder(t[2], out)\n```\nWhich line goes in the blank?",
+    "options": [
+      "out.append(t)",
+      "out.append(t[1])",
+      "out.append(t[0])",
+      "return t[0]"
+    ],
+    "answer": "out.append(t[0])",
+    "verify": "def inorder(t, out):\n    if t is None:\n        return\n    inorder(t[1], out)\n    __BLANK__\n    inorder(t[2], out)\ndef N(v, l=None, r=None): return (v, l, r)\nout = []\ninorder(N(5, N(3, N(1), N(4)), N(8)), out)\nprint(\"OK\" if out == [1, 3, 4, 5, 8] else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "EASY",
+    "categories": [
+      "Trees"
+    ],
+    "text": "Return the smallest key in a non-empty binary search tree:\n```\ndef bst_min(t):\n    while ____:\n        t = t[1]\n    return t[0]\n```\nWhat condition goes in the blank?",
+    "options": [
+      "t is not None",
+      "t[2] is not None",
+      "t[1] is None",
+      "t[1] is not None"
+    ],
+    "answer": "t[1] is not None",
+    "verify": "def bst_min(t):\n    steps = 0\n    while __BLANK__:\n        t = t[1]\n        steps += 1\n        if steps > 50:\n            return None\n    return t[0]\ndef N(v, l=None, r=None): return (v, l, r)\ntry:\n    ok = bst_min(N(8, N(3, None, N(6)), N(10))) == 3 and bst_min(N(5)) == 5\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Trees"
+    ],
+    "text": "Height is measured in edges. What is the maximum number of nodes in a binary tree of height `h`?",
+    "options": [
+      "2^(h+1) - 1",
+      "2^h - 1",
+      "2^h",
+      "2h + 1"
+    ],
+    "answer": "2^(h+1) - 1"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Trees"
+    ],
+    "text": "Why does an inorder traversal of a binary search tree produce its keys in sorted order?",
+    "options": [
+      "Insertion always places new keys at the rightmost position",
+      "Inorder visits left subtree, node, right subtree, and every left-subtree key is smaller and every right-subtree key larger",
+      "Inorder visits nodes level by level, and shallower keys are smaller",
+      "A binary search tree is always kept balanced"
+    ],
+    "answer": "Inorder visits left subtree, node, right subtree, and every left-subtree key is smaller and every right-subtree key larger"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Trees"
+    ],
+    "text": "A function validates a BST by checking, at every node, that the left child is smaller and the right child is larger. Why is this check wrong?",
+    "options": [
+      "It fails on a tree with only one node",
+      "It rejects valid BSTs whose leaves are at different depths",
+      "A node deep in a left subtree can still be larger than an ancestor higher up",
+      "It also needs to compare the two children with each other"
+    ],
+    "answer": "A node deep in a left subtree can still be larger than an ancestor higher up"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Trees"
+    ],
+    "text": "Which statement defines a complete binary tree?",
+    "options": [
+      "Every node has 0 or 2 children",
+      "Every level, including the last, is completely full",
+      "For every node, the subtree heights differ by at most 1",
+      "Every level is full except possibly the last, and the last level is filled from the left"
+    ],
+    "answer": "Every level is full except possibly the last, and the last level is filled from the left"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Trees"
+    ],
+    "text": "The keys `1, 2, 3, ..., n` are inserted in that order into an empty, non-self-balancing BST. What is the worst-case time to search it afterwards?",
+    "options": [
+      "O(n)",
+      "O(log n)",
+      "O(1)",
+      "O(n log n)"
+    ],
+    "answer": "O(n)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Trees"
+    ],
+    "text": "How do you find the lowest common ancestor of keys `p < q` in a binary search tree (both keys present)?",
+    "options": [
+      "Return the parent of whichever of `p` and `q` is deeper",
+      "Walk down from the root: go left while both keys are smaller, right while both are larger, and stop at the first node where they split",
+      "Return the node whose key is closest to `(p + q) / 2`",
+      "Return the root, since it is an ancestor of every node"
+    ],
+    "answer": "Walk down from the root: go left while both keys are smaller, right while both are larger, and stop at the first node where they split"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Trees"
+    ],
+    "text": "Why can a binary heap be stored in a plain array without child pointers?",
+    "options": [
+      "It is a binary search tree, so the array is sorted",
+      "Every node has exactly two children",
+      "It is a complete binary tree, so nodes fill array slots level by level with no gaps",
+      "Its height never exceeds 2"
+    ],
+    "answer": "It is a complete binary tree, so nodes fill array slots level by level with no gaps"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Trees"
+    ],
+    "text": "When is a binary tree height-balanced (in the AVL sense)?",
+    "options": [
+      "When the root's two subtrees contain the same number of nodes",
+      "When all leaves are at the same depth",
+      "When the root's two subtrees differ in height by at most 1",
+      "When, for every node, the heights of its left and right subtrees differ by at most 1"
+    ],
+    "answer": "When, for every node, the heights of its left and right subtrees differ by at most 1"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Trees"
+    ],
+    "text": "Level-order traversal (`N` builds a `(value, left, right)` tuple):\n```\nfrom collections import deque\ndef N(v, l=None, r=None): return (v, l, r)\nroot = N(7, N(3, None, N(9)), N(5, N(1), N(8)))\nqueue, out = deque([root]), []\nwhile queue:\n    v, l, r = queue.popleft()\n    out.append(v)\n    for c in (l, r):\n        if c is not None:\n            queue.append(c)\nprint(out)\n```\nWhat is printed?",
+    "options": [
+      "[7, 3, 5, 9, 1, 8]",
+      "[7, 3, 9, 5, 1, 8]",
+      "[3, 9, 7, 1, 5, 8]",
+      "[7, 5, 3, 8, 1, 9]"
+    ],
+    "answer": "[7, 3, 5, 9, 1, 8]",
+    "verify": "from collections import deque\ndef N(v, l=None, r=None): return (v, l, r)\nroot = N(7, N(3, None, N(9)), N(5, N(1), N(8)))\nqueue, out = deque([root]), []\nwhile queue:\n    v, l, r = queue.popleft()\n    out.append(v)\n    for c in (l, r):\n        if c is not None:\n            queue.append(c)\nprint(out)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Trees"
+    ],
+    "text": "Building a BST by repeated insertion, then printing its preorder:\n```\ndef insert(t, k):\n    if t is None:\n        return (k, None, None)\n    v, l, r = t\n    if k < v:\n        return (v, insert(l, k), r)\n    return (v, l, insert(r, k))\ndef pre(t): return [] if t is None else [t[0]] + pre(t[1]) + pre(t[2])\nroot = None\nfor k in [5, 2, 8, 1, 4, 9]:\n    root = insert(root, k)\nprint(pre(root))\n```\nWhat is printed?",
+    "options": [
+      "[1, 2, 4, 5, 8, 9]",
+      "[5, 2, 1, 4, 8, 9]",
+      "[5, 2, 8, 1, 4, 9]",
+      "[1, 4, 2, 9, 8, 5]"
+    ],
+    "answer": "[5, 2, 1, 4, 8, 9]",
+    "verify": "def insert(t, k):\n    if t is None:\n        return (k, None, None)\n    v, l, r = t\n    if k < v:\n        return (v, insert(l, k), r)\n    return (v, l, insert(r, k))\ndef pre(t): return [] if t is None else [t[0]] + pre(t[1]) + pre(t[2])\nroot = None\nfor k in [5, 2, 8, 1, 4, 9]:\n    root = insert(root, k)\nprint(pre(root))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Trees"
+    ],
+    "text": "A BST check that only compares each node with its own children:\n```\ndef N(v, l=None, r=None): return (v, l, r)\ndef looks_valid(t):\n    if t is None:\n        return True\n    v, l, r = t\n    if l is not None and l[0] > v:\n        return False\n    if r is not None and r[0] < v:\n        return False\n    return looks_valid(l) and looks_valid(r)\nprint(looks_valid(N(10, N(5, None, N(12)), N(15))))\n```\nWhat is printed?",
+    "options": [
+      "False",
+      "None",
+      "True",
+      "An error"
+    ],
+    "answer": "True",
+    "verify": "def N(v, l=None, r=None): return (v, l, r)\ndef looks_valid(t):\n    if t is None:\n        return True\n    v, l, r = t\n    if l is not None and l[0] > v:\n        return False\n    if r is not None and r[0] < v:\n        return False\n    return looks_valid(l) and looks_valid(r)\nprint(looks_valid(N(10, N(5, None, N(12)), N(15))))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Trees"
+    ],
+    "text": "Lowest common ancestor in a general binary tree (values are distinct):\n```\ndef N(v, l=None, r=None): return (v, l, r)\ndef lca(t, a, b):\n    if t is None or t[0] in (a, b):\n        return t\n    left = lca(t[1], a, b)\n    right = lca(t[2], a, b)\n    if left and right:\n        return t\n    return left or right\nroot = N(1, N(2, N(4), N(5, N(7), N(8))), N(3, N(6)))\nprint(lca(root, 7, 4)[0])\n```\nWhat is printed?",
+    "options": [
+      "1",
+      "5",
+      "4",
+      "2"
+    ],
+    "answer": "2",
+    "verify": "def N(v, l=None, r=None): return (v, l, r)\ndef lca(t, a, b):\n    if t is None or t[0] in (a, b):\n        return t\n    left = lca(t[1], a, b)\n    right = lca(t[2], a, b)\n    if left and right:\n        return t\n    return left or right\nroot = N(1, N(2, N(4), N(5, N(7), N(8))), N(3, N(6)))\nprint(lca(root, 7, 4)[0])"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Trees"
+    ],
+    "text": "Root-to-leaf path sums (`N` builds a `(value, left, right)` tuple):\n```\ndef N(v, l=None, r=None): return (v, l, r)\nroot = N(5, N(4, N(11, N(7), N(2))), N(8, N(13), N(4, None, N(1))))\ndef has_path(t, target):\n    if t is None:\n        return False\n    v, l, r = t\n    if l is None and r is None:\n        return v == target\n    return has_path(l, target - v) or has_path(r, target - v)\nprint([s for s in (22, 26, 18, 9) if has_path(root, s)])\n```\nWhat is printed?",
+    "options": [
+      "[22, 26, 18]",
+      "[22]",
+      "[22, 26, 18, 9]",
+      "[22, 18]"
+    ],
+    "answer": "[22, 26, 18]",
+    "verify": "def N(v, l=None, r=None): return (v, l, r)\nroot = N(5, N(4, N(11, N(7), N(2))), N(8, N(13), N(4, None, N(1))))\ndef has_path(t, target):\n    if t is None:\n        return False\n    v, l, r = t\n    if l is None and r is None:\n        return v == target\n    return has_path(l, target - v) or has_path(r, target - v)\nprint([s for s in (22, 26, 18, 9) if has_path(root, s)])"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Trees"
+    ],
+    "text": "Mirroring (inverting) a binary tree, then reading it inorder:\n```\ndef N(v, l=None, r=None): return (v, l, r)\ndef mirror(t):\n    if t is None:\n        return None\n    v, l, r = t\n    return (v, mirror(r), mirror(l))\ndef inorder(t): return [] if t is None else inorder(t[1]) + [t[0]] + inorder(t[2])\nroot = N(4, N(2, N(1), N(3)), N(7, N(6)))\nprint(inorder(mirror(root)))\n```\nWhat is printed?",
+    "options": [
+      "[1, 2, 3, 4, 6, 7]",
+      "[7, 6, 4, 3, 2, 1]",
+      "[4, 7, 6, 2, 3, 1]",
+      "[6, 7, 4, 1, 2, 3]"
+    ],
+    "answer": "[7, 6, 4, 3, 2, 1]",
+    "verify": "def N(v, l=None, r=None): return (v, l, r)\ndef mirror(t):\n    if t is None:\n        return None\n    v, l, r = t\n    return (v, mirror(r), mirror(l))\ndef inorder(t): return [] if t is None else inorder(t[1]) + [t[0]] + inorder(t[2])\nroot = N(4, N(2, N(1), N(3)), N(7, N(6)))\nprint(inorder(mirror(root)))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Trees"
+    ],
+    "text": "`check` returns a tree's height in nodes, or `-1` if any node is unbalanced:\n```\ndef N(v, l=None, r=None): return (v, l, r)\ndef check(t):\n    if t is None:\n        return 0\n    lh, rh = check(t[1]), check(t[2])\n    if lh == -1 or rh == -1 or abs(lh - rh) > 1:\n        return -1\n    return 1 + max(lh, rh)\na = N(1, N(2, N(3)), N(4))\nb = N(1, N(2, N(3, N(4))), N(5))\nprint(check(a), check(b))\n```\nWhat is printed?",
+    "options": [
+      "3 4",
+      "-1 -1",
+      "3 -1",
+      "2 -1"
+    ],
+    "answer": "3 -1",
+    "verify": "def N(v, l=None, r=None): return (v, l, r)\ndef check(t):\n    if t is None:\n        return 0\n    lh, rh = check(t[1]), check(t[2])\n    if lh == -1 or rh == -1 or abs(lh - rh) > 1:\n        return -1\n    return 1 + max(lh, rh)\na = N(1, N(2, N(3)), N(4))\nb = N(1, N(2, N(3, N(4))), N(5))\nprint(check(a), check(b))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Trees"
+    ],
+    "text": "Inserting into a min-heap stored in an array (sift up after each append):\n```\nheap = []\nfor x in [5, 3, 8, 1]:\n    heap.append(x)\n    i = len(heap) - 1\n    while i > 0 and heap[(i - 1) // 2] > heap[i]:\n        p = (i - 1) // 2\n        heap[p], heap[i] = heap[i], heap[p]\n        i = p\nprint(heap)\n```\nWhat is printed?",
+    "options": [
+      "[1, 3, 5, 8]",
+      "[1, 5, 8, 3]",
+      "[3, 1, 8, 5]",
+      "[1, 3, 8, 5]"
+    ],
+    "answer": "[1, 3, 8, 5]",
+    "verify": "heap = []\nfor x in [5, 3, 8, 1]:\n    heap.append(x)\n    i = len(heap) - 1\n    while i > 0 and heap[(i - 1) // 2] > heap[i]:\n        p = (i - 1) // 2\n        heap[p], heap[i] = heap[i], heap[p]\n        i = p\nprint(heap)"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Trees"
+    ],
+    "text": "Validate a BST by passing down the allowed range `(lo, hi)`:\n```\ndef valid(t, lo, hi):\n    if t is None:\n        return True\n    v, l, r = t\n    if not (lo < v < hi):\n        return False\n    return valid(l, ____) and valid(r, v, hi)\n```\nWhat goes in the blank?",
+    "options": [
+      "lo, v",
+      "v, hi",
+      "lo, hi",
+      "float(\"-inf\"), v"
+    ],
+    "answer": "lo, v",
+    "verify": "def valid(t, lo, hi):\n    if t is None:\n        return True\n    v, l, r = t\n    if not (lo < v < hi):\n        return False\n    return valid(l, __BLANK__) and valid(r, v, hi)\ndef N(v, l=None, r=None): return (v, l, r)\nINF = float(\"inf\")\ngood = N(10, N(5, N(2), N(7)), N(15))\nbad1 = N(10, N(5, None, N(12)), N(15))\nbad2 = N(10, N(5), N(20, N(8), None))\nok = valid(good, -INF, INF) and not valid(bad1, -INF, INF) and not valid(bad2, -INF, INF)\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Trees"
+    ],
+    "text": "Lowest common ancestor of `p` and `q` in a binary search tree:\n```\ndef lca_bst(t, p, q):\n    while t is not None:\n        if p < t[0] and q < t[0]:\n            t = t[1]\n        elif ____:\n            t = t[2]\n        else:\n            return t[0]\n```\nWhat condition goes in the blank?",
+    "options": [
+      "p > t[0] or q > t[0]",
+      "p > t[0] and q > t[0]",
+      "p < t[0] or q < t[0]",
+      "p == t[0] and q == t[0]"
+    ],
+    "answer": "p > t[0] and q > t[0]",
+    "verify": "def lca_bst(t, p, q):\n    while t is not None:\n        if p < t[0] and q < t[0]:\n            t = t[1]\n        elif __BLANK__:\n            t = t[2]\n        else:\n            return t[0]\ndef N(v, l=None, r=None): return (v, l, r)\nbst = N(6, N(2, N(0), N(4, N(3), N(5))), N(8, N(7), N(9)))\ngot = [lca_bst(bst, 2, 8), lca_bst(bst, 3, 5), lca_bst(bst, 7, 9), lca_bst(bst, 2, 4)]\nprint(\"OK\" if got == [6, 4, 8, 2] else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Trees"
+    ],
+    "text": "Level-order traversal using a list as the queue:\n```\ndef level_order(root):\n    out, queue = [], [root]\n    while queue:\n        t = queue.pop(0)\n        if t is None:\n            continue\n        out.append(t[0])\n        ____\n    return out\n```\nWhich line goes in the blank?",
+    "options": [
+      "queue.extend([t[2], t[1]])",
+      "queue[:0] = [t[1], t[2]]",
+      "queue.extend([t[1], t[2]])",
+      "out.extend([t[1], t[2]])"
+    ],
+    "answer": "queue.extend([t[1], t[2]])",
+    "verify": "def level_order(root):\n    out, queue = [], [root]\n    while queue and len(out) < 50:\n        t = queue.pop(0)\n        if t is None:\n            continue\n        out.append(t[0])\n        __BLANK__\n    return out\ndef N(v, l=None, r=None): return (v, l, r)\nprint(\"OK\" if level_order(N(1, N(2, N(4)), N(3))) == [1, 2, 3, 4] else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Trees"
+    ],
+    "text": "Sift up the value at index `i` of a 0-indexed array min-heap:\n```\ndef sift_up(heap, i):\n    while i > 0:\n        p = ____\n        if heap[p] <= heap[i]:\n            break\n        heap[p], heap[i] = heap[i], heap[p]\n        i = p\n```\nWhat goes in the blank?",
+    "options": [
+      "(i - 2) // 2",
+      "(i + 1) // 2",
+      "2 * i + 1",
+      "(i - 1) // 2"
+    ],
+    "answer": "(i - 1) // 2",
+    "verify": "def sift_up(heap, i):\n    steps = 0\n    while i > 0 and steps < 100:\n        steps += 1\n        p = __BLANK__\n        if heap[p] <= heap[i]:\n            break\n        heap[p], heap[i] = heap[i], heap[p]\n        i = p\ndef is_heap(h):\n    return all(h[(i - 1) // 2] <= h[i] for i in range(1, len(h)))\nok = True\ntry:\n    for data in ([9, 8, 7, 6, 5, 4, 3, 2, 1], [4, 10, 3, 5, 1, 2, 0], [5, 6, 7, 1]):\n        h = []\n        for x in data:\n            h.append(x)\n            sift_up(h, len(h) - 1)\n        ok = ok and is_heap(h)\n    h = []\n    for x in [5, 3, 8, 1, 4, 2]:\n        h.append(x)\n        sift_up(h, len(h) - 1)\n    ok = ok and h == [1, 3, 2, 5, 4, 8]\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "Trees"
+    ],
+    "text": "All values are distinct. Which pair of traversals is NOT always enough to rebuild a unique binary tree?",
+    "options": [
+      "Preorder and postorder",
+      "Preorder and inorder",
+      "Postorder and inorder",
+      "Level-order and inorder"
+    ],
+    "answer": "Preorder and postorder"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "Trees"
+    ],
+    "text": "The diameter of a binary tree is the number of edges on its longest path between any two nodes. Why is `height(root.left) + height(root.right)` (heights in nodes) not always the diameter?",
+    "options": [
+      "Heights must be counted in edges, so the formula is always off by one",
+      "The longest path does not have to pass through the root",
+      "It double-counts the root on every path",
+      "It is wrong only when the tree is perfectly balanced"
+    ],
+    "answer": "The longest path does not have to pass through the root"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "Trees"
+    ],
+    "text": "What is the time complexity of building a binary heap from an unsorted array of `n` elements by sifting down from the last internal node to the root?",
+    "options": [
+      "O(n log n)",
+      "O(log n)",
+      "O(n)",
+      "O(n^2)"
+    ],
+    "answer": "O(n)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "Trees"
+    ],
+    "text": "An `is_balanced(t)` function calls a separate `height()` on both children at every node, then recurses. What is its running time on a perfectly balanced tree of `n` nodes?",
+    "options": [
+      "O(n)",
+      "O(n^2)",
+      "O(log n)",
+      "O(n log n)"
+    ],
+    "answer": "O(n log n)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "Trees"
+    ],
+    "text": "Height is measured in edges. What is the minimum possible height of a binary tree with 100 nodes?",
+    "options": [
+      "6",
+      "7",
+      "99",
+      "5"
+    ],
+    "answer": "6",
+    "verify": "h = 0\nwhile 2 ** (h + 1) - 1 < 100:\n    h += 1\nprint(h)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "Trees"
+    ],
+    "text": "A full binary tree (every node has 0 or 2 children) has 20 internal nodes. How many leaves does it have?",
+    "options": [
+      "20",
+      "21",
+      "40",
+      "19"
+    ],
+    "answer": "21"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "Trees"
+    ],
+    "text": "How many structurally different binary search trees can be built from the keys `1`, `2`, `3`?",
+    "options": [
+      "6",
+      "3",
+      "5",
+      "4"
+    ],
+    "answer": "5",
+    "verify": "def count(n):\n    if n <= 1:\n        return 1\n    return sum(count(i) * count(n - 1 - i) for i in range(n))\nprint(count(3))"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "Trees"
+    ],
+    "text": "When deleting a node with two children from a binary search tree, which key is usually copied into it before removing a node lower down?",
+    "options": [
+      "The maximum key of its right subtree",
+      "The key of its left child",
+      "The minimum key of its left subtree",
+      "Its inorder successor: the minimum key of its right subtree"
+    ],
+    "answer": "Its inorder successor: the minimum key of its right subtree"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "Trees"
+    ],
+    "text": "Diameter (longest path, in edges) of a binary tree:\n```\ndef N(v, l=None, r=None): return (v, l, r)\nbest = 0\ndef depth(t):\n    global best\n    if t is None:\n        return 0\n    l, r = depth(t[1]), depth(t[2])\n    best = max(best, l + r)\n    return 1 + max(l, r)\nroot = N(1, N(2, N(4, N(6)), N(5, None, N(7))), None)\ndepth(root)\nprint(best)\n```\nWhat is printed?",
+    "options": [
+      "4",
+      "3",
+      "5",
+      "2"
+    ],
+    "answer": "4",
+    "verify": "def N(v, l=None, r=None): return (v, l, r)\nbest = 0\ndef depth(t):\n    global best\n    if t is None:\n        return 0\n    l, r = depth(t[1]), depth(t[2])\n    best = max(best, l + r)\n    return 1 + max(l, r)\nroot = N(1, N(2, N(4, N(6)), N(5, None, N(7))), None)\ndepth(root)\nprint(best)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "Trees"
+    ],
+    "text": "Rebuilding a tree from its preorder and inorder traversals:\n```\ndef build(pre, ino):\n    if not pre:\n        return None\n    root = pre[0]\n    k = ino.index(root)\n    return (root, build(pre[1:k + 1], ino[:k]), build(pre[k + 1:], ino[k + 1:]))\ndef post(t): return [] if t is None else post(t[1]) + post(t[2]) + [t[0]]\nprint(post(build([1, 2, 4, 5, 3, 6], [4, 2, 5, 1, 6, 3])))\n```\nWhat is printed?",
+    "options": [
+      "[4, 5, 2, 3, 6, 1]",
+      "[4, 5, 2, 6, 3, 1]",
+      "[4, 2, 5, 6, 3, 1]",
+      "[5, 4, 2, 6, 3, 1]"
+    ],
+    "answer": "[4, 5, 2, 6, 3, 1]",
+    "verify": "def build(pre, ino):\n    if not pre:\n        return None\n    root = pre[0]\n    k = ino.index(root)\n    return (root, build(pre[1:k + 1], ino[:k]), build(pre[k + 1:], ino[k + 1:]))\ndef post(t): return [] if t is None else post(t[1]) + post(t[2]) + [t[0]]\nprint(post(build([1, 2, 4, 5, 3, 6], [4, 2, 5, 1, 6, 3])))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "Trees"
+    ],
+    "text": "Iterative inorder traversal of a BST with an explicit stack:\n```\ndef N(v, l=None, r=None): return (v, l, r)\ndef kth_smallest(t, k):\n    stack = []\n    while True:\n        while t is not None:\n            stack.append(t)\n            t = t[1]\n        t = stack.pop()\n        k -= 1\n        if k == 0:\n            return t[0]\n        t = t[2]\nbst = N(20, N(8, N(4), N(12, N(10), N(14))), N(22))\nprint(kth_smallest(bst, 4))\n```\nWhat is printed?",
+    "options": [
+      "10",
+      "14",
+      "12",
+      "20"
+    ],
+    "answer": "12",
+    "verify": "def N(v, l=None, r=None): return (v, l, r)\ndef kth_smallest(t, k):\n    stack = []\n    while True:\n        while t is not None:\n            stack.append(t)\n            t = t[1]\n        t = stack.pop()\n        k -= 1\n        if k == 0:\n            return t[0]\n        t = t[2]\nbst = N(20, N(8, N(4), N(12, N(10), N(14))), N(22))\nprint(kth_smallest(bst, 4))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "Trees"
+    ],
+    "text": "Maximum path sum, where a path may start and end at any nodes:\n```\ndef N(v, l=None, r=None): return (v, l, r)\nbest = float(\"-inf\")\ndef gain(t):\n    global best\n    if t is None:\n        return 0\n    l = max(gain(t[1]), 0)\n    r = max(gain(t[2]), 0)\n    best = max(best, t[0] + l + r)\n    return t[0] + max(l, r)\ngain(N(-10, N(9), N(20, N(15), N(7))))\nprint(best)\n```\nWhat is printed?",
+    "options": [
+      "34",
+      "35",
+      "41",
+      "42"
+    ],
+    "answer": "42",
+    "verify": "def N(v, l=None, r=None): return (v, l, r)\nbest = float(\"-inf\")\ndef gain(t):\n    global best\n    if t is None:\n        return 0\n    l = max(gain(t[1]), 0)\n    r = max(gain(t[2]), 0)\n    best = max(best, t[0] + l + r)\n    return t[0] + max(l, r)\ngain(N(-10, N(9), N(20, N(15), N(7))))\nprint(best)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "Trees"
+    ],
+    "text": "Deleting from a BST, replacing a two-child node with its inorder successor:\n```\ndef N(v, l=None, r=None): return (v, l, r)\ndef delete(t, k):\n    if t is None: return None\n    v, l, r = t\n    if k < v: return (v, delete(l, k), r)\n    if k > v: return (v, l, delete(r, k))\n    if l is None: return r\n    if r is None: return l\n    s = r\n    while s[1] is not None: s = s[1]\n    return (s[0], l, delete(r, s[0]))\ndef pre(t): return [] if t is None else [t[0]] + pre(t[1]) + pre(t[2])\nbst = N(50, N(30, N(20), N(40)), N(70, N(60, None, N(65)), N(80)))\nprint(pre(delete(bst, 50)))\n```\nWhat is printed?",
+    "options": [
+      "[60, 30, 20, 40, 70, 65, 80]",
+      "[40, 30, 20, 70, 60, 65, 80]",
+      "[65, 30, 20, 40, 70, 60, 80]",
+      "[60, 30, 20, 40, 70, 80, 65]"
+    ],
+    "answer": "[60, 30, 20, 40, 70, 65, 80]",
+    "verify": "def N(v, l=None, r=None): return (v, l, r)\ndef delete(t, k):\n    if t is None: return None\n    v, l, r = t\n    if k < v: return (v, delete(l, k), r)\n    if k > v: return (v, l, delete(r, k))\n    if l is None: return r\n    if r is None: return l\n    s = r\n    while s[1] is not None: s = s[1]\n    return (s[0], l, delete(r, s[0]))\ndef pre(t): return [] if t is None else [t[0]] + pre(t[1]) + pre(t[2])\nbst = N(50, N(30, N(20), N(40)), N(70, N(60, None, N(65)), N(80)))\nprint(pre(delete(bst, 50)))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "Trees"
+    ],
+    "text": "Bottom-up heap construction (min-heap):\n```\ndef sift_down(a, i, n):\n    while 2 * i + 1 < n:\n        c = 2 * i + 1\n        if c + 1 < n and a[c + 1] < a[c]:\n            c += 1\n        if a[i] <= a[c]:\n            break\n        a[i], a[c] = a[c], a[i]\n        i = c\na = [9, 4, 7, 1, 8, 2]\nfor i in range(len(a) // 2 - 1, -1, -1):\n    sift_down(a, i, len(a))\nprint(a)\n```\nWhat is printed?",
+    "options": [
+      "[1, 2, 4, 7, 8, 9]",
+      "[1, 4, 2, 9, 8, 7]",
+      "[1, 9, 2, 4, 8, 7]",
+      "[1, 4, 7, 9, 8, 2]"
+    ],
+    "answer": "[1, 4, 2, 9, 8, 7]",
+    "verify": "def sift_down(a, i, n):\n    while 2 * i + 1 < n:\n        c = 2 * i + 1\n        if c + 1 < n and a[c + 1] < a[c]:\n            c += 1\n        if a[i] <= a[c]:\n            break\n        a[i], a[c] = a[c], a[i]\n        i = c\na = [9, 4, 7, 1, 8, 2]\nfor i in range(len(a) // 2 - 1, -1, -1):\n    sift_down(a, i, len(a))\nprint(a)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "Trees"
+    ],
+    "text": "Processing a tree one level at a time:\n```\ndef N(v, l=None, r=None): return (v, l, r)\nroot = N(1, N(2, None, N(5, N(7))), N(3, None, N(4)))\nview, level = [], [root]\nwhile level:\n    view.append(level[-1][0])\n    level = [c for t in level for c in (t[1], t[2]) if c is not None]\nprint(view)\n```\nWhat is printed?",
+    "options": [
+      "[1, 3, 4]",
+      "[1, 2, 5, 7]",
+      "[1, 3, 4, 7]",
+      "[1, 3, 5, 7]"
+    ],
+    "answer": "[1, 3, 4, 7]",
+    "verify": "def N(v, l=None, r=None): return (v, l, r)\nroot = N(1, N(2, None, N(5, N(7))), N(3, None, N(4)))\nview, level = [], [root]\nwhile level:\n    view.append(level[-1][0])\n    level = [c for t in level for c in (t[1], t[2]) if c is not None]\nprint(view)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "Trees"
+    ],
+    "text": "Checking whether a binary tree is complete:\n```\ndef N(v, l=None, r=None): return (v, l, r)\ndef is_complete(root):\n    queue, gap = [root], False\n    while queue:\n        t = queue.pop(0)\n        if t is None:\n            gap = True\n        elif gap:\n            return False\n        else:\n            queue += [t[1], t[2]]\n    return True\na = N(1, N(2, N(4), N(5)), N(3, N(6)))\nb = N(1, N(2, N(4)), N(3, N(6)))\nc = N(1, N(2, None, N(5)), N(3))\nprint(is_complete(a), is_complete(b), is_complete(c))\n```\nWhat is printed?",
+    "options": [
+      "True True False",
+      "True False True",
+      "False False False",
+      "True False False"
+    ],
+    "answer": "True False False",
+    "verify": "def N(v, l=None, r=None): return (v, l, r)\ndef is_complete(root):\n    queue, gap = [root], False\n    while queue:\n        t = queue.pop(0)\n        if t is None:\n            gap = True\n        elif gap:\n            return False\n        else:\n            queue += [t[1], t[2]]\n    return True\na = N(1, N(2, N(4), N(5)), N(3, N(6)))\nb = N(1, N(2, N(4)), N(3, N(6)))\nc = N(1, N(2, None, N(5)), N(3))\nprint(is_complete(a), is_complete(b), is_complete(c))"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "HARD",
+    "categories": [
+      "Trees"
+    ],
+    "text": "Diameter of a binary tree in edges. `depth` returns the height in nodes (`0` for an empty tree):\n```\ndef diameter(root):\n    best = [0]\n    def depth(t):\n        if t is None:\n            return 0\n        l, r = depth(t[1]), depth(t[2])\n        best[0] = max(best[0], ____)\n        return 1 + max(l, r)\n    depth(root)\n    return best[0]\n```\nWhat goes in the blank?",
+    "options": [
+      "l + r",
+      "l + r + 1",
+      "1 + max(l, r)",
+      "max(l, r)"
+    ],
+    "answer": "l + r",
+    "verify": "def diameter(root):\n    best = [0]\n    def depth(t):\n        if t is None:\n            return 0\n        l, r = depth(t[1]), depth(t[2])\n        best[0] = max(best[0], __BLANK__)\n        return 1 + max(l, r)\n    depth(root)\n    return best[0]\ndef N(v, l=None, r=None): return (v, l, r)\nperfect = N(1, N(2, N(4), N(5)), N(3, N(6), N(7)))\nprint(\"OK\" if diameter(perfect) == 4 and diameter(N(1)) == 0 else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "HARD",
+    "categories": [
+      "Trees"
+    ],
+    "text": "Rebuild a binary tree (distinct values) from its preorder and inorder traversals:\n```\ndef build(pre, ino):\n    if not pre:\n        return None\n    root = pre[0]\n    k = ino.index(root)\n    left = build(pre[1:k + 1], ino[:k])\n    right = build(____, ino[k + 1:])\n    return (root, left, right)\n```\nWhat goes in the blank?",
+    "options": [
+      "pre[k:]",
+      "pre[k + 1:]",
+      "pre[1:]",
+      "pre[k + 2:]"
+    ],
+    "answer": "pre[k + 1:]",
+    "verify": "def build(pre, ino):\n    if not pre:\n        return None\n    root = pre[0]\n    k = ino.index(root)\n    left = build(pre[1:k + 1], ino[:k])\n    right = build(__BLANK__, ino[k + 1:])\n    return (root, left, right)\ndef N(v, l=None, r=None): return (v, l, r)\ntry:\n    ok = build([1, 2, 4, 5, 3, 6], [4, 2, 5, 1, 6, 3]) == N(1, N(2, N(4), N(5)), N(3, N(6)))\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "HARD",
+    "categories": [
+      "Trees"
+    ],
+    "text": "Validate a BST (distinct keys required) by checking that the inorder sequence strictly increases:\n```\ndef is_bst(root):\n    prev = [float(\"-inf\")]\n    def walk(t):\n        if t is None:\n            return True\n        if not walk(t[1]):\n            return False\n        if ____:\n            return False\n        prev[0] = t[0]\n        return walk(t[2])\n    return walk(root)\n```\nWhat condition goes in the blank?",
+    "options": [
+      "t[0] < prev[0]",
+      "t[1] is not None and t[1][0] > t[0]",
+      "t[0] <= prev[0]",
+      "t[0] >= prev[0]"
+    ],
+    "answer": "t[0] <= prev[0]",
+    "verify": "def is_bst(root):\n    prev = [float(\"-inf\")]\n    def walk(t):\n        if t is None:\n            return True\n        if not walk(t[1]):\n            return False\n        if __BLANK__:\n            return False\n        prev[0] = t[0]\n        return walk(t[2])\n    return walk(root)\ndef N(v, l=None, r=None): return (v, l, r)\ngood = N(10, N(5, N(2), N(7)), N(15))\ndeep = N(10, N(5, None, N(12)), N(15))\ndup = N(5, N(5))\nprint(\"OK\" if is_bst(good) and not is_bst(deep) and not is_bst(dup) else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "HARD",
+    "categories": [
+      "Trees"
+    ],
+    "text": "Build a height-balanced BST from a sorted list `a` (call `build(a, 0, len(a) - 1)`):\n```\ndef build(a, lo, hi):\n    if lo > hi:\n        return None\n    mid = ____\n    return (a[mid], build(a, lo, mid - 1), build(a, mid + 1, hi))\n```\nWhat goes in the blank?",
+    "options": [
+      "lo",
+      "hi // 2",
+      "(hi - lo) // 2",
+      "(lo + hi) // 2"
+    ],
+    "answer": "(lo + hi) // 2",
+    "verify": "import sys\nsys.setrecursionlimit(200)\ndef build(a, lo, hi):\n    if lo > hi:\n        return None\n    mid = __BLANK__\n    return (a[mid], build(a, lo, mid - 1), build(a, mid + 1, hi))\ndef inorder(t): return [] if t is None else inorder(t[1]) + [t[0]] + inorder(t[2])\ndef height(t): return 0 if t is None else 1 + max(height(t[1]), height(t[2]))\na = list(range(1, 16))\ntry:\n    t = build(a, 0, len(a) - 1)\n    ok = inorder(t) == a and height(t) == 4\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  }
+]

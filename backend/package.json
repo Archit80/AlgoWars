@@ -9,10 +9,10 @@
     "dev": "nodemon src/index.js",
     "build": "npx prisma generate",
     "db:push": "prisma db push",
-    "db:seed": "node scripts/seed-leetcode-questions.js",
-    "db:seed:arrays": "node scripts/seed-arrays-questions.js",
-    "db:append:strings": "node scripts/seed-strings-questions.js",
     "db:studio": "prisma studio",
+    "questions:export": "node scripts/questions/export.js",
+    "questions:validate": "node scripts/questions/validate.js",
+    "questions:seed": "node scripts/questions/seed.js",
     "db:reset": "prisma migrate reset",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

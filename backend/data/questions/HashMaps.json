@@ -1,0 +1,940 @@
+[
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "What is the average-case time to look up a key in a well-designed hash map?",
+    "options": [
+      "O(1)",
+      "O(log n)",
+      "O(n)",
+      "O(n log n)"
+    ],
+    "answer": "O(1)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "In Python, what happens when you read `d[\"x\"]` from a dict `d` that has no key `\"x\"`?",
+    "options": [
+      "It returns `None`",
+      "It raises a `KeyError`",
+      "It returns `0`",
+      "It inserts `\"x\"` with value `None` and returns it"
+    ],
+    "answer": "It raises a `KeyError`"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "You want to check whether a list of `n` numbers contains any duplicate in O(n) average time. What should you keep track of as you scan?",
+    "options": [
+      "A stack of the numbers seen so far",
+      "A queue of the numbers seen so far",
+      "A set of the numbers seen so far",
+      "Only the previous number"
+    ],
+    "answer": "A set of the numbers seen so far"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "What is a hash collision?",
+    "options": [
+      "The same key is inserted twice",
+      "The table runs out of free memory",
+      "A key is looked up before it is inserted",
+      "Two different keys map to the same bucket"
+    ],
+    "answer": "Two different keys map to the same bucket"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "Which of these can be used as a key in a Python dict?",
+    "options": [
+      "The tuple `(1, 2)`",
+      "The list `[1, 2]`",
+      "The set `{1, 2}`",
+      "The dict `{1: 2}`"
+    ],
+    "answer": "The tuple `(1, 2)`"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "What happens when you assign `d[k] = v` and the key `k` is already in the dict `d`?",
+    "options": [
+      "A second entry for `k` is added",
+      "The old value is replaced and the size stays the same",
+      "It raises an error because `k` exists",
+      "The old value is kept and `v` is ignored"
+    ],
+    "answer": "The old value is replaced and the size stays the same"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "For two sets `a` and `b`, what does the intersection `a & b` contain?",
+    "options": [
+      "Elements that are in `a` or `b`",
+      "Elements in `a` but not in `b`",
+      "Elements that are in both `a` and `b`",
+      "Elements in exactly one of `a` and `b`"
+    ],
+    "answer": "Elements that are in both `a` and `b`"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "In a hash table that uses separate chaining, where does a colliding key go?",
+    "options": [
+      "Into the next empty bucket in the array",
+      "Nowhere; the insert is rejected",
+      "Into a bucket chosen at random",
+      "Into a list (chain) stored at the same bucket"
+    ],
+    "answer": "Into a list (chain) stored at the same bucket"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "Counting characters with `get`:\n```\ncounts = {}\nfor ch in \"banana\":\n    counts[ch] = counts.get(ch, 0) + 1\nprint(counts)\n```\nWhat is printed?",
+    "options": [
+      "{'b': 1, 'a': 3, 'n': 2}",
+      "{'a': 3, 'b': 1, 'n': 2}",
+      "{'b': 1, 'a': 1, 'n': 1}",
+      "{'b': 0, 'a': 2, 'n': 1}"
+    ],
+    "answer": "{'b': 1, 'a': 3, 'n': 2}",
+    "verify": "counts = {}\nfor ch in \"banana\":\n    counts[ch] = counts.get(ch, 0) + 1\nprint(counts)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "Pseudocode:\n```\nd = {\"a\": 1, \"b\": 2}\nd[\"a\"] = 5\nd[\"c\"] = 3\nprint(d)\n```\nWhat is printed?",
+    "options": [
+      "{'b': 2, 'a': 5, 'c': 3}",
+      "{'a': 5, 'b': 2, 'c': 3}",
+      "{'a': 1, 'b': 2, 'c': 3}",
+      "{'a': 6, 'b': 2, 'c': 3}"
+    ],
+    "answer": "{'a': 5, 'b': 2, 'c': 3}",
+    "verify": "d = {\"a\": 1, \"b\": 2}\nd[\"a\"] = 5\nd[\"c\"] = 3\nprint(d)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "Pseudocode:\n```\nnums = [3, 1, 3, 2, 1, 3]\nprint(len(set(nums)))\n```\nWhat is printed?",
+    "options": [
+      "6",
+      "2",
+      "3",
+      "4"
+    ],
+    "answer": "3",
+    "verify": "nums = [3, 1, 3, 2, 1, 3]\nprint(len(set(nums)))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "Reading with a default value:\n```\nages = {\"ann\": 30, \"bob\": 25}\nprint(ages.get(\"cat\", -1), ages.get(\"bob\", -1))\n```\nWhat is printed?",
+    "options": [
+      "None 25",
+      "-1 -1",
+      "25 -1",
+      "-1 25"
+    ],
+    "answer": "-1 25",
+    "verify": "ages = {\"ann\": 30, \"bob\": 25}\nprint(ages.get(\"cat\", -1), ages.get(\"bob\", -1))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "Membership test on a dict:\n```\nd = {\"x\": 10, \"y\": 20}\nprint(10 in d, \"x\" in d)\n```\nWhat is printed?",
+    "options": [
+      "False True",
+      "True True",
+      "True False",
+      "False False"
+    ],
+    "answer": "False True",
+    "verify": "d = {\"x\": 10, \"y\": 20}\nprint(10 in d, \"x\" in d)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "Set difference:\n```\na = {1, 2, 3, 4}\nb = {3, 4, 5}\nprint(sorted(a - b))\n```\nWhat is printed?",
+    "options": [
+      "[5]",
+      "[1, 2]",
+      "[3, 4]",
+      "[1, 2, 5]"
+    ],
+    "answer": "[1, 2]",
+    "verify": "a = {1, 2, 3, 4}\nb = {3, 4, 5}\nprint(sorted(a - b))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "Finding the first repeated value:\n```\nseen = set()\ndup = None\nfor x in [4, 7, 2, 7, 4]:\n    if x in seen:\n        dup = x\n        break\n    seen.add(x)\nprint(dup)\n```\nWhat is printed?",
+    "options": [
+      "4",
+      "None",
+      "7",
+      "2"
+    ],
+    "answer": "7",
+    "verify": "seen = set()\ndup = None\nfor x in [4, 7, 2, 7, 4]:\n    if x in seen:\n        dup = x\n        break\n    seen.add(x)\nprint(dup)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "Removing a key with `pop`:\n```\nd = {\"a\": 1, \"b\": 2, \"c\": 3}\nx = d.pop(\"b\")\nprint(x, len(d))\n```\nWhat is printed?",
+    "options": [
+      "2 3",
+      "b 2",
+      "1 2",
+      "2 2"
+    ],
+    "answer": "2 2",
+    "verify": "d = {\"a\": 1, \"b\": 2, \"c\": 3}\nx = d.pop(\"b\")\nprint(x, len(d))"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "EASY",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "Count how many times each word appears:\n```\ndef word_counts(words):\n    counts = {}\n    for w in words:\n        counts[w] = ____\n    return counts\n```\nWhat goes in the blank?",
+    "options": [
+      "counts.get(w, 0) + 1",
+      "counts[w] + 1",
+      "counts.get(w) + 1",
+      "1"
+    ],
+    "answer": "counts.get(w, 0) + 1",
+    "verify": "def word_counts(words):\n    counts = {}\n    for w in words:\n        counts[w] = __BLANK__\n    return counts\ntry:\n    ok = word_counts([\"a\", \"b\", \"a\", \"a\"]) == {\"a\": 3, \"b\": 1}\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "EASY",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "Return `True` if the list contains any duplicate value:\n```\ndef has_duplicate(nums):\n    return ____\n```\nWhat goes in the blank?",
+    "options": [
+      "len(set(nums)) == len(nums)",
+      "len(set(nums)) != len(nums)",
+      "len(set(nums)) > 1",
+      "len(nums) > 1"
+    ],
+    "answer": "len(set(nums)) != len(nums)",
+    "verify": "def has_duplicate(nums):\n    return __BLANK__\nok = has_duplicate([1, 2, 1]) is True and has_duplicate([1, 2, 3]) is False and has_duplicate([]) is False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "EASY",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "Return the values that appear in both lists, in sorted order:\n```\ndef common(a, b):\n    return sorted(____)\n```\nWhat goes in the blank?",
+    "options": [
+      "set(a) | set(b)",
+      "set(a) - set(b)",
+      "set(a) & set(b)",
+      "set(a) ^ set(b)"
+    ],
+    "answer": "set(a) & set(b)",
+    "verify": "def common(a, b):\n    return sorted(__BLANK__)\nprint(\"OK\" if common([1, 2, 3, 2], [2, 3, 4]) == [2, 3] else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "EASY",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "Invert a dict whose values are all distinct, so values become keys:\n```\ndef invert(d):\n    inv = {}\n    for k, v in d.items():\n        ____\n    return inv\n```\nWhich line goes in the blank?",
+    "options": [
+      "inv[k] = v",
+      "inv[v] = v",
+      "inv[k] = k",
+      "inv[v] = k"
+    ],
+    "answer": "inv[v] = k",
+    "verify": "def invert(d):\n    inv = {}\n    for k, v in d.items():\n        __BLANK__\n    return inv\nprint(\"OK\" if invert({\"a\": 1, \"b\": 2}) == {1: \"a\", 2: \"b\"} else \"NO\")"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "In open addressing with linear probing, what happens when a key's home slot is already taken?",
+    "options": [
+      "It tries the following slots one by one until it finds an empty one",
+      "It appends the key to a list stored in that slot",
+      "It doubles the table size immediately",
+      "It overwrites the key already in the slot"
+    ],
+    "answer": "It tries the following slots one by one until it finds an empty one"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "Why can't a Python list be used as a dict key?",
+    "options": [
+      "Lists are too large to hash",
+      "It is mutable, so its hash could change after insertion and the entry would be lost",
+      "Lists may contain duplicate elements",
+      "Lists keep their elements in order"
+    ],
+    "answer": "It is mutable, so its hash could change after insertion and the entry would be lost"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "Solving two-sum by storing each value's index in a hash map as you scan gives which complexity?",
+    "options": [
+      "O(n^2) time and O(1) extra space",
+      "O(n log n) time and O(1) extra space",
+      "O(n) time and O(n) extra space",
+      "O(n) time and O(1) extra space"
+    ],
+    "answer": "O(n) time and O(n) extra space"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "To group words that are anagrams of each other in a dict, which key works correctly for every input?",
+    "options": [
+      "`len(word)`",
+      "The sum of the character codes of `word`",
+      "`word[0]`",
+      "`\"\".join(sorted(word))`"
+    ],
+    "answer": "`\"\".join(sorted(word))`"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "In Python 3.7 and later, in what order does `for k in d` visit the keys of a dict?",
+    "options": [
+      "The order the keys were first inserted",
+      "Sorted order of the keys",
+      "A random order that changes each run",
+      "Increasing order of the keys' hash values"
+    ],
+    "answer": "The order the keys were first inserted"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "In a linear-probing hash table, how should a key be deleted so later lookups still work?",
+    "options": [
+      "Set the slot back to empty",
+      "Mark the slot as deleted (a tombstone) so probes continue past it",
+      "Move the last element of the array into the slot",
+      "Do nothing; deleted keys are found and skipped automatically"
+    ],
+    "answer": "Mark the slot as deleted (a tombstone) so probes continue past it"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "Finding the first non-repeating character of a string of length `n` with a frequency map (one pass to count, one pass to check) takes how long?",
+    "options": [
+      "O(n^2)",
+      "O(n log n)",
+      "O(n)",
+      "O(1)"
+    ],
+    "answer": "O(n)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "What does `d.setdefault(k, [])` do?",
+    "options": [
+      "Always resets `d[k]` to `[]` and returns it",
+      "Returns `[]` without changing `d` when `k` is missing",
+      "Raises `KeyError` if `k` is missing",
+      "Returns `d[k]` if `k` exists; otherwise stores `[]` under `k` and returns that list"
+    ],
+    "answer": "Returns `d[k]` if `k` exists; otherwise stores `[]` under `k` and returns that list"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "Two-sum with a hash map:\n```\nnums = [3, 8, 5, 2, 7]\ntarget = 10\nseen = {}\nfor i, x in enumerate(nums):\n    if target - x in seen:\n        print(seen[target - x], i)\n        break\n    seen[x] = i\n```\nWhat is printed?",
+    "options": [
+      "1 3",
+      "0 4",
+      "2 2",
+      "3 1"
+    ],
+    "answer": "1 3",
+    "verify": "nums = [3, 8, 5, 2, 7]\ntarget = 10\nseen = {}\nfor i, x in enumerate(nums):\n    if target - x in seen:\n        print(seen[target - x], i)\n        break\n    seen[x] = i"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "Grouping anagrams:\n```\nwords = [\"eat\", \"tea\", \"tan\", \"ate\", \"nat\", \"bat\"]\ngroups = {}\nfor w in words:\n    key = \"\".join(sorted(w))\n    groups.setdefault(key, []).append(w)\nprint(list(groups.values()))\n```\nWhat is printed?",
+    "options": [
+      "[['eat', 'tea', 'ate'], ['bat'], ['tan', 'nat']]",
+      "[['eat', 'tea', 'ate'], ['tan', 'nat'], ['bat']]",
+      "[['ate', 'eat', 'tea'], ['nat', 'tan'], ['bat']]",
+      "[['eat'], ['tea'], ['tan'], ['ate'], ['nat'], ['bat']]"
+    ],
+    "answer": "[['eat', 'tea', 'ate'], ['tan', 'nat'], ['bat']]",
+    "verify": "words = [\"eat\", \"tea\", \"tan\", \"ate\", \"nat\", \"bat\"]\ngroups = {}\nfor w in words:\n    key = \"\".join(sorted(w))\n    groups.setdefault(key, []).append(w)\nprint(list(groups.values()))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "First non-repeating character:\n```\ns = \"statistics\"\ncount = {}\nfor ch in s:\n    count[ch] = count.get(ch, 0) + 1\nfor i, ch in enumerate(s):\n    if count[ch] == 1:\n        print(i, ch)\n        break\n```\nWhat is printed?",
+    "options": [
+      "8 c",
+      "0 s",
+      "2 a",
+      "1 t"
+    ],
+    "answer": "2 a",
+    "verify": "s = \"statistics\"\ncount = {}\nfor ch in s:\n    count[ch] = count.get(ch, 0) + 1\nfor i, ch in enumerate(s):\n    if count[ch] == 1:\n        print(i, ch)\n        break"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "Tuples as keys:\n```\nd = {}\nd[(1, 2)] = \"a\"\nd[(2, 1)] = \"b\"\nd[(1, 2)] = \"c\"\nprint(len(d), d[(1, 2)])\n```\nWhat is printed?",
+    "options": [
+      "3 c",
+      "2 a",
+      "1 c",
+      "2 c"
+    ],
+    "answer": "2 c",
+    "verify": "d = {}\nd[(1, 2)] = \"a\"\nd[(2, 1)] = \"b\"\nd[(1, 2)] = \"c\"\nprint(len(d), d[(1, 2)])"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "Symmetric difference and union:\n```\na = {\"x\", \"y\", \"z\"}\nb = {\"y\", \"z\", \"w\"}\nprint(sorted(a ^ b), len(a | b))\n```\nWhat is printed?",
+    "options": [
+      "['w', 'x'] 4",
+      "['y', 'z'] 4",
+      "['w', 'x'] 6",
+      "['x'] 4"
+    ],
+    "answer": "['w', 'x'] 4",
+    "verify": "a = {\"x\", \"y\", \"z\"}\nb = {\"y\", \"z\", \"w\"}\nprint(sorted(a ^ b), len(a | b))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "Counting words by length with `defaultdict`:\n```\nfrom collections import defaultdict\nby_len = defaultdict(int)\nfor w in [\"hi\", \"hey\", \"yo\", \"hello\", \"sup\"]:\n    by_len[len(w)] += 1\nprint(dict(by_len))\n```\nWhat is printed?",
+    "options": [
+      "{2: 1, 3: 1, 5: 1}",
+      "{2: 2, 3: 2, 5: 1}",
+      "{2: 2, 5: 1, 3: 2}",
+      "{2: 2, 3: 1, 5: 1}"
+    ],
+    "answer": "{2: 2, 3: 2, 5: 1}",
+    "verify": "from collections import defaultdict\nby_len = defaultdict(int)\nfor w in [\"hi\", \"hey\", \"yo\", \"hello\", \"sup\"]:\n    by_len[len(w)] += 1\nprint(dict(by_len))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "Tracking the most frequent value while counting:\n```\nnums = [1, 3, 2, 3, 1, 3, 1]\ncount = {}\nbest = None\nfor x in nums:\n    count[x] = count.get(x, 0) + 1\n    if best is None or count[x] > count[best]:\n        best = x\nprint(best, count[best])\n```\nWhat is printed?",
+    "options": [
+      "1 3",
+      "3 2",
+      "3 3",
+      "1 2"
+    ],
+    "answer": "3 3",
+    "verify": "nums = [1, 3, 2, 3, 1, 3, 1]\ncount = {}\nbest = None\nfor x in nums:\n    count[x] = count.get(x, 0) + 1\n    if best is None or count[x] > count[best]:\n        best = x\nprint(best, count[best])"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "A hash table with separate chaining and `hash(key) = key % 5`:\n```\nsize = 5\ntable = [[] for _ in range(size)]\nfor key in [12, 7, 22, 3, 17]:\n    table[key % size].append(key)\nprint(table[2])\n```\nWhat is printed?",
+    "options": [
+      "[12]",
+      "[17]",
+      "[12, 22, 17]",
+      "[12, 7, 22, 17]"
+    ],
+    "answer": "[12, 7, 22, 17]",
+    "verify": "size = 5\ntable = [[] for _ in range(size)]\nfor key in [12, 7, 22, 3, 17]:\n    table[key % size].append(key)\nprint(table[2])"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "Two-sum: return the indices of two different elements that add up to `target`:\n```\ndef two_sum(nums, target):\n    seen = {}\n    for i, x in enumerate(nums):\n        if ____ in seen:\n            return [seen[target - x], i]\n        seen[x] = i\n    return None\n```\nWhat goes in the blank?",
+    "options": [
+      "target - x",
+      "x",
+      "target + x",
+      "x - target"
+    ],
+    "answer": "target - x",
+    "verify": "def two_sum(nums, target):\n    seen = {}\n    for i, x in enumerate(nums):\n        if __BLANK__ in seen:\n            return [seen[target - x], i]\n        seen[x] = i\n    return None\ntry:\n    ok = two_sum([2, 7, 11, 15], 9) == [0, 1] and two_sum([3, 2, 4], 6) == [1, 2]\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "Group words that are anagrams of each other:\n```\ndef group_anagrams(words):\n    groups = {}\n    for w in words:\n        key = ____\n        groups.setdefault(key, []).append(w)\n    return list(groups.values())\n```\nWhat goes in the blank?",
+    "options": [
+      "sorted(w)",
+      "\"\".join(sorted(w))",
+      "len(w)",
+      "w[0]"
+    ],
+    "answer": "\"\".join(sorted(w))",
+    "verify": "def group_anagrams(words):\n    groups = {}\n    for w in words:\n        key = __BLANK__\n        groups.setdefault(key, []).append(w)\n    return list(groups.values())\ntry:\n    ok = group_anagrams([\"eat\", \"tea\", \"tan\", \"ate\", \"nat\", \"bat\", \"ten\"]) == [[\"eat\", \"tea\", \"ate\"], [\"tan\", \"nat\"], [\"bat\"], [\"ten\"]]\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "Return the index of the first character that appears exactly once, or `-1`:\n```\ndef first_unique(s):\n    count = {}\n    for ch in s:\n        count[ch] = count.get(ch, 0) + 1\n    for i, ch in enumerate(s):\n        if ____:\n            return i\n    return -1\n```\nWhat condition goes in the blank?",
+    "options": [
+      "count[ch] > 1",
+      "ch not in count",
+      "count[ch] == 1",
+      "count[ch] == 0"
+    ],
+    "answer": "count[ch] == 1",
+    "verify": "def first_unique(s):\n    count = {}\n    for ch in s:\n        count[ch] = count.get(ch, 0) + 1\n    for i, ch in enumerate(s):\n        if __BLANK__:\n            return i\n    return -1\nprint(\"OK\" if first_unique(\"loveleetcode\") == 2 and first_unique(\"aabb\") == -1 else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "Group employee names by department:\n```\ndef by_dept(rows):\n    groups = {}\n    for name, dept in rows:\n        ____.append(name)\n    return groups\n```\nWhat goes in the blank?",
+    "options": [
+      "groups.get(dept, [])",
+      "groups[dept]",
+      "groups.setdefault(name, [])",
+      "groups.setdefault(dept, [])"
+    ],
+    "answer": "groups.setdefault(dept, [])",
+    "verify": "def by_dept(rows):\n    groups = {}\n    for name, dept in rows:\n        __BLANK__.append(name)\n    return groups\ntry:\n    ok = by_dept([(\"ann\", \"eng\"), (\"bob\", \"ops\"), (\"cat\", \"eng\")]) == {\"eng\": [\"ann\", \"cat\"], \"ops\": [\"bob\"]}\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "A hash table has 16 buckets and doubles its size when the load factor (entries / buckets) would exceed `0.75`. How many entries can it hold before the first resize?",
+    "options": [
+      "12",
+      "16",
+      "8",
+      "15"
+    ],
+    "answer": "12",
+    "verify": "n = 0\nwhile (n + 1) / 16 <= 0.75:\n    n += 1\nprint(n)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "A hash table doubles its bucket array (rehashing every key) whenever it gets too full. What is the amortized cost of an insert?",
+    "options": [
+      "O(n), because any insert may trigger a resize",
+      "O(1), because the O(n) resizes happen geometrically rarely",
+      "O(log n), one for each doubling so far",
+      "O(1) in the worst case for every single insert"
+    ],
+    "answer": "O(1), because the O(n) resizes happen geometrically rarely"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "What is the worst-case lookup time in a separate-chaining hash table with `n` keys, and when does it happen?",
+    "options": [
+      "O(1), because hashing always takes constant time",
+      "O(log n), when the table is completely full",
+      "O(n), when every key lands in the same bucket",
+      "O(n^2), while the table is being resized"
+    ],
+    "answer": "O(n), when every key lands in the same bucket"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "Every key is a multiple of 10 and the hash function is `key % m`. Which table size `m` spreads these keys most evenly?",
+    "options": [
+      "10",
+      "20",
+      "100",
+      "13"
+    ],
+    "answer": "13",
+    "verify": "keys = range(0, 2000, 10)\nbest = max([10, 13, 20, 100], key=lambda m: len({k % m for k in keys}))\nprint(best)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "In the prefix-sum solution for \"count subarrays whose sum is `k`\", why is the map initialised to `{0: 1}`?",
+    "options": [
+      "So subarrays that start at index 0 (prefix sum exactly `k`) are counted",
+      "So negative numbers in the array are handled",
+      "So the same subarray is never counted twice",
+      "So the map is never empty when `k` is 0"
+    ],
+    "answer": "So subarrays that start at index 0 (prefix sum exactly `k`) are counted"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "Why does \"count subarrays with sum `k`\" need a prefix-sum hash map instead of a two-pointer sliding window?",
+    "options": [
+      "A sliding window only works on sorted arrays",
+      "The array may contain negative numbers, so growing the window does not always increase the sum",
+      "A sliding window needs O(n) extra space",
+      "A sliding window cannot handle `k = 0`"
+    ],
+    "answer": "The array may contain negative numbers, so growing the window does not always increase the sum"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "Longest consecutive sequence: put all numbers in a set, then for each `x` with `x - 1` not in the set, walk `x + 1, x + 2, ...`. Why is this O(n) overall?",
+    "options": [
+      "Sets keep their elements sorted, so runs sit next to each other",
+      "Removing duplicates makes the input no longer than the answer",
+      "Each number is walked over only once, from the start of its run",
+      "Each set lookup is O(log n), and there are only n / log n of them"
+    ],
+    "answer": "Each number is walked over only once, from the start of its run"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "Which pair of structures lets an LRU cache do both `get` and `put` in O(1) time?",
+    "options": [
+      "A hash map plus a min-heap keyed by last access time",
+      "A sorted array of keys ordered by last access time",
+      "Two hash maps: key to value, and value to key",
+      "A hash map from key to node, plus a doubly linked list ordered by recency"
+    ],
+    "answer": "A hash map from key to node, plus a doubly linked list ordered by recency"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "Counting subarrays with sum `k` using prefix sums:\n```\nnums = [1, -1, 2, 1, -2, 3]\nk = 2\ncount = 0\nprefix = 0\nseen = {0: 1}\nfor x in nums:\n    prefix += x\n    count += seen.get(prefix - k, 0)\n    seen[prefix] = seen.get(prefix, 0) + 1\nprint(count)\n```\nWhat is printed?",
+    "options": [
+      "4",
+      "3",
+      "5",
+      "2"
+    ],
+    "answer": "4",
+    "verify": "nums = [1, -1, 2, 1, -2, 3]\nk = 2\ncount = 0\nprefix = 0\nseen = {0: 1}\nfor x in nums:\n    prefix += x\n    count += seen.get(prefix - k, 0)\n    seen[prefix] = seen.get(prefix, 0) + 1\nprint(count)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "Longest run of consecutive integers:\n```\nnums = [10, 4, 20, 1, 3, 2, 11, 12, 5]\ns = set(nums)\nbest = 0\nfor x in s:\n    if x - 1 not in s:\n        y = x\n        while y + 1 in s:\n            y += 1\n        best = max(best, y - x + 1)\nprint(best)\n```\nWhat is printed?",
+    "options": [
+      "4",
+      "5",
+      "3",
+      "9"
+    ],
+    "answer": "5",
+    "verify": "nums = [10, 4, 20, 1, 3, 2, 11, 12, 5]\ns = set(nums)\nbest = 0\nfor x in s:\n    if x - 1 not in s:\n        y = x\n        while y + 1 in s:\n            y += 1\n        best = max(best, y - x + 1)\nprint(best)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "Open addressing with linear probing, `hash(key) = key % 7`:\n```\nsize = 7\ntable = [None] * size\nfor key in [10, 3, 17, 24, 5]:\n    i = key % size\n    while table[i] is not None:\n        i = (i + 1) % size\n    table[i] = key\nprint(table)\n```\nWhat is printed?",
+    "options": [
+      "[None, None, None, 24, None, 5, None]",
+      "[None, 5, None, 10, 3, 17, 24]",
+      "[5, None, None, 10, 3, 17, 24]",
+      "[None, None, None, 10, 3, 17, 24]"
+    ],
+    "answer": "[5, None, None, 10, 3, 17, 24]",
+    "verify": "size = 7\ntable = [None] * size\nfor key in [10, 3, 17, 24, 5]:\n    i = key % size\n    while table[i] is not None:\n        i = (i + 1) % size\n    table[i] = key\nprint(table)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "An LRU cache of capacity 2 built on dict insertion order:\n```\ncap = 2\ncache = {}\ndef touch(k, v):\n    cache.pop(k, None)\n    cache[k] = v\n    if len(cache) > cap:\n        del cache[next(iter(cache))]\ntouch(1, \"a\")\ntouch(2, \"b\")\ntouch(1, \"a\")   # use key 1 again\ntouch(3, \"c\")\nprint(list(cache))\n```\nWhat is printed?",
+    "options": [
+      "[2, 3]",
+      "[1, 2, 3]",
+      "[3, 1]",
+      "[1, 3]"
+    ],
+    "answer": "[1, 3]",
+    "verify": "cap = 2\ncache = {}\ndef touch(k, v):\n    cache.pop(k, None)\n    cache[k] = v\n    if len(cache) > cap:\n        del cache[next(iter(cache))]\ntouch(1, \"a\")\ntouch(2, \"b\")\ntouch(1, \"a\")   # use key 1 again\ntouch(3, \"c\")\nprint(list(cache))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "Using a tuple that contains a list as a key:\n```\nd = {}\nkey = (1, [2, 3])\ntry:\n    d[key] = \"x\"\n    print(\"stored\")\nexcept TypeError:\n    print(\"TypeError\")\n```\nWhat is printed?",
+    "options": [
+      "TypeError",
+      "stored",
+      "KeyError",
+      "None"
+    ],
+    "answer": "TypeError",
+    "verify": "d = {}\nkey = (1, [2, 3])\ntry:\n    d[key] = \"x\"\n    print(\"stored\")\nexcept TypeError:\n    print(\"TypeError\")"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "Keys that compare equal (`1 == 1.0 == True`):\n```\nd = {1: \"int\", 1.0: \"float\", True: \"bool\"}\nprint(d)\n```\nWhat is printed?",
+    "options": [
+      "{1: 'int', 1.0: 'float', True: 'bool'}",
+      "{1: 'bool'}",
+      "{True: 'bool'}",
+      "{1: 'int'}"
+    ],
+    "answer": "{1: 'bool'}",
+    "verify": "d = {1: \"int\", 1.0: \"float\", True: \"bool\"}\nprint(d)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "A table that doubles when the load factor goes above `0.75`:\n```\ncapacity = 4\nsize = 0\nresizes = 0\nfor _ in range(20):\n    size += 1\n    if size / capacity > 0.75:\n        capacity *= 2\n        resizes += 1\nprint(capacity, resizes)\n```\nWhat is printed?",
+    "options": [
+      "16 2",
+      "32 4",
+      "32 3",
+      "64 4"
+    ],
+    "answer": "32 3",
+    "verify": "capacity = 4\nsize = 0\nresizes = 0\nfor _ in range(20):\n    size += 1\n    if size / capacity > 0.75:\n        capacity *= 2\n        resizes += 1\nprint(capacity, resizes)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "Counting index pairs `i < j` with `nums[i] == nums[j]`:\n```\nnums = [1, 2, 1, 1, 2, 3]\nseen = {}\npairs = 0\nfor x in nums:\n    pairs += seen.get(x, 0)\n    seen[x] = seen.get(x, 0) + 1\nprint(pairs)\n```\nWhat is printed?",
+    "options": [
+      "8",
+      "10",
+      "3",
+      "4"
+    ],
+    "answer": "4",
+    "verify": "nums = [1, 2, 1, 1, 2, 3]\nseen = {}\npairs = 0\nfor x in nums:\n    pairs += seen.get(x, 0)\n    seen[x] = seen.get(x, 0) + 1\nprint(pairs)"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "HARD",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "Count subarrays whose sum equals `k` (the array may contain negatives):\n```\ndef subarray_sum(nums, k):\n    count = 0\n    prefix = 0\n    seen = {0: 1}\n    for x in nums:\n        prefix += x\n        count += seen.get(____, 0)\n        seen[prefix] = seen.get(prefix, 0) + 1\n    return count\n```\nWhat goes in the blank?",
+    "options": [
+      "prefix - k",
+      "k - prefix",
+      "prefix + k",
+      "prefix"
+    ],
+    "answer": "prefix - k",
+    "verify": "def subarray_sum(nums, k):\n    count = 0\n    prefix = 0\n    seen = {0: 1}\n    for x in nums:\n        prefix += x\n        count += seen.get(__BLANK__, 0)\n        seen[prefix] = seen.get(prefix, 0) + 1\n    return count\nok = subarray_sum([1, 1, 1], 2) == 2 and subarray_sum([1, -1, 2, 1, -2, 3], 2) == 4 and subarray_sum([3, 4, 7, -2], 7) == 2\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "HARD",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "Length of the longest run of consecutive integers in O(n):\n```\ndef longest_run(nums):\n    s = set(nums)\n    best = 0\n    for x in s:\n        if ____:\n            y = x\n            while y + 1 in s:\n                y += 1\n            best = max(best, y - x + 1)\n    return best\n```\nWhich condition goes in the blank?",
+    "options": [
+      "x + 1 not in s",
+      "x - 1 not in s",
+      "x - 1 in s",
+      "x not in s"
+    ],
+    "answer": "x - 1 not in s",
+    "verify": "def longest_run(nums):\n    s = set(nums)\n    best = 0\n    for x in s:\n        if __BLANK__:\n            y = x\n            while y + 1 in s:\n                y += 1\n            best = max(best, y - x + 1)\n    return best\nprint(\"OK\" if longest_run([100, 4, 200, 1, 3, 2]) == 4 and longest_run([7]) == 1 else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "HARD",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "An LRU cache that relies on dict insertion order (oldest key first):\n```\ndef touch(cache, cap, k, v):\n    cache.pop(k, None)\n    cache[k] = v\n    if len(cache) > cap:\n        del cache[____]\n```\nWhat goes in the blank so the least recently used key is evicted?",
+    "options": [
+      "k",
+      "list(cache)[-1]",
+      "next(iter(cache))",
+      "min(cache)"
+    ],
+    "answer": "next(iter(cache))",
+    "verify": "def touch(cache, cap, k, v):\n    cache.pop(k, None)\n    cache[k] = v\n    if len(cache) > cap:\n        del cache[__BLANK__]\nc = {}\nfor key in [2, 5, 2, 9]:\n    touch(c, 2, key, str(key))\nprint(\"OK\" if list(c) == [2, 9] else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "HARD",
+    "categories": [
+      "HashMaps"
+    ],
+    "text": "Lookup in a linear-probing table (`None` marks an empty slot):\n```\ndef contains(table, key):\n    i = key % len(table)\n    while table[i] is not None:\n        if table[i] == key:\n            return True\n        i = ____\n    return False\n```\nWhat goes in the blank?",
+    "options": [
+      "i + 1",
+      "(i + key) % len(table)",
+      "key % len(table)",
+      "(i + 1) % len(table)"
+    ],
+    "answer": "(i + 1) % len(table)",
+    "verify": "def contains(table, key):\n    i = key % len(table)\n    steps = 0\n    while table[i] is not None and steps < 50:\n        steps += 1\n        if table[i] == key:\n            return True\n        i = __BLANK__\n    if steps >= 50:\n        raise RuntimeError(\"loop\")\n    return False\nt = [5, None, None, 10, 3, 17, 24]\ntry:\n    ok = contains(t, 5) and contains(t, 24) and not contains(t, 4) and not contains(t, 12)\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  }
+]

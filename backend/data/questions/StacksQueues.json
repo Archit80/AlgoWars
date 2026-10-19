@@ -1,0 +1,941 @@
+[
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "In what order does a stack remove its elements?",
+    "options": [
+      "Last in, first out (LIFO)",
+      "First in, first out (FIFO)",
+      "Smallest element first",
+      "In the order they were inserted, oldest first"
+    ],
+    "answer": "Last in, first out (LIFO)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "The values `5`, `2`, `8` are enqueued into an empty queue in that order. Which value is dequeued first?",
+    "options": [
+      "8",
+      "5",
+      "2",
+      "None, until the queue is full"
+    ],
+    "answer": "5"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "A Python list is used as a stack with `append` to push and `pop()` to pop. What is the cost of each operation?",
+    "options": [
+      "O(n)",
+      "O(log n)",
+      "O(1) amortized",
+      "O(1) for push but O(n) for pop"
+    ],
+    "answer": "O(1) amortized"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "Why is `list.pop(0)` a poor way to dequeue from a large queue stored in a Python list?",
+    "options": [
+      "It removes the last element instead of the first",
+      "It raises an error when the list has one element",
+      "It sorts the list before removing",
+      "It shifts every remaining element left, costing O(n)"
+    ],
+    "answer": "It shifts every remaining element left, costing O(n)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "Which of these behaves like a stack?",
+    "options": [
+      "An editor's undo history",
+      "A printer's job queue",
+      "People waiting in line at a ticket counter",
+      "A round-robin CPU scheduler"
+    ],
+    "answer": "An editor's undo history"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "While a recursive function is running, what does the call stack hold?",
+    "options": [
+      "Only the final return value",
+      "One frame per active call, with its local variables and where to return",
+      "Every function defined in the program",
+      "A copy of all global variables per call"
+    ],
+    "answer": "One frame per active call, with its local variables and where to return"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "What does the `peek` (or `top`) operation of a stack do?",
+    "options": [
+      "Removes and returns the top element",
+      "Returns the bottom element",
+      "Returns the top element without removing it",
+      "Returns the number of elements"
+    ],
+    "answer": "Returns the top element without removing it"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "What is the error called when you try to pop from an empty stack?",
+    "options": [
+      "Stack overflow",
+      "Heap overflow",
+      "Queue overflow",
+      "Stack underflow"
+    ],
+    "answer": "Stack underflow"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "A list used as a stack:\n```\ns = []\ns.append(1)\ns.append(2)\ns.append(3)\ns.pop()\ns.append(4)\nprint(s)\n```\nWhat is printed?",
+    "options": [
+      "[1, 2, 4]",
+      "[2, 3, 4]",
+      "[1, 2, 3, 4]",
+      "[1, 2, 3]"
+    ],
+    "answer": "[1, 2, 4]",
+    "verify": "s = []\ns.append(1)\ns.append(2)\ns.append(3)\ns.pop()\ns.append(4)\nprint(s)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "A queue built on `collections.deque`:\n```\nfrom collections import deque\nq = deque()\nq.append(\"a\")\nq.append(\"b\")\nq.append(\"c\")\nprint(q.popleft(), q.popleft())\n```\nWhat is printed?",
+    "options": [
+      "c b",
+      "a b",
+      "a c",
+      "b c"
+    ],
+    "answer": "a b",
+    "verify": "from collections import deque\nq = deque()\nq.append(\"a\")\nq.append(\"b\")\nq.append(\"c\")\nprint(q.popleft(), q.popleft())"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "Reversing a string with a stack:\n```\nstack = []\nfor ch in \"code\":\n    stack.append(ch)\nout = \"\"\nwhile stack:\n    out += stack.pop()\nprint(out)\n```\nWhat is printed?",
+    "options": [
+      "code",
+      "odce",
+      "edoc",
+      "edo"
+    ],
+    "answer": "edoc",
+    "verify": "stack = []\nfor ch in \"code\":\n    stack.append(ch)\nout = \"\"\nwhile stack:\n    out += stack.pop()\nprint(out)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "Pseudocode:\n```\nstack = [3, 7, 9]\ntop = stack[-1]\nstack.append(top * 2)\nprint(stack[-1], len(stack))\n```\nWhat is printed?",
+    "options": [
+      "9 3",
+      "6 4",
+      "18 3",
+      "18 4"
+    ],
+    "answer": "18 4",
+    "verify": "stack = [3, 7, 9]\ntop = stack[-1]\nstack.append(top * 2)\nprint(stack[-1], len(stack))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "Pseudocode:\n```\nstack = []\nfor x in [5, 1, 4]:\n    stack.append(x)\nprint(stack.pop() + stack.pop())\n```\nWhat is printed?",
+    "options": [
+      "5",
+      "9",
+      "6",
+      "10"
+    ],
+    "answer": "5",
+    "verify": "stack = []\nfor x in [5, 1, 4]:\n    stack.append(x)\nprint(stack.pop() + stack.pop())"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "A list used as a queue:\n```\nqueue = [10, 20, 30]\nqueue.append(40)\nfirst = queue.pop(0)\nprint(first, queue)\n```\nWhat is printed?",
+    "options": [
+      "40 [10, 20, 30]",
+      "10 [20, 30, 40]",
+      "10 [20, 30]",
+      "20 [10, 30, 40]"
+    ],
+    "answer": "10 [20, 30, 40]",
+    "verify": "queue = [10, 20, 30]\nqueue.append(40)\nfirst = queue.pop(0)\nprint(first, queue)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "Matching parentheses with a stack:\n```\nstack = []\nfor ch in \"(()\":\n    if ch == \"(\":\n        stack.append(ch)\n    else:\n        stack.pop()\nprint(len(stack))\n```\nWhat is printed?",
+    "options": [
+      "0",
+      "2",
+      "1",
+      "3"
+    ],
+    "answer": "1",
+    "verify": "stack = []\nfor ch in \"(()\":\n    if ch == \"(\":\n        stack.append(ch)\n    else:\n        stack.pop()\nprint(len(stack))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "Popping with an empty check:\n```\nstack = [\"x\"]\nresults = []\nfor _ in range(2):\n    results.append(stack.pop() if stack else \"empty\")\nprint(results)\n```\nWhat is printed?",
+    "options": [
+      "['x', 'x']",
+      "['empty', 'x']",
+      "['x']",
+      "['x', 'empty']"
+    ],
+    "answer": "['x', 'empty']",
+    "verify": "stack = [\"x\"]\nresults = []\nfor _ in range(2):\n    results.append(stack.pop() if stack else \"empty\")\nprint(results)"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "EASY",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "Return whether a list-based stack has no elements:\n```\ndef is_empty(stack):\n    return ____\n```\nWhat goes in the blank?",
+    "options": [
+      "len(stack) == 0",
+      "len(stack) == 1",
+      "stack[-1] is None",
+      "stack == None"
+    ],
+    "answer": "len(stack) == 0",
+    "verify": "def is_empty(stack):\n    return __BLANK__\ntry:\n    ok = is_empty([]) is True and is_empty([0]) is False and is_empty([4, 5]) is False\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "EASY",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "Return the top of a list-based stack without changing the stack:\n```\ndef peek(stack):\n    return ____\n```\nWhat goes in the blank?",
+    "options": [
+      "stack[0]",
+      "stack[-1]",
+      "stack.pop()",
+      "stack[len(stack)]"
+    ],
+    "answer": "stack[-1]",
+    "verify": "def peek(stack):\n    return __BLANK__\ns = [1, 2, 3]\ntry:\n    ok = peek(s) == 3 and s == [1, 2, 3]\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "EASY",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "Dequeue from a FIFO queue stored in a `deque`:\n```\nfrom collections import deque\ndef dequeue(q):\n    return ____\n```\nWhat goes in the blank?",
+    "options": [
+      "q.pop()",
+      "q[-1]",
+      "q.popleft()",
+      "q.appendleft()"
+    ],
+    "answer": "q.popleft()",
+    "verify": "from collections import deque\ndef dequeue(q):\n    return __BLANK__\nq = deque([1, 2, 3])\ntry:\n    ok = dequeue(q) == 1 and list(q) == [2, 3]\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "EASY",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "Reverse a list using a stack:\n```\ndef reverse(items):\n    stack = list(items)\n    out = []\n    while stack:\n        out.append(____)\n    return out\n```\nWhat goes in the blank?",
+    "options": [
+      "stack.pop(0)",
+      "stack[-1]",
+      "items.pop()",
+      "stack.pop()"
+    ],
+    "answer": "stack.pop()",
+    "verify": "def reverse(items):\n    stack = list(items)\n    out = []\n    while stack and len(out) < 20:\n        out.append(__BLANK__)\n    return out\ntry:\n    ok = reverse([1, 2, 3]) == [3, 2, 1] and reverse([\"a\", \"b\"]) == [\"b\", \"a\"]\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "A queue is built from two stacks: push onto `inbox`; to dequeue, pop from `outbox`, first moving everything from `inbox` to `outbox` only if `outbox` is empty. What is the cost of a dequeue?",
+    "options": [
+      "O(1) amortized, since each element moves from `inbox` to `outbox` at most once",
+      "O(n) on every call",
+      "O(log n) on every call",
+      "O(1) in the worst case for every call"
+    ],
+    "answer": "O(1) amortized, since each element moves from `inbox` to `outbox` at most once"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "How does a min-stack return the current minimum in O(1) time?",
+    "options": [
+      "It sorts the stack after every push",
+      "It stores, alongside each pushed value, the minimum of the stack at that point",
+      "It keeps one `min` variable that is never updated on pop",
+      "It scans the whole stack on each `get_min` call"
+    ],
+    "answer": "It stores, alongside each pushed value, the minimum of the stack at that point"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "Which structure supports O(1) insertion and removal at both the front and the back?",
+    "options": [
+      "A Python list",
+      "A binary heap",
+      "`collections.deque`",
+      "A singly linked list with only a head pointer"
+    ],
+    "answer": "`collections.deque`"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "What does the postfix expression `7 2 3 * -` evaluate to?",
+    "options": [
+      "-1",
+      "15",
+      "12",
+      "1"
+    ],
+    "answer": "1",
+    "verify": "print(7 - 2 * 3)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "A circular queue has capacity `n`, front index `f` and current size `s`. At which index is the next element inserted?",
+    "options": [
+      "(f + s) % n",
+      "f + s",
+      "(f + s + 1) % n",
+      "(f - s) % n"
+    ],
+    "answer": "(f + s) % n"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "Why does a very deep recursive function in Python raise `RecursionError`?",
+    "options": [
+      "Recursive results are stored in a queue that fills up",
+      "Each call adds a frame to the call stack, and Python caps the depth (about 1000 by default)",
+      "Python converts recursion into a loop that overflows an integer counter",
+      "The garbage collector frees the frames too early"
+    ],
+    "answer": "Each call adds a frame to the call stack, and Python caps the depth (about 1000 by default)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "A stack is built from one queue: after enqueuing a new item, the queue is rotated so that item is at the front. What does each push cost?",
+    "options": [
+      "O(1)",
+      "O(log n)",
+      "O(n), for the rotation",
+      "O(n^2)"
+    ],
+    "answer": "O(n), for the rotation"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "An editor keeps an undo stack and a redo stack. After undoing twice, the user types a new character. What should happen to the redo stack?",
+    "options": [
+      "The new action is pushed onto it",
+      "It is reversed",
+      "It is moved onto the undo stack",
+      "It is cleared, because those redo states no longer follow from the current text"
+    ],
+    "answer": "It is cleared, because those redo states no longer follow from the current text"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "Checking balanced brackets:\n```\ndef balanced(s):\n    pairs = {\")\": \"(\", \"]\": \"[\", \"}\": \"{\"}\n    stack = []\n    for ch in s:\n        if ch in \"([{\":\n            stack.append(ch)\n        elif not stack or stack.pop() != pairs[ch]:\n            return False\n    return not stack\nprint(balanced(\"([]{})\"), balanced(\"([)]\"), balanced(\"((\"))\n```\nWhat is printed?",
+    "options": [
+      "True False False",
+      "True True False",
+      "True False True",
+      "False False False"
+    ],
+    "answer": "True False False",
+    "verify": "def balanced(s):\n    pairs = {\")\": \"(\", \"]\": \"[\", \"}\": \"{\"}\n    stack = []\n    for ch in s:\n        if ch in \"([{\":\n            stack.append(ch)\n        elif not stack or stack.pop() != pairs[ch]:\n            return False\n    return not stack\nprint(balanced(\"([]{})\"), balanced(\"([)]\"), balanced(\"((\"))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "Evaluating a postfix expression:\n```\ntokens = \"5 1 2 + 4 * + 3 -\".split()\nstack = []\nfor t in tokens:\n    if t in (\"+\", \"-\", \"*\"):\n        b = stack.pop()\n        a = stack.pop()\n        if t == \"+\": stack.append(a + b)\n        elif t == \"-\": stack.append(a - b)\n        else: stack.append(a * b)\n    else:\n        stack.append(int(t))\nprint(stack[0])\n```\nWhat is printed?",
+    "options": [
+      "-14",
+      "14",
+      "11",
+      "17"
+    ],
+    "answer": "14",
+    "verify": "tokens = \"5 1 2 + 4 * + 3 -\".split()\nstack = []\nfor t in tokens:\n    if t in (\"+\", \"-\", \"*\"):\n        b = stack.pop()\n        a = stack.pop()\n        if t == \"+\": stack.append(a + b)\n        elif t == \"-\": stack.append(a - b)\n        else: stack.append(a * b)\n    else:\n        stack.append(int(t))\nprint(stack[0])"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "A min-stack keeps a parallel list of minimums:\n```\nstack = []\nmins = []\nfor x in [5, 3, 7, 2]:\n    stack.append(x)\n    mins.append(min(x, mins[-1]) if mins else x)\nstack.pop()\nmins.pop()\nprint(mins[-1])\n```\nWhat is printed?",
+    "options": [
+      "2",
+      "5",
+      "3",
+      "7"
+    ],
+    "answer": "3",
+    "verify": "stack = []\nmins = []\nfor x in [5, 3, 7, 2]:\n    stack.append(x)\n    mins.append(min(x, mins[-1]) if mins else x)\nstack.pop()\nmins.pop()\nprint(mins[-1])"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "A queue built from two stacks:\n```\ninbox, outbox = [], []\ndef dequeue():\n    if not outbox:\n        while inbox:\n            outbox.append(inbox.pop())\n    return outbox.pop()\ninbox.extend([1, 2, 3])\na = dequeue()\ninbox.append(4)\nb = dequeue()\nprint(a, b, inbox, outbox)\n```\nWhat is printed?",
+    "options": [
+      "1 2 [] [4, 3]",
+      "3 2 [4] [1]",
+      "1 2 [4, 3] []",
+      "1 2 [4] [3]"
+    ],
+    "answer": "1 2 [4] [3]",
+    "verify": "inbox, outbox = [], []\ndef dequeue():\n    if not outbox:\n        while inbox:\n            outbox.append(inbox.pop())\n    return outbox.pop()\ninbox.extend([1, 2, 3])\na = dequeue()\ninbox.append(4)\nb = dequeue()\nprint(a, b, inbox, outbox)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "Next greater element with a monotonic stack (`-1` means none):\n```\nnums = [2, 1, 2, 4, 3]\nres = [-1] * len(nums)\nstack = []\nfor i, x in enumerate(nums):\n    while stack and nums[stack[-1]] < x:\n        res[stack.pop()] = x\n    stack.append(i)\nprint(res)\n```\nWhat is printed?",
+    "options": [
+      "[4, 2, 4, -1, -1]",
+      "[2, 2, 4, -1, -1]",
+      "[4, 2, 4, 3, -1]",
+      "[1, 2, 4, 3, -1]"
+    ],
+    "answer": "[4, 2, 4, -1, -1]",
+    "verify": "nums = [2, 1, 2, 4, 3]\nres = [-1] * len(nums)\nstack = []\nfor i, x in enumerate(nums):\n    while stack and nums[stack[-1]] < x:\n        res[stack.pop()] = x\n    stack.append(i)\nprint(res)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "Enqueuing into a circular buffer:\n```\ncap = 5\nbuf = [None] * cap\nhead, size = 3, 0\nfor x in \"abcd\":\n    buf[(head + size) % cap] = x\n    size += 1\nprint(buf)\n```\nWhat is printed?",
+    "options": [
+      "['a', 'b', 'c', 'd', None]",
+      "['c', 'd', None, 'a', 'b']",
+      "[None, 'c', 'd', 'a', 'b']",
+      "['d', 'c', None, 'a', 'b']"
+    ],
+    "answer": "['c', 'd', None, 'a', 'b']",
+    "verify": "cap = 5\nbuf = [None] * cap\nhead, size = 3, 0\nfor x in \"abcd\":\n    buf[(head + size) % cap] = x\n    size += 1\nprint(buf)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "Days to wait for a warmer temperature (`0` means never):\n```\ntemps = [30, 38, 30, 36, 35, 40, 28]\nans = [0] * len(temps)\nstack = []\nfor i, t in enumerate(temps):\n    while stack and temps[stack[-1]] < t:\n        j = stack.pop()\n        ans[j] = i - j\n    stack.append(i)\nprint(ans)\n```\nWhat is printed?",
+    "options": [
+      "[38, 40, 36, 40, 40, 0, 0]",
+      "[1, 1, 1, 2, 1, 0, 0]",
+      "[1, 4, 1, 2, 1, 0, 0]",
+      "[1, 3, 1, 2, 1, 0, 0]"
+    ],
+    "answer": "[1, 4, 1, 2, 1, 0, 0]",
+    "verify": "temps = [30, 38, 30, 36, 35, 40, 28]\nans = [0] * len(temps)\nstack = []\nfor i, t in enumerate(temps):\n    while stack and temps[stack[-1]] < t:\n        j = stack.pop()\n        ans[j] = i - j\n    stack.append(i)\nprint(ans)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "A stack built from one queue:\n```\nfrom collections import deque\nq = deque()\ndef push(x):\n    q.append(x)\n    for _ in range(len(q) - 1):\n        q.append(q.popleft())\nfor x in [1, 2, 3]:\n    push(x)\nprint(q.popleft(), list(q))\n```\nWhat is printed?",
+    "options": [
+      "1 [2, 3]",
+      "3 [1, 2]",
+      "2 [1, 3]",
+      "3 [2, 1]"
+    ],
+    "answer": "3 [2, 1]",
+    "verify": "from collections import deque\nq = deque()\ndef push(x):\n    q.append(x)\n    for _ in range(len(q) - 1):\n        q.append(q.popleft())\nfor x in [1, 2, 3]:\n    push(x)\nprint(q.popleft(), list(q))"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "Checking balanced brackets:\n```\ndef balanced(s):\n    pairs = {\")\": \"(\", \"]\": \"[\", \"}\": \"{\"}\n    stack = []\n    for ch in s:\n        if ch in \"([{\":\n            stack.append(ch)\n        elif not stack or ____:\n            return False\n    return not stack\n```\nWhat goes in the blank?",
+    "options": [
+      "stack.pop() != pairs[ch]",
+      "stack.pop() == pairs[ch]",
+      "stack[-1] != pairs[ch]",
+      "stack.pop(0) != pairs[ch]"
+    ],
+    "answer": "stack.pop() != pairs[ch]",
+    "verify": "def balanced(s):\n    pairs = {\")\": \"(\", \"]\": \"[\", \"}\": \"{\"}\n    stack = []\n    for ch in s:\n        if ch in \"([{\":\n            stack.append(ch)\n        elif not stack or __BLANK__:\n            return False\n    return not stack\ntests = {\"()\": True, \"([]{})\": True, \"([)]\": False, \"(]\": False, \"((\": False, \")\": False}\nprint(\"OK\" if all(balanced(s) == want for s, want in tests.items()) else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "Dequeue for a queue built from two stacks:\n```\ninbox, outbox = [], []\ndef dequeue():\n    if not outbox:\n        while inbox:\n            outbox.append(____)\n    return outbox.pop()\n```\nWhat goes in the blank?",
+    "options": [
+      "inbox.pop(0)",
+      "inbox.pop()",
+      "inbox[-1]",
+      "outbox.pop()"
+    ],
+    "answer": "inbox.pop()",
+    "verify": "inbox, outbox = [], []\ndef dequeue():\n    if not outbox:\n        while inbox and len(outbox) < 50:\n            outbox.append(__BLANK__)\n    return outbox.pop()\ntry:\n    inbox.extend([1, 2, 3])\n    got = [dequeue()]\n    inbox.append(4)\n    got += [dequeue(), dequeue(), dequeue()]\n    ok = got == [1, 2, 3, 4]\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "A min-stack that keeps a parallel list of minimums:\n```\nstack, mins = [], []\ndef push(x):\n    stack.append(x)\n    mins.append(____)\ndef pop():\n    mins.pop()\n    return stack.pop()\n```\nWhat goes in the blank?",
+    "options": [
+      "x",
+      "max(x, mins[-1]) if mins else x",
+      "min(x, mins[-1]) if mins else x",
+      "min(x, mins[0]) if mins else x"
+    ],
+    "answer": "min(x, mins[-1]) if mins else x",
+    "verify": "stack, mins = [], []\ndef push(x):\n    stack.append(x)\n    mins.append(__BLANK__)\ndef pop():\n    mins.pop()\n    return stack.pop()\npush(5); push(3); push(4)\na = mins[-1]\npop(); pop()\nb = mins[-1]\npush(7)\nc = mins[-1]\nprint(\"OK\" if (a, b, c) == (3, 5, 5) else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "Enqueue into a fixed-size circular queue that tracks `head` and `size`:\n```\ndef enqueue(buf, head, size, x):\n    cap = len(buf)\n    buf[____] = x\n    return size + 1\n```\nWhat goes in the blank?",
+    "options": [
+      "head + size",
+      "(head + size + 1) % cap",
+      "(head - size) % cap",
+      "(head + size) % cap"
+    ],
+    "answer": "(head + size) % cap",
+    "verify": "def enqueue(buf, head, size, x):\n    cap = len(buf)\n    buf[__BLANK__] = x\n    return size + 1\nbuf = [None] * 4\nhead, size = 2, 0\ntry:\n    for x in \"abc\":\n        size = enqueue(buf, head, size, x)\n    out = [buf[(head + i) % 4] for i in range(size)]\n    ok = out == [\"a\", \"b\", \"c\"] and buf == [\"c\", None, \"a\", \"b\"]\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "Sliding window maximum over `n` numbers with window size `k`, using a deque of indices kept in decreasing value order. What is the total running time?",
+    "options": [
+      "O(n), since each index is added and removed at most once",
+      "O(n * k)",
+      "O(n log k)",
+      "O(k^2)"
+    ],
+    "answer": "O(n), since each index is added and removed at most once"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "What is the postfix form of the infix expression `a + b * c`?",
+    "options": [
+      "a b + c *",
+      "a b c * +",
+      "a b c + *",
+      "+ a * b c"
+    ],
+    "answer": "a b c * +"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "What is the postfix form of the infix expression `(a + b) * (c - d)`?",
+    "options": [
+      "a b c d + - *",
+      "a b + * c d -",
+      "a b + c d - *",
+      "* + a b - c d"
+    ],
+    "answer": "a b + c d - *"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "A queue built from two stacks (`inbox`, `outbox`, transfer only when `outbox` is empty) receives `n` enqueues and then `n` dequeues. Counting every stack push and pop, how many stack operations happen in total?",
+    "options": [
+      "2n",
+      "3n",
+      "n^2",
+      "4n"
+    ],
+    "answer": "4n",
+    "verify": "n = 10\ninbox, outbox, ops = [], [], 0\nfor x in range(n):\n    inbox.append(x); ops += 1\nfor _ in range(n):\n    if not outbox:\n        while inbox:\n            outbox.append(inbox.pop()); ops += 2\n    outbox.pop(); ops += 1\nprint(f\"{ops // n}n\")"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "In the stack-based algorithm for the largest rectangle in a histogram, what does the stack hold?",
+    "options": [
+      "Indices of bars with increasing heights",
+      "Indices of bars with decreasing heights",
+      "The heights of all bars seen so far, sorted",
+      "Only the index of the tallest bar so far"
+    ],
+    "answer": "Indices of bars with increasing heights"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "A recursive function walks a linked list of 100,000 nodes in CPython with default settings, making one call per node. What happens?",
+    "options": [
+      "It finishes, because Python optimizes tail calls",
+      "It raises `RecursionError`; an explicit stack or a loop avoids this",
+      "It stops at depth 1000 and returns the partial result",
+      "It switches to heap-allocated frames and finishes slowly"
+    ],
+    "answer": "It raises `RecursionError`; an explicit stack or a loop avoids this"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "An array-based circular queue tracks only `front` and `rear` (no size counter) and leaves one slot permanently unused. Why?",
+    "options": [
+      "Because `% n` can never produce index `n - 1`",
+      "To store the queue's size in that slot",
+      "So that `front == rear` means empty while `(rear + 1) % n == front` means full",
+      "Because the last slot is reserved for the front pointer"
+    ],
+    "answer": "So that `front == rear` means empty while `(rear + 1) % n == front` means full"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "The values `1, 2, 3, 4` are pushed onto a stack in that order, and pops may happen at any time in between. Which pop sequence is impossible?",
+    "options": [
+      "2 1 4 3",
+      "3 2 4 1",
+      "1 2 3 4",
+      "3 1 4 2"
+    ],
+    "answer": "3 1 4 2",
+    "verify": "def possible(seq):\n    stack, nxt = [], 1\n    for want in seq:\n        while (not stack or stack[-1] != want) and nxt <= 4:\n            stack.append(nxt); nxt += 1\n        if not stack or stack[-1] != want:\n            return False\n        stack.pop()\n    return True\nbad = [s for s in [\"3 1 4 2\", \"2 1 4 3\", \"3 2 4 1\", \"1 2 3 4\"] if not possible(map(int, s.split()))]\nprint(bad[0] if len(bad) == 1 else bad)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "Sliding window maximum with a deque of indices:\n```\nfrom collections import deque\nnums, k = [4, 2, 12, 3, 8, 5, 1], 3\ndq = deque()\nout = []\nfor i, x in enumerate(nums):\n    while dq and nums[dq[-1]] <= x:\n        dq.pop()\n    dq.append(i)\n    if dq[0] <= i - k:\n        dq.popleft()\n    if i >= k - 1:\n        out.append(nums[dq[0]])\nprint(out)\n```\nWhat is printed?",
+    "options": [
+      "[12, 12, 12, 8, 8]",
+      "[4, 12, 12, 12, 8, 8]",
+      "[12, 12, 8, 8, 5]",
+      "[12, 12, 12, 12, 12]"
+    ],
+    "answer": "[12, 12, 12, 8, 8]",
+    "verify": "from collections import deque\nnums, k = [4, 2, 12, 3, 8, 5, 1], 3\ndq = deque()\nout = []\nfor i, x in enumerate(nums):\n    while dq and nums[dq[-1]] <= x:\n        dq.pop()\n    dq.append(i)\n    if dq[0] <= i - k:\n        dq.popleft()\n    if i >= k - 1:\n        out.append(nums[dq[0]])\nprint(out)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "Infix to postfix (shunting-yard, no parentheses):\n```\nprec = {\"+\": 1, \"-\": 1, \"*\": 2, \"/\": 2}\nout, ops = [], []\nfor t in \"a - b * c + d\".split():\n    if t in prec:\n        while ops and prec[ops[-1]] >= prec[t]:\n            out.append(ops.pop())\n        ops.append(t)\n    else:\n        out.append(t)\nwhile ops:\n    out.append(ops.pop())\nprint(\" \".join(out))\n```\nWhat is printed?",
+    "options": [
+      "a b c * d + -",
+      "a b c * - d +",
+      "a b - c * d +",
+      "a b c d + * -"
+    ],
+    "answer": "a b c * - d +",
+    "verify": "prec = {\"+\": 1, \"-\": 1, \"*\": 2, \"/\": 2}\nout, ops = [], []\nfor t in \"a - b * c + d\".split():\n    if t in prec:\n        while ops and prec[ops[-1]] >= prec[t]:\n            out.append(ops.pop())\n        ops.append(t)\n    else:\n        out.append(t)\nwhile ops:\n    out.append(ops.pop())\nprint(\" \".join(out))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "Decoding `k[text]` patterns with a stack:\n```\ndef decode(s):\n    stack, cur, num = [], \"\", 0\n    for ch in s:\n        if ch.isdigit():\n            num = num * 10 + int(ch)\n        elif ch == \"[\":\n            stack.append((cur, num))\n            cur, num = \"\", 0\n        elif ch == \"]\":\n            prev, k = stack.pop()\n            cur = prev + cur * k\n        else:\n            cur += ch\n    return cur\nprint(decode(\"2[ab3[c]]\"))\n```\nWhat is printed?",
+    "options": [
+      "cccabcccab",
+      "ababcccccc",
+      "abcccabccc",
+      "abccc"
+    ],
+    "answer": "abcccabccc",
+    "verify": "def decode(s):\n    stack, cur, num = [], \"\", 0\n    for ch in s:\n        if ch.isdigit():\n            num = num * 10 + int(ch)\n        elif ch == \"[\":\n            stack.append((cur, num))\n            cur, num = \"\", 0\n        elif ch == \"]\":\n            prev, k = stack.pop()\n            cur = prev + cur * k\n        else:\n            cur += ch\n    return cur\nprint(decode(\"2[ab3[c]]\"))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "Counting element transfers in a two-stack queue:\n```\ninbox, outbox = [], []\nmoves = [0]\ndef dequeue():\n    if not outbox:\n        while inbox:\n            outbox.append(inbox.pop())\n            moves[0] += 1\n    return outbox.pop()\ninbox.extend([0, 1, 2, 3])\ndequeue(); dequeue()\ninbox.extend([4, 5])\nfor _ in range(4):\n    dequeue()\nprint(moves[0])\n```\nWhat is printed?",
+    "options": [
+      "4",
+      "8",
+      "10",
+      "6"
+    ],
+    "answer": "6",
+    "verify": "inbox, outbox = [], []\nmoves = [0]\ndef dequeue():\n    if not outbox:\n        while inbox:\n            outbox.append(inbox.pop())\n            moves[0] += 1\n    return outbox.pop()\ninbox.extend([0, 1, 2, 3])\ndequeue(); dequeue()\ninbox.extend([4, 5])\nfor _ in range(4):\n    dequeue()\nprint(moves[0])"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "Recursion depth in CPython with the default limit:\n```\ndef count(n):\n    if n == 0:\n        return 0\n    return 1 + count(n - 1)\nresults = []\nfor n in [10, 500, 5000]:\n    try:\n        results.append(count(n))\n    except RecursionError:\n        results.append(\"overflow\")\nprint(results)\n```\nWhat is printed?",
+    "options": [
+      "[10, 500, 'overflow']",
+      "[10, 500, 5000]",
+      "[10, 'overflow', 'overflow']",
+      "[10, 500, 1000]"
+    ],
+    "answer": "[10, 500, 'overflow']",
+    "verify": "def count(n):\n    if n == 0:\n        return 0\n    return 1 + count(n - 1)\nresults = []\nfor n in [10, 500, 5000]:\n    try:\n        results.append(count(n))\n    except RecursionError:\n        results.append(\"overflow\")\nprint(results)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "Asteroid collisions (positive moves right, negative moves left; the smaller one explodes, equal sizes both explode):\n```\nrocks = [5, 10, -5, 3, -12, 4]\nstack = []\nfor r in rocks:\n    alive = True\n    while alive and r < 0 and stack and stack[-1] > 0:\n        if stack[-1] < -r:\n            stack.pop()\n        elif stack[-1] == -r:\n            stack.pop()\n            alive = False\n        else:\n            alive = False\n    if alive:\n        stack.append(r)\nprint(stack)\n```\nWhat is printed?",
+    "options": [
+      "[5, 10, 3, 4]",
+      "[-12, 4]",
+      "[-12]",
+      "[5, 10, -12, 4]"
+    ],
+    "answer": "[-12, 4]",
+    "verify": "rocks = [5, 10, -5, 3, -12, 4]\nstack = []\nfor r in rocks:\n    alive = True\n    while alive and r < 0 and stack and stack[-1] > 0:\n        if stack[-1] < -r:\n            stack.pop()\n        elif stack[-1] == -r:\n            stack.pop()\n            alive = False\n        else:\n            alive = False\n    if alive:\n        stack.append(r)\nprint(stack)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "Removing `k` digits to make the smallest number, with a monotonic stack:\n```\nnum, k = \"4372816\", 3\nstack = []\nfor d in num:\n    while k and stack and stack[-1] > d:\n        stack.pop()\n        k -= 1\n    stack.append(d)\nstack = stack[:len(stack) - k]\nprint(\"\".join(stack))\n```\nWhat is printed?",
+    "options": [
+      "3216",
+      "4372",
+      "2816",
+      "7816"
+    ],
+    "answer": "2816",
+    "verify": "num, k = \"4372816\", 3\nstack = []\nfor d in num:\n    while k and stack and stack[-1] > d:\n        stack.pop()\n        k -= 1\n    stack.append(d)\nstack = stack[:len(stack) - k]\nprint(\"\".join(stack))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "Largest rectangle in a histogram (a `0` is appended to flush the stack):\n```\nheights = [3, 1, 3, 2, 2] + [0]\nstack = []\nbest = 0\nfor i, h in enumerate(heights):\n    while stack and heights[stack[-1]] >= h:\n        top = heights[stack.pop()]\n        left = stack[-1] + 1 if stack else 0\n        best = max(best, top * (i - left))\n    stack.append(i)\nprint(best)\n```\nWhat is printed?",
+    "options": [
+      "5",
+      "4",
+      "9",
+      "6"
+    ],
+    "answer": "6",
+    "verify": "heights = [3, 1, 3, 2, 2] + [0]\nstack = []\nbest = 0\nfor i, h in enumerate(heights):\n    while stack and heights[stack[-1]] >= h:\n        top = heights[stack.pop()]\n        left = stack[-1] + 1 if stack else 0\n        best = max(best, top * (i - left))\n    stack.append(i)\nprint(best)"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "HARD",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "Sliding window maximum: drop the front index once it falls out of the window.\n```\nfrom collections import deque\ndef window_max(nums, k):\n    dq, out = deque(), []\n    for i, x in enumerate(nums):\n        while dq and nums[dq[-1]] <= x:\n            dq.pop()\n        dq.append(i)\n        if ____:\n            dq.popleft()\n        if i >= k - 1:\n            out.append(nums[dq[0]])\n    return out\n```\nWhat condition goes in the blank?",
+    "options": [
+      "dq[0] <= i - k",
+      "dq[0] < i - k",
+      "dq[0] <= i - k + 1",
+      "nums[dq[0]] <= i - k"
+    ],
+    "answer": "dq[0] <= i - k",
+    "verify": "from collections import deque\ndef window_max(nums, k):\n    dq, out = deque(), []\n    for i, x in enumerate(nums):\n        while dq and nums[dq[-1]] <= x:\n            dq.pop()\n        dq.append(i)\n        if __BLANK__:\n            dq.popleft()\n        if i >= k - 1:\n            out.append(nums[dq[0]])\n    return out\ntry:\n    ok = window_max([9, 1, 2, 3, 0], 2) == [9, 2, 3, 3] and window_max([4, 2, 12, 3, 8, 5, 1], 3) == [12, 12, 12, 8, 8]\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "HARD",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "Shunting-yard conversion from infix to postfix (left-associative operators, no parentheses):\n```\ndef to_postfix(expr):\n    prec = {\"+\": 1, \"-\": 1, \"*\": 2, \"/\": 2}\n    out, ops = [], []\n    for t in expr.split():\n        if t in prec:\n            while ops and ____:\n                out.append(ops.pop())\n            ops.append(t)\n        else:\n            out.append(t)\n    while ops:\n        out.append(ops.pop())\n    return \" \".join(out)\n```\nWhat condition goes in the blank?",
+    "options": [
+      "prec[ops[-1]] < prec[t]",
+      "prec[ops[-1]] >= prec[t]",
+      "prec[ops[0]] >= prec[t]",
+      "prec[t] >= prec[ops[-1]]"
+    ],
+    "answer": "prec[ops[-1]] >= prec[t]",
+    "verify": "def to_postfix(expr):\n    prec = {\"+\": 1, \"-\": 1, \"*\": 2, \"/\": 2}\n    out, ops = [], []\n    for t in expr.split():\n        if t in prec:\n            while ops and __BLANK__:\n                out.append(ops.pop())\n            ops.append(t)\n        else:\n            out.append(t)\n    while ops:\n        out.append(ops.pop())\n    return \" \".join(out)\ntests = {\"a - b * c + d\": \"a b c * - d +\", \"a * b + c\": \"a b * c +\", \"a + b * c * d\": \"a b c * d * +\"}\nprint(\"OK\" if all(to_postfix(e) == want for e, want in tests.items()) else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "HARD",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "Next greater element with a monotonic stack of indices (`-1` means none):\n```\ndef next_greater(nums):\n    res = [-1] * len(nums)\n    stack = []\n    for i, x in enumerate(nums):\n        while stack and ____:\n            res[stack.pop()] = x\n        stack.append(i)\n    return res\n```\nWhat condition goes in the blank?",
+    "options": [
+      "nums[stack[-1]] > x",
+      "stack[-1] < x",
+      "nums[stack[-1]] < x",
+      "nums[stack[0]] < x"
+    ],
+    "answer": "nums[stack[-1]] < x",
+    "verify": "def next_greater(nums):\n    res = [-1] * len(nums)\n    stack = []\n    for i, x in enumerate(nums):\n        while stack and __BLANK__:\n            res[stack.pop()] = x\n        stack.append(i)\n    return res\ntry:\n    ok = (next_greater([2, 7, 3, 5, 4, 6, 8]) == [7, 8, 5, 6, 6, 8, -1]\n          and next_greater([5, 4, 3, 10]) == [10, 10, 10, -1]\n          and next_greater([1, 5, 3, 4]) == [5, -1, 4, -1])\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "HARD",
+    "categories": [
+      "StacksQueues"
+    ],
+    "text": "A circular queue keeps items from `buf[front]` up to (not including) `buf[rear]` and leaves one slot unused, so empty and full look different:\n```\ndef is_full(front, rear, cap):\n    return ____\n```\nWhat goes in the blank?",
+    "options": [
+      "rear == front",
+      "rear + 1 == front",
+      "(front + 1) % cap == rear",
+      "(rear + 1) % cap == front"
+    ],
+    "answer": "(rear + 1) % cap == front",
+    "verify": "def is_full(front, rear, cap):\n    return __BLANK__\ncases = {(0, 3, 4): True, (2, 1, 4): True, (0, 0, 4): False, (1, 3, 4): False, (3, 1, 4): False}\nprint(\"OK\" if all(is_full(*c) == want for c, want in cases.items()) else \"NO\")"
+  }
+]

@@ -1,0 +1,940 @@
+[
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "You search a sorted array for a pair summing to `target`, with `l` at the start and `r` at the end. If `a[l] + a[r]` is less than `target`, what should you do?",
+    "options": [
+      "Move `l` one step right",
+      "Move `r` one step left",
+      "Move both pointers one step inward",
+      "Move `r` back to the last index"
+    ],
+    "answer": "Move `l` one step right"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "What is the time complexity of the two-pointer pair-sum search on an already sorted array of `n` elements?",
+    "options": [
+      "O(n log n)",
+      "O(n)",
+      "O(n^2)",
+      "O(log n)"
+    ],
+    "answer": "O(n)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "To find the middle of a linked list in one pass, a slow pointer moves one node per step. How does the fast pointer move?",
+    "options": [
+      "One node per step, starting one node ahead",
+      "Three nodes per step",
+      "Two nodes per step",
+      "Back from the tail, one node per step"
+    ],
+    "answer": "Two nodes per step"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "A palindrome check compares `s[l]` and `s[r]` while moving the pointers inward. When can it stop and report a palindrome?",
+    "options": [
+      "When `l` reaches the last index",
+      "As soon as one pair of characters matches",
+      "When `r` reaches index `0`",
+      "When the pointers meet or cross (`l >= r`)"
+    ],
+    "answer": "When the pointers meet or cross (`l >= r`)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "Why does the opposite-end two-pointer pair-sum search need the array to be sorted?",
+    "options": [
+      "Sorting tells you which pointer to move: a small sum needs a bigger left value, a large sum needs a smaller right value",
+      "Sorting removes duplicate values, which would break the pointers",
+      "Only sorted arrays can be indexed from both ends",
+      "Sorting lets the pointers jump by binary search instead of one step"
+    ],
+    "answer": "Sorting tells you which pointer to move: a small sum needs a bigger left value, a large sum needs a smaller right value"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "How much extra space does reversing an array in place with two pointers (swap `a[l]` and `a[r]`, then move both inward) use?",
+    "options": [
+      "O(n)",
+      "O(1)",
+      "O(n / 2)",
+      "O(log n)"
+    ],
+    "answer": "O(1)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "Which pointer pattern fits \"move all zeros to the end while keeping the order of the non-zero values\"?",
+    "options": [
+      "Opposite-end pointers that swap the first and last elements",
+      "Fast and slow pointers moving one and two steps",
+      "Same-direction pointers: a write index for the next non-zero slot and a read index scanning the array",
+      "Binary search for the first zero, then shift everything after it"
+    ],
+    "answer": "Same-direction pointers: a write index for the next non-zero slot and a read index scanning the array"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "In Floyd's cycle detection, a slow pointer moves one step and a fast pointer moves two steps. What shows the list has a cycle?",
+    "options": [
+      "The fast pointer reaches the end of the list",
+      "The slow pointer returns to the head",
+      "The fast pointer gets exactly one node ahead of the slow pointer",
+      "The two pointers land on the same node"
+    ],
+    "answer": "The two pointers land on the same node"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "Pair sum on a sorted array:\n```\na = [1, 3, 4, 6, 9]\ntarget = 13\nl, r = 0, len(a) - 1\nwhile l < r:\n    s = a[l] + a[r]\n    if s == target:\n        break\n    elif s < target:\n        l += 1\n    else:\n        r -= 1\nprint(l, r)\n```\nWhat is printed?",
+    "options": [
+      "2 4",
+      "3 4",
+      "1 4",
+      "2 3"
+    ],
+    "answer": "2 4",
+    "verify": "a = [1, 3, 4, 6, 9]\ntarget = 13\nl, r = 0, len(a) - 1\nwhile l < r:\n    s = a[l] + a[r]\n    if s == target:\n        break\n    elif s < target:\n        l += 1\n    else:\n        r -= 1\nprint(l, r)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "Palindrome check that counts matching pairs:\n```\ns = \"racecar\"\nl, r = 0, len(s) - 1\nsteps = 0\nwhile l < r and s[l] == s[r]:\n    l += 1\n    r -= 1\n    steps += 1\nprint(steps)\n```\nWhat is printed?",
+    "options": [
+      "4",
+      "3",
+      "7",
+      "2"
+    ],
+    "answer": "3",
+    "verify": "s = \"racecar\"\nl, r = 0, len(s) - 1\nsteps = 0\nwhile l < r and s[l] == s[r]:\n    l += 1\n    r -= 1\n    steps += 1\nprint(steps)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "Reversing part of an array in place:\n```\na = [1, 2, 3, 4, 5]\nl, r = 0, 3\nwhile l < r:\n    a[l], a[r] = a[r], a[l]\n    l += 1\n    r -= 1\nprint(a)\n```\nWhat is printed?",
+    "options": [
+      "[5, 4, 3, 2, 1]",
+      "[4, 2, 3, 1, 5]",
+      "[4, 3, 2, 1, 5]",
+      "[1, 4, 3, 2, 5]"
+    ],
+    "answer": "[4, 3, 2, 1, 5]",
+    "verify": "a = [1, 2, 3, 4, 5]\nl, r = 0, 3\nwhile l < r:\n    a[l], a[r] = a[r], a[l]\n    l += 1\n    r -= 1\nprint(a)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "Removing duplicates from a sorted array in place (`w` is the write index):\n```\na = [1, 1, 2, 2, 2, 3]\nw = 1\nfor i in range(1, len(a)):\n    if a[i] != a[w - 1]:\n        a[w] = a[i]\n        w += 1\nprint(w)\n```\nWhat is printed?",
+    "options": [
+      "6",
+      "4",
+      "2",
+      "3"
+    ],
+    "answer": "3",
+    "verify": "a = [1, 1, 2, 2, 2, 3]\nw = 1\nfor i in range(1, len(a)):\n    if a[i] != a[w - 1]:\n        a[w] = a[i]\n        w += 1\nprint(w)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "Moving zeros to the end:\n```\na = [0, 1, 0, 3, 12]\nw = 0\nfor i in range(len(a)):\n    if a[i] != 0:\n        a[w], a[i] = a[i], a[w]\n        w += 1\nprint(a)\n```\nWhat is printed?",
+    "options": [
+      "[1, 3, 12, 0, 0]",
+      "[0, 0, 1, 3, 12]",
+      "[12, 3, 1, 0, 0]",
+      "[1, 0, 3, 12, 0]"
+    ],
+    "answer": "[1, 3, 12, 0, 0]",
+    "verify": "a = [0, 1, 0, 3, 12]\nw = 0\nfor i in range(len(a)):\n    if a[i] != 0:\n        a[w], a[i] = a[i], a[w]\n        w += 1\nprint(a)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "Merging two sorted lists:\n```\na = [1, 4, 7]\nb = [2, 3, 8]\ni = j = 0\nout = []\nwhile i < len(a) and j < len(b):\n    if a[i] <= b[j]:\n        out.append(a[i])\n        i += 1\n    else:\n        out.append(b[j])\n        j += 1\nprint(out)\n```\nWhat is printed?",
+    "options": [
+      "[1, 2, 3, 4, 7, 8]",
+      "[1, 2, 3, 4, 7]",
+      "[1, 2, 3, 4]",
+      "[1, 4, 7, 2, 3, 8]"
+    ],
+    "answer": "[1, 2, 3, 4, 7]",
+    "verify": "a = [1, 4, 7]\nb = [2, 3, 8]\ni = j = 0\nout = []\nwhile i < len(a) and j < len(b):\n    if a[i] <= b[j]:\n        out.append(a[i])\n        i += 1\n    else:\n        out.append(b[j])\n        j += 1\nprint(out)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "A linked list stored as a next-array: node `i` points to `nxt[i]`, and `None` ends the list.\n```\nnxt = [1, 2, 3, 4, 5, None]\nslow = fast = 0\nwhile fast is not None and nxt[fast] is not None:\n    slow = nxt[slow]\n    fast = nxt[nxt[fast]]\nprint(slow)\n```\nWhat is printed?",
+    "options": [
+      "2",
+      "4",
+      "3",
+      "5"
+    ],
+    "answer": "3",
+    "verify": "nxt = [1, 2, 3, 4, 5, None]\nslow = fast = 0\nwhile fast is not None and nxt[fast] is not None:\n    slow = nxt[slow]\n    fast = nxt[nxt[fast]]\nprint(slow)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "Squares of a sorted array, taking the larger end first:\n```\na = [-4, -1, 0, 3]\nl, r = 0, len(a) - 1\nout = []\nwhile l <= r:\n    if abs(a[l]) > abs(a[r]):\n        out.append(a[l] * a[l])\n        l += 1\n    else:\n        out.append(a[r] * a[r])\n        r -= 1\nprint(out)\n```\nWhat is printed?",
+    "options": [
+      "[0, 1, 9, 16]",
+      "[16, 9, 1]",
+      "[16, 1, 9, 0]",
+      "[16, 9, 1, 0]"
+    ],
+    "answer": "[16, 9, 1, 0]",
+    "verify": "a = [-4, -1, 0, 3]\nl, r = 0, len(a) - 1\nout = []\nwhile l <= r:\n    if abs(a[l]) > abs(a[r]):\n        out.append(a[l] * a[l])\n        l += 1\n    else:\n        out.append(a[r] * a[r])\n        r -= 1\nprint(out)"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "EASY",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "Find the indices of two values in a sorted array that add up to `target`:\n```\ndef pair_sum(a, target):\n    l, r = 0, len(a) - 1\n    while l < r:\n        s = a[l] + a[r]\n        if s == target:\n            return (l, r)\n        elif s < target:\n            ____\n        else:\n            r -= 1\n    return None\n```\nWhich line goes in the blank?",
+    "options": [
+      "l += 1",
+      "r -= 1",
+      "l -= 1",
+      "r += 1"
+    ],
+    "answer": "l += 1",
+    "verify": "def pair_sum(a, target):\n    l, r = 0, len(a) - 1\n    steps = 0\n    while l < r and steps < 100:\n        steps += 1\n        s = a[l] + a[r]\n        if s == target:\n            return (l, r)\n        elif s < target:\n            __BLANK__\n        else:\n            r -= 1\n    return None\ntry:\n    ok = (pair_sum([1, 3, 4, 6, 9], 13) == (2, 4) and pair_sum([2, 5, 8, 11], 16) == (1, 3)\n          and pair_sum([1, 2, 3], 10) is None)\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "EASY",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "A two-pointer palindrome check:\n```\ndef is_palindrome(s):\n    l, r = 0, len(s) - 1\n    while ____:\n        if s[l] != s[r]:\n            return False\n        l += 1\n        r -= 1\n    return True\n```\nWhat condition goes in the blank?",
+    "options": [
+      "l > r",
+      "l < r",
+      "l == r",
+      "s[l] == s[r]"
+    ],
+    "answer": "l < r",
+    "verify": "def is_palindrome(s):\n    l, r = 0, len(s) - 1\n    while __BLANK__:\n        if s[l] != s[r]:\n            return False\n        l += 1\n        r -= 1\n    return True\ntry:\n    ok = (is_palindrome(\"abba\") and is_palindrome(\"aba\") and is_palindrome(\"a\")\n          and not is_palindrome(\"ab\") and not is_palindrome(\"abca\"))\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "EASY",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "Remove duplicates from a sorted array in place and return the number of unique values:\n```\ndef dedupe(a):\n    if not a:\n        return 0\n    w = 1\n    for i in range(1, len(a)):\n        if a[i] != ____:\n            a[w] = a[i]\n            w += 1\n    return w\n```\nWhat goes in the blank?",
+    "options": [
+      "a[w]",
+      "a[i]",
+      "a[w - 1]",
+      "a[0]"
+    ],
+    "answer": "a[w - 1]",
+    "verify": "def dedupe(a):\n    if not a:\n        return 0\n    w = 1\n    for i in range(1, len(a)):\n        if a[i] != __BLANK__:\n            a[w] = a[i]\n            w += 1\n    return w\nok = True\nfor arr in ([1, 1, 2, 2, 3], [1, 2, 3], [1, 1, 1], [0, 0, 1, 1, 1, 2, 3, 3]):\n    a = list(arr)\n    w = dedupe(a)\n    ok = ok and a[:w] == sorted(set(arr))\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "EASY",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "Reverse an array in place:\n```\ndef reverse(a):\n    l, r = 0, len(a) - 1\n    while l < r:\n        ____\n        l += 1\n        r -= 1\n```\nWhich line goes in the blank?",
+    "options": [
+      "a[l] = a[r]",
+      "a[r] = a[l]",
+      "a[l], a[r] = a[l], a[r]",
+      "a[l], a[r] = a[r], a[l]"
+    ],
+    "answer": "a[l], a[r] = a[r], a[l]",
+    "verify": "def reverse(a):\n    l, r = 0, len(a) - 1\n    while l < r:\n        __BLANK__\n        l += 1\n        r -= 1\na = [1, 2, 3, 4, 5]\nb = [7, 8, 9, 10]\nreverse(a)\nreverse(b)\nprint(\"OK\" if a == [5, 4, 3, 2, 1] and b == [10, 9, 8, 7] else \"NO\")"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "In \"container with most water\", the two-pointer solution always moves the pointer at the shorter line. Why is that safe?",
+    "options": [
+      "Keeping the shorter line can't give a larger area: the width shrinks while the height stays capped by that shorter line",
+      "The shorter line has already been paired with every other line",
+      "Moving the shorter line keeps the width the same",
+      "The next area is always larger after moving the shorter line"
+    ],
+    "answer": "Keeping the shorter line can't give a larger area: the width shrinks while the height stays capped by that shorter line"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "What is the time complexity of merging two sorted arrays of lengths `m` and `n` with two pointers?",
+    "options": [
+      "O(m * n)",
+      "O(m + n)",
+      "O((m + n) log(m + n))",
+      "O(min(m, n))"
+    ],
+    "answer": "O(m + n)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "`nums1` has length `m + n`, its first `m` values are sorted and the rest is empty space for the sorted `nums2`. Why does the in-place merge fill `nums1` from the back?",
+    "options": [
+      "Filling from the back produces descending order, which is then reversed",
+      "The largest values must be placed first so the loop ends early",
+      "Writing from the back never overwrites a value of `nums1` that hasn't been read yet",
+      "Writing from the front would need `nums2` to be reversed first"
+    ],
+    "answer": "Writing from the back never overwrites a value of `nums1` that hasn't been read yet"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "Floyd's algorithm finds where slow and fast meet inside a cycle. How do you then find the node where the cycle starts?",
+    "options": [
+      "The meeting node is always the cycle start",
+      "Move the fast pointer three steps at a time until it reaches the head",
+      "Count the cycle length and step that many nodes from the meeting node",
+      "Put one pointer back at the head, then move both one step at a time; they meet at the cycle start"
+    ],
+    "answer": "Put one pointer back at the head, then move both one step at a time; they meet at the cycle start"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "When squaring the values of a sorted array (which may contain negatives), why does the two-pointer method compare the two ends?",
+    "options": [
+      "The largest remaining square always comes from one of the two ends",
+      "The smallest remaining square always comes from one of the two ends",
+      "Negative values are always at the right end",
+      "Both ends always have the same absolute value"
+    ],
+    "answer": "The largest remaining square always comes from one of the two ends"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "To solve pair-sum on an unsorted array with two pointers, you first sort it. What is the total time complexity?",
+    "options": [
+      "O(n)",
+      "O(n log n)",
+      "O(n^2)",
+      "O(log n)"
+    ],
+    "answer": "O(n log n)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "Why is comparing each value with the last kept value enough to remove duplicates from a sorted array?",
+    "options": [
+      "Sorted arrays never contain more than two copies of a value",
+      "The last kept value is always the largest value in the array",
+      "In a sorted array equal values are adjacent, so a new value differs from the last one kept",
+      "Duplicates in a sorted array always appear at the end"
+    ],
+    "answer": "In a sorted array equal values are adjacent, so a new value differs from the last one kept"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "A linked list has an even number of nodes. Slow and fast both start at the head and the loop runs `while fast and fast.next`. Where does slow stop?",
+    "options": [
+      "At the first of the two middle nodes",
+      "At the last node",
+      "One node before the first middle node",
+      "At the second of the two middle nodes"
+    ],
+    "answer": "At the second of the two middle nodes",
+    "verify": "nxt = [1, 2, 3, 4, 5, None]\nslow = fast = 0\nwhile fast is not None and nxt[fast] is not None:\n    slow = nxt[slow]\n    fast = nxt[nxt[fast]]\nprint(\"At the second of the two middle nodes\" if slow == 3 else \"other\")"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "Container with most water (`h[i]` is the height of line `i`):\n```\nh = [2, 3, 10, 5, 7, 8, 9]\nl, r = 0, len(h) - 1\nbest = 0\nwhile l < r:\n    best = max(best, min(h[l], h[r]) * (r - l))\n    if h[l] < h[r]:\n        l += 1\n    else:\n        r -= 1\nprint(best)\n```\nWhat is printed?",
+    "options": [
+      "36",
+      "40",
+      "54",
+      "24"
+    ],
+    "answer": "36",
+    "verify": "h = [2, 3, 10, 5, 7, 8, 9]\nl, r = 0, len(h) - 1\nbest = 0\nwhile l < r:\n    best = max(best, min(h[l], h[r]) * (r - l))\n    if h[l] < h[r]:\n        l += 1\n    else:\n        r -= 1\nprint(best)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "Reversing only the vowels of a word:\n```\ns = list(\"leetcode\")\nvowels = \"aeiou\"\nl, r = 0, len(s) - 1\nwhile l < r:\n    if s[l] not in vowels:\n        l += 1\n    elif s[r] not in vowels:\n        r -= 1\n    else:\n        s[l], s[r] = s[r], s[l]\n        l += 1\n        r -= 1\nprint(\"\".join(s))\n```\nWhat is printed?",
+    "options": [
+      "edocteel",
+      "leotcede",
+      "leetcode",
+      "leotcdee"
+    ],
+    "answer": "leotcede",
+    "verify": "s = list(\"leetcode\")\nvowels = \"aeiou\"\nl, r = 0, len(s) - 1\nwhile l < r:\n    if s[l] not in vowels:\n        l += 1\n    elif s[r] not in vowels:\n        r -= 1\n    else:\n        s[l], s[r] = s[r], s[l]\n        l += 1\n        r -= 1\nprint(\"\".join(s))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "Floyd's cycle detection on a next-array (node `i` points to `nxt[i]`):\n```\nnxt = [1, 2, 3, 4, 2]\nslow = fast = 0\nsteps = 0\nwhile True:\n    slow = nxt[slow]\n    fast = nxt[nxt[fast]]\n    steps += 1\n    if slow == fast:\n        break\nprint(steps, slow)\n```\nWhat is printed?",
+    "options": [
+      "2 2",
+      "3 2",
+      "3 3",
+      "4 4"
+    ],
+    "answer": "3 3",
+    "verify": "nxt = [1, 2, 3, 4, 2]\nslow = fast = 0\nsteps = 0\nwhile True:\n    slow = nxt[slow]\n    fast = nxt[nxt[fast]]\n    steps += 1\n    if slow == fast:\n        break\nprint(steps, slow)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "Partitioning even values to the front in place:\n```\na = [3, 8, 5, 2, 7, 6]\nw = 0\nfor i in range(len(a)):\n    if a[i] % 2 == 0:\n        a[w], a[i] = a[i], a[w]\n        w += 1\nprint(a)\n```\nWhat is printed?",
+    "options": [
+      "[8, 2, 6, 3, 5, 7]",
+      "[2, 6, 8, 3, 5, 7]",
+      "[8, 2, 6, 5, 3, 7]",
+      "[8, 2, 6, 3, 7, 5]"
+    ],
+    "answer": "[8, 2, 6, 3, 7, 5]",
+    "verify": "a = [3, 8, 5, 2, 7, 6]\nw = 0\nfor i in range(len(a)):\n    if a[i] % 2 == 0:\n        a[w], a[i] = a[i], a[w]\n        w += 1\nprint(a)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "Merging `b` into the spare slots at the end of `a`, filling from the back:\n```\na = [1, 3, 5, 0, 0]\nb = [2, 4]\ni, j, k = 2, 1, 4\nwhile j >= 0:\n    if i >= 0 and a[i] > b[j]:\n        a[k] = a[i]\n        i -= 1\n    else:\n        a[k] = b[j]\n        j -= 1\n    k -= 1\nprint(a, i)\n```\nWhat is printed?",
+    "options": [
+      "[1, 2, 3, 4, 5] 0",
+      "[1, 2, 3, 4, 5] -1",
+      "[1, 3, 5, 2, 4] 2",
+      "[1, 2, 3, 5, 4] 0"
+    ],
+    "answer": "[1, 2, 3, 4, 5] 0",
+    "verify": "a = [1, 3, 5, 0, 0]\nb = [2, 4]\ni, j, k = 2, 1, 4\nwhile j >= 0:\n    if i >= 0 and a[i] > b[j]:\n        a[k] = a[i]\n        i -= 1\n    else:\n        a[k] = b[j]\n        j -= 1\n    k -= 1\nprint(a, i)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "Keeping at most two copies of each value in a sorted array:\n```\na = [1, 1, 1, 2, 2, 3, 3, 3]\nw = 0\nfor x in a:\n    if w < 2 or x != a[w - 2]:\n        a[w] = x\n        w += 1\nprint(a[:w])\n```\nWhat is printed?",
+    "options": [
+      "[1, 2, 3]",
+      "[1, 1, 2, 2, 3, 3]",
+      "[1, 1, 1, 2, 2, 3, 3, 3]",
+      "[1, 1, 2, 2, 3]"
+    ],
+    "answer": "[1, 1, 2, 2, 3, 3]",
+    "verify": "a = [1, 1, 1, 2, 2, 3, 3, 3]\nw = 0\nfor x in a:\n    if w < 2 or x != a[w - 2]:\n        a[w] = x\n        w += 1\nprint(a[:w])"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "Intersection of two sorted arrays:\n```\na = [1, 2, 2, 4, 6]\nb = [2, 2, 3, 6, 7]\ni = j = 0\ncommon = []\nwhile i < len(a) and j < len(b):\n    if a[i] == b[j]:\n        common.append(a[i])\n        i += 1\n        j += 1\n    elif a[i] < b[j]:\n        i += 1\n    else:\n        j += 1\nprint(common)\n```\nWhat is printed?",
+    "options": [
+      "[2, 6]",
+      "[1, 2, 2, 3, 4, 6, 7]",
+      "[2, 2, 6]",
+      "[2, 6, 6]"
+    ],
+    "answer": "[2, 2, 6]",
+    "verify": "a = [1, 2, 2, 4, 6]\nb = [2, 2, 3, 6, 7]\ni = j = 0\ncommon = []\nwhile i < len(a) and j < len(b):\n    if a[i] == b[j]:\n        common.append(a[i])\n        i += 1\n        j += 1\n    elif a[i] < b[j]:\n        i += 1\n    else:\n        j += 1\nprint(common)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "Pair sum closest to `target` in a sorted array:\n```\na = [1, 4, 6, 9, 13]\ntarget = 16\nl, r = 0, len(a) - 1\nbest = a[l] + a[r]\nwhile l < r:\n    s = a[l] + a[r]\n    if abs(s - target) < abs(best - target):\n        best = s\n    if s < target:\n        l += 1\n    else:\n        r -= 1\nprint(best)\n```\nWhat is printed?",
+    "options": [
+      "15",
+      "14",
+      "13",
+      "17"
+    ],
+    "answer": "17",
+    "verify": "a = [1, 4, 6, 9, 13]\ntarget = 16\nl, r = 0, len(a) - 1\nbest = a[l] + a[r]\nwhile l < r:\n    s = a[l] + a[r]\n    if abs(s - target) < abs(best - target):\n        best = s\n    if s < target:\n        l += 1\n    else:\n        r -= 1\nprint(best)"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "Container with most water:\n```\ndef max_area(h):\n    l, r = 0, len(h) - 1\n    best = 0\n    while l < r:\n        best = max(best, min(h[l], h[r]) * (r - l))\n        if ____:\n            l += 1\n        else:\n            r -= 1\n    return best\n```\nWhich condition goes in the blank?",
+    "options": [
+      "h[l] < h[r]",
+      "h[l] > h[r]",
+      "l < r - 1",
+      "h[l] + h[r] < best"
+    ],
+    "answer": "h[l] < h[r]",
+    "verify": "def max_area(h):\n    l, r = 0, len(h) - 1\n    best = 0\n    while l < r:\n        best = max(best, min(h[l], h[r]) * (r - l))\n        if __BLANK__:\n            l += 1\n        else:\n            r -= 1\n    return best\ndef brute(h):\n    return max(min(h[i], h[j]) * (j - i) for i in range(len(h)) for j in range(i + 1, len(h)))\ntests = [[1, 8, 6, 2, 5, 4, 8, 3, 7], [2, 3, 10, 5, 7, 8, 9], [1, 1], [4, 3, 2, 1, 4], [1, 2, 4, 3], [9, 1, 1, 1, 2], [5, 9, 9, 1]]\nprint(\"OK\" if all(max_area(t) == brute(t) for t in tests) else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "Move all zeros to the end, keeping the order of the other values:\n```\ndef move_zeros(a):\n    w = 0\n    for i in range(len(a)):\n        if ____:\n            a[w], a[i] = a[i], a[w]\n            w += 1\n```\nWhich condition goes in the blank?",
+    "options": [
+      "a[w] != 0",
+      "a[i] != 0",
+      "a[i] == 0",
+      "i != w"
+    ],
+    "answer": "a[i] != 0",
+    "verify": "def move_zeros(a):\n    w = 0\n    for i in range(len(a)):\n        if __BLANK__:\n            a[w], a[i] = a[i], a[w]\n            w += 1\na = [0, 1, 0, 3, 12]\nb = [4, 0, 5, 0, 0, 6]\nmove_zeros(a)\nmove_zeros(b)\nprint(\"OK\" if a == [1, 3, 12, 0, 0] and b == [4, 5, 6, 0, 0, 0] else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "Floyd's cycle detection on a next-array (`None` ends the list):\n```\ndef has_cycle(nxt, head):\n    slow = fast = head\n    while fast is not None and nxt[fast] is not None:\n        slow = nxt[slow]\n        fast = ____\n        if slow == fast:\n            return True\n    return False\n```\nWhat goes in the blank?",
+    "options": [
+      "nxt[fast]",
+      "nxt[slow]",
+      "nxt[nxt[fast]]",
+      "nxt[nxt[slow]]"
+    ],
+    "answer": "nxt[nxt[fast]]",
+    "verify": "def has_cycle(nxt, head):\n    slow = fast = head\n    steps = 0\n    while fast is not None and nxt[fast] is not None:\n        steps += 1\n        if steps > 100:\n            raise RuntimeError(\"no progress\")\n        slow = nxt[slow]\n        fast = __BLANK__\n        if slow == fast:\n            return True\n    return False\ntry:\n    ok = (has_cycle([1, 2, 3, 1], 0) and has_cycle([1, 2, 3, 4, 5, 3], 0)\n          and not has_cycle([1, 2, 3, None], 0) and not has_cycle([1, 2, 3, 4, None], 0))\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "Merge two sorted lists into one sorted list:\n```\ndef merge(a, b):\n    i = j = 0\n    out = []\n    while i < len(a) and j < len(b):\n        if a[i] <= b[j]:\n            out.append(a[i])\n            i += 1\n        else:\n            out.append(b[j])\n            j += 1\n    ____\n    return out\n```\nWhich line goes in the blank?",
+    "options": [
+      "out += a[i:]",
+      "out += a + b",
+      "out += a[i + 1:] + b[j + 1:]",
+      "out += a[i:] + b[j:]"
+    ],
+    "answer": "out += a[i:] + b[j:]",
+    "verify": "def merge(a, b):\n    i = j = 0\n    out = []\n    while i < len(a) and j < len(b):\n        if a[i] <= b[j]:\n            out.append(a[i])\n            i += 1\n        else:\n            out.append(b[j])\n            j += 1\n    __BLANK__\n    return out\nok = merge([1, 4, 7], [2, 3, 8]) == [1, 2, 3, 4, 7, 8] and merge([5, 6], [1, 2]) == [1, 2, 5, 6]\nok = ok and merge([], [3]) == [3] and merge([1, 9], [2]) == [1, 2, 9]\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "Three-sum (find all unique triples summing to `0`) is solved by sorting, fixing `a[i]`, and running two pointers on the rest. What is the overall time complexity?",
+    "options": [
+      "O(n^2)",
+      "O(n^3)",
+      "O(n log n)",
+      "O(n^2 log n)"
+    ],
+    "answer": "O(n^2)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "An array of `n + 1` integers holds values in `1..n`, so one value repeats. Why can Floyd's cycle detection find it?",
+    "options": [
+      "The repeated value is always at index `0`, the head of the list",
+      "Following `i -> nums[i]` forms a linked list in which the repeated value has two incoming links, so it is where the cycle starts",
+      "The fast pointer skips exactly the indices that hold unique values",
+      "The slow and fast pointers first meet at the repeated value"
+    ],
+    "answer": "Following `i -> nums[i]` forms a linked list in which the repeated value has two incoming links, so it is where the cycle starts"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "In Dutch national flag partitioning (`lo`, `mid`, `hi`), when `a[mid] == 2` you swap it with `a[hi]` and decrement `hi`. Why is `mid` not advanced?",
+    "options": [
+      "`a[hi]` is always `0`, so `mid` must wait for `lo`",
+      "Advancing `mid` would make it pass `lo`",
+      "The value swapped in from `hi` has not been examined yet",
+      "`mid` only moves when a `1` is swapped"
+    ],
+    "answer": "The value swapped in from `hi` has not been examined yet"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "Why does Floyd's second phase (one pointer restarted at the head, both moving one step) reach the cycle start together?",
+    "options": [
+      "The meeting point is always exactly halfway around the cycle",
+      "The tail before the cycle always has the same length as the cycle",
+      "The fast pointer has always travelled exactly one full cycle more than the slow one",
+      "The head-to-start distance equals the meeting-point-to-start distance, modulo the cycle length"
+    ],
+    "answer": "The head-to-start distance equals the meeting-point-to-start distance, modulo the cycle length"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "Counting pairs with `a[l] + a[r] < target` in a sorted array: when the condition holds for the current `l` and `r`, what should the algorithm do?",
+    "options": [
+      "Add `r - l` to the count, then move `l` right",
+      "Add `1` to the count, then move `l` right",
+      "Add `r - l` to the count, then move `r` left",
+      "Add `r - l + 1` to the count, then move `l` right"
+    ],
+    "answer": "Add `r - l` to the count, then move `l` right"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "In three-sum on a sorted array, what goes wrong if the outer loop does not skip a value of `a[i]` equal to `a[i - 1]`?",
+    "options": [
+      "Some valid triples are missed",
+      "The same triple is reported more than once",
+      "The inner loop never terminates",
+      "The time complexity becomes O(n^3)"
+    ],
+    "answer": "The same triple is reported more than once"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "What are the time and extra space costs of Floyd's cycle detection on a linked list with `n` nodes?",
+    "options": [
+      "O(n) time, O(n) space",
+      "O(n log n) time, O(1) space",
+      "O(n) time, O(1) space",
+      "O(n^2) time, O(1) space"
+    ],
+    "answer": "O(n) time, O(1) space"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "How many unique triples (as value sets) sum to `0` in `[-2, 0, 1, 1, 2, -1, -1, 0]`?",
+    "options": [
+      "3",
+      "5",
+      "6",
+      "4"
+    ],
+    "answer": "4",
+    "verify": "from itertools import combinations\na = [-2, 0, 1, 1, 2, -1, -1, 0]\nprint(len({tuple(sorted(t)) for t in combinations(a, 3) if sum(t) == 0}))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "Dutch national flag partitioning:\n```\na = [2, 0, 1, 2, 0, 1]\nlo, mid, hi = 0, 0, len(a) - 1\nwhile mid <= hi:\n    if a[mid] == 0:\n        a[lo], a[mid] = a[mid], a[lo]\n        lo += 1\n        mid += 1\n    elif a[mid] == 1:\n        mid += 1\n    else:\n        a[mid], a[hi] = a[hi], a[mid]\n        hi -= 1\nprint(lo, mid, hi)\n```\nWhat is printed?",
+    "options": [
+      "2 4 3",
+      "2 3 3",
+      "2 4 4",
+      "3 4 3"
+    ],
+    "answer": "2 4 3",
+    "verify": "a = [2, 0, 1, 2, 0, 1]\nlo, mid, hi = 0, 0, len(a) - 1\nwhile mid <= hi:\n    if a[mid] == 0:\n        a[lo], a[mid] = a[mid], a[lo]\n        lo += 1\n        mid += 1\n    elif a[mid] == 1:\n        mid += 1\n    else:\n        a[mid], a[hi] = a[hi], a[mid]\n        hi -= 1\nprint(lo, mid, hi)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "Three-sum that skips duplicate `a[i]` values, but not duplicate `a[l]` values:\n```\na = [-2, -1, 0, 0, 1, 2, 2]\nfound = []\nfor i in range(len(a) - 2):\n    if i > 0 and a[i] == a[i - 1]:\n        continue\n    l, r = i + 1, len(a) - 1\n    while l < r:\n        s = a[i] + a[l] + a[r]\n        if s < 0:\n            l += 1\n        elif s > 0:\n            r -= 1\n        else:\n            found.append((a[i], a[l], a[r]))\n            l, r = l + 1, r - 1\nprint(len(found), len(set(found)))\n```\nWhat is printed?",
+    "options": [
+      "2 2",
+      "3 2",
+      "3 3",
+      "4 2"
+    ],
+    "answer": "3 2",
+    "verify": "a = [-2, -1, 0, 0, 1, 2, 2]\nfound = []\nfor i in range(len(a) - 2):\n    if i > 0 and a[i] == a[i - 1]:\n        continue\n    l, r = i + 1, len(a) - 1\n    while l < r:\n        s = a[i] + a[l] + a[r]\n        if s < 0:\n            l += 1\n        elif s > 0:\n            r -= 1\n        else:\n            found.append((a[i], a[l], a[r]))\n            l, r = l + 1, r - 1\nprint(len(found), len(set(found)))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "Finding the repeated number with Floyd's algorithm:\n```\nnums = [2, 5, 9, 6, 9, 3, 8, 9, 7, 1]\nslow = fast = nums[0]\nwhile True:\n    slow = nums[slow]\n    fast = nums[nums[fast]]\n    if slow == fast:\n        break\nmeet = slow\nslow = nums[0]\nwhile slow != fast:\n    slow = nums[slow]\n    fast = nums[fast]\nprint(meet, slow)\n```\nWhat is printed?",
+    "options": [
+      "9 9",
+      "7 7",
+      "7 9",
+      "9 7"
+    ],
+    "answer": "7 9",
+    "verify": "nums = [2, 5, 9, 6, 9, 3, 8, 9, 7, 1]\nslow = fast = nums[0]\nwhile True:\n    slow = nums[slow]\n    fast = nums[nums[fast]]\n    if slow == fast:\n        break\nmeet = slow\nslow = nums[0]\nwhile slow != fast:\n    slow = nums[slow]\n    fast = nums[fast]\nprint(meet, slow)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "Floyd's algorithm on a next-array, then a second phase from the head:\n```\nnxt = [1, 2, 3, 4, 5, 2]\nslow = fast = 0\nwhile True:\n    slow = nxt[slow]\n    fast = nxt[nxt[fast]]\n    if slow == fast:\n        break\np, q = 0, slow\nwhile p != q:\n    p = nxt[p]\n    q = nxt[q]\nprint(p, slow)\n```\nWhat is printed?",
+    "options": [
+      "4 4",
+      "2 2",
+      "0 4",
+      "2 4"
+    ],
+    "answer": "2 4",
+    "verify": "nxt = [1, 2, 3, 4, 5, 2]\nslow = fast = 0\nwhile True:\n    slow = nxt[slow]\n    fast = nxt[nxt[fast]]\n    if slow == fast:\n        break\np, q = 0, slow\nwhile p != q:\n    p = nxt[p]\n    q = nxt[q]\nprint(p, slow)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "Trapping rain water with two pointers (`h[i]` is the bar height):\n```\nh = [4, 2, 0, 3, 2, 5]\nl, r = 0, len(h) - 1\nlmax = rmax = water = 0\nwhile l < r:\n    if h[l] < h[r]:\n        lmax = max(lmax, h[l])\n        water += lmax - h[l]\n        l += 1\n    else:\n        rmax = max(rmax, h[r])\n        water += rmax - h[r]\n        r -= 1\nprint(water)\n```\nWhat is printed?",
+    "options": [
+      "9",
+      "7",
+      "10",
+      "6"
+    ],
+    "answer": "9",
+    "verify": "h = [4, 2, 0, 3, 2, 5]\nl, r = 0, len(h) - 1\nlmax = rmax = water = 0\nwhile l < r:\n    if h[l] < h[r]:\n        lmax = max(lmax, h[l])\n        water += lmax - h[l]\n        l += 1\n    else:\n        rmax = max(rmax, h[r])\n        water += rmax - h[r]\n        r -= 1\nprint(water)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "A palindrome check that skips punctuation and ignores case:\n```\ns = \"Step on, no pets!\"\nl, r = 0, len(s) - 1\nwhile l < r:\n    if not s[l].isalnum():\n        l += 1\n    elif not s[r].isalnum():\n        r -= 1\n    elif s[l].lower() != s[r].lower():\n        break\n    else:\n        l += 1\n        r -= 1\nprint(l, r)\n```\nWhat is printed?",
+    "options": [
+      "7 7",
+      "8 8",
+      "8 7",
+      "7 8"
+    ],
+    "answer": "8 8",
+    "verify": "s = \"Step on, no pets!\"\nl, r = 0, len(s) - 1\nwhile l < r:\n    if not s[l].isalnum():\n        l += 1\n    elif not s[r].isalnum():\n        r -= 1\n    elif s[l].lower() != s[r].lower():\n        break\n    else:\n        l += 1\n        r -= 1\nprint(l, r)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "This code is meant to count index pairs `i < j` with `a[i] + a[j] == target`. The array contains duplicates.\n```\na = [1, 1, 2, 3, 3]\ntarget = 4\nl, r = 0, len(a) - 1\ncount = 0\nwhile l < r:\n    s = a[l] + a[r]\n    if s == target:\n        count += 1\n        l += 1\n        r -= 1\n    elif s < target:\n        l += 1\n    else:\n        r -= 1\nprint(count)\n```\nWhat is printed?",
+    "options": [
+      "4",
+      "3",
+      "2",
+      "5"
+    ],
+    "answer": "2",
+    "verify": "a = [1, 1, 2, 3, 3]\ntarget = 4\nl, r = 0, len(a) - 1\ncount = 0\nwhile l < r:\n    s = a[l] + a[r]\n    if s == target:\n        count += 1\n        l += 1\n        r -= 1\n    elif s < target:\n        l += 1\n    else:\n        r -= 1\nprint(count)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "Counting triangles in a sorted array of side lengths:\n```\na = [2, 2, 3, 4, 5]\ncount = 0\nfor k in range(len(a) - 1, 1, -1):\n    l, r = 0, k - 1\n    while l < r:\n        if a[l] + a[r] > a[k]:\n            count += r - l\n            r -= 1\n        else:\n            l += 1\nprint(count)\n```\nWhat is printed?",
+    "options": [
+      "5",
+      "4",
+      "7",
+      "6"
+    ],
+    "answer": "6",
+    "verify": "a = [2, 2, 3, 4, 5]\ncount = 0\nfor k in range(len(a) - 1, 1, -1):\n    l, r = 0, k - 1\n    while l < r:\n        if a[l] + a[r] > a[k]:\n            count += r - l\n            r -= 1\n        else:\n            l += 1\nprint(count)"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "HARD",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "Dutch national flag: sort an array of `0`s, `1`s and `2`s in one pass.\n```\ndef sort_colors(a):\n    lo, mid, hi = 0, 0, len(a) - 1\n    while mid <= hi:\n        if a[mid] == 0:\n            a[lo], a[mid] = a[mid], a[lo]\n            lo += 1\n            mid += 1\n        elif a[mid] == 1:\n            mid += 1\n        else:\n            a[mid], a[hi] = a[hi], a[mid]\n            ____\n```\nWhich line goes in the blank?",
+    "options": [
+      "hi -= 1",
+      "hi -= 1; mid += 1",
+      "mid += 1",
+      "lo += 1"
+    ],
+    "answer": "hi -= 1",
+    "verify": "from itertools import product\ndef sort_colors(a):\n    lo, mid, hi = 0, 0, len(a) - 1\n    steps = 0\n    while mid <= hi:\n        steps += 1\n        if steps > 100:\n            raise RuntimeError(\"no progress\")\n        if a[mid] == 0:\n            a[lo], a[mid] = a[mid], a[lo]\n            lo += 1\n            mid += 1\n        elif a[mid] == 1:\n            mid += 1\n        else:\n            a[mid], a[hi] = a[hi], a[mid]\n            __BLANK__\nok = True\ntry:\n    for n in range(1, 6):\n        for arr in product([0, 1, 2], repeat=n):\n            a = list(arr)\n            sort_colors(a)\n            ok = ok and a == sorted(arr)\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "HARD",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "Three-sum on a sorted array, returning each triple once:\n```\ndef three_sum(a):\n    res = []\n    for i in range(len(a) - 2):\n        if i > 0 and a[i] == a[i - 1]:\n            continue\n        l, r = i + 1, len(a) - 1\n        while l < r:\n            s = a[i] + a[l] + a[r]\n            if s < 0:\n                l += 1\n            elif s > 0:\n                r -= 1\n            else:\n                res.append((a[i], a[l], a[r]))\n                l, r = l + 1, r - 1\n                while l < r and ____:\n                    l += 1\n    return res\n```\nWhich condition goes in the blank?",
+    "options": [
+      "a[l] == a[l + 1]",
+      "a[l] == a[l - 1]",
+      "a[l] == a[r]",
+      "a[l] != a[l - 1]"
+    ],
+    "answer": "a[l] == a[l - 1]",
+    "verify": "from itertools import combinations\ndef three_sum(a):\n    res = []\n    for i in range(len(a) - 2):\n        if i > 0 and a[i] == a[i - 1]:\n            continue\n        l, r = i + 1, len(a) - 1\n        while l < r:\n            s = a[i] + a[l] + a[r]\n            if s < 0:\n                l += 1\n            elif s > 0:\n                r -= 1\n            else:\n                res.append((a[i], a[l], a[r]))\n                l, r = l + 1, r - 1\n                while l < r and __BLANK__:\n                    l += 1\n    return res\nok = True\nfor arr in ([-2, 0, 0, 2, 2], [-1, 0, 1, 2, -1, -4], [-2, 0, 1, 1, 2, -1, -1, 0], [0, 0, 0, 0], [-4, -1, -1, 0, 1, 2, 3]):\n    a = sorted(arr)\n    got = three_sum(a)\n    want = {tuple(sorted(t)) for t in combinations(a, 3) if sum(t) == 0}\n    ok = ok and len(got) == len(set(got)) and set(got) == want\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "HARD",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "Find the repeated value in `nums` (`n + 1` values in `1..n`) with Floyd's algorithm:\n```\ndef find_duplicate(nums):\n    slow = fast = nums[0]\n    while True:\n        slow = nums[slow]\n        fast = nums[nums[fast]]\n        if slow == fast:\n            break\n    slow = ____\n    while slow != fast:\n        slow = nums[slow]\n        fast = nums[fast]\n    return slow\n```\nWhat goes in the blank?",
+    "options": [
+      "0",
+      "fast",
+      "nums[0]",
+      "nums[fast]"
+    ],
+    "answer": "nums[0]",
+    "verify": "def find_duplicate(nums):\n    slow = fast = nums[0]\n    while True:\n        slow = nums[slow]\n        fast = nums[nums[fast]]\n        if slow == fast:\n            break\n    slow = __BLANK__\n    steps = 0\n    while slow != fast:\n        steps += 1\n        if steps > 100:\n            raise RuntimeError(\"no progress\")\n        slow = nums[slow]\n        fast = nums[fast]\n    return slow\ntry:\n    ok = (find_duplicate([2, 5, 9, 6, 9, 3, 8, 9, 7, 1]) == 9 and find_duplicate([1, 3, 4, 2, 2]) == 2\n          and find_duplicate([3, 1, 3, 4, 2]) == 3 and find_duplicate([1, 4, 4, 2, 4]) == 4)\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "HARD",
+    "categories": [
+      "TwoPointers"
+    ],
+    "text": "Trapping rain water with two pointers:\n```\ndef trap(h):\n    l, r = 0, len(h) - 1\n    lmax = rmax = water = 0\n    while l < r:\n        if h[l] < h[r]:\n            lmax = max(lmax, h[l])\n            water += ____\n            l += 1\n        else:\n            rmax = max(rmax, h[r])\n            water += rmax - h[r]\n            r -= 1\n    return water\n```\nWhat goes in the blank?",
+    "options": [
+      "rmax - h[l]",
+      "h[l] - lmax",
+      "h[r] - h[l]",
+      "lmax - h[l]"
+    ],
+    "answer": "lmax - h[l]",
+    "verify": "import random\ndef trap(h):\n    l, r = 0, len(h) - 1\n    lmax = rmax = water = 0\n    while l < r:\n        if h[l] < h[r]:\n            lmax = max(lmax, h[l])\n            water += __BLANK__\n            l += 1\n        else:\n            rmax = max(rmax, h[r])\n            water += rmax - h[r]\n            r -= 1\n    return water\ndef brute(h):\n    return sum(max(0, min(max(h[:i + 1]), max(h[i:])) - h[i]) for i in range(len(h)))\nrandom.seed(7)\ntests = [[4, 2, 0, 3, 2, 5], [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]]\ntests += [[random.randint(0, 6) for _ in range(random.randint(1, 9))] for _ in range(200)]\nprint(\"OK\" if all(trap(t) == brute(t) for t in tests) else \"NO\")"
+  }
+]

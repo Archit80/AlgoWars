@@ -1,0 +1,938 @@
+[
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "You need the maximum sum of every window of `k` consecutive elements in an array of length `n`. Recomputing each window from scratch costs O(n*k). What does a sliding window cost?",
+    "options": [
+      "O(n)",
+      "O(n*k)",
+      "O(n log n)",
+      "O(k)"
+    ],
+    "answer": "O(n)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "An array has `n` elements. How many windows of exactly `k` consecutive elements does it contain (assume `k <= n`)?",
+    "options": [
+      "n - k",
+      "n - k + 1",
+      "n",
+      "n - k - 1"
+    ],
+    "answer": "n - k + 1"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "When a fixed-size window slides one step to the right, how is the running window sum updated?",
+    "options": [
+      "Recompute the sum of all `k` elements in the new window",
+      "Add the element that enters only",
+      "Add the element that enters and subtract the element that leaves",
+      "Subtract the element that enters and add the element that leaves"
+    ],
+    "answer": "Add the element that enters and subtract the element that leaves"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "In 'longest substring without repeating characters', when must the left edge of the window move right?",
+    "options": [
+      "After every step of the right pointer",
+      "Only when the window length reaches `k`",
+      "When the character just added has never been seen before",
+      "When the character just added already appears in the window"
+    ],
+    "answer": "When the character just added already appears in the window"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "Which of these problems uses a fixed-size window rather than a variable-size one?",
+    "options": [
+      "Maximum sum of any 3 consecutive elements",
+      "Longest substring without repeating characters",
+      "Shortest subarray with sum at least `target`",
+      "Longest subarray with at most 2 distinct values"
+    ],
+    "answer": "Maximum sum of any 3 consecutive elements"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "To find the maximum number of vowels in any substring of length `k`, what should the window keep track of?",
+    "options": [
+      "The set of all vowels seen so far in the string",
+      "How many vowels are currently inside the window",
+      "The index of the most recent vowel",
+      "A sorted list of the characters in the window"
+    ],
+    "answer": "How many vowels are currently inside the window"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "In a variable-size window where `left` and `right` only move forward, how many times is each element added to and removed from the window?",
+    "options": [
+      "Added and removed up to `k` times each",
+      "Added and removed about log n times",
+      "Added once and removed at most once",
+      "Added once, but removed up to `n` times"
+    ],
+    "answer": "Added once and removed at most once"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "A window covers `nums[left..right]` with both ends inclusive. How many elements does it hold?",
+    "options": [
+      "right - left",
+      "right - left - 1",
+      "right + left",
+      "right - left + 1"
+    ],
+    "answer": "right - left + 1"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "Sums of every window of size `k`:\n```\nnums = [1, 3, 2, 6, 4]\nk = 3\nwindow = sum(nums[:k])\nsums = [window]\nfor i in range(k, len(nums)):\n    window += nums[i] - nums[i - k]\n    sums.append(window)\nprint(sums)\n```\nWhat is printed?",
+    "options": [
+      "[6, 11, 12]",
+      "[6, 11, 12, 10]",
+      "[4, 5, 8, 10]",
+      "[6, 11]"
+    ],
+    "answer": "[6, 11, 12]",
+    "verify": "nums = [1, 3, 2, 6, 4]\nk = 3\nwindow = sum(nums[:k])\nsums = [window]\nfor i in range(k, len(nums)):\n    window += nums[i] - nums[i - k]\n    sums.append(window)\nprint(sums)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "Maximum sum of a window of size `3`:\n```\nnums = [2, 1, 5, 1, 3, 2]\nk = 3\nwindow = sum(nums[:k])\nbest = window\nfor i in range(k, len(nums)):\n    window += nums[i] - nums[i - k]\n    best = max(best, window)\nprint(best)\n```\nWhat is printed?",
+    "options": [
+      "8",
+      "9",
+      "10",
+      "6"
+    ],
+    "answer": "9",
+    "verify": "nums = [2, 1, 5, 1, 3, 2]\nk = 3\nwindow = sum(nums[:k])\nbest = window\nfor i in range(k, len(nums)):\n    window += nums[i] - nums[i - k]\n    best = max(best, window)\nprint(best)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "Maximum number of vowels in any substring of length `k`:\n```\ns = \"programming\"\nk = 4\nvowels = \"aeiou\"\ncount = sum(1 for c in s[:k] if c in vowels)\nbest = count\nfor i in range(k, len(s)):\n    if s[i] in vowels:\n        count += 1\n    if s[i - k] in vowels:\n        count -= 1\n    best = max(best, count)\nprint(best)\n```\nWhat is printed?",
+    "options": [
+      "1",
+      "3",
+      "2",
+      "4"
+    ],
+    "answer": "2",
+    "verify": "s = \"programming\"\nk = 4\nvowels = \"aeiou\"\ncount = sum(1 for c in s[:k] if c in vowels)\nbest = count\nfor i in range(k, len(s)):\n    if s[i] in vowels:\n        count += 1\n    if s[i - k] in vowels:\n        count -= 1\n    best = max(best, count)\nprint(best)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "Averages of every window of size `2`:\n```\nnums = [4, 8, 2, 6]\nk = 2\nwindow = nums[0] + nums[1]\navgs = [window / k]\nfor i in range(k, len(nums)):\n    window += nums[i] - nums[i - k]\n    avgs.append(window / k)\nprint(avgs)\n```\nWhat is printed?",
+    "options": [
+      "[6, 5, 4]",
+      "[12, 10, 8]",
+      "[6.0, 5.0, 4.0, 3.0]",
+      "[6.0, 5.0, 4.0]"
+    ],
+    "answer": "[6.0, 5.0, 4.0]",
+    "verify": "nums = [4, 8, 2, 6]\nk = 2\nwindow = nums[0] + nums[1]\navgs = [window / k]\nfor i in range(k, len(nums)):\n    window += nums[i] - nums[i - k]\n    avgs.append(window / k)\nprint(avgs)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "Counting windows of size `k` whose average is at least `threshold`:\n```\nnums = [2, 2, 2, 2, 5, 5, 5, 8]\nk, threshold = 3, 4\nwindow = sum(nums[:k])\ncount = 1 if window >= k * threshold else 0\nfor i in range(k, len(nums)):\n    window += nums[i] - nums[i - k]\n    if window >= k * threshold:\n        count += 1\nprint(count)\n```\nWhat is printed?",
+    "options": [
+      "3",
+      "2",
+      "4",
+      "6"
+    ],
+    "answer": "3",
+    "verify": "nums = [2, 2, 2, 2, 5, 5, 5, 8]\nk, threshold = 3, 4\nwindow = sum(nums[:k])\ncount = 1 if window >= k * threshold else 0\nfor i in range(k, len(nums)):\n    window += nums[i] - nums[i - k]\n    if window >= k * threshold:\n        count += 1\nprint(count)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "Finding where the best window of size `3` starts:\n```\nnums = [3, 1, 4, 1, 5, 9, 2]\nk = 3\nwindow = sum(nums[:k])\nbest, best_start = window, 0\nfor i in range(k, len(nums)):\n    window += nums[i] - nums[i - k]\n    if window > best:\n        best, best_start = window, i - k + 1\nprint(best_start)\n```\nWhat is printed?",
+    "options": [
+      "6",
+      "4",
+      "5",
+      "3"
+    ],
+    "answer": "4",
+    "verify": "nums = [3, 1, 4, 1, 5, 9, 2]\nk = 3\nwindow = sum(nums[:k])\nbest, best_start = window, 0\nfor i in range(k, len(nums)):\n    window += nums[i] - nums[i - k]\n    if window > best:\n        best, best_start = window, i - k + 1\nprint(best_start)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "Maximum of each window, computed directly:\n```\nnums = [1, 3, -1, -3, 5]\nk = 2\nout = []\nfor i in range(len(nums) - k + 1):\n    out.append(max(nums[i:i + k]))\nprint(out)\n```\nWhat is printed?",
+    "options": [
+      "[3, 3, -1]",
+      "[1, 3, -1, -3]",
+      "[3, 3, -1, 5]",
+      "[3, 3, 5, 5]"
+    ],
+    "answer": "[3, 3, -1, 5]",
+    "verify": "nums = [1, 3, -1, -3, 5]\nk = 2\nout = []\nfor i in range(len(nums) - k + 1):\n    out.append(max(nums[i:i + k]))\nprint(out)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "Distinct characters in each window of size `3`:\n```\ns = \"aabcbb\"\nk = 3\nprint([len(set(s[i:i + k])) for i in range(len(s) - k + 1)])\n```\nWhat is printed?",
+    "options": [
+      "[2, 3, 2]",
+      "[2, 3, 2, 2, 1]",
+      "[3, 3, 2, 2]",
+      "[2, 3, 2, 2]"
+    ],
+    "answer": "[2, 3, 2, 2]",
+    "verify": "s = \"aabcbb\"\nk = 3\nprint([len(set(s[i:i + k])) for i in range(len(s) - k + 1)])"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "EASY",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "Maximum sum of any window of size `k`:\n```\ndef max_window_sum(nums, k):\n    window = sum(nums[:k])\n    best = window\n    for i in range(k, len(nums)):\n        window += ____\n        best = max(best, window)\n    return best\n```\nWhat goes in the blank?",
+    "options": [
+      "nums[i] - nums[i - k]",
+      "nums[i] - nums[i - k + 1]",
+      "nums[i] - nums[i - 1]",
+      "nums[i]"
+    ],
+    "answer": "nums[i] - nums[i - k]",
+    "verify": "def max_window_sum(nums, k):\n    window = sum(nums[:k])\n    best = window\n    for i in range(k, len(nums)):\n        window += __BLANK__\n        best = max(best, window)\n    return best\nok = max_window_sum([2, 1, 5, 1, 3, 2], 3) == 9 and max_window_sum([1, 9, 1, 1, 8, 1], 2) == 10\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "EASY",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "List the sum of every window of size `k`:\n```\ndef window_sums(nums, k):\n    sums = []\n    for i in range(____):\n        sums.append(sum(nums[i:i + k]))\n    return sums\n```\nWhat goes in the blank?",
+    "options": [
+      "len(nums) - k",
+      "len(nums) - k + 1",
+      "len(nums)",
+      "k"
+    ],
+    "answer": "len(nums) - k + 1",
+    "verify": "def window_sums(nums, k):\n    sums = []\n    for i in range(__BLANK__):\n        sums.append(sum(nums[i:i + k]))\n    return sums\nok = window_sums([1, 3, 2, 6, 4], 3) == [6, 11, 12] and window_sums([1, 2, 3, 4], 2) == [3, 5, 7]\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "EASY",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "Maximum number of vowels in any substring of length `k`:\n```\ndef max_vowels(s, k):\n    vowels = \"aeiou\"\n    count = sum(1 for c in s[:k] if c in vowels)\n    best = count\n    for i in range(k, len(s)):\n        if s[i] in vowels:\n            count += 1\n        if ____ in vowels:\n            count -= 1\n        best = max(best, count)\n    return best\n```\nWhat goes in the blank?",
+    "options": [
+      "s[i - k + 1]",
+      "s[i - 1]",
+      "s[i - k]",
+      "s[k]"
+    ],
+    "answer": "s[i - k]",
+    "verify": "def max_vowels(s, k):\n    vowels = \"aeiou\"\n    count = sum(1 for c in s[:k] if c in vowels)\n    best = count\n    for i in range(k, len(s)):\n        if s[i] in vowels:\n            count += 1\n        if __BLANK__ in vowels:\n            count -= 1\n        best = max(best, count)\n    return best\ntests = [(\"abciiidef\", 3, 3), (\"leetcode\", 3, 2), (\"aaxxxxxx\", 2, 2), (\"xaxxxaax\", 2, 2), (\"axxxxa\", 3, 1)]\nprint(\"OK\" if all(max_vowels(s, k) == want for s, k, want in tests) else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "EASY",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "Maximum average of any window of size `k`:\n```\ndef max_average(nums, k):\n    window = ____\n    best = window\n    for i in range(k, len(nums)):\n        window += nums[i] - nums[i - k]\n        best = max(best, window)\n    return best / k\n```\nWhat goes in the blank?",
+    "options": [
+      "sum(nums[:k - 1])",
+      "nums[0]",
+      "sum(nums)",
+      "sum(nums[:k])"
+    ],
+    "answer": "sum(nums[:k])",
+    "verify": "def max_average(nums, k):\n    window = __BLANK__\n    best = window\n    for i in range(k, len(nums)):\n        window += nums[i] - nums[i - k]\n        best = max(best, window)\n    return best / k\nok = max_average([1, 12, -5, -6, 50, 3], 4) == 12.75 and max_average([5, 1, 1, 1], 2) == 3.0\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "What is the time complexity of 'longest substring without repeating characters' using a sliding window and a set, for a string of length `n`?",
+    "options": [
+      "O(n)",
+      "O(n^2)",
+      "O(n log n)",
+      "O(n * m), where m is the alphabet size"
+    ],
+    "answer": "O(n)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "For 'shortest subarray with sum at least `target`', why is it safe to shrink the window from the left once the sum reaches `target`?",
+    "options": [
+      "The array is sorted, so the smallest element is always on the left",
+      "All numbers are positive, so removing an element from the left can only lower the sum",
+      "The target is always reached exactly once",
+      "Each subarray is checked twice, so nothing can be missed"
+    ],
+    "answer": "All numbers are positive, so removing an element from the left can only lower the sum"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "In 'shortest subarray with sum at least `target`', when should the best length be updated?",
+    "options": [
+      "After the shrink loop finishes, when the sum has dropped below `target`",
+      "Only once `right` reaches the end of the array",
+      "Inside the shrink loop, while the sum is still at least `target`, before `nums[left]` is removed",
+      "Before `nums[right]` is added to the sum"
+    ],
+    "answer": "Inside the shrink loop, while the sum is still at least `target`, before `nums[left]` is removed"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "For 'longest substring with at most `k` distinct characters' (counts kept in a dictionary), what should trigger shrinking the window?",
+    "options": [
+      "The window length exceeds `k`",
+      "Some character's count drops to zero",
+      "The number of keys in the count dictionary equals `k`",
+      "The number of keys in the count dictionary exceeds `k`"
+    ],
+    "answer": "The number of keys in the count dictionary exceeds `k`"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "For 'max consecutive ones if you can flip at most `k` zeros', what invariant does the window maintain?",
+    "options": [
+      "The window contains at most `k` zeros",
+      "The window contains exactly `k` zeros",
+      "The window contains at most `k` ones",
+      "The window contains no zeros at all"
+    ],
+    "answer": "The window contains at most `k` zeros"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "Why does a variable-size window usually shrink with `while` rather than `if`?",
+    "options": [
+      "Using `if` would make the algorithm O(n^2)",
+      "Adding one element can require removing several elements from the left before the window is valid again",
+      "The `while` loop is what moves the right pointer",
+      "There is no difference; `if` and `while` always behave the same here"
+    ],
+    "answer": "Adding one element can require removing several elements from the left before the window is valid again"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "In 'at most `k` distinct characters', when a character's count drops to `0` while shrinking, what must you do?",
+    "options": [
+      "Reset `left` to `right`",
+      "Nothing; a key with count zero is harmless",
+      "Delete it from the dictionary so the number of keys counts only characters in the window",
+      "Increase `k` by one"
+    ],
+    "answer": "Delete it from the dictionary so the number of keys counts only characters in the window"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "A 'longest substring without repeating characters' solution stores each character's last index and does `left = max(left, last[c] + 1)`. Why the `max`?",
+    "options": [
+      "To pick the longer of the two possible windows",
+      "To avoid an index out of range error",
+      "Because `last[c]` can be negative",
+      "`last[c]` may lie before the current window, and `left` must never move backwards"
+    ],
+    "answer": "`last[c]` may lie before the current window, and `left` must never move backwards"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "Longest substring without repeating characters:\n```\ns = \"dvdfa\"\nseen = set()\nleft = best = 0\nfor right in range(len(s)):\n    while s[right] in seen:\n        seen.remove(s[left])\n        left += 1\n    seen.add(s[right])\n    best = max(best, right - left + 1)\nprint(best)\n```\nWhat is printed?",
+    "options": [
+      "4",
+      "3",
+      "5",
+      "2"
+    ],
+    "answer": "4",
+    "verify": "s = \"dvdfa\"\nseen = set()\nleft = best = 0\nfor right in range(len(s)):\n    while s[right] in seen:\n        seen.remove(s[left])\n        left += 1\n    seen.add(s[right])\n    best = max(best, right - left + 1)\nprint(best)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "Shortest subarray with sum at least `target` (all numbers positive):\n```\nnums = [1, 2, 3, 4, 5]\ntarget = 11\nleft = total = 0\nbest = len(nums) + 1\nfor right in range(len(nums)):\n    total += nums[right]\n    while total >= target:\n        best = min(best, right - left + 1)\n        total -= nums[left]\n        left += 1\nprint(best)\n```\nWhat is printed?",
+    "options": [
+      "4",
+      "3",
+      "2",
+      "5"
+    ],
+    "answer": "3",
+    "verify": "nums = [1, 2, 3, 4, 5]\ntarget = 11\nleft = total = 0\nbest = len(nums) + 1\nfor right in range(len(nums)):\n    total += nums[right]\n    while total >= target:\n        best = min(best, right - left + 1)\n        total -= nums[left]\n        left += 1\nprint(best)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "Longest run of `1`s if you may flip at most `k` zeros:\n```\nnums = [1, 1, 0, 1, 1, 0, 1, 1, 1]\nk = 1\nleft = zeros = best = 0\nfor right in range(len(nums)):\n    if nums[right] == 0:\n        zeros += 1\n    while zeros > k:\n        if nums[left] == 0:\n            zeros -= 1\n        left += 1\n    best = max(best, right - left + 1)\nprint(best)\n```\nWhat is printed?",
+    "options": [
+      "5",
+      "3",
+      "6",
+      "9"
+    ],
+    "answer": "6",
+    "verify": "nums = [1, 1, 0, 1, 1, 0, 1, 1, 1]\nk = 1\nleft = zeros = best = 0\nfor right in range(len(nums)):\n    if nums[right] == 0:\n        zeros += 1\n    while zeros > k:\n        if nums[left] == 0:\n            zeros -= 1\n        left += 1\n    best = max(best, right - left + 1)\nprint(best)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "Longest substring with at most `k` distinct characters:\n```\ns = \"abaccc\"\nk = 2\ncount = {}\nleft = best = 0\nfor right in range(len(s)):\n    count[s[right]] = count.get(s[right], 0) + 1\n    while len(count) > k:\n        count[s[left]] -= 1\n        if count[s[left]] == 0:\n            del count[s[left]]\n        left += 1\n    best = max(best, right - left + 1)\nprint(best)\n```\nWhat is printed?",
+    "options": [
+      "3",
+      "5",
+      "6",
+      "4"
+    ],
+    "answer": "4",
+    "verify": "s = \"abaccc\"\nk = 2\ncount = {}\nleft = best = 0\nfor right in range(len(s)):\n    count[s[right]] = count.get(s[right], 0) + 1\n    while len(count) > k:\n        count[s[left]] -= 1\n        if count[s[left]] == 0:\n            del count[s[left]]\n        left += 1\n    best = max(best, right - left + 1)\nprint(best)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "Longest subarray whose sum is at most `limit` (all numbers positive):\n```\nnums = [3, 1, 2, 1, 4, 1]\nlimit = 5\nleft = total = best = 0\nfor right in range(len(nums)):\n    total += nums[right]\n    while total > limit:\n        total -= nums[left]\n        left += 1\n    best = max(best, right - left + 1)\nprint(best)\n```\nWhat is printed?",
+    "options": [
+      "3",
+      "2",
+      "4",
+      "6"
+    ],
+    "answer": "3",
+    "verify": "nums = [3, 1, 2, 1, 4, 1]\nlimit = 5\nleft = total = best = 0\nfor right in range(len(nums)):\n    total += nums[right]\n    while total > limit:\n        total -= nums[left]\n        left += 1\n    best = max(best, right - left + 1)\nprint(best)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "Counting windows of size `k` whose elements are all different:\n```\nnums = [1, 2, 1, 3, 4, 3]\nk = 3\ncount = {}\ngood = 0\nfor i in range(len(nums)):\n    count[nums[i]] = count.get(nums[i], 0) + 1\n    if i >= k:\n        old = nums[i - k]\n        count[old] -= 1\n        if count[old] == 0:\n            del count[old]\n    if i >= k - 1 and len(count) == k:\n        good += 1\nprint(good)\n```\nWhat is printed?",
+    "options": [
+      "3",
+      "2",
+      "1",
+      "4"
+    ],
+    "answer": "2",
+    "verify": "nums = [1, 2, 1, 3, 4, 3]\nk = 3\ncount = {}\ngood = 0\nfor i in range(len(nums)):\n    count[nums[i]] = count.get(nums[i], 0) + 1\n    if i >= k:\n        old = nums[i - k]\n        count[old] -= 1\n        if count[old] == 0:\n            del count[old]\n    if i >= k - 1 and len(count) == k:\n        good += 1\nprint(good)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "Longest substring of one repeated letter after replacing at most `k` letters:\n```\ns = \"ABBBCA\"\nk = 1\ncount = {}\nleft = maxf = best = 0\nfor right in range(len(s)):\n    count[s[right]] = count.get(s[right], 0) + 1\n    maxf = max(maxf, count[s[right]])\n    while (right - left + 1) - maxf > k:\n        count[s[left]] -= 1\n        left += 1\n    best = max(best, right - left + 1)\nprint(best)\n```\nWhat is printed?",
+    "options": [
+      "5",
+      "3",
+      "4",
+      "6"
+    ],
+    "answer": "4",
+    "verify": "s = \"ABBBCA\"\nk = 1\ncount = {}\nleft = maxf = best = 0\nfor right in range(len(s)):\n    count[s[right]] = count.get(s[right], 0) + 1\n    maxf = max(maxf, count[s[right]])\n    while (right - left + 1) - maxf > k:\n        count[s[left]] -= 1\n        left += 1\n    best = max(best, right - left + 1)\nprint(best)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "Longest substring without repeating characters, using last-seen indices:\n```\ns = \"abcbdea\"\nlast = {}\nleft = 0\nbest_start, best_len = 0, 0\nfor right, c in enumerate(s):\n    if c in last and last[c] >= left:\n        left = last[c] + 1\n    last[c] = right\n    if right - left + 1 > best_len:\n        best_start, best_len = left, right - left + 1\nprint(s[best_start:best_start + best_len])\n```\nWhat is printed?",
+    "options": [
+      "abc",
+      "bdea",
+      "bcbdea",
+      "cbdea"
+    ],
+    "answer": "cbdea",
+    "verify": "s = \"abcbdea\"\nlast = {}\nleft = 0\nbest_start, best_len = 0, 0\nfor right, c in enumerate(s):\n    if c in last and last[c] >= left:\n        left = last[c] + 1\n    last[c] = right\n    if right - left + 1 > best_len:\n        best_start, best_len = left, right - left + 1\nprint(s[best_start:best_start + best_len])"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "Longest substring without repeating characters:\n```\ndef longest_unique(s):\n    seen = set()\n    left = best = 0\n    for right in range(len(s)):\n        while ____:\n            seen.remove(s[left])\n            left += 1\n        seen.add(s[right])\n        best = max(best, right - left + 1)\n    return best\n```\nWhich condition goes in the blank?",
+    "options": [
+      "s[right] in seen",
+      "s[left] in seen",
+      "s[right] not in seen",
+      "len(seen) > 1"
+    ],
+    "answer": "s[right] in seen",
+    "verify": "def longest_unique(s):\n    seen = set()\n    left = best = 0\n    steps = 0\n    for right in range(len(s)):\n        while (__BLANK__) and steps < 100:\n            steps += 1\n            seen.remove(s[left])\n            left += 1\n        seen.add(s[right])\n        best = max(best, right - left + 1)\n    return best\ntry:\n    ok = longest_unique(\"abcabcbb\") == 3 and longest_unique(\"dvdf\") == 3 and longest_unique(\"bbbb\") == 1\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "Shortest subarray with sum at least `target` (all numbers positive):\n```\ndef min_len(nums, target):\n    left = total = 0\n    best = len(nums) + 1\n    for right in range(len(nums)):\n        total += nums[right]\n        while total >= target:\n            best = min(best, ____)\n            total -= nums[left]\n            left += 1\n    return best if best <= len(nums) else 0\n```\nWhat goes in the blank?",
+    "options": [
+      "right - left",
+      "right - left + 1",
+      "right - left - 1",
+      "left - right + 1"
+    ],
+    "answer": "right - left + 1",
+    "verify": "def min_len(nums, target):\n    left = total = 0\n    best = len(nums) + 1\n    for right in range(len(nums)):\n        total += nums[right]\n        while total >= target:\n            best = min(best, __BLANK__)\n            total -= nums[left]\n            left += 1\n    return best if best <= len(nums) else 0\nok = min_len([2, 3, 1, 2, 4, 3], 7) == 2 and min_len([1, 2, 3, 4, 5], 11) == 3 and min_len([1, 4, 4], 4) == 1\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "Longest substring with at most `k` distinct characters:\n```\ndef longest_k_distinct(s, k):\n    count = {}\n    left = best = 0\n    for right in range(len(s)):\n        count[s[right]] = count.get(s[right], 0) + 1\n        while len(count) > k:\n            count[s[left]] -= 1\n            if ____:\n                del count[s[left]]\n            left += 1\n        best = max(best, right - left + 1)\n    return best\n```\nWhich condition goes in the blank?",
+    "options": [
+      "count[s[left]] == 1",
+      "count[s[left]] > 0",
+      "count[s[left]] == 0",
+      "count[s[left]] < 0"
+    ],
+    "answer": "count[s[left]] == 0",
+    "verify": "def longest_k_distinct(s, k):\n    count = {}\n    left = best = 0\n    for right in range(len(s)):\n        count[s[right]] = count.get(s[right], 0) + 1\n        while len(count) > k and left <= right:\n            count[s[left]] -= 1\n            if __BLANK__:\n                del count[s[left]]\n            left += 1\n        best = max(best, right - left + 1)\n    return best\ntry:\n    ok = longest_k_distinct(\"eceba\", 2) == 3 and longest_k_distinct(\"abaccc\", 2) == 4 and longest_k_distinct(\"aab\", 1) == 2\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "Longest run of `1`s if you may flip at most `k` zeros:\n```\ndef longest_ones(nums, k):\n    left = zeros = best = 0\n    for right in range(len(nums)):\n        if nums[right] == 0:\n            zeros += 1\n        while ____:\n            if nums[left] == 0:\n                zeros -= 1\n            left += 1\n        best = max(best, right - left + 1)\n    return best\n```\nWhich condition goes in the blank?",
+    "options": [
+      "zeros >= k",
+      "zeros == k",
+      "zeros > k + 1",
+      "zeros > k"
+    ],
+    "answer": "zeros > k",
+    "verify": "def longest_ones(nums, k):\n    left = zeros = best = 0\n    for right in range(len(nums)):\n        if nums[right] == 0:\n            zeros += 1\n        while (__BLANK__) and left <= right:\n            if nums[left] == 0:\n                zeros -= 1\n            left += 1\n        best = max(best, right - left + 1)\n    return best\ntests = [([1, 1, 0, 1, 1, 0, 1, 1, 1], 1, 6), ([1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0], 2, 6), ([0, 0, 1, 1], 0, 2)]\nprint(\"OK\" if all(longest_ones(n, k) == want for n, k, want in tests) else \"NO\")"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "Why does the shrink-from-the-left window for 'shortest subarray with sum at least `target`' give wrong answers when the array contains negative numbers?",
+    "options": [
+      "Removing a negative number from the left increases the sum, so the window sum no longer changes monotonically",
+      "Negative numbers make the window length negative",
+      "The right pointer would have to move backwards",
+      "Python cannot add negative numbers to a running sum"
+    ],
+    "answer": "Removing a negative number from the left increases the sum, so the window sum no longer changes monotonically"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "'Shortest subarray with sum at least `K`' must handle negative numbers. Which approach still runs in O(n)?",
+    "options": [
+      "The same sliding window, shrinking with `if` instead of `while`",
+      "Prefix sums with a monotonic deque of indices",
+      "Sort the array first, then slide the window",
+      "Binary search on the window length, checking each length with the positive-only window"
+    ],
+    "answer": "Prefix sums with a monotonic deque of indices"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "When counting subarrays with product less than `k`, the window `nums[left..right]` is valid after shrinking. How many new valid subarrays end at `right`?",
+    "options": [
+      "1",
+      "right - left",
+      "right - left + 1",
+      "(right - left + 1) * (right - left + 2) / 2"
+    ],
+    "answer": "right - left + 1"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "Let `atMost(k)` count subarrays with at most `k` distinct values. How do you count subarrays with exactly `k` distinct values?",
+    "options": [
+      "atMost(k) - atMost(k + 1)",
+      "atMost(k) - k",
+      "atMost(k) // k",
+      "atMost(k) - atMost(k - 1)"
+    ],
+    "answer": "atMost(k) - atMost(k - 1)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "What is the time complexity of the standard 'minimum window substring' solution (need counts plus a `formed` counter), for strings `s` and `t`?",
+    "options": [
+      "O(|s| + |t|)",
+      "O(|s| * |t|)",
+      "O(|s|^2)",
+      "O(|s| log |s|)"
+    ],
+    "answer": "O(|s| + |t|)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "A 'count subarrays with product less than `k`' solution (positive integers) returns `0` immediately when `k <= 1`. Why is that check needed?",
+    "options": [
+      "The window size must be at least `k`",
+      "No product of positive integers is below 1, so the shrink loop would push `left` past `right`",
+      "Multiplying by 1 would overflow the running product",
+      "It isn't needed; the main loop already returns 0 in that case"
+    ],
+    "answer": "No product of positive integers is below 1, so the shrink loop would push `left` past `right`"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "Sliding window maximum with a monotonic deque runs in O(n) total, even though the inner `while` can pop many indices at once. Why?",
+    "options": [
+      "The deque never holds more than two indices",
+      "The maximum is found by binary search in the deque",
+      "Each index is pushed once and popped at most once",
+      "Each pop costs O(1) and there is at most one pop per step"
+    ],
+    "answer": "Each index is pushed once and popped at most once"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "Some 'longest window with at most `k` distinct characters' solutions replace the shrinking `while` with an `if`, so the window slides right by one instead of shrinking. Why is the maximum length still correct?",
+    "options": [
+      "`if` and `while` always remove the same number of elements",
+      "The window is always valid after the `if`",
+      "It is only correct when `k` is 1",
+      "The window never gets shorter, so its length only grows when a longer valid window exists"
+    ],
+    "answer": "The window never gets shorter, so its length only grows when a longer valid window exists"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "Counting subarrays whose product is less than `k`:\n```\nnums = [2, 5, 3, 10]\nk = 31\nprod = 1\nleft = count = 0\nfor right in range(len(nums)):\n    prod *= nums[right]\n    while prod >= k:\n        prod //= nums[left]\n        left += 1\n    count += right - left + 1\nprint(count)\n```\nWhat is printed?",
+    "options": [
+      "8",
+      "6",
+      "7",
+      "10"
+    ],
+    "answer": "8",
+    "verify": "nums = [2, 5, 3, 10]\nk = 31\nprod = 1\nleft = count = 0\nfor right in range(len(nums)):\n    prod *= nums[right]\n    while prod >= k:\n        prod //= nums[left]\n        left += 1\n    count += right - left + 1\nprint(count)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "Counting subarrays whose sum is less than `k` (all numbers positive):\n```\nnums = [1, 2, 3, 4]\nk = 6\ntotal = left = count = 0\nfor right in range(len(nums)):\n    total += nums[right]\n    while total >= k:\n        total -= nums[left]\n        left += 1\n    count += right - left + 1\nprint(count)\n```\nWhat is printed?",
+    "options": [
+      "5",
+      "6",
+      "4",
+      "10"
+    ],
+    "answer": "6",
+    "verify": "nums = [1, 2, 3, 4]\nk = 6\ntotal = left = count = 0\nfor right in range(len(nums)):\n    total += nums[right]\n    while total >= k:\n        total -= nums[left]\n        left += 1\n    count += right - left + 1\nprint(count)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "Finding the start of every anagram of `p` inside `s`:\n```\ns, p = \"bacdcab\", \"abc\"\nneed = {}\nfor c in p:\n    need[c] = need.get(c, 0) + 1\nwindow, res = {}, []\nfor i, c in enumerate(s):\n    window[c] = window.get(c, 0) + 1\n    if i >= len(p):\n        old = s[i - len(p)]\n        window[old] -= 1\n        if window[old] == 0:\n            del window[old]\n    if window == need:\n        res.append(i - len(p) + 1)\nprint(res)\n```\nWhat is printed?",
+    "options": [
+      "[2, 6]",
+      "[0]",
+      "[0, 4]",
+      "[0, 3, 4]"
+    ],
+    "answer": "[0, 4]",
+    "verify": "s, p = \"bacdcab\", \"abc\"\nneed = {}\nfor c in p:\n    need[c] = need.get(c, 0) + 1\nwindow, res = {}, []\nfor i, c in enumerate(s):\n    window[c] = window.get(c, 0) + 1\n    if i >= len(p):\n        old = s[i - len(p)]\n        window[old] -= 1\n        if window[old] == 0:\n            del window[old]\n    if window == need:\n        res.append(i - len(p) + 1)\nprint(res)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "Minimum window substring:\n```\ns, t = \"AXBYCAZB\", \"ABC\"\nneed = {c: t.count(c) for c in t}\nhave, formed, left, best = {}, 0, 0, \"\"\nfor right, c in enumerate(s):\n    have[c] = have.get(c, 0) + 1\n    if c in need and have[c] == need[c]:\n        formed += 1\n    while formed == len(need):\n        if best == \"\" or right - left + 1 < len(best):\n            best = s[left:right + 1]\n        have[s[left]] -= 1\n        if s[left] in need and have[s[left]] < need[s[left]]:\n            formed -= 1\n        left += 1\nprint(best)\n```\nWhat is printed?",
+    "options": [
+      "CAZB",
+      "AXBYC",
+      "YCAZB",
+      "BYCA"
+    ],
+    "answer": "BYCA",
+    "verify": "s, t = \"AXBYCAZB\", \"ABC\"\nneed = {c: t.count(c) for c in t}\nhave, formed, left, best = {}, 0, 0, \"\"\nfor right, c in enumerate(s):\n    have[c] = have.get(c, 0) + 1\n    if c in need and have[c] == need[c]:\n        formed += 1\n    while formed == len(need):\n        if best == \"\" or right - left + 1 < len(best):\n            best = s[left:right + 1]\n        have[s[left]] -= 1\n        if s[left] in need and have[s[left]] < need[s[left]]:\n            formed -= 1\n        left += 1\nprint(best)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "Sliding window maximum with a monotonic deque:\n```\nfrom collections import deque\nnums = [4, 2, 12, 3, 8, 5, 1]\nk = 3\ndq, out = deque(), []\nfor i, x in enumerate(nums):\n    while dq and nums[dq[-1]] <= x:\n        dq.pop()\n    dq.append(i)\n    if dq[0] <= i - k:\n        dq.popleft()\n    if i >= k - 1:\n        out.append(nums[dq[0]])\nprint(out)\n```\nWhat is printed?",
+    "options": [
+      "[12, 12, 12, 8, 8]",
+      "[4, 12, 12, 8, 8, 5]",
+      "[12, 12, 12, 8]",
+      "[12, 12, 8, 8, 5]"
+    ],
+    "answer": "[12, 12, 12, 8, 8]",
+    "verify": "from collections import deque\nnums = [4, 2, 12, 3, 8, 5, 1]\nk = 3\ndq, out = deque(), []\nfor i, x in enumerate(nums):\n    while dq and nums[dq[-1]] <= x:\n        dq.pop()\n    dq.append(i)\n    if dq[0] <= i - k:\n        dq.popleft()\n    if i >= k - 1:\n        out.append(nums[dq[0]])\nprint(out)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "The positive-only 'shortest subarray with sum at least `target`' window, run on an array with a negative number:\n```\nnums = [5, -4, 1, 1, 4]\ntarget = 6\nleft = total = 0\nbest = len(nums) + 1\nfor right in range(len(nums)):\n    total += nums[right]\n    while total >= target:\n        best = min(best, right - left + 1)\n        total -= nums[left]\n        left += 1\nprint(best)\n```\nWhat is printed? (Compare it with the true shortest subarray whose sum is at least `6`.)",
+    "options": [
+      "3",
+      "5",
+      "2",
+      "6"
+    ],
+    "answer": "5",
+    "verify": "nums = [5, -4, 1, 1, 4]\ntarget = 6\nleft = total = 0\nbest = len(nums) + 1\nfor right in range(len(nums)):\n    total += nums[right]\n    while total >= target:\n        best = min(best, right - left + 1)\n        total -= nums[left]\n        left += 1\nprint(best)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "Counting subarrays with exactly `k` distinct values:\n```\ndef at_most(nums, k):\n    count, left, total = {}, 0, 0\n    for right, x in enumerate(nums):\n        count[x] = count.get(x, 0) + 1\n        while len(count) > k:\n            count[nums[left]] -= 1\n            if count[nums[left]] == 0:\n                del count[nums[left]]\n            left += 1\n        total += right - left + 1\n    return total\nnums = [1, 2, 1, 3]\nprint(at_most(nums, 2) - at_most(nums, 1))\n```\nWhat is printed?",
+    "options": [
+      "8",
+      "3",
+      "4",
+      "5"
+    ],
+    "answer": "4",
+    "verify": "def at_most(nums, k):\n    count, left, total = {}, 0, 0\n    for right, x in enumerate(nums):\n        count[x] = count.get(x, 0) + 1\n        while len(count) > k:\n            count[nums[left]] -= 1\n            if count[nums[left]] == 0:\n                del count[nums[left]]\n            left += 1\n        total += right - left + 1\n    return total\nnums = [1, 2, 1, 3]\nprint(at_most(nums, 2) - at_most(nums, 1))"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "Counting substrings that contain at least one `a`, one `b` and one `c`:\n```\ns = \"abcba\"\ncount = {\"a\": 0, \"b\": 0, \"c\": 0}\nleft = total = 0\nfor right in range(len(s)):\n    count[s[right]] += 1\n    while min(count.values()) > 0:\n        count[s[left]] -= 1\n        left += 1\n    total += left\nprint(total)\n```\nWhat is printed?",
+    "options": [
+      "3",
+      "6",
+      "4",
+      "5"
+    ],
+    "answer": "5",
+    "verify": "s = \"abcba\"\ncount = {\"a\": 0, \"b\": 0, \"c\": 0}\nleft = total = 0\nfor right in range(len(s)):\n    count[s[right]] += 1\n    while min(count.values()) > 0:\n        count[s[left]] -= 1\n        left += 1\n    total += left\nprint(total)"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "HARD",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "Counting subarrays whose product is less than `k` (positive integers):\n```\ndef count_product_below(nums, k):\n    if k <= 1:\n        return 0\n    prod, left, count = 1, 0, 0\n    for right in range(len(nums)):\n        prod *= nums[right]\n        while prod >= k:\n            prod //= nums[left]\n            left += 1\n        count += ____\n    return count\n```\nWhat goes in the blank?",
+    "options": [
+      "right - left + 1",
+      "right - left",
+      "1",
+      "left + 1"
+    ],
+    "answer": "right - left + 1",
+    "verify": "def count_product_below(nums, k):\n    if k <= 1:\n        return 0\n    prod, left, count = 1, 0, 0\n    for right in range(len(nums)):\n        prod *= nums[right]\n        while prod >= k:\n            prod //= nums[left]\n            left += 1\n        count += __BLANK__\n    return count\nok = count_product_below([10, 5, 2, 6], 100) == 8 and count_product_below([2, 5, 3, 10], 31) == 8\nprint(\"OK\" if ok and count_product_below([1, 2, 3], 0) == 0 else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "HARD",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "Minimum window substring: `formed` counts how many distinct characters of `t` are fully covered.\n```\ndef min_window(s, t):\n    need = {c: t.count(c) for c in t}\n    have, formed, left, best = {}, 0, 0, \"\"\n    for right, c in enumerate(s):\n        have[c] = have.get(c, 0) + 1\n        if c in need and ____:\n            formed += 1\n        while formed == len(need):\n            if best == \"\" or right - left + 1 < len(best):\n                best = s[left:right + 1]\n            have[s[left]] -= 1\n            if s[left] in need and have[s[left]] < need[s[left]]:\n                formed -= 1\n            left += 1\n    return best\n```\nWhat goes in the blank?",
+    "options": [
+      "have[c] >= need[c]",
+      "have[c] == need[c]",
+      "have[c] > need[c]",
+      "have[c] == 1"
+    ],
+    "answer": "have[c] == need[c]",
+    "verify": "def min_window(s, t):\n    need = {c: t.count(c) for c in t}\n    have, formed, left, best = {}, 0, 0, \"\"\n    for right, c in enumerate(s):\n        have[c] = have.get(c, 0) + 1\n        if c in need and __BLANK__:\n            formed += 1\n        while formed == len(need) and left <= right:\n            if best == \"\" or right - left + 1 < len(best):\n                best = s[left:right + 1]\n            have[s[left]] -= 1\n            if s[left] in need and have[s[left]] < need[s[left]]:\n                formed -= 1\n            left += 1\n    return best\ntry:\n    ok = min_window(\"ADOBECODEBANC\", \"ABC\") == \"BANC\" and min_window(\"AAXBC\", \"ABC\") == \"AXBC\"\n    ok = ok and min_window(\"xaay\", \"aa\") == \"aa\"\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "HARD",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "Start index of every anagram of `p` in `s`, using a fixed window of letter counts:\n```\ndef find_anagrams(s, p):\n    need = {}\n    for c in p:\n        need[c] = need.get(c, 0) + 1\n    window, res = {}, []\n    for i, c in enumerate(s):\n        window[c] = window.get(c, 0) + 1\n        if i >= ____:\n            old = s[i - len(p)]\n            window[old] -= 1\n            if window[old] == 0:\n                del window[old]\n        if window == need:\n            res.append(i - len(p) + 1)\n    return res\n```\nWhat goes in the blank?",
+    "options": [
+      "len(p) - 1",
+      "len(p) + 1",
+      "len(p)",
+      "len(s) - len(p)"
+    ],
+    "answer": "len(p)",
+    "verify": "def find_anagrams(s, p):\n    need = {}\n    for c in p:\n        need[c] = need.get(c, 0) + 1\n    window, res = {}, []\n    for i, c in enumerate(s):\n        window[c] = window.get(c, 0) + 1\n        if i >= __BLANK__:\n            old = s[i - len(p)]\n            window[old] -= 1\n            if window[old] == 0:\n                del window[old]\n        if window == need:\n            res.append(i - len(p) + 1)\n    return res\ntry:\n    ok = find_anagrams(\"cbaebabacd\", \"abc\") == [0, 6] and find_anagrams(\"abab\", \"ab\") == [0, 1, 2]\n    ok = ok and find_anagrams(\"bacdcab\", \"abc\") == [0, 4]\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "HARD",
+    "categories": [
+      "SlidingWindow"
+    ],
+    "text": "Sliding window maximum with a monotonic deque of indices:\n```\nfrom collections import deque\ndef window_max(nums, k):\n    dq, out = deque(), []\n    for i, x in enumerate(nums):\n        while dq and nums[dq[-1]] <= x:\n            dq.pop()\n        dq.append(i)\n        if dq[0] <= ____:\n            dq.popleft()\n        if i >= k - 1:\n            out.append(nums[dq[0]])\n    return out\n```\nWhat goes in the blank so the front index is dropped exactly when it leaves the window?",
+    "options": [
+      "i - k + 1",
+      "i - k - 1",
+      "i + k",
+      "i - k"
+    ],
+    "answer": "i - k",
+    "verify": "from collections import deque\ndef window_max(nums, k):\n    dq, out = deque(), []\n    for i, x in enumerate(nums):\n        while dq and nums[dq[-1]] <= x:\n            dq.pop()\n        dq.append(i)\n        if dq[0] <= __BLANK__:\n            dq.popleft()\n        if i >= k - 1:\n            out.append(nums[dq[0]])\n    return out\ntry:\n    ok = window_max([1, 3, -1, -3, 5, 3, 6, 7], 3) == [3, 3, 5, 5, 6, 7] and window_max([9, 1, 1, 1, 1], 2) == [9, 1, 1, 1]\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  }
+]

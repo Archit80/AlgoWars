@@ -1,0 +1,940 @@
+[
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "What is the time complexity of reading `a[i]` from an array of `n` elements?",
+    "options": [
+      "O(1)",
+      "O(n)",
+      "O(log n)",
+      "O(i)"
+    ],
+    "answer": "O(1)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "What is the time complexity of inserting a new element at the front (index `0`) of an array holding `n` elements?",
+    "options": [
+      "O(1), because only index `0` changes",
+      "O(n), because every existing element must shift one place right",
+      "O(log n), because half the elements move on average",
+      "O(n^2), because each element is compared with every other"
+    ],
+    "answer": "O(n), because every existing element must shift one place right"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "A dynamic array (like a Python list) doubles its capacity when full. What is the amortized cost of appending one element at the end?",
+    "options": [
+      "O(n)",
+      "O(log n)",
+      "O(1)",
+      "O(n^2)"
+    ],
+    "answer": "O(1)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "An array `a` has length 6 and is 0-indexed. Which indices are valid?",
+    "options": [
+      "1 to 6",
+      "0 to 6",
+      "1 to 5",
+      "0 to 5"
+    ],
+    "answer": "0 to 5"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "In Python, what does `a[-1]` refer to for a non-empty list `a`?",
+    "options": [
+      "The last element",
+      "The first element",
+      "The second-to-last element",
+      "Nothing: it raises an IndexError"
+    ],
+    "answer": "The last element"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "You delete the element at index `0` of an array holding `n` elements and keep the remaining elements in order without gaps. How many elements must be shifted?",
+    "options": [
+      "n",
+      "n - 1",
+      "1",
+      "0"
+    ],
+    "answer": "n - 1"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "An integer array starts at memory address `1000` and each element takes 4 bytes. What is the address of `a[5]`?",
+    "options": [
+      "1024",
+      "1016",
+      "1020",
+      "1005"
+    ],
+    "answer": "1020",
+    "verify": "print(1000 + 5 * 4)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "EASY",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "Finding the maximum of an unsorted array of `n` elements by keeping a running best needs how many comparisons?",
+    "options": [
+      "n",
+      "n / 2",
+      "log n",
+      "n - 1"
+    ],
+    "answer": "n - 1"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "Pseudocode:\n```\na = [10, 20, 30, 40, 50]\nprint(a[-2])\n```\nWhat is printed?",
+    "options": [
+      "40",
+      "30",
+      "50",
+      "20"
+    ],
+    "answer": "40",
+    "verify": "a = [10, 20, 30, 40, 50]\nprint(a[-2])"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "Pseudocode:\n```\na = [5, 6, 7, 8, 9]\nprint(a[1:4])\n```\nWhat is printed?",
+    "options": [
+      "[6, 7, 8, 9]",
+      "[6, 7, 8]",
+      "[5, 6, 7]",
+      "[5, 6, 7, 8]"
+    ],
+    "answer": "[6, 7, 8]",
+    "verify": "a = [5, 6, 7, 8, 9]\nprint(a[1:4])"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "Pseudocode:\n```\na = [3, 1, 4, 1, 5, 9]\ntotal = 0\nfor i in range(0, len(a), 2):\n    total += a[i]\nprint(total)\n```\nWhat is printed?",
+    "options": [
+      "11",
+      "23",
+      "12",
+      "7"
+    ],
+    "answer": "12",
+    "verify": "a = [3, 1, 4, 1, 5, 9]\ntotal = 0\nfor i in range(0, len(a), 2):\n    total += a[i]\nprint(total)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "Pseudocode:\n```\na = [1, 2, 3]\nb = a\nb.append(4)\nprint(a)\n```\nWhat is printed?",
+    "options": [
+      "[1, 2, 3]",
+      "[4]",
+      "[4, 1, 2, 3]",
+      "[1, 2, 3, 4]"
+    ],
+    "answer": "[1, 2, 3, 4]",
+    "verify": "a = [1, 2, 3]\nb = a\nb.append(4)\nprint(a)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "Finding the position of the maximum:\n```\na = [4, -2, 9, 7, 9, 1]\nbest = a[0]\nidx = 0\nfor i in range(1, len(a)):\n    if a[i] > best:\n        best = a[i]\n        idx = i\nprint(idx)\n```\nWhat is printed?",
+    "options": [
+      "2",
+      "4",
+      "9",
+      "3"
+    ],
+    "answer": "2",
+    "verify": "a = [4, -2, 9, 7, 9, 1]\nbest = a[0]\nidx = 0\nfor i in range(1, len(a)):\n    if a[i] > best:\n        best = a[i]\n        idx = i\nprint(idx)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "Counting values with a frequency array:\n```\na = [2, 0, 2, 1, 2, 0]\ncount = [0] * 3\nfor x in a:\n    count[x] += 1\nprint(count)\n```\nWhat is printed?",
+    "options": [
+      "[3, 1, 2]",
+      "[2, 1, 3]",
+      "[1, 1, 1]",
+      "[2, 0, 2]"
+    ],
+    "answer": "[2, 1, 3]",
+    "verify": "a = [2, 0, 2, 1, 2, 0]\ncount = [0] * 3\nfor x in a:\n    count[x] += 1\nprint(count)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "A 2D array (list of rows):\n```\nm = [[1, 2, 3],\n     [4, 5, 6],\n     [7, 8, 9]]\nprint(m[2][0])\n```\nWhat is printed?",
+    "options": [
+      "3",
+      "8",
+      "7",
+      "4"
+    ],
+    "answer": "7",
+    "verify": "m = [[1, 2, 3],\n     [4, 5, 6],\n     [7, 8, 9]]\nprint(m[2][0])"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "EASY",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "Pseudocode:\n```\na = [1, 2, 3, 4, 5]\na[0], a[-1] = a[-1], a[0]\nprint(a)\n```\nWhat is printed?",
+    "options": [
+      "[5, 2, 3, 4, 5]",
+      "[1, 2, 3, 4, 5]",
+      "[5, 4, 3, 2, 1]",
+      "[5, 2, 3, 4, 1]"
+    ],
+    "answer": "[5, 2, 3, 4, 1]",
+    "verify": "a = [1, 2, 3, 4, 5]\na[0], a[-1] = a[-1], a[0]\nprint(a)"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "EASY",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "This function adds up every element of `a`:\n```\ndef array_sum(a):\n    total = 0\n    for i in range(____):\n        total += a[i]\n    return total\n```\nWhat goes in the blank?",
+    "options": [
+      "len(a)",
+      "len(a) - 1",
+      "1, len(a)",
+      "len(a) + 1"
+    ],
+    "answer": "len(a)",
+    "verify": "def array_sum(a):\n    total = 0\n    for i in range(__BLANK__):\n        total += a[i]\n    return total\ntry:\n    ok = array_sum([4, 1, 7]) == 12 and array_sum([5]) == 5\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "EASY",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "Return the smallest element of a non-empty array:\n```\ndef find_min(a):\n    smallest = ____\n    for x in a:\n        if x < smallest:\n            smallest = x\n    return smallest\n```\nWhat goes in the blank so it works for any non-empty array?",
+    "options": [
+      "0",
+      "a[0]",
+      "-1",
+      "len(a)"
+    ],
+    "answer": "a[0]",
+    "verify": "def find_min(a):\n    smallest = __BLANK__\n    for x in a:\n        if x < smallest:\n            smallest = x\n    return smallest\nok = find_min([5, 3, 8]) == 3 and find_min([-4, -9]) == -9 and find_min([7, 9]) == 7\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "EASY",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "Count how many times `target` appears in `a`:\n```\ndef count(a, target):\n    c = 0\n    for x in a:\n        if ____:\n            c += 1\n    return c\n```\nWhich condition goes in the blank?",
+    "options": [
+      "a[x] == target",
+      "target in a",
+      "x == target",
+      "x != target"
+    ],
+    "answer": "x == target",
+    "verify": "def count(a, target):\n    c = 0\n    for x in a:\n        if __BLANK__:\n            c += 1\n    return c\ntry:\n    ok = count([3, 1, 3, 2, 3], 3) == 3 and count([0, 5], 0) == 1\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "EASY",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "Return a copy of `a` that can be changed without affecting `a`:\n```\ndef copy_list(a):\n    b = ____\n    return b\n```\nWhat goes in the blank?",
+    "options": [
+      "a",
+      "[a]",
+      "a[1:]",
+      "a[:]"
+    ],
+    "answer": "a[:]",
+    "verify": "def copy_list(a):\n    b = __BLANK__\n    return b\na = [1, 2, 3]\nb = copy_list(a)\nb.append(9)\nprint(\"OK\" if a == [1, 2, 3] and b == [1, 2, 3, 9] else \"NO\")"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "What are the time and extra space of Kadane's algorithm for the maximum subarray sum?",
+    "options": [
+      "O(n) time, O(1) extra space",
+      "O(n^2) time, O(1) extra space",
+      "O(n log n) time, O(n) extra space",
+      "O(n) time, O(n) extra space"
+    ],
+    "answer": "O(n) time, O(1) extra space"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "A prefix array `p` has `p[0] = 0` and `p[i + 1] = p[i] + a[i]`. Which expression gives the sum of `a[l]` through `a[r]` inclusive?",
+    "options": [
+      "p[r] - p[l]",
+      "p[r + 1] - p[l]",
+      "p[r + 1] - p[l - 1]",
+      "p[r] - p[l - 1]"
+    ],
+    "answer": "p[r + 1] - p[l]"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "Which sequence of in-place reversals rotates an array of length `n` to the RIGHT by `k` positions (`0 < k < n`)?",
+    "options": [
+      "Reverse the first `k` elements, then the remaining `n - k`, then the whole array",
+      "Reverse the whole array twice",
+      "Reverse the whole array, then reverse the first `k` elements, then reverse the remaining `n - k`",
+      "Reverse the first `n - k` elements, then the whole array"
+    ],
+    "answer": "Reverse the whole array, then reverse the first `k` elements, then reverse the remaining `n - k`"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "A loop calls `a.pop(0)` on a Python list of `n` elements until the list is empty. What is the total running time?",
+    "options": [
+      "O(n)",
+      "O(n log n)",
+      "O(1)",
+      "O(n^2)"
+    ],
+    "answer": "O(n^2)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "You track the largest value `first` and second-largest value `second` in one pass. A new value `x` is greater than `first`. What should happen?",
+    "options": [
+      "Set `second = first`, then `first = x`",
+      "Set `first = x` only",
+      "Set `second = x` only",
+      "Set `first = x`, then `second = first`"
+    ],
+    "answer": "Set `second = first`, then `first = x`"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "A matrix with `R` rows and `C` columns is stored row by row in a flat 0-indexed array. At which flat index is element `(i, j)`?",
+    "options": [
+      "i * R + j",
+      "i * C + j",
+      "j * R + i",
+      "i + j"
+    ],
+    "answer": "i * C + j"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "What does `b = a[::-1]` do, and how much extra space does it use?",
+    "options": [
+      "Reverses `a` in place, using O(1) extra space",
+      "Creates a reversed copy of `a`, using O(1) extra space",
+      "Creates a reversed copy of `a`, using O(n) extra space",
+      "Makes `b` another name for `a`, so reversing `b` reverses `a`"
+    ],
+    "answer": "Creates a reversed copy of `a`, using O(n) extra space"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "All `n` values are integers in the range `0` to `k - 1`. How long does it take to count how often each value occurs using a count array of size `k`?",
+    "options": [
+      "O(n log n)",
+      "O(n * k)",
+      "O(k)",
+      "O(n + k)"
+    ],
+    "answer": "O(n + k)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "Building a prefix-sum array:\n```\na = [3, -1, 4, 2, 5]\np = [0]\nfor x in a:\n    p.append(p[-1] + x)\nprint(p[4] - p[1])\n```\nWhat is printed?",
+    "options": [
+      "5",
+      "10",
+      "8",
+      "6"
+    ],
+    "answer": "5",
+    "verify": "a = [3, -1, 4, 2, 5]\np = [0]\nfor x in a:\n    p.append(p[-1] + x)\nprint(p[4] - p[1])"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "Kadane's maximum subarray sum:\n```\na = [2, -3, 4, -1, -2, 1, 5, -3]\nbest = cur = a[0]\nfor x in a[1:]:\n    cur = max(x, cur + x)\n    best = max(best, cur)\nprint(best)\n```\nWhat is printed?",
+    "options": [
+      "6",
+      "7",
+      "12",
+      "4"
+    ],
+    "answer": "7",
+    "verify": "a = [2, -3, 4, -1, -2, 1, 5, -3]\nbest = cur = a[0]\nfor x in a[1:]:\n    cur = max(x, cur + x)\n    best = max(best, cur)\nprint(best)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "Rotating with slices:\n```\na = [1, 2, 3, 4, 5, 6]\nk = 2\na = a[-k:] + a[:-k]\nprint(a)\n```\nWhat is printed?",
+    "options": [
+      "[3, 4, 5, 6, 1, 2]",
+      "[6, 1, 2, 3, 4, 5]",
+      "[5, 6, 1, 2, 3, 4]",
+      "[4, 5, 6, 1, 2, 3]"
+    ],
+    "answer": "[5, 6, 1, 2, 3, 4]",
+    "verify": "a = [1, 2, 3, 4, 5, 6]\nk = 2\na = a[-k:] + a[:-k]\nprint(a)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "Removing items while looping over the same list:\n```\na = [1, 2, 2, 3, 4]\nfor x in a:\n    if x == 2:\n        a.remove(x)\nprint(a)\n```\nWhat is printed?",
+    "options": [
+      "[1, 3, 4]",
+      "[1, 2, 2, 3, 4]",
+      "[1, 3, 4, 4]",
+      "[1, 2, 3, 4]"
+    ],
+    "answer": "[1, 2, 3, 4]",
+    "verify": "a = [1, 2, 2, 3, 4]\nfor x in a:\n    if x == 2:\n        a.remove(x)\nprint(a)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "This loop is meant to reverse the array in place:\n```\na = [1, 2, 3, 4, 5]\nn = len(a)\nfor i in range(n):\n    a[i], a[n - 1 - i] = a[n - 1 - i], a[i]\nprint(a)\n```\nWhat is printed?",
+    "options": [
+      "[1, 2, 3, 4, 5]",
+      "[5, 4, 3, 2, 1]",
+      "[5, 2, 3, 4, 1]",
+      "[1, 4, 3, 2, 5]"
+    ],
+    "answer": "[1, 2, 3, 4, 5]",
+    "verify": "a = [1, 2, 3, 4, 5]\nn = len(a)\nfor i in range(n):\n    a[i], a[n - 1 - i] = a[n - 1 - i], a[i]\nprint(a)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "Column sums of a matrix:\n```\nm = [[1, 2, 3],\n     [4, 5, 6]]\ncols = [0] * len(m[0])\nfor row in m:\n    for j in range(len(row)):\n        cols[j] += row[j]\nprint(cols)\n```\nWhat is printed?",
+    "options": [
+      "[6, 15]",
+      "[5, 7, 9]",
+      "[21]",
+      "[4, 5, 6]"
+    ],
+    "answer": "[5, 7, 9]",
+    "verify": "m = [[1, 2, 3],\n     [4, 5, 6]]\ncols = [0] * len(m[0])\nfor row in m:\n    for j in range(len(row)):\n        cols[j] += row[j]\nprint(cols)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "Largest and second-largest distinct values in one pass:\n```\na = [5, 9, 3, 9, 7]\nfirst = second = -1\nfor x in a:\n    if x > first:\n        second = first\n        first = x\n    elif x > second and x != first:\n        second = x\nprint(first, second)\n```\nWhat is printed?",
+    "options": [
+      "9 9",
+      "9 5",
+      "9 7",
+      "7 9"
+    ],
+    "answer": "9 7",
+    "verify": "a = [5, 9, 3, 9, 7]\nfirst = second = -1\nfor x in a:\n    if x > first:\n        second = first\n        first = x\n    elif x > second and x != first:\n        second = x\nprint(first, second)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "Inserting into an array by shifting elements right:\n```\na = [1, 3, 5, 7, 0]   # the last slot is free\nn = 4\npos = 1\nfor i in range(n, pos, -1):\n    a[i] = a[i - 1]\na[pos] = 2\nprint(a)\n```\nWhat is printed?",
+    "options": [
+      "[1, 2, 5, 7, 0]",
+      "[1, 2, 3, 3, 3]",
+      "[2, 1, 3, 5, 7]",
+      "[1, 2, 3, 5, 7]"
+    ],
+    "answer": "[1, 2, 3, 5, 7]",
+    "verify": "a = [1, 3, 5, 7, 0]   # the last slot is free\nn = 4\npos = 1\nfor i in range(n, pos, -1):\n    a[i] = a[i - 1]\na[pos] = 2\nprint(a)"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "Kadane's algorithm for the maximum subarray sum:\n```\ndef max_subarray(a):\n    best = cur = a[0]\n    for x in a[1:]:\n        cur = ____\n        best = max(best, cur)\n    return best\n```\nWhat goes in the blank so it also works when every element is negative?",
+    "options": [
+      "max(x, cur + x)",
+      "cur + x",
+      "max(cur, x)",
+      "max(0, cur + x)"
+    ],
+    "answer": "max(x, cur + x)",
+    "verify": "def max_subarray(a):\n    best = cur = a[0]\n    for x in a[1:]:\n        cur = __BLANK__\n        best = max(best, cur)\n    return best\nok = max_subarray([-2, 1, -3, 4, -1, 2, 1, -5, 4]) == 6 and max_subarray([-3, -1, -2]) == -1\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "Build a prefix-sum array where `p[i]` is the sum of the first `i` elements:\n```\ndef prefix(a):\n    p = [0] * (len(a) + 1)\n    for i in range(len(a)):\n        p[i + 1] = ____\n    return p\n```\nWhat goes in the blank?",
+    "options": [
+      "p[i - 1] + a[i]",
+      "p[i] + a[i]",
+      "p[i] + a[i + 1]",
+      "a[i] + a[i - 1]"
+    ],
+    "answer": "p[i] + a[i]",
+    "verify": "def prefix(a):\n    p = [0] * (len(a) + 1)\n    for i in range(len(a)):\n        p[i + 1] = __BLANK__\n    return p\ntry:\n    ok = prefix([2, 4, 1]) == [0, 2, 6, 7] and prefix([5, -3, 2, 6]) == [0, 5, 2, 4, 10]\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "Transpose a square matrix in place:\n```\ndef transpose(m):\n    n = len(m)\n    for i in range(n):\n        for j in range(____):\n            m[i][j], m[j][i] = m[j][i], m[i][j]\n```\nWhat goes in the blank so each pair is swapped exactly once?",
+    "options": [
+      "n",
+      "1, n",
+      "i + 1, n",
+      "i + 1, n - 1"
+    ],
+    "answer": "i + 1, n",
+    "verify": "def transpose(m):\n    n = len(m)\n    for i in range(n):\n        for j in range(__BLANK__):\n            m[i][j], m[j][i] = m[j][i], m[i][j]\nm = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]\ntranspose(m)\nprint(\"OK\" if m == [[1, 4, 7], [2, 5, 8], [3, 6, 9]] else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "MEDIUM",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "Rotate an array left by one position in place:\n```\ndef rotate_left(a):\n    first = a[0]\n    for i in range(____):\n        a[i] = a[i + 1]\n    a[-1] = first\n```\nWhat goes in the blank?",
+    "options": [
+      "len(a)",
+      "1, len(a) - 1",
+      "len(a) - 2",
+      "len(a) - 1"
+    ],
+    "answer": "len(a) - 1",
+    "verify": "def rotate_left(a):\n    first = a[0]\n    for i in range(__BLANK__):\n        a[i] = a[i + 1]\n    a[-1] = first\na = [1, 2, 3, 4]\ntry:\n    rotate_left(a)\n    ok = a == [2, 3, 4, 1]\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "A dynamic array grows by adding a fixed 10 extra slots whenever it is full, instead of doubling. What is the total time for `n` appends, counting the copying?",
+    "options": [
+      "O(n^2)",
+      "O(n)",
+      "O(n log n)",
+      "O(10n)"
+    ],
+    "answer": "O(n^2)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "A Kadane implementation starts with `best = cur = 0` and updates `cur = max(0, cur + x)` and `best = max(best, cur)`. What does it return for `[-4, -2, -7]`?",
+    "options": [
+      "-2",
+      "0",
+      "-4",
+      "-13"
+    ],
+    "answer": "0",
+    "verify": "best = cur = 0\nfor x in [-4, -2, -7]:\n    cur = max(0, cur + x)\n    best = max(best, cur)\nprint(best)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "You must remove every occurrence of `val` from an array in O(n) time and O(1) extra space. Which approach works?",
+    "options": [
+      "Call `a.remove(val)` repeatedly until it raises an error",
+      "Build a new list of the elements that are not `val`",
+      "Keep a write index and copy each element that is not `val` to `a[write]`",
+      "Sort the array so the copies of `val` are adjacent, then delete that block"
+    ],
+    "answer": "Keep a write index and copy each element that is not `val` to `a[write]`"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "An array of length `n` holds values in `1..n`. To find the missing values with O(1) extra space, you mark value `x` as seen by:",
+    "options": [
+      "Setting `a[x] = 0`",
+      "Making `a[x]` negative",
+      "Appending `x` to a list of seen values",
+      "Making `a[abs(x) - 1]` negative"
+    ],
+    "answer": "Making `a[abs(x) - 1]` negative"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "You answer `q` range-sum queries on a static array of `n` elements using a prefix-sum array. What is the total time, including the preprocessing?",
+    "options": [
+      "O(n + q)",
+      "O(n * q)",
+      "O(q log n)",
+      "O(n log n + q)"
+    ],
+    "answer": "O(n + q)"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "Let `S` be the total sum of an array and `L` the sum of the elements before index `i`. Index `i` is an equilibrium index (left sum equals right sum) when:",
+    "options": [
+      "L == S - L",
+      "L == S - L - a[i]",
+      "L == S - a[i]",
+      "2 * L == S"
+    ],
+    "answer": "L == S - L - a[i]"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "An array holds `n` distinct numbers taken from `0..n`, so exactly one is missing. Which method finds it in O(n) time and O(1) extra space?",
+    "options": [
+      "Sort the array, then scan for the gap",
+      "Mark each value in a boolean array of size `n + 1`",
+      "Subtract the array's sum from `n * (n + 1) / 2`",
+      "Compare every pair of elements"
+    ],
+    "answer": "Subtract the array's sum from `n * (n + 1) / 2`"
+  },
+  {
+    "type": "MCQ",
+    "difficulty": "HARD",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "A large matrix is stored in row-major order. Why is summing it row by row usually faster than column by column?",
+    "options": [
+      "Row-by-row traversal performs fewer additions",
+      "Column-by-column traversal is O(n^3) instead of O(n^2)",
+      "Column access needs an extra copy of the matrix",
+      "Row-by-row access reads consecutive memory addresses, so it uses the CPU cache better"
+    ],
+    "answer": "Row-by-row access reads consecutive memory addresses, so it uses the CPU cache better"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "Creating a grid by repeating a row:\n```\ngrid = [[0] * 3] * 3\ngrid[0][1] = 5\nprint(grid)\n```\nWhat is printed?",
+    "options": [
+      "[[0, 5, 0], [0, 5, 0], [0, 5, 0]]",
+      "[[0, 5, 0], [0, 0, 0], [0, 0, 0]]",
+      "[[5, 5, 5], [0, 0, 0], [0, 0, 0]]",
+      "[[0, 0, 0], [5, 5, 5], [0, 0, 0]]"
+    ],
+    "answer": "[[0, 5, 0], [0, 5, 0], [0, 5, 0]]",
+    "verify": "grid = [[0] * 3] * 3\ngrid[0][1] = 5\nprint(grid)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "Spiral traversal, one layer at a time:\n```\nm = [[1, 2, 3],\n     [4, 5, 6],\n     [7, 8, 9],\n     [10, 11, 12]]\ntop, bottom, left, right = 0, 3, 0, 2\nout = []\nwhile top <= bottom and left <= right:\n    out += [m[top][j] for j in range(left, right + 1)]\n    out += [m[i][right] for i in range(top + 1, bottom + 1)]\n    if top < bottom and left < right:\n        out += [m[bottom][j] for j in range(right - 1, left - 1, -1)]\n        out += [m[i][left] for i in range(bottom - 1, top, -1)]\n    top, bottom, left, right = top + 1, bottom - 1, left + 1, right - 1\nprint(out)\n```\nWhat is printed?",
+    "options": [
+      "[1, 2, 3, 6, 9, 12, 10, 11, 7, 4, 5, 8]",
+      "[1, 2, 3, 6, 9, 12, 11, 10, 7, 4, 5, 8]",
+      "[1, 2, 3, 6, 9, 12, 11, 10, 7, 4, 8, 5]",
+      "[1, 4, 7, 10, 11, 12, 9, 6, 3, 2, 5, 8]"
+    ],
+    "answer": "[1, 2, 3, 6, 9, 12, 11, 10, 7, 4, 5, 8]",
+    "verify": "m = [[1, 2, 3],\n     [4, 5, 6],\n     [7, 8, 9],\n     [10, 11, 12]]\ntop, bottom, left, right = 0, 3, 0, 2\nout = []\nwhile top <= bottom and left <= right:\n    out += [m[top][j] for j in range(left, right + 1)]\n    out += [m[i][right] for i in range(top + 1, bottom + 1)]\n    if top < bottom and left < right:\n        out += [m[bottom][j] for j in range(right - 1, left - 1, -1)]\n        out += [m[i][left] for i in range(bottom - 1, top, -1)]\n    top, bottom, left, right = top + 1, bottom - 1, left + 1, right - 1\nprint(out)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "Walking a matrix by anti-diagonals:\n```\nm = [[1, 2, 3],\n     [4, 5, 6],\n     [7, 8, 9]]\nn = len(m)\nout = []\nfor d in range(2 * n - 1):\n    for i in range(n):\n        j = d - i\n        if 0 <= j < n:\n            out.append(m[i][j])\nprint(out)\n```\nWhat is printed?",
+    "options": [
+      "[1, 4, 2, 7, 5, 3, 8, 6, 9]",
+      "[1, 2, 4, 3, 5, 7, 6, 8]",
+      "[1, 2, 4, 3, 5, 7, 6, 8, 9]",
+      "[1, 5, 9, 2, 6, 4, 8, 3, 7]"
+    ],
+    "answer": "[1, 2, 4, 3, 5, 7, 6, 8, 9]",
+    "verify": "m = [[1, 2, 3],\n     [4, 5, 6],\n     [7, 8, 9]]\nn = len(m)\nout = []\nfor d in range(2 * n - 1):\n    for i in range(n):\n        j = d - i\n        if 0 <= j < n:\n            out.append(m[i][j])\nprint(out)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "Transpose, then reverse every row:\n```\nm = [[1, 2, 3],\n     [4, 5, 6],\n     [7, 8, 9]]\nn = 3\nfor i in range(n):\n    for j in range(i + 1, n):\n        m[i][j], m[j][i] = m[j][i], m[i][j]\nfor row in m:\n    row.reverse()\nprint(m[0])\n```\nWhat is printed?",
+    "options": [
+      "[3, 2, 1]",
+      "[1, 4, 7]",
+      "[3, 6, 9]",
+      "[7, 4, 1]"
+    ],
+    "answer": "[7, 4, 1]",
+    "verify": "m = [[1, 2, 3],\n     [4, 5, 6],\n     [7, 8, 9]]\nn = 3\nfor i in range(n):\n    for j in range(i + 1, n):\n        m[i][j], m[j][i] = m[j][i], m[i][j]\nfor row in m:\n    row.reverse()\nprint(m[0])"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "Copying a list of lists with a slice:\n```\na = [[1, 2], [3, 4]]\nb = a[:]\nb[0].append(9)\nb[1] = [0]\nprint(a)\n```\nWhat is printed?",
+    "options": [
+      "[[1, 2, 9], [3, 4]]",
+      "[[1, 2], [3, 4]]",
+      "[[1, 2, 9], [0]]",
+      "[[1, 2], [0]]"
+    ],
+    "answer": "[[1, 2, 9], [3, 4]]",
+    "verify": "a = [[1, 2], [3, 4]]\nb = a[:]\nb[0].append(9)\nb[1] = [0]\nprint(a)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "Rotation by three reversals:\n```\ndef rev(a, i, j):\n    while i < j:\n        a[i], a[j] = a[j], a[i]\n        i += 1\n        j -= 1\na = [1, 2, 3, 4, 5]\nk = 7 % len(a)\nrev(a, 0, len(a) - 1)\nrev(a, 0, k - 1)\nrev(a, k, len(a) - 1)\nprint(a)\n```\nWhat is printed?",
+    "options": [
+      "[3, 4, 5, 1, 2]",
+      "[4, 5, 1, 2, 3]",
+      "[5, 1, 2, 3, 4]",
+      "[4, 5, 3, 2, 1]"
+    ],
+    "answer": "[4, 5, 1, 2, 3]",
+    "verify": "def rev(a, i, j):\n    while i < j:\n        a[i], a[j] = a[j], a[i]\n        i += 1\n        j -= 1\na = [1, 2, 3, 4, 5]\nk = 7 % len(a)\nrev(a, 0, len(a) - 1)\nrev(a, 0, k - 1)\nrev(a, k, len(a) - 1)\nprint(a)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "Kadane's algorithm that also records where the best subarray is:\n```\na = [3, -4, 2, -1, 3, -5, 4]\nbest, cur = a[0], a[0]\nstart = s = end = 0\nfor i in range(1, len(a)):\n    if cur < 0:\n        cur, s = a[i], i\n    else:\n        cur += a[i]\n    if cur > best:\n        best, start, end = cur, s, i\nprint(best, start, end)\n```\nWhat is printed?",
+    "options": [
+      "4 6 6",
+      "3 0 0",
+      "4 2 4",
+      "4 0 4"
+    ],
+    "answer": "4 2 4",
+    "verify": "a = [3, -4, 2, -1, 3, -5, 4]\nbest, cur = a[0], a[0]\nstart = s = end = 0\nfor i in range(1, len(a)):\n    if cur < 0:\n        cur, s = a[i], i\n    else:\n        cur += a[i]\n    if cur > best:\n        best, start, end = cur, s, i\nprint(best, start, end)"
+  },
+  {
+    "type": "PREDICT_OUTPUT",
+    "difficulty": "HARD",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "Product of all other elements, without division:\n```\na = [2, 3, 4, 5]\nn = len(a)\nout = [1] * n\nleft = 1\nfor i in range(n):\n    out[i] = left\n    left *= a[i]\nright = 1\nfor i in range(n - 1, -1, -1):\n    out[i] *= right\n    right *= a[i]\nprint(out)\n```\nWhat is printed?",
+    "options": [
+      "[120, 120, 120, 120]",
+      "[1, 2, 6, 24]",
+      "[60, 20, 5, 1]",
+      "[60, 40, 30, 24]"
+    ],
+    "answer": "[60, 40, 30, 24]",
+    "verify": "a = [2, 3, 4, 5]\nn = len(a)\nout = [1] * n\nleft = 1\nfor i in range(n):\n    out[i] = left\n    left *= a[i]\nright = 1\nfor i in range(n - 1, -1, -1):\n    out[i] *= right\n    right *= a[i]\nprint(out)"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "HARD",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "A difference array applies many range updates `(l, r, v)` (add `v` to `a[l..r]` inclusive) in O(1) each:\n```\ndef apply_updates(n, updates):\n    d = [0] * (n + 1)\n    for l, r, v in updates:\n        d[l] += v\n        ____\n    out, run = [], 0\n    for i in range(n):\n        run += d[i]\n        out.append(run)\n    return out\n```\nWhich line goes in the blank?",
+    "options": [
+      "d[r + 1] -= v",
+      "d[r] -= v",
+      "d[r + 1] += v",
+      "d[l + 1] -= v"
+    ],
+    "answer": "d[r + 1] -= v",
+    "verify": "def apply_updates(n, updates):\n    d = [0] * (n + 1)\n    for l, r, v in updates:\n        d[l] += v\n        __BLANK__\n    out, run = [], 0\n    for i in range(n):\n        run += d[i]\n        out.append(run)\n    return out\nprint(\"OK\" if apply_updates(5, [(1, 3, 2), (0, 4, 1), (2, 2, 5)]) == [1, 3, 8, 3, 1] else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "HARD",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "Remove every `val` from `a` in place with O(1) extra space:\n```\ndef remove_all(a, val):\n    k = 0\n    for x in a:\n        if x != val:\n            ____\n            k += 1\n    del a[k:]\n```\nWhich line goes in the blank?",
+    "options": [
+      "a[k + 1] = x",
+      "a[k] = x",
+      "a.remove(x)",
+      "a[k] = val"
+    ],
+    "answer": "a[k] = x",
+    "verify": "def remove_all(a, val):\n    k = 0\n    for x in a:\n        if x != val:\n            __BLANK__\n            k += 1\n    del a[k:]\ntry:\n    a = [3, 1, 3, 2, 3]\n    remove_all(a, 3)\n    b = [4, 4, 5]\n    remove_all(b, 4)\n    ok = a == [1, 2] and b == [5]\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "HARD",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "Sum both diagonals of a square matrix, counting the centre cell once:\n```\ndef diagonal_sum(m):\n    n = len(m)\n    total = 0\n    for i in range(n):\n        total += m[i][i] + m[i][____]\n    if n % 2 == 1:\n        total -= m[n // 2][n // 2]\n    return total\n```\nWhat goes in the blank?",
+    "options": [
+      "n - i",
+      "i",
+      "n - 1 - i",
+      "-i"
+    ],
+    "answer": "n - 1 - i",
+    "verify": "def diagonal_sum(m):\n    n = len(m)\n    total = 0\n    for i in range(n):\n        total += m[i][i] + m[i][__BLANK__]\n    if n % 2 == 1:\n        total -= m[n // 2][n // 2]\n    return total\ntry:\n    ok = diagonal_sum([[2, 0, 1], [0, 3, 0], [4, 0, 5]]) == 15 and diagonal_sum([[1, 7], [2, 3]]) == 13\nexcept Exception:\n    ok = False\nprint(\"OK\" if ok else \"NO\")"
+  },
+  {
+    "type": "FILL_BLANK",
+    "difficulty": "HARD",
+    "categories": [
+      "Arrays"
+    ],
+    "text": "Boyer-Moore voting finds the majority element (one that appears more than `n / 2` times) in O(1) extra space:\n```\ndef majority(a):\n    candidate, count = None, 0\n    for x in a:\n        if count == 0:\n            candidate = x\n        ____\n    return candidate\n```\nWhich line goes in the blank?",
+    "options": [
+      "count += 1",
+      "count += 1 if x == candidate else 0",
+      "count = 1 if x == candidate else 0",
+      "count += 1 if x == candidate else -1"
+    ],
+    "answer": "count += 1 if x == candidate else -1",
+    "verify": "def majority(a):\n    candidate, count = None, 0\n    for x in a:\n        if count == 0:\n            candidate = x\n        __BLANK__\n    return candidate\nok = majority([2, 2, 1, 1, 2]) == 2 and majority([1, 3, 3, 2, 3]) == 3 and majority([4, 5, 5]) == 5 and majority([6, 6, 7]) == 6\nprint(\"OK\" if ok else \"NO\")"
+  }
+]

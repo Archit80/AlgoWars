@@ -3,3 +3,6 @@ node_modules
 .env
 
 /src/generated/prisma
+
+# Question bank backups (contain user ids)
+/data/backup/
