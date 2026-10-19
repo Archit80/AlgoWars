@@ -8,6 +8,7 @@ import { useUserStore } from '@/stores/userStore';
 import { useUser } from '@/contexts/userContext';
 import SavedQuestionsService from '@/services/savedQuestionsService';
 import { Space_Grotesk } from 'next/font/google';
+import QuestionText, { InlineText } from "@/components/quiz/QuestionText";
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
   variable: '--font-space',
@@ -267,9 +268,7 @@ const Result: React.FC<ResultProps> = (props) => {
                       }`} />
                     </button>
                   </div>
-                  <div className="mb-4 text-gray-300">
-                    {q.text}
-                  </div>
+                  <QuestionText text={q.text} className="mb-4 text-gray-300" />
                   <div className="space-y-3 mb-4">
                     {q.options.map((option, idx) => {
                       const isCorrect = option === q.correctAnswer;
@@ -290,7 +289,7 @@ const Result: React.FC<ResultProps> = (props) => {
                               <span className="font-mono text-sm">
                                 {String.fromCharCode(65 + idx)}
                               </span>
-                              <span>{option}</span>
+                              <span className="font-mono min-w-0 break-words"><InlineText text={option} /></span>
                             </div>
                             <div className="flex gap-2">
                               {isCorrect && (

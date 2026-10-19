@@ -6,21 +6,9 @@ import Result from "../result/page";
 import QuestionsService from "@/services/questionsService";
 import { motion } from "framer-motion";
 import { usePracticeStore } from "@/stores/practiceStore";
-import { ArrowLeft, Clock, Loader2 } from "lucide-react";
-import { Space_Grotesk } from "next/font/google";
-
-// Import Prism.js for syntax highlighting
-import Prism from 'prismjs';
-import 'prismjs/themes/prism-dark.css';
-import 'prismjs/components/prism-javascript';
-import 'prismjs/components/prism-python';
-import 'prismjs/components/prism-java';
-import 'prismjs/components/prism-clike';
-
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-space",
-});
+import { ArrowLeft, Clock, Loader2, CheckCircle2 } from "lucide-react";
+import AnswerOptions from "@/components/quiz/AnswerOptions";
+import QuestionText from "@/components/quiz/QuestionText";
 // import Link from "next/link"; // Use next/link for Next.js navigation
 
 const SoloPractice = () => {
@@ -50,150 +38,14 @@ const SoloPractice = () => {
   // If all questions are done, show result
   const [isQuizComplete, setIsQuizComplete] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  // Brief "answer saved" state between submitting and showing the next question
+  const [lockedIn, setLockedIn] = useState(false);
+  const lockTimerRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+  useEffect(() => () => {
+    if (lockTimerRef.current) clearTimeout(lockTimerRef.current);
+  }, []);
   const [sessionStats, setSessionStats] = useState<React.ComponentProps<typeof Result> | null>(null);
 
-
-  // Enhanced function to detect and format code blocks with syntax highlighting
-  const formatQuestionText = (text: string) => {
-    // Split text by code blocks (content between ``` markers)
-    const parts = text.split(/```/);
-    
-    return parts.map((part, index) => {
-      if (index % 2 === 1) {
-        // This is a code block
-        return (
-          <div key={index} className="my-4 overflow-hidden bg-[#1a1a1a]">
-            <div className="bg-neutral-800 px-4 py-2 text-xs text-neutral-400 font-mono">
-              <span>Algorithm</span>
-            </div>
-            <div className={`p-4 ${spaceGrotesk.className} `}>
-              <SyntaxHighlighter code={part.trim()} />
-            </div>
-          </div>
-        );
-      } else {
-        // This is regular text
-        return part && (
-          <div key={index} className="text-white leading-relaxed whitespace-pre-wrap">
-            {part.trim()}
-          </div>
-        );
-      }
-    });
-  };
-
-  // Custom syntax highlighter component
-  const SyntaxHighlighter = ({ code }: { code: string }) => {
-    const codeRef = React.useRef<HTMLElement>(null);
-
-    useEffect(() => {
-      if (codeRef.current) {
-        // Apply custom pseudo-code highlighting
-        Prism.highlightElement(codeRef.current);
-      }
-    }, [code]);
-
-    // Enhanced highlighting for pseudo-code
-    const highlightPseudoCode = (code: string) => {
-      // Escape HTML first to prevent conflicts
-      const highlightedCode = code
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;');
-
-      // Create a tokenization system to prevent overlapping replacements
-      const tokens: Array<{start: number, end: number, type: string, content: string}> = [];
-      
-      // Find all patterns and their positions
-      const patterns = [
-        // Comments
-        { regex: /(\/\/.*$)/gm, type: 'comment' },
-        // Strings
-        { regex: /"([^"]*)"/g, type: 'string' },
-        // Function definitions
-        { regex: /\b(function|FUNCTION)\s+([A-Z_][A-Z0-9_]*)/gi, type: 'function-def' },
-        // Control structures
-        { regex: /\b(if|else|while|for|return|break|continue|elif|end)\b/gi, type: 'keyword' },
-        // Data structures and types
-        { regex: /\b(ARRAY|STRING|MAP|SET|STACK|QUEUE|TREE|NODE|LIST|INT|FLOAT|BOOL)\b/g, type: 'class-name' },
-        // Built-in functions
-        { regex: /\b(length|LENGTH|size|SIZE|empty|EMPTY|push|POP|enqueue|dequeue|append|insert|remove|sort|reverse|MAX|MIN|ABS)\b/g, type: 'function' },
-        // Numbers
-        { regex: /\b\d+\.?\d*\b/g, type: 'number' },
-        // Operators
-        { regex: /[=<>!+\-*\/≤≥≠]+/g, type: 'operator' },
-        // Variables (simple pattern)
-        { regex: /\b[a-zA-Z_][a-zA-Z0-9_]*\b/g, type: 'variable' }
-      ];
-
-      // Find all matches without overlapping
-      patterns.forEach(pattern => {
-        let match;
-        const regex = new RegExp(pattern.regex.source, pattern.regex.flags);
-        while ((match = regex.exec(highlightedCode)) !== null) {
-          const start = match.index;
-          const end = start + match[0].length;
-          
-          // Check if this position is already covered by a higher priority token
-          const isOverlapping = tokens.some(token => 
-            (start >= token.start && start < token.end) || 
-            (end > token.start && end <= token.end) ||
-            (start <= token.start && end >= token.end)
-          );
-          
-          if (!isOverlapping) {
-            tokens.push({
-              start,
-              end,
-              type: pattern.type,
-              content: match[0]
-            });
-          }
-        }
-      });
-
-      // Sort tokens by position
-      tokens.sort((a, b) => a.start - b.start);
-
-      // Build the highlighted code
-      let result = '';
-      let lastIndex = 0;
-
-      tokens.forEach(token => {
-        // Add text before this token
-        result += highlightedCode.slice(lastIndex, token.start);
-        
-        // Add the highlighted token
-        if (token.type === 'function-def') {
-          const parts = token.content.match(/\b(function|FUNCTION)\s+([A-Z_][A-Z0-9_]*)/i);
-          if (parts) {
-            result += `<span class="token keyword">${parts[1]}</span> <span class="token function">${parts[2]}</span>`;
-          } else {
-            result += `<span class="token ${token.type}">${token.content}</span>`;
-          }
-        } else {
-          result += `<span class="token ${token.type}">${token.content}</span>`;
-        }
-        
-        lastIndex = token.end;
-      });
-
-      // Add remaining text
-      result += highlightedCode.slice(lastIndex);
-
-      return result;
-    };
-
-    return (
-      <pre className={`${spaceGrotesk.className} text-sm overflow-x-auto`}>
-        <code 
-          ref={codeRef}
-          className="language-javascript"
-          dangerouslySetInnerHTML={{ __html: highlightPseudoCode(code) }}
-        />
-      </pre>
-    );
-  };
 
   useEffect(() => {
     if (questions.length === 0) {
@@ -230,7 +82,8 @@ const SoloPractice = () => {
   }, [currentIndex, questions, soloSessionId, nextQuestion, mode]);
 
   useEffect(() => {
-    if (mode === "timed" && timeLeft > 0) {
+    // Paused while an answer is locking in, so the timeout can't also advance the question
+    if (mode === "timed" && timeLeft > 0 && !lockedIn) {
       const timer = setInterval(() => {
         setTimeLeft((prev) => {
           if (prev <= 1) {
@@ -244,7 +97,7 @@ const SoloPractice = () => {
       }, 1000);
       return () => clearInterval(timer);
     }
-  }, [timeLeft, handleNext, mode]);
+  }, [timeLeft, handleNext, mode, lockedIn]);
 
   useEffect(() => {
     if (mode === "timed") {
@@ -277,9 +130,14 @@ const SoloPractice = () => {
   };
 
   const handleSubmit = () => {
-    if (!selectedAnswer) return;
+    if (!selectedAnswer || lockedIn) return;
     submitAnswer(currentQuestion.id, selectedAnswer);
-    handleNext();
+    // Show the locked-in state for a beat, then move on (grading happens when the session ends)
+    setLockedIn(true);
+    lockTimerRef.current = setTimeout(() => {
+      setLockedIn(false);
+      handleNext();
+    }, 600);
   };
 
   // Show nothing while redirecting to login
@@ -342,37 +200,16 @@ const SoloPractice = () => {
           transition={{ duration: 0.6, delay: 0.1 }}
         >
           
-          {currentQuestion.text && (
-            <div className="mb-6 ">
-              {formatQuestionText(currentQuestion.text)}
-            </div>
-          )}
+          {currentQuestion.text && <QuestionText text={currentQuestion.text} className="mb-6" />}
 
-          <div className="space-y-4">
-              {currentQuestion.options.map((option: string, idx: number) => (
-                <button
-                  key={idx}
-                  onClick={() => setSelectedAnswer(option)}
-                  className={`w-full p-4 rounded-xl border-2 text-left transition-all hover:cursor-pointer ${
-                    selectedAnswer === option
-                      ? "border-lime-500 bg-lime-500/20"
-                      : "border-neutral-600 hover:border-lime-500/50"
-                  }`}
-                >
-                  <div className="flex items-center gap-3">
-                    <div
-                      className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
-                        selectedAnswer === option ? "border-lime-500 bg-lime-500" : "border-neutral-600"
-                      }`}
-                    >
-                      <span className="text-white font-bold text-sm">{String.fromCharCode(65 + idx)}</span>
-                    </div>
-                    <span className="font-mono text-white">{option}</span>
-                  </div>
-                </button>
-              ))}
-            </div>
-          
+          <AnswerOptions
+            options={currentQuestion.options}
+            selected={selectedAnswer}
+            onSelect={setSelectedAnswer}
+            locked={lockedIn}
+            disabled={submitting}
+          />
+
         </motion.div>
 
         {/* Action Buttons */}
@@ -386,25 +223,37 @@ const SoloPractice = () => {
             <>
               <button
                 onClick={handleSkip}
-                disabled={submitting}
+                disabled={submitting || lockedIn}
                 className={`px-6 py-3 rounded-xl font-semibold transition-all ${
-                  submitting
+                  submitting || lockedIn
                     ? "bg-neutral-700 text-neutral-500 cursor-not-allowed"
-                    : "bg-neutral-600 hover:bg-neutral-500"
+                    : "bg-neutral-600 hover:bg-neutral-500 active:scale-95"
                 }`}
               >
-                {submitting ? "Finishing..." : "Skip Question"}
+                Skip Question
               </button>
               <button
                 onClick={handleSubmit}
-                disabled={selectedAnswer === null || submitting}
-                className={`px-8 py-3 rounded-xl font-semibold transition-all ${
-                  selectedAnswer !== null && !submitting
-                    ? "bg-lime-500 hover:bg-lime-400 text-black"
-                    : "bg-neutral-600 text-neutral-400 cursor-not-allowed"
+                disabled={selectedAnswer === null || submitting || lockedIn}
+                className={`min-w-48 px-8 py-3 rounded-xl font-semibold transition-all flex items-center justify-center gap-2 ${
+                  lockedIn
+                    ? "bg-lime-500/15 text-lime-300 border border-lime-500/40 cursor-default"
+                    : selectedAnswer !== null && !submitting
+                      ? "bg-lime-500 hover:bg-lime-400 text-black active:scale-95"
+                      : "bg-neutral-600 text-neutral-400 cursor-not-allowed"
                 }`}
               >
-                {submitting ? "Finishing..." : "Submit Answer"}
+                {submitting ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" /> Finishing...
+                  </>
+                ) : lockedIn ? (
+                  <>
+                    <CheckCircle2 className="w-4 h-4" /> Answer saved
+                  </>
+                ) : (
+                  "Submit Answer"
+                )}
               </button>
             </>
           

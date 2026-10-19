@@ -9,6 +9,7 @@ import SavedQuestionsService from '@/services/savedQuestionsService';
 import { Bookmark } from 'lucide-react';
 import Link from 'next/link';
 import Confetti from 'react-confetti';
+import QuestionText, { InlineText } from "@/components/quiz/QuestionText";
 
 interface QuestionResult {
   id: string;
@@ -176,9 +177,7 @@ export default function BattleResultPage() {
                   <Bookmark className={`w-5 h-5 transition-all duration-200 ${savedQuestions[q.id] ? 'text-lime-500 fill-lime-400' : 'text-white group-hover:text-lime-600'}`} />
                 </button>
               </div>
-              <div className="mb-4 text-gray-300">
-                {q.text}
-              </div>
+              <QuestionText text={q.text} className="mb-4 text-gray-300" />
               <div className="space-y-3">
                 {q.options.map((option, idx) => {
                   const isCorrect = option === q.correctAnswer;
@@ -200,7 +199,7 @@ export default function BattleResultPage() {
                           <span className="font-mono text-sm">
                             {String.fromCharCode(65 + idx)}
                           </span>
-                          <span>{option}</span>
+                          <span className="font-mono min-w-0 break-words"><InlineText text={option} /></span>
                         </div>
                         <div className="flex gap-2">
                           {isCorrect && (

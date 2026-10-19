@@ -1,18 +1,14 @@
 "use client";
 import React from "react";
-import { Swords } from "lucide-react";
+import { Swords, Loader2, CheckCircle2, Zap } from "lucide-react";
 import { useState, useEffect } from "react";
-import Prism from "prismjs";
-import "prismjs/themes/prism-dark.css";
-import "prismjs/components/prism-javascript";
-import "prismjs/components/prism-python";
-import "prismjs/components/prism-java";
-import "prismjs/components/prism-clike";
 import MatchService from "@/services/matchService";
 import { getSocket, joinMatchRoom, leaveMatchRoom } from "@/lib/socket";
 import { useMatchStore } from "@/stores/matchStore";
 import { useUser } from "@/contexts/userContext";
 import { useParams, useRouter } from "next/navigation";
+import AnswerOptions from "@/components/quiz/AnswerOptions";
+import QuestionText from "@/components/quiz/QuestionText";
 
 const QUESTION_SECONDS = 60;
 
@@ -28,60 +24,8 @@ interface QuestionClock {
 //TODO: opponent name -> {matchData?.user2Id} kinda like Archit vs Bob
 export default function BattlePlayPage() {
   const { supabaseUser } = useUser();
+  const myUserId = (supabaseUser as { id?: string } | null)?.id;
 
-  // Prism syntax highlighter for code blocks
-  const spaceGrotesk = { className: "" };
-
-  // Enhanced function to detect and format code blocks with syntax highlighting
-  const formatQuestionText = (text: string) => {
-    const parts = text.split(/```/);
-    return parts.map((part, index) => {
-      if (index % 2 === 1) {
-        // This is a code block
-        return (
-          <div key={index} className="my-4 overflow-hidden bg-[#1a1a1a]">
-            <div className="bg-neutral-800 px-4 py-2 text-xs text-neutral-400 font-mono">
-              <span>Algorithm</span>
-            </div>
-            <div className={`p-4 ${spaceGrotesk.className} `}>
-              <SyntaxHighlighter code={part.trim()} />
-            </div>
-          </div>
-        );
-      } else {
-        // This is regular text
-        return (
-          part && (
-            <div
-              key={index}
-              className="text-white leading-relaxed whitespace-pre-wrap"
-            >
-              {part.trim()}
-            </div>
-          )
-        );
-      }
-    });
-  };
-
-  // Custom syntax highlighter component
-  const SyntaxHighlighter = ({ code }: { code: string }) => {
-    const codeRef = React.useRef<HTMLElement>(null);
-
-    React.useEffect(() => {
-      if (codeRef.current) {
-        Prism.highlightElement(codeRef.current);
-      }
-    }, [code]);
-
-    return (
-      <pre className={`text-sm overflow-x-auto`}>
-        <code ref={codeRef} className="language-javascript">
-          {code}
-        </code>
-      </pre>
-    );
-  };
   const params = useParams();
   const matchId = params?.id as string;
   // Local state
@@ -102,6 +46,9 @@ export default function BattlePlayPage() {
   const [isQuizComplete, setIsQuizComplete] = useState(false);
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [isWaitingForOpponent, setIsWaitingForOpponent] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [opponentAnswered, setOpponentAnswered] = useState(false);
   const [clock, setClock] = useState<{ index: number; startsAt: number; endsAt: number; offset: number } | null>(null);
   const [now, setNow] = useState(() => Date.now());
   const [waitingForOpponentJoin, setWaitingForOpponentJoin] = useState(false);
@@ -121,6 +68,8 @@ export default function BattlePlayPage() {
       setSelectedAnswer(null);
       setHasSubmitted(false);
       setIsWaitingForOpponent(false);
+      setSubmitError(null);
+      setOpponentAnswered(false);
     }
     setWaitingForOpponentJoin(false);
     // offset corrects for client/server clock skew
@@ -235,6 +184,10 @@ export default function BattlePlayPage() {
 
     s.on("match:question", applyQuestion);
     s.on("match:waiting", () => setWaitingForOpponentJoin(true));
+    // Opponent progress for the live question (correctness is never revealed during play)
+    s.on("match:answer", (d: { userId: string; index: number }) => {
+      if (d.userId !== myUserId && d.index === clockIndexRef.current) setOpponentAnswered(true);
+    });
 
     s.on("match:completed", () => {
       setIsQuizComplete(true);
@@ -249,9 +202,10 @@ export default function BattlePlayPage() {
       if (matchId) leaveMatchRoom(matchId);
       s.off("match:question", applyQuestion);
       s.off("match:waiting");
+      s.off("match:answer");
       s.off("match:completed");
     };
-  }, [matchId, router, clearMatch, applyQuestion]);
+  }, [matchId, router, clearMatch, applyQuestion, myUserId]);
 
   // Backfill usernames if missing by calling the lightweight endpoint once
   React.useEffect(() => {
@@ -287,9 +241,9 @@ export default function BattlePlayPage() {
   // }, [socket]);
 
   const handleLocalAdvance = React.useCallback(() => {
-    // Wait for server; local optimistic fallback
+    // Last question: after a beat (so the locked-in state is visible), show the waiting screen
     if (currentIndex === questions.length - 1) {
-      setIsQuizComplete(true);
+      setTimeout(() => setIsQuizComplete(true), 900);
     }
   }, [currentIndex, questions.length]);
 
@@ -297,24 +251,30 @@ export default function BattlePlayPage() {
   // Client no longer owns timer; server authoritative. (Optional local fallback removed)
 
   const handleSubmit = async () => {
-    if (!selectedAnswer || hasSubmitted) return;
+    if (!selectedAnswer || hasSubmitted || isSubmitting) return;
 
-    setHasSubmitted(true);
-    setIsWaitingForOpponent(true);
-
+    setIsSubmitting(true);
+    setSubmitError(null);
     try {
       const q = questions[currentIndex];
       await MatchService.submitAnswer(matchId, {
         questionId: q.id,
         answer: selectedAnswer,
       });
-      // Server will emit advance / reveal; optimistic safeguard
+      setHasSubmitted(true);
+      setIsWaitingForOpponent(true);
       handleLocalAdvance();
     } catch (e) {
-      console.error(e);
-      // Reset states on error
-      setHasSubmitted(false);
-      setIsWaitingForOpponent(false);
+      const message = (e as { response?: { data?: { error?: string } } })?.response?.data?.error;
+      if (message === "Already answered") {
+        // A retry after a lost response: the server has it, so treat it as locked in
+        setHasSubmitted(true);
+        setIsWaitingForOpponent(true);
+      } else {
+        setSubmitError(message || "Couldn't submit your answer. Try again.");
+      }
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -433,66 +393,60 @@ export default function BattlePlayPage() {
         </div>
         {/* Question Card */}
         <div className="bg-neutral-900/50 border border-neutral-800 p-8 rounded-2xl mb-8">
-          {currentQuestion.text && (
-            <div className="mb-6 ">
-              {formatQuestionText(currentQuestion.text)}
-            </div>
-          )}
-          <div className="space-y-4">
-            {currentQuestion.options?.map((option: string, idx: number) => (
-              <button
-                key={idx}
-                onClick={() => !hasSubmitted && setSelectedAnswer(option)}
-                disabled={hasSubmitted}
-                className={`w-full p-4 rounded-xl border-2 text-left transition-all hover:caret-fuchsia-800 hover:cursor-pointer ${
-                  hasSubmitted
-                    ? "cursor-not-allowed opacity-60"
-                    : "hover:cursor-pointer"
-                } ${
-                  selectedAnswer === option
-                    ? "border-lime-500 bg-lime-500/20"
-                    : "border-neutral-600 hover:border-lime-500/50"
-                }`}
-              >
-                <div className="flex items-center gap-3">
-                  <div
-                    className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
-                      selectedAnswer === option
-                        ? "border-lime-500 bg-lime-500"
-                        : "border-neutral-600"
-                    }`}
-                  >
-                    <span className="text-white font-bold text-sm">
-                      {String.fromCharCode(65 + idx)}
-                    </span>
-                  </div>
-                  <span className="text-white">{option}</span>
-                </div>
-              </button>
-            ))}
-          </div>
+          {currentQuestion.text && <QuestionText text={currentQuestion.text} className="mb-6" />}
+          <AnswerOptions
+            options={currentQuestion.options ?? []}
+            selected={selectedAnswer}
+            onSelect={(option) => {
+              setSelectedAnswer(option);
+              setSubmitError(null);
+            }}
+            locked={hasSubmitted}
+            disabled={isSubmitting || displayTimeLeft === 0}
+          />
         </div>
 
-        {/* Action Buttons */}
-        <div className="flex gap-4 justify-center">
-          {isWaitingForOpponent && (
-            <div className="px-8 py-3 text-center">
-              <p className="text-yellow-400 font-semibold">
-                Waiting for opponent...
-              </p>
-            </div>
-          )}
+        {/* Submit + live status */}
+        <div className="flex flex-col items-center gap-3">
           <button
             onClick={handleSubmit}
-            disabled={selectedAnswer === null || hasSubmitted}
-            className={`px-8 py-3 rounded-xl font-semibold transition-all hover:cursor-pointer ${
-              selectedAnswer !== null && !hasSubmitted
-                ? "bg-lime-500 hover:bg-lime-400 text-black"
-                : "bg-neutral-600 text-neutral-400 cursor-not-allowed"
+            disabled={selectedAnswer === null || hasSubmitted || isSubmitting}
+            className={`min-w-52 px-8 py-3 rounded-xl font-semibold transition-all flex items-center justify-center gap-2 ${
+              hasSubmitted
+                ? "bg-lime-500/15 text-lime-300 border border-lime-500/40 cursor-default"
+                : selectedAnswer !== null && !isSubmitting
+                  ? "bg-lime-500 hover:bg-lime-400 text-black cursor-pointer active:scale-95"
+                  : "bg-neutral-700 text-neutral-400 cursor-not-allowed"
             }`}
           >
-            {hasSubmitted ? "Submitted" : "Submit Answer"}
+            {isSubmitting ? (
+              <>
+                <Loader2 className="w-4 h-4 animate-spin" /> Locking in...
+              </>
+            ) : hasSubmitted ? (
+              <>
+                <CheckCircle2 className="w-4 h-4" /> Answer locked in
+              </>
+            ) : (
+              "Submit Answer"
+            )}
           </button>
+
+          <div className="min-h-6 text-sm font-medium" aria-live="polite">
+            {submitError ? (
+              <p className="text-red-400">{submitError}</p>
+            ) : isWaitingForOpponent ? (
+              opponentAnswered ? (
+                <p className="text-lime-300 animate-in fade-in">Both answered. Next question incoming...</p>
+              ) : (
+                <p className="text-yellow-400 animate-pulse">Waiting for your opponent...</p>
+              )
+            ) : opponentAnswered ? (
+              <p className="flex items-center gap-1 text-orange-400 animate-in fade-in slide-in-from-bottom-1">
+                <Zap className="w-4 h-4" /> Your opponent has answered
+              </p>
+            ) : null}
+          </div>
         </div>
       </div>
     </div>
