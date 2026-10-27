@@ -29,7 +29,7 @@ export function XPProgress({
   xpRequiredForCurrentLevel,
   progress,
   tierName,
-  tierColor,
+
   isAtMilestone,
   totalXP, // legacy
   className 
@@ -67,65 +67,55 @@ export function XPProgress({
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-3">
           {/* Tier Icon */}
-          <div 
-            className="w-10 h-10 rounded-full flex items-center justify-center shadow-lg border-2 transition-all"
-            style={{ 
-              backgroundColor: `${tierColor || '#84CC16'}20`,
-              borderColor: tierColor || '#84CC16',
-              color: tierColor || '#84CC16'
-            }}
-          >
+          <div className="w-10 h-10 rounded-md flex items-center justify-center border border-blue-100 bg-blue-50 text-blue-700">
             <TierIcon className="w-5 h-5" />
           </div>
-          
+
           {/* Level and Tier Info */}
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-xl font-bold text-white">Level {safeLevel}</span>
+              <span className="text-xl font-semibold text-slate-900">Level {safeLevel}</span>
               {isAtMilestone && (
-                <Crown className="w-5 h-5 text-yellow-400" />
+                <Crown className="w-5 h-5 text-amber-600" />
               )}
             </div>
             {tierName && (
-              <span 
-                className="text-sm font-semibold uppercase tracking-wide"
-                style={{ color: tierColor || '#84CC16' }}
-              >
+              <span className="section-label">
                 {tierName}
               </span>
             )}
           </div>
         </div>
-        
+
         {/* XP Badge */}
-        <Badge className="text-sm">
+        <Badge variant="outline" className="text-sm border-slate-200 bg-white text-slate-700">
           {displayCurrentLevelXP.toLocaleString()} / {displayXPRequired.toLocaleString()} XP
         </Badge>
       </div>
-      
+
       {/* Progress Bar */}
-      <div className="space-y-2 z-2">
-        <Progress 
-          value={Math.min(displayProgress, 100)} 
-          className="h-4 bg-neutral-800 z-10" 
-          barClassName="bg-gradient-to-r from-lime-400 to-lime-500 transition-all duration-300"
+      <div className="space-y-2">
+        <Progress
+          value={Math.min(displayProgress, 100)}
+          className="h-3 bg-slate-200"
+          barClassName="bg-blue-700 transition-all duration-300"
         />
-        
+
         {/* Progress Info */}
         <div className="flex justify-between items-center text-sm">
-          <span className="text-lime-400 font-semibold">
+          <span className="text-blue-700 font-semibold">
             {Math.round(displayProgress)}% Complete
           </span>
-          <span className="text-muted-foreground">
+          <span className="text-slate-500">
             {displayXPToNext.toLocaleString()} XP to next level
           </span>
         </div>
-        
+
         {/* Milestone Indicator */}
         {isAtMilestone && (
-          <div className="flex items-center gap-2 mt-3 p-2 bg-yellow-500/10 border border-yellow-500/30 rounded-lg">
-            <Star className="w-4 h-4 text-yellow-400" />
-            <span className="text-yellow-300 text-sm font-medium">
+          <div className="flex items-center gap-2 mt-3 p-2 bg-amber-50 border border-amber-200 rounded-md">
+            <Star className="w-4 h-4 text-amber-600" />
+            <span className="text-amber-700 text-sm font-medium">
               Milestone Level! You earned bonus XP for reaching level {safeLevel}
             </span>
           </div>

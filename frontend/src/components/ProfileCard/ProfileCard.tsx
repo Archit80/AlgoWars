@@ -23,12 +23,6 @@ interface ProfileCardProps {
   onContactClick?: () => void;
 }
 
-const DEFAULT_BEHIND_GRADIENT =
-  "radial-gradient(farthest-side circle at var(--pointer-x) var(--pointer-y),hsla(266,100%,90%,var(--card-opacity)) 4%,hsla(266,50%,80%,calc(var(--card-opacity)*0.75)) 10%,hsla(266,25%,70%,calc(var(--card-opacity)*0.5)) 50%,hsla(266,0%,60%,0) 100%),radial-gradient(35% 52% at 55% 20%,#00ffaac4 0%,#073aff00 100%),radial-gradient(100% 100% at 50% 50%,#00c1ffff 1%,#073aff00 76%),conic-gradient(from 124deg at 50% 50%,#c137ffff 0%,#07c6ffff 40%,#07c6ffff 60%,#c137ffff 100%)";
-
-const DEFAULT_INNER_GRADIENT =
-  "linear-gradient(145deg,#60496e8c 0%,#71C4FF44 100%)";
-
 const ANIMATION_CONFIG = {
   SMOOTH_DURATION: 600,
   INITIAL_DURATION: 1500,
@@ -59,9 +53,6 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
   avatarUrl = "<Placeholder for avatar URL>",
   iconUrl = "<Placeholder for icon URL>",
   grainUrl = "<Placeholder for grain URL>",
-  behindGradient,
-  innerGradient,
-  showBehindGradient = true,
   className = "",
   enableTilt = true,
   enableMobileTilt = false,
@@ -301,12 +292,8 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
       ({
         "--icon": iconUrl ? `url(${iconUrl})` : "none",
         "--grain": grainUrl ? `url(${grainUrl})` : "none",
-        "--behind-gradient": showBehindGradient
-          ? (behindGradient ?? DEFAULT_BEHIND_GRADIENT)
-          : "none",
-        "--inner-gradient": innerGradient ?? DEFAULT_INNER_GRADIENT,
       }) as React.CSSProperties,
-    [iconUrl, grainUrl, showBehindGradient, behindGradient, innerGradient],
+    [iconUrl, grainUrl],
   );
 
   const handleContactClick = useCallback(() => {
@@ -320,13 +307,14 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
       style={cardStyle}
     >
       <section ref={cardRef} className="pc-card">
-        <div className="pc-inside">
-          <div className="pc-shine" />
-          <div className="pc-glare" />
-          <div className="pc-content pc-avatar-content">
+        <div className="pc-band">
+          <span>Player Identification</span>
+        </div>
+        <div className="pc-body">
+          <div className="pc-avatar-frame">
             <Image
-              width={1080}
-              height={1080}
+              width={400}
+              height={400}
               className="avatar"
               src={avatarUrl}
               alt={`${name || "User"} avatar`}
@@ -336,13 +324,22 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
                 target.style.display = "none";
               }}
             />
-            {showUserInfo && (
-              <div className="pc-user-info">
-                <div className="pc-user-details">
-                  <div className="pc-mini-avatar">
+          </div>
+          <div className="pc-details">
+            <h3>{name}</h3>
+            <p>{title}</p>
+          </div>
+        </div>
+        {showUserInfo && (
+          <>
+            <div className="pc-fields">
+              <div className="pc-row">
+                <span className="pc-label">Username</span>
+                <span className="pc-value flex items-center gap-2">
+                  <span className="pc-mini-avatar">
                     <Image
-                      width={256}
-                      height={256}
+                      width={64}
+                      height={64}
                       src={miniAvatarUrl || avatarUrl}
                       alt={`${name || "User"} mini avatar`}
                       loading="lazy"
@@ -352,31 +349,27 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
                         target.src = avatarUrl;
                       }}
                     />
-                  </div>
-                  <div className="pc-user-text">
-                    <div className="pc-handle">@{handle}</div>
-                    <div className="pc-status">{status}</div>
-                  </div>
-                </div>
-                <button
-                  className="pc-contact-btn"
-                  onClick={handleContactClick}
-                  style={{ pointerEvents: "auto" }}
-                  type="button"
-                  aria-label={`Contact ${name || "user"}`}
-                >
-                  {contactText}
-                </button>
+                  </span>
+                  @{handle}
+                </span>
               </div>
-            )}
-          </div>
-          <div className="pc-content">
-            <div className="pc-details">
-              <h3>{name}</h3>
-              <p>{title}</p>
+              <div className="pc-row">
+                <span className="pc-label">Status</span>
+                <span className="pc-value">{status}</span>
+              </div>
             </div>
-          </div>
-        </div>
+            <div className="pc-footer">
+              <button
+                className="pc-contact-btn"
+                onClick={handleContactClick}
+                type="button"
+                aria-label={`Contact ${name || "user"}`}
+              >
+                {contactText}
+              </button>
+            </div>
+          </>
+        )}
       </section>
     </div>
   );

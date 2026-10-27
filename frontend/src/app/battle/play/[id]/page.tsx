@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Swords, Loader2, CheckCircle2, Zap } from "lucide-react";
+import { Handshake, Loader2, CheckCircle2, Zap } from "lucide-react";
 import { useState, useEffect } from "react";
 import MatchService from "@/services/matchService";
 import { getSocket, joinMatchRoom, leaveMatchRoom } from "@/lib/socket";
@@ -279,40 +279,29 @@ export default function BattlePlayPage() {
   };
 
   if (questions.length === 0) {
-    return <div className="text-white p-8">Loading questions...</div>;
+    return <div className="text-slate-600 p-8">Loading questions...</div>;
   }
 
   if (isQuizComplete || currentIndex >= questions.length) {
     return (
-      <div className="text-white p-8 flex items-center justify-center min-h-[60vh] ">
-        <div className="max-w-lg w-full mx-auto bg-gradient-to-br from-neutral-900 via-neutral-950 to-neutral-900 border border-lime-500/30 shadow-xl rounded-3xl p-8 animate-pulse-glow">
-          <div className="flex items-center gap-6 mb-6">
-            <div
-              className="aspect-square w-24 rounded-full bg-lime-500 flex items-center justify-center shadow-lg"
-              style={{ boxShadow: "0 0 16px 4px #a3e635, 0 0 0 8px #84cc16" }}
-            >
-              <Swords className="w-6 h-6 text-white" />
+      <div className="p-8 flex items-center justify-center min-h-[60vh] bg-white text-slate-900">
+        <div className="max-w-lg w-full mx-auto bg-white border border-slate-200 shadow-sm rounded-lg p-8">
+          <div className="flex items-center gap-6">
+            <div className="aspect-square w-16 shrink-0 rounded-md bg-blue-50 border border-blue-100 flex items-center justify-center">
+              <Handshake className="w-6 h-6 text-blue-700" />
             </div>
             <div className="text-left">
-              <h2 className="text-2xl font-extrabold text-lime-400 drop-shadow mb-2">
-                Opponent still in the Arena...
+              <div className="section-label mb-1">Awaiting Peer</div>
+              <h2 className="text-xl font-bold text-slate-900 mb-2">
+                Peer still in progress
               </h2>
-              <p className="text-base text-neutral-300 font-medium leading-relaxed">
-                They&apos;re solving their final puzzles — stay locked in.
-                You&apos;ll jump straight into the results when they finish.
+              <p className="text-sm text-slate-600 leading-relaxed">
+                They&apos;re working through their final questions.
+                You&apos;ll be taken to the results as soon as they finish.
               </p>
             </div>
           </div>
         </div>
-        <style>{`
-          @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 0 10px rgba(132,204,22,0.2); }
-            50% { box-shadow: 0 0 30px rgba(132,204,22,0.5); }
-          }
-          .animate-pulse-glow {
-            animation: pulse-glow 4s infinite;
-          }
-        `}</style>
       </div>
     );
   }
@@ -326,45 +315,43 @@ export default function BattlePlayPage() {
 
   if (!clock || startsIn > 0) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#0E0E0E] text-white">
+      <div className="min-h-screen flex items-center justify-center bg-white text-slate-900">
         <div className="text-center">
-          <p className="text-neutral-400 mb-2">
+          <p className="text-slate-600 mb-2">
             {waitingForOpponentJoin
-              ? "Waiting for your opponent to join..."
+              ? "Waiting for your peer to join..."
               : !clock
                 ? "Connecting to match..."
                 : "Get ready"}
           </p>
-          {clock && <p className="text-6xl font-bold text-lime-400">{startsIn}</p>}
+          {clock && <p className="text-6xl font-bold text-blue-700">{startsIn}</p>}
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen p-6 bg-[#0E0E0E] text-white">
+    <div className="min-h-screen p-6 bg-white text-slate-900">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-2xl font-bold text-lime-500">
+            <div className="section-label mb-1">{currentQuestion.categories?.join(", ") || "Challenge"}</div>
+            <h1 className="text-2xl font-bold text-slate-900">
               Question {currentIndex + 1} of {questions.length}
             </h1>
-            <p className="text-neutral-400">{`> ${
-              currentQuestion.categories?.join(", ") || "Battle"
-            }`}</p>
           </div>
           <div className="text-right">
             <div className="flex items-center justify-end gap-4">
               <div className="flex items-center gap-2">
-                <span className="text-xl font-bold text-lime-400">
+                <span className="text-xl font-bold text-blue-700 tabular-nums">
                   {displayTimeLeft}s
                 </span>
               </div>
-              <div className="w-20 h-2 bg-neutral-700 rounded-full overflow-hidden">
+              <div className="w-20 h-2 bg-slate-200 rounded-full overflow-hidden">
                 <div
                   className={`h-full transition-all duration-1000 ${
-                    displayTimeLeft < 10 ? "bg-red-500" : "bg-lime-500"
+                    displayTimeLeft < 10 ? "bg-red-600" : "bg-blue-700"
                   }`}
                   style={{ width: `${(displayTimeLeft / 60) * 100}%` }}
                 />
@@ -373,7 +360,7 @@ export default function BattlePlayPage() {
             <div className="mt-2">
               {(() => {
                 let player1 = "Player 1";
-                let player2 = "Opponent";
+                let player2 = "Peer";
 
                 if (matchData) {
                   player1 = matchData.user1Username || "Player 1";
@@ -381,10 +368,10 @@ export default function BattlePlayPage() {
                 }
 
                 return (
-                  <p className="text-sm text-neutral-400">
-                    <span className="font-bold text-white">{player1}</span>
-                    <span className="text-neutral-600"> vs </span>
-                    <span className="font-bold text-white">{player2}</span>
+                  <p className="text-sm text-slate-500">
+                    <span className="font-semibold text-slate-900">{player1}</span>
+                    <span className="text-slate-400"> and </span>
+                    <span className="font-semibold text-slate-900">{player2}</span>
                   </p>
                 );
               })()}
@@ -392,7 +379,7 @@ export default function BattlePlayPage() {
           </div>
         </div>
         {/* Question Card */}
-        <div className="bg-neutral-900/50 border border-neutral-800 p-8 rounded-2xl mb-8">
+        <div className="bg-white border border-slate-200 shadow-sm p-8 rounded-lg mb-8">
           {currentQuestion.text && <QuestionText text={currentQuestion.text} className="mb-6" />}
           <AnswerOptions
             options={currentQuestion.options ?? []}
@@ -411,12 +398,12 @@ export default function BattlePlayPage() {
           <button
             onClick={handleSubmit}
             disabled={selectedAnswer === null || hasSubmitted || isSubmitting}
-            className={`min-w-52 px-8 py-3 rounded-xl font-semibold transition-all flex items-center justify-center gap-2 ${
+            className={`min-w-52 px-8 py-3 rounded-md font-semibold transition-colors flex items-center justify-center gap-2 ${
               hasSubmitted
-                ? "bg-lime-500/15 text-lime-300 border border-lime-500/40 cursor-default"
+                ? "bg-emerald-50 text-emerald-600 border border-emerald-600 cursor-default"
                 : selectedAnswer !== null && !isSubmitting
-                  ? "bg-lime-500 hover:bg-lime-400 text-black cursor-pointer active:scale-95"
-                  : "bg-neutral-700 text-neutral-400 cursor-not-allowed"
+                  ? "bg-blue-700 hover:bg-blue-800 text-white cursor-pointer"
+                  : "bg-slate-200 text-slate-500 cursor-not-allowed"
             }`}
           >
             {isSubmitting ? (
@@ -434,16 +421,16 @@ export default function BattlePlayPage() {
 
           <div className="min-h-6 text-sm font-medium" aria-live="polite">
             {submitError ? (
-              <p className="text-red-400">{submitError}</p>
+              <p className="text-red-600">{submitError}</p>
             ) : isWaitingForOpponent ? (
               opponentAnswered ? (
-                <p className="text-lime-300 animate-in fade-in">Both answered. Next question incoming...</p>
+                <p className="text-emerald-600">Both answered. Next question incoming...</p>
               ) : (
-                <p className="text-yellow-400 animate-pulse">Waiting for your opponent...</p>
+                <p className="text-amber-600">Waiting for your peer...</p>
               )
             ) : opponentAnswered ? (
-              <p className="flex items-center gap-1 text-orange-400 animate-in fade-in slide-in-from-bottom-1">
-                <Zap className="w-4 h-4" /> Your opponent has answered
+              <p className="flex items-center gap-1 text-amber-600">
+                <Zap className="w-4 h-4" /> Your peer has answered
               </p>
             ) : null}
           </div>

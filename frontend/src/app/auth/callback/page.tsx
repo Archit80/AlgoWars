@@ -37,7 +37,7 @@ export default function AuthCallback() {
   }, [refreshUser]);
 
   return (
-    <div className="min-h-screen bg-zinc-950 flex items-center justify-center">
+    <div className="min-h-screen bg-white flex items-center justify-center">
       <Loader />
     </div>
   );

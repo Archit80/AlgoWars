@@ -1,23 +1,15 @@
 "use client";
 import "./home.css";
-// WebGL background: loaded after the page renders, not part of the initial bundle
-import { LazyPrism as Prism } from "@/components/LazyComponents";
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import { useUser } from "@/contexts/userContext";
 import { Button } from "@/components/ui/button";
-import { Leaderboard } from "@/components/HOME/Leaderboard";
+// import { Leaderboard } from "@/components/HOME/Leaderboard";
 import Header from "@/components/HOME/Header";
-import { Trophy, Zap, Target, Users, Swords } from "lucide-react";
+import { Trophy, Zap, Target, Users, Handshake } from "lucide-react";
 import Link from "next/link";
 import { XPProgress } from "@/components/HOME/XPProgress";
-import { motion } from "framer-motion";
-import { Space_Grotesk } from "next/font/google";
 import UserService, { UserData } from "@/services/userService";
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-space",
-});
 
 export default function HomePage() {
   const { supabaseUser } = useUser();
@@ -51,8 +43,8 @@ export default function HomePage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#0E0E0E] text-white flex items-center justify-center">
-        <div className="text-lime-400 text-xl">Loading...</div>
+      <div className="min-h-screen bg-slate-50 text-slate-600 flex items-center justify-center">
+        <div className="text-lg">Loading...</div>
       </div>
     );
   }
@@ -89,7 +81,7 @@ export default function HomePage() {
     { icon: Trophy, label: "Total Wins", value: userStats.battlesWon },
     { icon: Target, label: "Accuracy", value: `${userStats.accuracy}%` },
     { icon: Zap, label: "Longest Streak", value: userStats.longestStreak },
-    { icon: Users, label: "Battles Played", value: userStats.totalBattles },
+    { icon: Users, label: "Challenges Played", value: userStats.totalBattles },
   ];
 
   // Show nothing while redirecting to login
@@ -98,25 +90,7 @@ export default function HomePage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0E0E0E]/80 text-white relative">
-      <div
-        className="inset-0 fixed h-screen w-screen z-1 opacity-25 pointer-events-none"
-        aria-hidden
-      >
-        <div className="bg-black/50 z-3 w-full h-full hidden md:block">
-          <Prism
-            animationType="hover"
-            timeScale={1.5}
-            height={5}
-            baseWidth={7.5}
-            scale={3.6}
-            hueShift={0}
-            colorFrequency={1}
-            noise={0.6}
-            glow={0.3}
-          />
-        </div>
-      </div>
+    <div className="min-h-screen bg-slate-50 text-slate-900">
       {/* Header */}
       <Header
         streak={userStats.streak}
@@ -129,48 +103,45 @@ export default function HomePage() {
       />
 
       {/* Main Content */}
-
-      <div className="container mx-auto px-4 py-8 z-30">
-        {/* Hero Section */}
-        <div className="text-center mb-12 z-20">
-          <h2
-            className={`text-5xl font-bold mb-2 py-2 bg-gradient-to-b from-lime-400 to-lime-500 bg-clip-text text-transparent ${spaceGrotesk.className}`}
-          >
-            Clash with Code. Rise through the ranks.
+      <div className="container mx-auto px-4 py-10">
+        {/* Welcome */}
+        <section className="max-w-6xl mx-auto mb-10">
+          <p className="section-label mb-2">Student Dashboard</p>
+          <h2 className="text-3xl md:text-4xl font-semibold text-slate-900 rule-title mb-4">
+            Welcome back{userData?.username ? `, ${userData.username}` : ""}
           </h2>
-          <p className="text-xl text-neutral-300 mb-8 max-w-3xl mx-auto">
-            Practice solo or compete in epic 1v1 coding battles against players
-            worldwide.
-            <br />
-            Level up your skills, earn XP, and dominate the leaderboard.
+          <p className="text-base text-slate-600 mb-6 max-w-3xl">
+            Practice solo or take part in peer coding challenges against other
+            learners. Build your skills, earn XP, and track your progress.
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+          <div className="flex flex-col sm:flex-row gap-3">
             <Link href="/battle">
               <Button
                 size="lg"
-                className="glow-button hover:cursor-pointer bg-lime-500 hover:bg-lime-500/90 text-black font-semibold px-8 py-4 text-lg"
+                className="hover:cursor-pointer bg-blue-700 hover:bg-blue-800 text-white font-semibold px-8"
               >
-                <Swords className="mr-2 h-5 w-5" />
-                1v1 Match
+                <Handshake className="mr-2 h-5 w-5" />
+                Peer Challenge
               </Button>
             </Link>
             <Link href="/practice-mode-setup">
               <Button
                 size="lg"
                 variant="outline"
-                className="hover:cursor-pointer border-2 border-lime-600 text-lime-500 bg-transparent  hover:bg-lime-500/50 hover:text-white px-8 py-4 text-lg "
+                className="hover:cursor-pointer border border-blue-700 text-blue-700 bg-white hover:bg-blue-50 hover:text-blue-800 px-8"
               >
                 <Target className="mr-2 h-5 w-5" />
                 Practice Solo
               </Button>
             </Link>
           </div>
-        </div>
+        </section>
 
-        <div className="z-20">
-          {/* Enhanced XP Bar */}
+        {/* Progress */}
+        <section className="max-w-6xl mx-auto mb-10 bg-white border border-slate-200 rounded-md shadow-sm p-6">
+          <p className="section-label mb-3">Progress Overview</p>
           <XPProgress
             level={userStats.level}
             currentXP={userStats.currentXP}
@@ -183,48 +154,46 @@ export default function HomePage() {
             tierEmoji={userStats.tierEmoji}
             isAtMilestone={userStats.isAtMilestone}
             totalXP={userStats.totalXP}
-            className="max-w-2xl mx-auto mb-10"
+            className="w-full"
           />
-        </div>
+        </section>
+
         {/* Stats Cards */}
-        <motion.div
-          className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8 w-full text-center max-w-6xl mx-auto"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-        >
-          {stats.map((stat, index) => (
-            <div
-              key={index}
-              className="border group border-zinc-900 hover:border-lime-500 transition-all duration-300 shadow-md shadow-zinc-950 bg-neutral-900 p-6 rounded-xl text-center"
-            >
-              <stat.icon className="w-12 h-12 rounded-lg text-lime-400 bg-lime-600/10 p-2 mx-auto mb-3" />
-              <div className="text-2xl font-bold mb-1 group-hover:text-lime-500">
-                {stat.value}
+        <section className="max-w-6xl mx-auto mb-4">
+          <p className="section-label mb-3">Performance Summary</p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full">
+            {stats.map((stat, index) => (
+              <div
+                key={index}
+                className="bg-white border border-slate-200 shadow-sm rounded-md p-5"
+              >
+                <stat.icon className="w-10 h-10 rounded-md text-blue-700 bg-blue-50 p-2 mb-3" />
+                <div className="text-2xl font-semibold text-slate-900 mb-1">
+                  {stat.value}
+                </div>
+                <div className="text-sm text-slate-500">{stat.label}</div>
               </div>
-              <div className="text-sm text-gray-400">{stat.label}</div>
-            </div>
-          ))}
-        </motion.div>
+            ))}
+          </div>
+          <p className="text-xs text-slate-500 mt-2">Figure 1. Summary of your recorded activity.</p>
+        </section>
 
         {/* View All Stats Button */}
-        <div className="flex justify-center mb-16 ">
+        <div className="max-w-6xl mx-auto flex mb-12">
           <Link href={`/profile/${userData?.username || userId}`}>
             <Button
               variant="outline"
-              className="border-lime-600 hover:cursor-pointer text-lime-500 hover:bg-lime-600 hover:text-white bg-transparent px-8 py-3 text-base font-semibold"
+              className="border-blue-700 hover:cursor-pointer text-blue-700 hover:bg-blue-50 hover:text-blue-800 bg-white font-semibold"
             >
               View All Stats
             </Button>
           </Link>
         </div>
 
-        {/* Leaderboard Preview */}
-        <div className="z-30">
+        {/* Leaderboard (disabled)
+        <div>
           <Leaderboard />
-        </div>
-
-        {/* Footer */}
+        </div> */}
       </div>
     </div>
   );

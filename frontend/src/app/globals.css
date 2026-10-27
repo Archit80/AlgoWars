@@ -6,7 +6,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-dm-sans);
+  --font-sans: var(--font-inter);
   --font-mono: var(--font-geist-mono);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -44,116 +44,89 @@
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.141 0.005 285.823);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.141 0.005 285.823);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.141 0.005 285.823);
-  --primary: oklch(0.21 0.006 285.885);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.967 0.001 286.375);
-  --secondary-foreground: oklch(0.21 0.006 285.885);
-  --muted: oklch(0.967 0.001 286.375);
-  --muted-foreground: oklch(0.552 0.016 285.938);
-  --accent: oklch(0.967 0.001 286.375);
-  --accent-foreground: oklch(0.21 0.006 285.885);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.92 0.004 286.32);
-  --input: oklch(0.92 0.004 286.32);
-  --ring: oklch(0.705 0.015 286.067);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.141 0.005 285.823);
-  --sidebar-primary: oklch(0.21 0.006 285.885);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.967 0.001 286.375);
-  --sidebar-accent-foreground: oklch(0.21 0.006 285.885);
-  --sidebar-border: oklch(0.92 0.004 286.32);
-  --sidebar-ring: oklch(0.705 0.015 286.067);
+  --radius: 0.375rem;
+  --background: #ffffff;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  --popover: #ffffff;
+  --popover-foreground: #0f172a;
+  --primary: #1d4ed8;
+  --primary-foreground: #ffffff;
+  --secondary: #eff6ff;
+  --secondary-foreground: #1e3a8a;
+  --muted: #f1f5f9;
+  --muted-foreground: #475569;
+  --accent: #eff6ff;
+  --accent-foreground: #1e3a8a;
+  --destructive: #dc2626;
+  --border: #dbe3ef;
+  --input: #cbd5e1;
+  --ring: #3b82f6;
+  --chart-1: #1d4ed8;
+  --chart-2: #0ea5e9;
+  --chart-3: #6366f1;
+  --chart-4: #0d9488;
+  --chart-5: #64748b;
+  --sidebar: #f8fafc;
+  --sidebar-foreground: #0f172a;
+  --sidebar-primary: #1d4ed8;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #eff6ff;
+  --sidebar-accent-foreground: #1e3a8a;
+  --sidebar-border: #dbe3ef;
+  --sidebar-ring: #3b82f6;
+  --navy: #1e3a8a;
 }
 
-.dark {
-  --background: oklch(0.141 0.005 285.823);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.21 0.006 285.885);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.21 0.006 285.885);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.92 0.004 286.32);
-  --primary-foreground: oklch(0.21 0.006 285.885);
-  --secondary: oklch(0.274 0.006 286.033);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.274 0.006 286.033);
-  --muted-foreground: oklch(0.705 0.015 286.067);
-  --accent: oklch(0.274 0.006 286.033);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.552 0.016 285.938);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.21 0.006 285.885);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.274 0.006 286.033);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.552 0.016 285.938);
+body {
+  background: var(--background);
+  color: var(--foreground);
 }
 
- 
-
-/* Custom syntax highlighting theme for AlgoWars */
-.token.keyword {
-  color: #ff6b6b !important; /* Red for keywords like if, for, function */
-  font-weight: bold;
+/* Academic typography: serif headings, sans body */
+h1, h2, h3, .font-heading {
+  font-family: var(--font-heading), Georgia, "Times New Roman", serif;
+  letter-spacing: -0.01em;
 }
 
-.token.function {
-  color: #4ecdc4 !important; /* Teal for function names */
-  font-weight: bold;
+/* Reusable academic-report building blocks */
+.section-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+.rule-title {
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: 0.5rem;
+}
+.paper-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+.paper-grid {
+  background-image:
+    linear-gradient(to right, rgba(29, 78, 216, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(29, 78, 216, 0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
 }
 
-.token.class-name {
-  color: #45b7d1 !important; /* Blue for data structure names */
-  font-weight: bold;
-}
+/* Light code theme */
+.token.keyword { color: #1d4ed8 !important; font-weight: 600; }
+.token.function { color: #7c3aed !important; }
+.token.class-name { color: #0369a1 !important; font-weight: 600; }
+.token.variable { color: #0f172a !important; }
+.token.number { color: #b45309 !important; }
+.token.string { color: #047857 !important; }
+.token.operator { color: #475569 !important; }
+.token.comment { color: #64748b !important; font-style: italic; }
 
-.token.variable {
-  color: #96ceb4 !important; /* Light green for variables */
-}
-
-.token.number {
-  color: #feca57 !important; /* Yellow for numbers */
-}
-
-.token.string {
-  color: #ff9ff3 !important; /* Pink for strings */
-}
-
-.token.operator {
-  color: #ff6348 !important; /* Orange for operators */
-}
-
-.token.comment {
-  color: #6c7b7f !important; /* Gray for comments */
-  font-style: italic;
-}
-
-/* Enhanced code block styling */
 pre[class*="language-"] {
-  background: #1a1a1a !important;
+  background: #f8fafc !important;
   border: none !important;
   border-radius: 0 !important;
   padding: 1rem !important;
@@ -162,11 +135,10 @@ pre[class*="language-"] {
   box-shadow: none !important;
   outline: none !important;
 }
-
 code[class*="language-"] {
   background: transparent !important;
-  color: #e2e8f0 !important;
-  font-family: 'Space Grotesk', 'Consolas', monospace;
+  color: #0f172a !important;
+  font-family: var(--font-geist-mono), 'Consolas', monospace;
   font-size: 0.9rem;
   line-height: 1.5;
   border: none !important;
@@ -174,35 +146,10 @@ code[class*="language-"] {
   outline: none !important;
   text-shadow: none !important;
 }
+.line-numbers .line-numbers-rows { border-right: 1px solid #cbd5e1; margin-right: 1rem; padding-right: 1rem; }
+.line-numbers-rows > span:before { color: #94a3b8; }
 
-/* Line numbers (optional) */
-.line-numbers .line-numbers-rows {
-  border-right: 1px solid #374151;
-  margin-right: 1rem;
-  padding-right: 1rem;
-}
-
-.line-numbers-rows > span:before {
-  color: #6b7280;
-}
-
-/* Glass panel effect for profile pages */
-.glass-panel {
-  background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* Lime glow effects */
-.lime-glow {
-  box-shadow: 0 0 10px rgba(132, 204, 22, 0.3);
-}
-
-.lime-glow-strong {
-  box-shadow: 0 0 20px rgba(132, 204, 22, 0.5);
-}
-
-/* Code font class */
-.code-font {
-  font-family: 'Space Grotesk', monospace;
-}
+/* Legacy helpers kept for existing markup */
+.glass-panel { background: #fff; border: 1px solid var(--border); box-shadow: 0 1px 2px rgba(15,23,42,.04); }
+.lime-glow, .lime-glow-strong { box-shadow: 0 1px 3px rgba(29, 78, 216, 0.2); }
+.code-font { font-family: var(--font-geist-mono), monospace; }

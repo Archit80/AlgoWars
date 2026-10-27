@@ -58,23 +58,25 @@ function JoinByCodeInner() {
     }
   };
   if (loading) {
-    return <div className="min-h-screen flex items-center justify-center text-white">Loading...</div>;
+    return <div className="min-h-screen flex items-center justify-center text-slate-600">Loading...</div>;
   }
   if (!user) {
     return <></>;
   }
   return (
-    <div className="min-h-screen p-6 bg-[#0E0E0E] text-white">
+    <div className="min-h-screen p-6 bg-white text-slate-900">
       <div className="max-w-md mx-auto">
-        <h1 className="text-3xl font-bold text-lime-500 mb-4">Join a Private Room</h1>
-        <div className="space-y-3">
+        <div className="section-label mb-1">Private Match</div>
+        <h1 className="rule-title text-3xl font-bold text-slate-900 mb-6">Join a Private Room</h1>
+        <div className="bg-white border border-slate-200 shadow-sm rounded-lg p-6 space-y-3">
+          <label className="block text-sm font-medium text-slate-600">Room code</label>
           <input
             value={code}
             onChange={(e) => setCode(e.target.value.toUpperCase())}
             placeholder="Enter 6-8 char code"
-            className="w-full px-4 py-3 rounded border border-neutral-700 bg-neutral-900/50"
+            className="w-full px-4 py-3 rounded-md border border-slate-300 bg-white text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-blue-700 focus:ring-2 focus:ring-blue-100"
           />
-          <Button onClick={handleJoin} disabled={!code || joining} className="bg-lime-600 hover:bg-lime-500 text-center text-black hover:cursor-pointer">
+          <Button onClick={handleJoin} disabled={!code || joining} className="bg-blue-700 hover:bg-blue-800 text-center text-white hover:cursor-pointer">
             {joining ? "Joining..." : "Join"}
           </Button>
         </div>
@@ -85,7 +87,7 @@ function JoinByCodeInner() {
 
 export default function JoinByCode() {
   return (
-    <Suspense fallback={<div className="min-h-screen flex items-center justify-center text-white">Loading...</div>}>
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center text-slate-600">Loading...</div>}>
       <JoinByCodeInner />
     </Suspense>
   );

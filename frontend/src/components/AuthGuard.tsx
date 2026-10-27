@@ -36,8 +36,8 @@ export default function AuthGuard({ children }: { children: React.ReactNode }) {
   const waiting = !isPublic && (loading || !supabaseUser || !userDataFetched);
   if (waiting) {
     return (
-      <div className="min-h-screen bg-zinc-950 flex items-center justify-center">
-        <div className="text-white">
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div>
           <Loader />
         </div>
       </div>

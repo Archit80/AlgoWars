@@ -1,43 +1,23 @@
-/* Dashboard-specific styles */
-.matrix-bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: -1;
-  opacity: 0.1;
-}
-
+/* Dashboard-specific styles (light, academic theme) */
+.matrix-bg,
 .matrix-char {
-  position: absolute;
-  color: #84cc16;
-  font-family: "JetBrains Mono", monospace;
-  font-size: 14px;
-  animation: matrix-drop 3s linear infinite;
+  display: none;
 }
 
 .glow-button {
-  transition: all 0.3s ease;
-}
-
-.glow-button:hover {
-  box-shadow: 0 0 20px rgba(132, 204, 22, 0.5);
-  transform: translateY(-2px);
+  transition: background-color 0.15s ease, border-color 0.15s ease;
 }
 
 .code-editor {
-  background: #1a1a1a;
-  border: 1px solid #333;
-  border-radius: 8px;
-  font-family: "JetBrains Mono", monospace;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-family: var(--font-geist-mono), "Consolas", monospace;
 }
 
 .xp-bar {
-  background: linear-gradient(90deg, #84cc16 0%, #a3e635 100%);
+  background: #1d4ed8;
   height: 8px;
   border-radius: 4px;
-  transition: width 0.5s ease;
+  transition: width 0.4s ease;
 }
-

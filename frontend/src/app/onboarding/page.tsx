@@ -4,12 +4,8 @@ import { useUser } from "../../contexts/userContext";
 import { useUserStore } from "../../stores/userStore";
 import userService from "../../services/userService";
 import { supabase } from "@/lib/supabaseClient";
-// WebGL background: loaded after the page renders, not part of the initial bundle
-import { LazyOrb as Orb } from "@/components/LazyComponents";
 import Header from "../landing-components/Header";
-import { Space_Grotesk } from "next/font/google";
 import Image from "next/image";
-const spaceGrotesk = Space_Grotesk({ subsets: ["latin"] });
 import { useRouter } from "next/navigation";
 export default function OnboardingPage() {
   // Define the type for supabaseUser to avoid 'unknown' errors
@@ -149,45 +145,41 @@ export default function OnboardingPage() {
   return userLoading || !userDataFetched || isOnboarded ? (
     <></>
   ) : (
-    <div className="h-screen bg-zinc-950 flex items-center justify-center text-white px-4 overflow-x-hidden w-screen">
+    <div className="min-h-screen bg-slate-50 paper-grid flex items-center justify-center text-slate-900 px-4 pt-16 overflow-x-hidden w-full">
       <Header />
-      <div className="absolute h-full overflow-hidden pt-6 inset-0 z-0">
-        <Orb hoverIntensity={1.2} hue={145} rotateOnHover={true} />
-      </div>
-      <div className="max-w-md w-full z-5 bg-zinc-900/20 backdrop-blur-xs rounded-lg shadow-xl p-8 border-2 border-zinc-800">
-        <h2
-          className={`text-3xl font-bold text-center mb-6 ${spaceGrotesk.className}`}
-        >
+      <div className="max-w-md w-full relative z-10 bg-white rounded-lg shadow-sm p-8 border border-slate-200">
+        <p className="section-label text-center mb-1">Step 1 of 1</p>
+        <h2 className="text-3xl font-bold text-center text-slate-900 mb-6 pb-3 border-b border-slate-200">
           Complete Your Profile
         </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label
               htmlFor="username"
-              className="block mb-1 text-sm font-medium"
+              className="block mb-1 text-sm font-medium text-slate-700"
             >
-              Forge Your Identity
+              Username
             </label>
             <input
               type="text"
               id="username"
-              placeholder="Choose Your Codename"
-              className={`w-full px-4 py-2 rounded bg-zinc-950/20 border ${
-                usernameError ? "border-red-500" : "border-zinc-700"
-              } focus:border-zinc-700`}
+              placeholder="Choose a username"
+              className={`w-full px-4 py-2 rounded-md bg-white border text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-100 ${
+                usernameError ? "border-red-600" : "border-slate-300 focus:border-blue-700"
+              }`}
               value={username}
               onChange={handleUsernameChange}
               required
             />
             {usernameError && (
-              <p className="text-red-500 text-xs mt-1">{usernameError}</p>
+              <p className="text-red-600 text-xs mt-1">{usernameError}</p>
             )}
           </div>
 
-          <p>Upload Your Avatar</p>
+          <p className="text-sm font-medium text-slate-700">Profile Picture</p>
           <div
-            className={`w-full h-36 border-2 border-dashed rounded-lg -mt-4 flex flex-col items-center justify-center bg-zinc-950/20 text-gray-400 relative transition-all duration-200 ${
-              dragActive ? "border-lime-500 bg-lime-900/20" : "border-zinc-700"
+            className={`w-full h-36 border-2 border-dashed rounded-lg -mt-4 flex flex-col items-center justify-center bg-slate-50 text-slate-500 relative transition-colors duration-200 ${
+              dragActive ? "border-blue-700 bg-blue-50" : "border-slate-300"
             }`}
             onDrop={handleDrop}
             onDragOver={handleDragOver}
@@ -219,16 +211,16 @@ export default function OnboardingPage() {
               className="hidden"
             />
           </div>
-          {error && <p className="text-red-500 text-sm">{error}</p>}
-          {message && <p className="text-green-500 text-sm">{message}</p>}
+          {error && <p className="text-red-600 text-sm">{error}</p>}
+          {message && <p className="text-emerald-600 text-sm">{message}</p>}
           <button
             type="submit"
-            className={`w-full py-2 rounded font-semibold hover:cursor-pointer bg-lime-600 hover:scale-97 transition-transform duration-200 ${
+            className={`w-full py-2 rounded-md font-semibold text-white hover:cursor-pointer bg-blue-700 hover:bg-blue-800 transition-colors duration-200 ${
               (usernameError || !username) && "opacity-50 cursor-not-allowed"
             }`}
             disabled={loading || !!usernameError || !username}
           >
-            {loading ? "Saving..." : "Begin Your Journey"}
+            {loading ? "Saving..." : "Continue"}
           </button>
         </form>
       </div>

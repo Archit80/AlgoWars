@@ -30,35 +30,29 @@ import QuestionsService from "@/services/questionsService";
 import usePracticeStore from "@/stores/practiceStore";
 import { PracticeStore } from "@/stores/practiceStore";
 import { useUserStore } from "@/stores/userStore";
-import { Space_Grotesk } from "next/font/google";
-
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-space",
-});
 
 const dataStructureTopics = [
-  { id: "Arrays", name: "Arrays", icon: Hash, bgColor: "bg-blue-500" },
-  { id: "Strings", name: "Strings", icon: Quote, bgColor: "bg-orange-500" },
-  { id: "Trees", name: "Trees", icon: TreePine, bgColor: "bg-lime-500" },
-  { id: "Graphs", name: "Graphs", icon: Share2, bgColor: "bg-fuchsia-400" },
-  { id: "StacksQueues", name: "Stacks & Queues", icon: Layers, bgColor: "bg-rose-500" },
-  { id: "HashMaps", name: "Hash Maps", icon: KeyRound, bgColor: "bg-cyan-500" }
+  { id: "Arrays", name: "Arrays", icon: Hash, bgColor: "bg-blue-700" },
+  { id: "Strings", name: "Strings", icon: Quote, bgColor: "bg-blue-700" },
+  { id: "Trees", name: "Trees", icon: TreePine, bgColor: "bg-blue-700" },
+  { id: "Graphs", name: "Graphs", icon: Share2, bgColor: "bg-blue-700" },
+  { id: "StacksQueues", name: "Stacks & Queues", icon: Layers, bgColor: "bg-blue-700" },
+  { id: "HashMaps", name: "Hash Maps", icon: KeyRound, bgColor: "bg-blue-700" }
 ];
 
 const algorithmTopics = [
-  { id: "SlidingWindow", name: "Sliding Window", icon: ChevronsRightLeft, bgColor: "bg-red-500" },
-  { id: "DynamicProgramming", name: "Dynamic Programming", icon: Grid3X3, bgColor: "bg-green-500" },
-  { id: "TwoPointers", name: "Two Pointers", icon: ArrowLeftRight, bgColor: "bg-indigo-500" },
-  { id: "BinarySearch", name: "Binary Search", icon: Crosshair, bgColor: "bg-yellow-500" },
-  { id: "Sorting", name: "Sorting", icon: ListOrdered, bgColor: "bg-emerald-500" },
-  { id: "Recursion", name: "Recursion", icon: RefreshCw, bgColor: "bg-pink-400" }
+  { id: "SlidingWindow", name: "Sliding Window", icon: ChevronsRightLeft, bgColor: "bg-blue-700" },
+  { id: "DynamicProgramming", name: "Dynamic Programming", icon: Grid3X3, bgColor: "bg-blue-700" },
+  { id: "TwoPointers", name: "Two Pointers", icon: ArrowLeftRight, bgColor: "bg-blue-700" },
+  { id: "BinarySearch", name: "Binary Search", icon: Crosshair, bgColor: "bg-blue-700" },
+  { id: "Sorting", name: "Sorting", icon: ListOrdered, bgColor: "bg-blue-700" },
+  { id: "Recursion", name: "Recursion", icon: RefreshCw, bgColor: "bg-blue-700" }
 ];
 
 const difficulties = [
-  { id: "easy", name: "Easy", color: "bg-green-500", textColor: "text-green-400" },
-  { id: "medium", name: "Medium", color: "bg-yellow-500", textColor: "text-yellow-400" },
-  { id: "hard", name: "Hard", color: "bg-red-500", textColor: "text-red-400" }
+  { id: "easy", name: "Easy", color: "bg-emerald-600", textColor: "text-emerald-600" },
+  { id: "medium", name: "Medium", color: "bg-amber-600", textColor: "text-amber-600" },
+  { id: "hard", name: "Hard", color: "bg-red-600", textColor: "text-red-600" }
 ];
 
 const questionCounts = [5, 10, 15, 20];
@@ -157,7 +151,7 @@ const PracticeModeSetup: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen p-6 bg-[#0E0E0E]">
+    <div className="min-h-screen p-6 bg-slate-50 text-slate-900">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <motion.div
@@ -168,34 +162,34 @@ const PracticeModeSetup: React.FC = () => {
         >
           <Link
             href="/dashboard"
-            className="p-3 bg-lime-600 rounded-xl hover:bg-lime-500 transition-all"
+            className="p-3 bg-blue-700 text-white rounded-md hover:bg-blue-800 transition-colors"
           >
             <ArrowLeft className="w-6 h-6" />
           </Link>
           <div>
-            <h1 className={`${spaceGrotesk.className} text-4xl font-bold text-lime-500`}>
+            <h1 className={`text-3xl font-semibold text-slate-900`}>
               Choose Your Challenge
             </h1>
-            <p className="text-neutral-200 font-mono">
-              {"> Select up to 5 topics to practice"}
+            <p className="text-slate-600">
+              {"Select up to 5 topics to practice"}
             </p>
-          <div className="mt-2 text-xs text-gray-400 font-mono">
-            <span className="font-semibold text-lime-400">XP Calculation:</span> XP is based on your correct answers, difficulty, and mode.<br />
-            <span className="text-green-400">Easy</span>: ×1.0 &nbsp; <span className="text-yellow-400">Medium</span>: ×1.5 &nbsp; <span className="text-red-400">Hard</span>: ×2.0<br />
-            <span className="text-amber-400">Sprint Mode</span>: +50% XP bonus
+          <div className="mt-2 text-xs text-slate-500">
+            <span className="font-semibold text-blue-700">XP Calculation:</span> XP is based on your correct answers, difficulty, and mode.<br />
+            <span className="text-emerald-600">Easy</span>: ×1.0 &nbsp; <span className="text-amber-600">Medium</span>: ×1.5 &nbsp; <span className="text-red-600">Hard</span>: ×2.0<br />
+            <span className="text-amber-600">Sprint Mode</span>: +50% XP bonus
           </div>
           </div>
         </motion.div>
 
         {/* Topic Selection */}
         <motion.div
-          className="bg-neutral-900/90 border border-neutral-800 p-8 rounded-2xl mb-8"
+          className="bg-white border border-slate-200 shadow-sm p-8 rounded-md mb-8"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
         >
           <div className="flex items-center justify-between mb-6">
-            <h2 className={`${spaceGrotesk.className} text-2xl font-bold text-lime-500`}>
+            <h2 className={`text-xl font-semibold text-slate-900`}>
               Choose Topics  
             </h2>
             {selectedTopics.length > 0 && (
@@ -203,9 +197,9 @@ const PracticeModeSetup: React.FC = () => {
                 {selectedTopics.map(topicId => {
                   const topic = [...dataStructureTopics, ...algorithmTopics].find(t => t.id === topicId);
                   return (
-                    <div key={topicId} className="flex items-center gap-1 bg-lime-500/20 border border-lime-500/50 rounded-lg px-3 py-1">
-                      <span className="text-lime-400 text-sm">{topic?.name}</span>
-                      <button onClick={() => toggleTopic(topicId)} className="text-lime-400 hover:text-white">
+                    <div key={topicId} className="flex items-center gap-1 bg-blue-50 border border-blue-100 rounded-md px-3 py-1">
+                      <span className="text-blue-800 text-sm">{topic?.name}</span>
+                      <button onClick={() => toggleTopic(topicId)} className="text-blue-700 hover:text-blue-900">
                         <X className="w-3 h-3" />
                       </button>
                     </div>
@@ -217,9 +211,9 @@ const PracticeModeSetup: React.FC = () => {
           
           {/* Data Structures Row */}
           <div className="mb-6">
-            <h3 className="text-lime-500 font-semibold mb-3 flex items-center gap-2">
+            <h3 className="text-blue-700 font-semibold mb-3 flex items-center gap-2">
               <Layers className="w-5 h-5" />
-             <span className="text-white">
+             <span className="text-slate-900">
                Data Structures
               </span>
             </h3>
@@ -233,21 +227,21 @@ const PracticeModeSetup: React.FC = () => {
                     key={topic.id}
                     onClick={() => toggleTopic(topic.id)}
                     disabled={isDisabled}
-                    className={`relative p-4 rounded-xl border-2 transition-all duration-300 ${
+                    className={`relative p-4 rounded-md border transition-colors ${
                       isSelected
-                        ? "border-lime-500 bg-lime-500/20 scale-95"
+                        ? "border-blue-700 bg-blue-50"
                         : isDisabled
-                        ? "border-neutral-700 bg-neutral-800/50 opacity-50 cursor-not-allowed"
-                        : "border-neutral-600 hover:border-lime-400/60 hover:bg-lime-500/10"
+                        ? "border-slate-200 bg-slate-50 opacity-50 cursor-not-allowed"
+                        : "border-slate-200 bg-white hover:border-blue-700 hover:bg-blue-50"
                     }`}
                   >
                     {isSelected && (
-                      <CheckCircle className="absolute top-2 right-2 w-4 h-4 text-lime-400" />
+                      <CheckCircle className="absolute top-2 right-2 w-4 h-4 text-blue-700" />
                     )}
                     <div className={`w-8 h-8 ${topic.bgColor} rounded-lg flex items-center justify-center mx-auto mb-2`}>
                       <topic.icon className="w-4 h-4 text-white" />
                     </div>
-                    <div className="text-white text-sm font-medium text-center">
+                    <div className="text-slate-900 text-sm font-medium text-center">
                       {topic.name}
                     </div>
                   </button>
@@ -258,8 +252,8 @@ const PracticeModeSetup: React.FC = () => {
 
           {/* Algorithms Row */}
           <div>
-            <h3 className="text-white font-semibold mb-3 flex items-center gap-2">
-              <Zap className="w-5 h-5 text-lime-500" />
+            <h3 className="text-slate-900 font-semibold mb-3 flex items-center gap-2">
+              <Zap className="w-5 h-5 text-blue-700" />
               Algorithms
             </h3>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
@@ -272,21 +266,21 @@ const PracticeModeSetup: React.FC = () => {
                     key={topic.id}
                     onClick={() => toggleTopic(topic.id)}
                     disabled={isDisabled}
-                    className={`relative p-4 rounded-xl border-2 transition-all duration-300 ${
+                    className={`relative p-4 rounded-md border transition-colors ${
                       isSelected
-                        ? "border-lime-500 bg-lime-500/20 scale-95"
+                        ? "border-blue-700 bg-blue-50"
                         : isDisabled
-                        ? "border-neutral-700 bg-neutral-800/50 opacity-50 cursor-not-allowed"
-                        : "border-neutral-600 hover:border-lime-400/60 hover:bg-lime-500/10"
+                        ? "border-slate-200 bg-slate-50 opacity-50 cursor-not-allowed"
+                        : "border-slate-200 bg-white hover:border-blue-700 hover:bg-blue-50"
                     }`}
                   >
                     {isSelected && (
-                      <CheckCircle className="absolute top-2 right-2 w-4 h-4 text-lime-400" />
+                      <CheckCircle className="absolute top-2 right-2 w-4 h-4 text-blue-700" />
                     )}
                     <div className={`w-8 h-8 ${topic.bgColor} rounded-lg flex items-center justify-center mx-auto mb-2`}>
                       <topic.icon className="w-4 h-4 text-white" />
                     </div>
-                    <div className="text-white text-sm font-medium text-center">
+                    <div className="text-slate-900 text-sm font-medium text-center">
                       {topic.name}
                     </div>
                   </button>
@@ -299,33 +293,33 @@ const PracticeModeSetup: React.FC = () => {
         {/* Practice Configuration - Horizontal Layout */}
         {selectedTopics.length > 0 && (
           <motion.div
-            className="bg-neutral-900/90 border border-neutral-800 p-8 rounded-2xl mb-6"
+            className="bg-white border border-slate-200 shadow-sm p-8 rounded-md mb-6"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <h2 className={`${spaceGrotesk.className} text-2xl font-bold text-lime-500 mb-6`}>
-              ⚙️ Practice Configuration
+            <h2 className={`text-xl font-semibold text-slate-900 rule-title mb-6`}>
+              Practice Configuration
             </h2>
             
             <div className="flex flex-wrap gap-8 justify-center">
               {/* Difficulty */}
               <div className="flex-1 min-w-[200px]">
-                <h3 className="text-white font-semibold mb-4 text-center">Difficulty</h3>
+                <h3 className="text-slate-900 font-semibold mb-4 text-center">Difficulty</h3>
                 <div className="flex gap-2 justify-center">
                   {difficulties.map((difficulty) => (
                     <button
                       key={difficulty.id}
                       onClick={() => setSelectedDifficulty(difficulty.id)}
-                      className={`px-6 py-3 rounded-lg border transition-all ${
+                      className={`px-6 py-3 rounded-md border transition-colors ${
                         selectedDifficulty === difficulty.id
-                          ? "border-lime-500 bg-lime-500/20"
-                          : "border-neutral-600 hover:border-lime-400/60"
+                          ? "border-blue-700 bg-blue-50"
+                          : "border-slate-200 bg-white hover:border-blue-700"
                       }`}
                     >
                       <div className="flex items-center gap-3">
                         <div className={`w-3 h-3 ${difficulty.color} rounded-full`}></div>
-                        <span className={selectedDifficulty === difficulty.id ? "text-lime-400" : "text-white"}>
+                        <span className={selectedDifficulty === difficulty.id ? "text-blue-800" : "text-slate-700"}>
                           {difficulty.name}
                         </span>
                       </div>
@@ -336,19 +330,19 @@ const PracticeModeSetup: React.FC = () => {
 
               {/* Question Count */}
               <div className="flex-1 min-w-[200px]">
-                <h3 className="text-white font-semibold mb-4 text-center">Questions</h3>
+                <h3 className="text-slate-900 font-semibold mb-4 text-center">Questions</h3>
                 <div className="flex gap-2 justify-center">
                   {questionCounts.map((count) => (
                     <button
                       key={count}
                       onClick={() => setSelectedQuestionCount(count)}
-                      className={`px-4 py-3 rounded-lg border transition-all ${
+                      className={`px-4 py-3 rounded-md border transition-colors ${
                         selectedQuestionCount === count
-                          ? "border-lime-500 bg-lime-500/20"
-                          : "border-neutral-600 hover:border-lime-400/60"
+                          ? "border-blue-700 bg-blue-50"
+                          : "border-slate-200 bg-white hover:border-blue-700"
                       }`}
                     >
-                      <span className={selectedQuestionCount === count ? "text-lime-400" : "text-white"}>
+                      <span className={selectedQuestionCount === count ? "text-blue-800" : "text-slate-700"}>
                         {count}
                       </span>
                     </button>
@@ -358,27 +352,27 @@ const PracticeModeSetup: React.FC = () => {
 
               {/* Mode */}
               <div className="flex-1 min-w-[200px] md:-mt-8">
-                <h3 className="text-white font-semibold mb-4 text-center">Mode</h3>
+                <h3 className="text-slate-900 font-semibold mb-4 text-center">Mode</h3>
                 <div className="flex gap-2 justify-center">
                   {modes.map((mode) => (
                     <button
                       key={mode.id}
                       onClick={() => setSelectedMode(mode.id)}
-                      className={`px-6 py-3 w-1/2 rounded-lg border transition-all ${
+                      className={`px-6 py-3 w-1/2 rounded-md border transition-colors ${
                         selectedMode === mode.id
-                          ? "border-lime-500 bg-lime-500/20"
-                          : "border-neutral-600 hover:border-lime-400/60"
+                          ? "border-blue-700 bg-blue-50"
+                          : "border-slate-200 bg-white hover:border-blue-700"
                       }`}
                     >
                       <div className="flex flex-col items-center gap-1">
                         <div className="flex items-center gap-2">
-                          <mode.icon className={`w-4 h-4 ${selectedMode === mode.id ? "text-lime-400" : "text-gray-400"}`} />
-                          <span className={selectedMode === mode.id ? "text-lime-400" : "text-white"}>
+                          <mode.icon className={`w-4 h-4 ${selectedMode === mode.id ? "text-blue-700" : "text-slate-500"}`} />
+                          <span className={selectedMode === mode.id ? "text-blue-800" : "text-slate-700"}>
                             {mode.name}
                           </span>
                         </div>
-                        <div className="text-xs text-gray-400">{mode.description}</div>
-                        <div className={`text-xs ${mode.id === "timed" ? "text-amber-400" : "text-cyan-400"}`}>
+                        <div className="text-xs text-slate-500">{mode.description}</div>
+                        <div className={`text-xs ${mode.id === "timed" ? "text-amber-600" : "text-blue-700"}`}>
                           {mode.bonus}
                         </div>
                       </div>
@@ -402,8 +396,8 @@ const PracticeModeSetup: React.FC = () => {
             disabled={selectedTopics.length === 0 || !selectedMode || !selectedDifficulty || loading}
             className={`inline-flex items-center gap-2 px-16 py-6 rounded-lg font-bold text-lg transition-all ${
               selectedTopics.length > 0 && selectedMode && selectedDifficulty && !loading
-                ? "bg-lime-500 hover:bg-lime-400 text-black hover:scale-105"
-                : "bg-gray-600 text-gray-400 cursor-not-allowed"
+                ? "bg-blue-700 hover:bg-blue-800 text-white"
+                : "bg-slate-200 text-slate-500 cursor-not-allowed"
             }`}
           >
             {loading ? (
@@ -413,8 +407,8 @@ const PracticeModeSetup: React.FC = () => {
             )}
           </Button>
           {selectedTopics.length > 0 && selectedMode && selectedDifficulty && (
-            <p className="text-sm text-gray-400 mt-3 font-mono">
-              {`> ${selectedQuestionCount} questions • ${selectedTopics.length} topic${selectedTopics.length > 1 ? 's' : ''} • ${selectedDifficulty} difficulty • ${selectedMode} mode`}
+            <p className="text-sm text-slate-500 mt-3">
+              {`${selectedQuestionCount} questions • ${selectedTopics.length} topic${selectedTopics.length > 1 ? 's' : ''} • ${selectedDifficulty} difficulty • ${selectedMode} mode`}
             </p>
           )}
         </motion.div>

@@ -1,18 +1,7 @@
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Trophy } from "lucide-react";
-import { Space_Grotesk } from "next/font/google";
 import { useQuery } from "@tanstack/react-query";
 import  LeaderboardService, { LeaderboardUser }  from "@/services/leaderboardService";
 import Image from "next/image";
-const spaceGrotesk = Space_Grotesk({ subsets: ["latin"] });
-
-// const leaderboardData = [
-//   { rank: 1, name: "CodeNinja_2024", xp: "15,420 XP", badge: "🥇" },
-//   { rank: 2, name: "AlgoMaster", xp: "14,890 XP", badge: "🥈" },
-//   { rank: 3, name: "ByteWarrior", xp: "13,750 XP", badge: "🥉" },
-//   { rank: 4, name: "StackOverflow_Hero", xp: "12,340 XP", badge: "⭐" },
-//   { rank: 5, name: "DebuggingQueen", xp: "11,920 XP", badge: "⭐" },
-// ];
 
 const LeaderboardSection = () => {
 
@@ -25,80 +14,71 @@ const LeaderboardSection = () => {
     },
   });
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+  if (isLoading) return <div className="py-8 text-center text-slate-600">Loading...</div>;
+  if (error) return <div className="py-8 text-center text-red-600">Error: {error.message}</div>;
 
   return (
     <section
       id="leaderboard"
-      className="px-4 py-16 bg-gradient-to-b from-gray-900/50 to-transparent"
+      className="px-4 py-20 bg-slate-50 border-b border-slate-200"
     >
       <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-16">
-          <h2
-            className={`text-4xl lg:text-5xl font-bold mb-4 ${spaceGrotesk.className}`}
-          >
-            <span className="bg-gradient-to-b from-lime-400 to-green-500 bg-clip-text text-transparent">
-              Hall of Fame
-            </span>
+        <div className="mb-10">
+          <p className="section-label mb-2">04 &middot; Results</p>
+          <h2 className="rule-title text-3xl lg:text-4xl font-bold text-slate-900 mb-4 inline-block">
+            Global Leaderboard
           </h2>
-          <p className="text-xl text-gray-400">
-            See where you stack up against the world&apos;s best coders
+          <p className="text-lg text-slate-600">
+            Ranking of players by accumulated experience points.
           </p>
         </div>
-        <Card className="bg-gray-900/80 border-gray-800">
-          <CardHeader>
-            <CardTitle
-              className={`flex items-center text-lime-400 ${spaceGrotesk.className}`}
-            >
-              <Trophy className="w-5 h-5 mr-2" />
-              Global Leaderboard
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              {data?.map((player: LeaderboardUser, index: number) => {
-                let badge = "⭐";
-                if (index === 0) badge = "🥇";
-                else if (index === 1) badge = "🥈";
-                else if (index === 2) badge = "🥉";
-                return (
-                  <div
-                    key={player.id}
-                    className="flex items-center justify-between p-3 rounded-lg bg-gray-800/50 hover:bg-gray-800 transition-colors"
-                  >
-                    <div className="flex items-center space-x-4">
-                      <span className="text-2xl">{badge}</span>
+        <div className="bg-white border border-slate-200 rounded-md shadow-sm overflow-x-auto">
+          <table className="w-full text-sm text-left">
+            <caption className="caption-top px-4 py-3 text-left text-xs text-slate-500 border-b border-slate-200">
+              <Trophy className="inline w-4 h-4 mr-1 text-blue-700 align-text-bottom" />
+              Table 1. Top players ranked by XP.
+            </caption>
+            <thead className="bg-slate-50 text-xs uppercase tracking-wider text-slate-500">
+              <tr>
+                <th className="px-4 py-3 font-semibold">Rank</th>
+                <th className="px-4 py-3 font-semibold">Player</th>
+                <th className="px-4 py-3 font-semibold text-right">Challenges</th>
+                <th className="px-4 py-3 font-semibold text-right">Win Rate</th>
+                <th className="px-4 py-3 font-semibold text-right">Accuracy</th>
+                <th className="px-4 py-3 font-semibold text-right">XP</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-200">
+              {data?.map((player: LeaderboardUser, index: number) => (
+                <tr key={player.id} className="hover:bg-slate-50 transition-colors">
+                  <td className="px-4 py-3 font-semibold text-slate-900">{index + 1}</td>
+                  <td className="px-4 py-3">
+                    <div className="flex items-center gap-3">
                       {player.profilePic ? (
                         <Image
-                          width={40}
-                          height={40}
+                          width={32}
+                          height={32}
                           src={player.profilePic}
                           alt={player.username + " avatar"}
-                          className="w-10 h-10 rounded-full border border-gray-700 object-cover"
+                          className="w-8 h-8 rounded-full border border-slate-200 object-cover"
                         />
                       ) : (
-                        <div className="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center text-white text-lg font-bold">
+                        <div className="w-8 h-8 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-700 text-sm font-bold">
                           {player.username?.[0] ?? "?"}
                         </div>
                       )}
-                      <div>
-                        <p className="font-semibold text-white">{player.username}</p>
-                        <p className="text-sm text-gray-400">
-                          Rank #{index + 1} • {player.totalMatches} battles • {player.winRate}% win rate
-                        </p>
-                      </div>
+                      <span className="font-medium text-slate-900">{player.username}</span>
                     </div>
-                    <div className="text-right">
-                      <p className="font-bold text-lime-400">{player.xp} XP</p>
-                      <p className="text-sm text-gray-400">{player.accuracy}% accuracy</p>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </CardContent>
-        </Card>
+                  </td>
+                  <td className="px-4 py-3 text-right text-slate-600">{player.totalMatches}</td>
+                  <td className="px-4 py-3 text-right text-slate-600">{player.winRate}%</td>
+                  <td className="px-4 py-3 text-right text-slate-600">{player.accuracy}%</td>
+                  <td className="px-4 py-3 text-right font-semibold text-blue-700">{player.xp}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </section>
   );

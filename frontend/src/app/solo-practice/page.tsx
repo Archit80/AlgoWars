@@ -109,9 +109,9 @@ const SoloPractice = () => {
 
   if (!questions || questions.length === 0 || !currentQuestion) {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center">
+      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
         <div className="text-center">
-          <div className="flex items-center gap-2 text-lime-400">
+          <div className="flex items-center gap-2 text-blue-700">
             <Loader2 className="w-8 h-8 animate-spin" />
             <span className="text-xl">Loading Practice Session...</span>
           </div>
@@ -146,7 +146,7 @@ const SoloPractice = () => {
   }
   
   return (
-    <div className="min-h-screen p-6 bg-[#0E0E0E]">
+    <div className="min-h-screen p-6 bg-slate-50 text-slate-900">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <motion.div
@@ -156,33 +156,32 @@ const SoloPractice = () => {
           transition={{ duration: 0.6 }}
         >
           <div className="flex items-center gap-4">
-            {/* <Link href="/practice" className="p-3 rounded-xl border border-gray-700 bg-gray-900 hover:bg-lime-500/10 transition-all"> */}
             <button
-              className="p-3 rounded-xl border border-neutral-700 bg-neutral-900 hover:bg-lime-500/10 transition-all"
+              className="p-3 rounded-md border border-slate-200 bg-white hover:bg-blue-50 transition-colors"
               onClick={() => window.history.back()}
             >
-              <ArrowLeft className="w-6 h-6 text-lime-600" />
+              <ArrowLeft className="w-6 h-6 text-blue-700" />
             </button>
             <div>
-              <h1 className="text-2xl font-bold text-lime-500">
+              <h1 className="text-2xl font-semibold text-slate-900">
                 Question {currentIndex + 1} of {questions.length}
               </h1>
-              <p className="text-neutral-400 font-mono">{`> ${currentQuestion.categories || "Practice"}`}</p>
+              <p className="section-label mt-1">{`${currentQuestion.categories || "Practice"}`}</p>
             </div>
           </div>
           <div className="flex items-center gap-4">
             {mode === "timed" && (
               <>
                 <div className="flex items-center gap-2">
-                  <Clock className="w-5 h-5 text-lime-400" />
-                  <span className={`text-xl font-bold ${timeLeft < 10 ? "text-red-400" : "text-lime-400"}`}>
+                  <Clock className="w-5 h-5 text-blue-700" />
+                  <span className={`text-xl font-bold ${timeLeft < 10 ? "text-red-600" : "text-blue-700"}`}>
                     {timeLeft}s
                   </span>
                 </div>
-                <div className="w-20 h-2 bg-neutral-700 rounded-full overflow-hidden">
+                <div className="w-20 h-2 bg-slate-200 rounded-full overflow-hidden">
                   <div
                     className={`h-full transition-all duration-1000 ${
-                      timeLeft < 10 ? "bg-red-500" : "bg-lime-500"
+                      timeLeft < 10 ? "bg-red-600" : "bg-blue-700"
                     }`}
                     style={{ width: `${(timeLeft / 60) * 100}%` }}
                   />
@@ -194,7 +193,7 @@ const SoloPractice = () => {
 
         {/* Question Card */}
         <motion.div
-          className="bg-neutral-900/50 border border-neutral-800 p-8 rounded-2xl mb-8"
+          className="bg-white border border-slate-200 shadow-sm p-8 rounded-md mb-8"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
@@ -224,10 +223,10 @@ const SoloPractice = () => {
               <button
                 onClick={handleSkip}
                 disabled={submitting || lockedIn}
-                className={`px-6 py-3 rounded-xl font-semibold transition-all ${
+                className={`px-6 py-3 rounded-md font-semibold transition-all ${
                   submitting || lockedIn
-                    ? "bg-neutral-700 text-neutral-500 cursor-not-allowed"
-                    : "bg-neutral-600 hover:bg-neutral-500 active:scale-95"
+                    ? "bg-slate-100 text-slate-400 cursor-not-allowed"
+                    : "bg-white border border-slate-300 text-slate-700 hover:bg-slate-50"
                 }`}
               >
                 Skip Question
@@ -235,12 +234,12 @@ const SoloPractice = () => {
               <button
                 onClick={handleSubmit}
                 disabled={selectedAnswer === null || submitting || lockedIn}
-                className={`min-w-48 px-8 py-3 rounded-xl font-semibold transition-all flex items-center justify-center gap-2 ${
+                className={`min-w-48 px-8 py-3 rounded-md font-semibold transition-all flex items-center justify-center gap-2 ${
                   lockedIn
-                    ? "bg-lime-500/15 text-lime-300 border border-lime-500/40 cursor-default"
+                    ? "bg-emerald-50 text-emerald-700 border border-emerald-200 cursor-default"
                     : selectedAnswer !== null && !submitting
-                      ? "bg-lime-500 hover:bg-lime-400 text-black active:scale-95"
-                      : "bg-neutral-600 text-neutral-400 cursor-not-allowed"
+                      ? "bg-blue-700 hover:bg-blue-800 text-white"
+                      : "bg-slate-200 text-slate-500 cursor-not-allowed"
                 }`}
               >
                 {submitting ? (

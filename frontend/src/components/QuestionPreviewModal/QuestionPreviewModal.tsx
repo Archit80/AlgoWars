@@ -60,18 +60,18 @@ const QuestionPreviewModal: React.FC<QuestionPreviewModalProps> = ({
 
   return (
     <div
-      className="fixed inset-0 bg-black/60 flex items-center justify-center h-full"
+      className="fixed inset-0 bg-slate-900/40 flex items-center justify-center h-full"
       style={{ zIndex: 9999 }}
       onClick={onClose}
     >
       <div
-        className="w-full max-w-3xl bg-neutral-900 border-2 border-white/10 rounded-lg px-6 py-2 max-h-[90vh] overflow-y-auto"
+        className="w-full max-w-3xl bg-white border border-slate-200 shadow-lg rounded-lg px-6 py-2 max-h-[90vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
           <div className="relative mb-6">
             <button
               onClick={onClose}
-              className="absolute top-2 right-0 text-gray-400 hover:text-white p-2 rounded-full hover:cursor-pointer"
+              className="absolute top-2 right-0 text-slate-500 hover:text-slate-900 p-2 rounded-full hover:cursor-pointer"
               aria-label="Close"
             >
               <X className="w-5 h-5" />
@@ -97,29 +97,29 @@ const QuestionPreviewModal: React.FC<QuestionPreviewModalProps> = ({
               return (
                 <div
                   key={idx}
-                  className={`p-4 rounded-xl border-2 text-left transition-all ${
+                  className={`p-4 rounded-md border text-left ${
                     isCorrect
-                      ? "border-lime-500 bg-lime-500/10 text-lime-300"
+                      ? "border-emerald-600 bg-emerald-50"
                       : isUserWrong
-                      ? "border-red-500 bg-red-500/10 text-red-300"
-                      : "border-neutral-600"
+                      ? "border-red-600 bg-red-50"
+                      : "border-slate-300 bg-white"
                   }`}
                 >
                   <div className="flex items-center gap-3">
                     <div
-                      className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
+                      className={`w-6 h-6 rounded-full border flex items-center justify-center ${
                         isCorrect
-                          ? "border-lime-500 bg-lime-500"
+                          ? "border-emerald-600 bg-emerald-600"
                           : isUserWrong
-                          ? "border-red-500 bg-red-500"
-                          : "border-neutral-600"
+                          ? "border-red-600 bg-red-600"
+                          : "border-slate-300"
                       }`}
                     >
-                      <span className="text-white font-bold text-sm">
+                      <span className={`font-semibold text-sm ${isCorrect || isUserWrong ? "text-white" : "text-slate-600"}`}>
                         {String.fromCharCode(65 + idx)}
                       </span>
                     </div>
-                    <span className="text-white font-mono min-w-0 break-words"><InlineText text={opt} /></span>
+                    <span className="text-slate-900 font-mono min-w-0 break-words"><InlineText text={opt} /></span>
                   </div>
                 </div>
               );

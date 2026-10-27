@@ -1,16 +1,10 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { Space_Grotesk } from "next/font/google";
 import { Button } from "@/components/ui/button";
 import { Copy, Users, Check } from "lucide-react";
 import MatchService from "@/services/matchService";
 import { useUserStore } from "@/stores/userStore";
-
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-space",
-});
 
 type MatchSummary = {
   id: string;
@@ -67,7 +61,7 @@ export default function WaitingRoom() {
   const difficulty = match?.difficulty || "Medium";
 
   return (
-    <div className="min-h-screen flex items-start justify-center bg-[#0E0E0E] text-white">
+    <div className="min-h-screen flex items-start justify-center bg-white text-slate-900">
       <style>{`
         @keyframes blink-slow {
           0%, 100% { opacity: 1; }
@@ -78,24 +72,23 @@ export default function WaitingRoom() {
         }
       `}</style>
       <div className="max-w-2xl w-full mt-12">
-        <h1
-          className={`${spaceGrotesk.className} text-4xl font-bold text-center mb-2`}
-        >
-          Battle Lobby
+        <div className="section-label text-center mb-1">Private Match</div>
+        <h1 className="text-3xl font-bold text-center mb-2">
+          Challenge Lobby
         </h1>
-        <div className="text-center text-neutral-400 mb-8 text-lg">
+        <div className="text-center text-slate-600 mb-8 text-base">
           {match?.status === "WAITING"
             ? "Waiting for your friend to join..."
             : ""}
         </div>
-        <div className="rounded-2xl shadow-sm bg-neutral-900 border border-neutral-800 p-8 mx-auto relative shadow-black hover:shadow-none ">
+        <div className="rounded-lg shadow-sm bg-white border border-slate-200 p-8 mx-auto relative">
           {/* Room code and copy link */}
           <div className="flex items-center justify-between mb-6">
             <div
-              className={`text-xl font-bold ${spaceGrotesk.className} text-white`}
+              className="text-xl font-bold text-slate-900"
             >
               Room:{" "}
-              <span className="text-lime-400">{match?.roomCode || "-"}</span>
+              <span className="text-blue-700 font-mono">{match?.roomCode || "-"}</span>
             </div>
             {match?.isPrivate && (
               <Button
@@ -104,12 +97,12 @@ export default function WaitingRoom() {
                   setCopied(true);
                   setTimeout(() => setCopied(false), 1000);
                 }}
-                className={`bg-neutral-900 border border-neutral-700 text-lime-400 px-4 py-2 rounded-lg hover:bg-lime-500/10 hover:cursor-pointer flex items-center gap-2 ${spaceGrotesk.className}`}
+                className="bg-white border border-slate-300 text-blue-700 px-4 py-2 rounded-md hover:bg-blue-50 hover:cursor-pointer flex items-center gap-2"
               >
                 {copied ? (
-                  <Check size={18} className="text-lime-400" />
+                  <Check size={18} className="text-blue-700" />
                 ) : (
-                  <Copy size={18} className="text-lime-400" />
+                  <Copy size={18} className="text-blue-700" />
                 )}
                 {copied ? "Copied!" : "Copy Link"}
               </Button>
@@ -118,12 +111,12 @@ export default function WaitingRoom() {
           {/* Topics and Difficulty summary */}
           <div className="flex items-center justify-between mb-8">
             <div>
-              <div className="text-neutral-400 mb-2 text-lg">Topics:</div>
+              <div className="text-slate-500 mb-2 text-sm">Topics:</div>
               <div className="flex gap-2">
                 {(match?.categories || []).map((cat, i) => (
                   <span
                     key={cat + i}
-                    className="px-3 py-1 rounded-full bg-neutral-900 text-white text-sm font-semibold border border-neutral-700"
+                    className="px-3 py-1 rounded-full bg-slate-50 text-slate-900 text-sm font-medium border border-slate-200"
                   >
                     {cat}
                   </span>
@@ -131,39 +124,39 @@ export default function WaitingRoom() {
               </div>
             </div>
             <div className="flex flex-col items-end">
-              <div className="text-neutral-400 mb-2 text-lg">Difficulty:</div>
-              <span className="px-4 py-1 rounded-full bg-lime-400 text-zinc-900 text-base font-semibold shadow-lg">
+              <div className="text-slate-500 mb-2 text-sm">Difficulty:</div>
+              <span className="px-4 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-100 text-sm font-semibold">
                 {difficulty}
               </span>
             </div>
           </div>
           {/* Players */}
           <div className="mb-8">
-            <div className="flex items-center gap-2 mb-2 text-neutral-400">
-              <Users size={20} className="text-neutral-400" /> Players (
+            <div className="flex items-center gap-2 mb-2 text-slate-600">
+              <Users size={20} className="text-slate-500" /> Players (
               {match?.status === "WAITING" ? "1" : "2"}/2)
             </div>
             <div className="grid grid-cols-2 gap-4">
               {/* Player 1 */}
-              <div className="rounded-xl bg-lime-600/10 border border-lime-400 p-4 flex flex-col items-start">
+              <div className="rounded-md bg-blue-50 border border-blue-700 p-4 flex flex-col items-start">
                 <div className="flex items-center gap-2 mb-1">
-                  <span className="bg-lime-500 text-black px-3 py-1 rounded-full text-xs font-bold">
+                  <span className="bg-blue-700 text-white px-3 py-1 rounded-full text-xs font-bold">
                     YOU
                   </span>
-                  <span className="font-semibold text-white">{user.name}</span>
+                  <span className="font-semibold text-slate-900">{user.name}</span>
                 </div>
                
               </div>
               {/* Player 2 */}
-              <div className="rounded-xl bg-neutral-900 border-2 border-dashed border-neutral-700 p-4 flex flex-col items-center justify-center">
+              <div className="rounded-md bg-slate-50 border border-dashed border-slate-300 p-4 flex flex-col items-center justify-center">
                 {match?.status === "WAITING" ? (
                   <div
-                    className={`text-neutral-400 animate-blink-slow ${spaceGrotesk.className} text-center`}
+                    className="text-slate-500 animate-blink-slow text-center"
                   >
-                    Waiting for opponent...
+                    Waiting for peer...
                   </div>
                 ) : (
-                  <div className="font-semibold text-white">Opponent</div>
+                  <div className="font-semibold text-slate-900">Peer</div>
                 )}
               </div>
             </div>

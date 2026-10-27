@@ -16,13 +16,13 @@ export function Leaderboard() {
   const getRankIcon = (rank: number) => {
     switch (rank) {
       case 1:
-        return <Crown className="w-5 h-5 text-yellow-300" />
+        return <Crown className="w-5 h-5 text-amber-600" />
       case 2:
-        return <Trophy className="w-5 h-5 text-neutral-200" />
+        return <Trophy className="w-5 h-5 text-slate-500" />
       case 3:
-        return <Medal className="w-5 h-5 text-orange-400" />
+        return <Medal className="w-5 h-5 text-amber-700" />
       default:
-        return <span className="w-5 h-5 flex items-center justify-center text-lg font-bold text-neutral-400">#{rank}</span>
+        return <span className="flex items-center justify-center text-sm font-semibold text-slate-500">#{rank}</span>
     }
   }
 
@@ -40,60 +40,73 @@ export function Leaderboard() {
     // Keep rendering the same UI; if loading, show placeholders
     const leaderboard = data ?? [] as LeaderboardUser[];
 
+
     return (
-      <Card className="md:max-w-5xl mx-auto bg-neutral-900 border-2 border-neutral-800 z-20">
+      <Card className="md:max-w-5xl mx-auto bg-white border border-slate-200 shadow-sm">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-lg ml-1 -mb-2 text-white">
-            <Trophy className="w-6 h-6 text-lime-400" />
+          <p className="section-label">Table 1</p>
+          <CardTitle className="flex items-center gap-2 text-lg text-slate-900 rule-title">
+            <Trophy className="w-5 h-5 text-blue-700" />
             Global Leaderboard
           </CardTitle>
         </CardHeader>
-        <CardContent className="space-y-3">
+        <CardContent>
           {isLoading && (
-            <div className="text-gray-400">Loading leaderboard...</div>
+            <div className="text-slate-500">Loading leaderboard...</div>
           )}
           {error && (
-            <div className="text-red-400">Failed to load leaderboard</div>
+            <div className="text-red-600">Failed to load leaderboard</div>
           )}
-          {!isLoading && !error && leaderboard.map((player, idx) => (
-            <Link
-              key={player.id}
-              href={`/profile/${player.username}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block"
-            >
-              <div
-                className="flex items-center justify-between py-3 px-6 rounded-lg bg-neutral-800/60 transition-colors hover:bg-neutral-800 cursor-pointer"
-              >
-              <div className="flex items-center gap-4 ">
-                {getRankIcon(idx + 1)}
-                {player.profilePic ? (
-                  <Image
-                    width={40}
-                    height={40}
-                    src={player.profilePic}
-                    alt={player.username + " avatar"}
-                    className="w-10 h-10 rounded-full border border-neutral-700 object-cover"
-                  />
-                ) : (
-                  <div className="w-10 h-10 rounded-full bg-neutral-700 flex items-center justify-center text-white text-lg font-bold">
-                    {player.username?.[0] ?? "?"}
-                  </div>
-                )}
-                <div>
-                  <p className="font-semibold text-white">{player.username}</p>
-                  <p className="text-sm text-muted-foreground">
-                    Level {player.level ?? 0}
-                  </p>
-                </div>
-              </div>
-              <Badge className={idx === 0 ? "bg-lime-400 font-semibold shadow-lime-300 shadow-sm text-black" : "bg-neutral-700 text-white"}>
-                {(player.xp ?? 0).toLocaleString()} XP
-              </Badge>
+          {!isLoading && !error && (
+            <div className="overflow-x-auto border border-slate-200 rounded-md">
+              <table className="w-full text-sm text-left">
+                <thead className="bg-slate-50 text-slate-600 text-xs uppercase tracking-wider">
+                  <tr>
+                    <th className="px-4 py-2 font-semibold w-16">Rank</th>
+                    <th className="px-4 py-2 font-semibold">Student</th>
+                    <th className="px-4 py-2 font-semibold">Level</th>
+                    <th className="px-4 py-2 font-semibold text-right">XP</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-200">
+                  {leaderboard.map((player, idx) => (
+                    <tr key={player.id} className="hover:bg-slate-50 transition-colors">
+                      <td className="px-4 py-3">{getRankIcon(idx + 1)}</td>
+                      <td className="px-4 py-3">
+                        <Link
+                          href={`/profile/${player.username}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-3 text-slate-900 hover:text-blue-700"
+                        >
+                          {player.profilePic ? (
+                            <Image
+                              width={32}
+                              height={32}
+                              src={player.profilePic}
+                              alt={player.username + " avatar"}
+                              className="w-8 h-8 rounded-full border border-slate-200 object-cover"
+                            />
+                          ) : (
+                            <div className="w-8 h-8 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-900 text-sm font-semibold">
+                              {player.username?.[0] ?? "?"}
+                            </div>
+                          )}
+                          <span className="font-medium">{player.username}</span>
+                        </Link>
+                      </td>
+                      <td className="px-4 py-3 text-slate-600">{player.level ?? 0}</td>
+                      <td className="px-4 py-3 text-right">
+                        <Badge className={idx === 0 ? "bg-blue-700 text-white font-semibold" : "bg-blue-50 text-blue-900 border border-blue-100"}>
+                          {(player.xp ?? 0).toLocaleString()} XP
+                        </Badge>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
-            </Link>
-          ))}
+          )}
         </CardContent>
       </Card>
     )

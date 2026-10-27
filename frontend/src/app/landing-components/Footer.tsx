@@ -1,48 +1,35 @@
 import Link from "next/link";
-import Image from "next/image";
+import BrandLogo from "@/components/BrandLogo";
 import ProfileCard from "@/components/ProfileCard/ProfileCard";
-// import { Code2 } from "lucide-react";
-import { Space_Grotesk } from "next/font/google";
-
-const spaceGrotesk = Space_Grotesk({ subsets: ["latin"] });
 
 const Footer = () => (
-  <footer className="relative px-4 py-8 bg-gray-950 border-t border-gray-800">
+  <footer className="relative px-4 py-12 bg-slate-50 border-t-4 border-blue-900">
     <div className="relative z-10 max-w-6xl mx-auto">
       <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
         {/* Main Footer Content */}
         <div className="flex-1 order-2 lg:order-1">
-          <div className="flex items-center space-x-3 mb-8">
-            <div className="w-fit h-fit flex items-center justify-center">
-              {/* <Code2 className="h-6 w-6 text-black" /> */}
-              <Image
-                src="/logo.png"
-                alt="AlgoWars Logo"
-                width={72}
-                height={72}
-                className="rounded-lg"
-              />
-            </div>
-            <span
-              className={`text-2xl font-bold text-white ${spaceGrotesk.className}`}
-            >
-              AlgoWars
+          <div className="flex items-center space-x-3 mb-4">
+            <BrandLogo size={44} />
+            <span className="font-heading text-2xl font-bold text-slate-900">
+              AlgoLearn
             </span>
           </div>
-          <div className="grid grid-cols-2 gap-8 mb-8">
+          <p className="text-sm text-slate-600 max-w-md mb-8">
+            A Final Year Project: a competitive web platform for learning data
+            structures and algorithms.
+          </p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 mb-8">
             <div>
-              <h4
-                className={`font-semibold text-lime-400 mb-4 ${spaceGrotesk.className}`}
-              >
+              <h4 className="text-xs font-semibold uppercase tracking-widest text-blue-900 mb-4">
                 Platform
               </h4>
               <ul className="space-y-2">
-                {["Features", "Challenges", "Leaderboard", "Tournaments"].map(
+                {["Features", "Challenges", "Tournaments"].map(
                   (item) => (
                     <li key={item}>
                       <Link
                         href="#"
-                        className="text-gray-400 hover:text-white transition-colors text-sm"
+                        className="text-slate-600 hover:text-blue-700 transition-colors text-sm"
                       >
                         {item}
                       </Link>
@@ -52,9 +39,7 @@ const Footer = () => (
               </ul>
             </div>
             <div>
-              <h4
-                className={`font-semibold text-lime-400 mb-4 ${spaceGrotesk.className}`}
-              >
+              <h4 className="text-xs font-semibold uppercase tracking-widest text-blue-900 mb-4">
                 Community
               </h4>
               <ul className="space-y-2">
@@ -62,7 +47,7 @@ const Footer = () => (
                   <li key={item}>
                     <Link
                       href="#"
-                      className="text-gray-400 hover:text-white transition-colors text-sm"
+                      className="text-slate-600 hover:text-blue-700 transition-colors text-sm"
                     >
                       {item}
                     </Link>
@@ -70,15 +55,26 @@ const Footer = () => (
                 ))}
               </ul>
             </div>
+            <div className="col-span-2 sm:col-span-1">
+              <h4 className="text-xs font-semibold uppercase tracking-widest text-blue-900 mb-4">
+                Tech Stack
+              </h4>
+              <ul className="space-y-2 text-sm text-slate-600">
+                <li>Next.js &amp; React</li>
+                <li>Tailwind CSS</li>
+                <li>Node.js &amp; Express</li>
+                <li>Supabase</li>
+              </ul>
+            </div>
           </div>
-          <div className="pt-8 border-t border-gray-800">
-            <p className="text-gray-500 text-sm">
-              © 2024 AlgoWars. Built for developers worldwide.
+          <div className="pt-6 border-t border-slate-200">
+            <p className="text-slate-500 text-sm">
+              &copy; 2026 AlgoLearn. Final Year Project.
             </p>
           </div>
         </div>
 
-        {/* Profile Card - Now with explicit mobile visibility */}
+        {/* Profile Card */}
         <div className="w-full lg:w-auto order-1 lg:order-2 flex justify-center lg:justify-end">
           <div className="w-full max-w-sm lg:max-w-none">
             <ProfileCard

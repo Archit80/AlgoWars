@@ -6,23 +6,23 @@ import { cn } from "@/lib/utils";
 // with in-house pseudocode highlighting. No highlighting library, no DOM mutation.
 
 const TOKEN_CLASS: Record<TokenKind, string> = {
-  keyword: "text-violet-300 font-semibold",
-  literal: "text-orange-300",
-  function: "text-sky-300",
-  constant: "text-amber-200",
-  number: "text-orange-300",
-  string: "text-emerald-300",
-  comment: "text-neutral-500 italic",
+  keyword: "text-blue-700 font-semibold",
+  literal: "text-amber-700",
+  function: "text-violet-700",
+  constant: "text-sky-700",
+  number: "text-amber-700",
+  string: "text-emerald-700",
+  comment: "text-slate-500 italic",
   blank: "",
-  operator: "text-neutral-400",
-  plain: "text-neutral-100",
+  operator: "text-slate-600",
+  plain: "text-slate-900",
 };
 
 function Blank({ text }: { text: string }) {
   return (
     <span
       aria-label="blank"
-      className="inline-block align-baseline mx-0.5 px-2 rounded-md border border-dashed border-lime-400/70 bg-lime-500/10 text-lime-300 font-mono"
+      className="inline-block align-baseline mx-0.5 px-2 rounded border border-dashed border-blue-400 bg-blue-50 text-blue-700 font-mono"
     >
       {" ".repeat(Math.min(4, Math.max(2, Math.ceil(text.length / 2))))}
     </span>
@@ -36,7 +36,7 @@ export const InlineText = memo(function InlineText({ text }: { text: string }) {
     <>
       {parts.map((part, i) =>
         part.kind === "code" ? (
-          <code key={i} className="mx-0.5 px-1.5 py-0.5 rounded-md bg-neutral-800 border border-neutral-700 text-lime-200 font-mono text-[0.9em]">
+          <code key={i} className="mx-0.5 px-1.5 py-0.5 rounded bg-slate-100 border border-slate-200 text-slate-900 font-mono text-[0.9em]">
             {part.text}
           </code>
         ) : part.kind === "blank" ? (
@@ -54,18 +54,17 @@ function CodeBlock({ code, lang }: { code: string; lang: string | null }) {
   const numbered = lines.length > 1;
 
   return (
-    <figure className="my-4 overflow-hidden rounded-xl border border-neutral-800 bg-[#101010]">
-      <figcaption className="flex items-center gap-2 border-b border-neutral-800 bg-neutral-900/80 px-4 py-2">
-        <span className="h-2 w-2 rounded-full bg-lime-400/80" />
-        <span className="font-mono text-xs uppercase tracking-wider text-neutral-400">{lang ?? "pseudocode"}</span>
+    <figure className="my-4 overflow-hidden rounded-md border border-slate-200 bg-slate-50">
+      <figcaption className="flex items-center gap-2 border-b border-slate-200 bg-slate-100 px-4 py-2">
+        <span className="font-mono text-xs uppercase tracking-wider text-slate-500">{lang ?? "pseudocode"}</span>
       </figcaption>
       {/* Wrap long lines instead of scrolling: nobody should scroll sideways mid-question */}
       <pre className="py-3 font-mono text-[13px] leading-6 sm:text-sm">
         <code>
           {lines.map((tokens, i) => (
-            <div key={i} className="flex hover:bg-white/[0.02]">
+            <div key={i} className="flex hover:bg-slate-100/60">
               {numbered && (
-                <span aria-hidden className="w-10 shrink-0 select-none pr-3 text-right text-neutral-600">
+                <span aria-hidden className="w-10 shrink-0 select-none pr-3 text-right text-slate-400">
                   {i + 1}
                 </span>
               )}
@@ -98,7 +97,7 @@ interface QuestionTextProps {
 function QuestionText({ text, className = "" }: QuestionTextProps) {
   const blocks = useMemo(() => parseQuestion(text ?? ""), [text]);
   return (
-    <div className={cn("space-y-3 text-white leading-relaxed", className)}>
+    <div className={cn("space-y-3 text-slate-900 leading-relaxed", className)}>
       {blocks.map((block, i) =>
         block.kind === "code" ? (
           <CodeBlock key={i} code={block.code} lang={block.lang} />

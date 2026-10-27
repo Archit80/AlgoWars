@@ -3,16 +3,11 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Home, Swords, Target, Clock, Zap, TrendingUp, Award, Bookmark } from 'lucide-react';
+import { Home, Handshake, Target, Clock, Zap, TrendingUp, Award, Bookmark } from 'lucide-react';
 import { useUserStore } from '@/stores/userStore';
 import { useUser } from '@/contexts/userContext';
 import SavedQuestionsService from '@/services/savedQuestionsService';
-import { Space_Grotesk } from 'next/font/google';
 import QuestionText, { InlineText } from "@/components/quiz/QuestionText";
-const spaceGrotesk = Space_Grotesk({
-  subsets: ['latin'],
-  variable: '--font-space',
-});
 interface QuestionResult {
   id: string;
   text: string;
@@ -132,85 +127,87 @@ const Result: React.FC<ResultProps> = (props) => {
   }
 
   return (
-    <div className="min-h-screen p-6 dark bg-[#0E0E0E] text-white">
+    <div className="min-h-screen p-6 bg-white text-slate-900">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <motion.div
-          className="text-center mb-8"
-          initial={{ opacity: 0, y: -30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          className="mb-8"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
         >
-          <div className="inline-flex items-center gap-3 mb-4">
-            <Award className="w-8 h-8 text-lime-400" />
-            <h1 className={`text-4xl font-bold text-white ${spaceGrotesk.className}`}>Session Complete!</h1>
+          <div className="section-label mb-1">Session Report</div>
+          <div className="flex items-center gap-3 mb-2">
+            <Award className="w-7 h-7 text-blue-700" />
+            <h1 className="text-3xl font-bold text-slate-900">Session Complete</h1>
           </div>
-          <p className="text-gray-400 code-font">{'> Practice session terminated successfully'}</p>
+          <div className="border-b-2 border-blue-700 w-full mb-3" />
+          <p className="text-slate-600 text-sm">Practice session completed successfully.</p>
         </motion.div>
 
         {/* Stats Grid */}
         <motion.div
           className="grid grid-cols-2 md:grid-cols-3   gap-6 mb-8"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
         >
-          <div className="bg-neutral-900/90 p-6 rounded-xl text-center">
-            <Target className="w-8 h-8 text-lime-400 mx-auto mb-3" />
-            <div className="text-2xl font-bold text-lime-400">{sessionData.accuracy}%</div>
-            <div className="text-sm text-gray-400">Accuracy</div>
+          <div className="bg-white border border-slate-200 shadow-sm p-6 rounded-lg text-center">
+            <Target className="w-8 h-8 text-blue-700 mx-auto mb-3" />
+            <div className="text-2xl font-bold text-slate-900">{sessionData.accuracy}%</div>
+            <div className="text-sm text-slate-500">Accuracy</div>
           </div>
-          <div className="bg-neutral-900/90 p-6 rounded-xl text-center">
-            <Clock className="w-8 h-8 text-lime-400 mx-auto mb-3" />
-            <div className="text-2xl font-bold text-lime-400">{formatTime(sessionData.totalTime)}</div>
-            <div className="text-sm text-gray-400">Time Spent</div>
+          <div className="bg-white border border-slate-200 shadow-sm p-6 rounded-lg text-center">
+            <Clock className="w-8 h-8 text-blue-700 mx-auto mb-3" />
+            <div className="text-2xl font-bold text-slate-900">{formatTime(sessionData.totalTime)}</div>
+            <div className="text-sm text-slate-500">Time Spent</div>
           </div>
-          <div className="bg-neutral-900/90 p-6 rounded-xl text-center">
-            <Zap className="w-8 h-8 text-lime-400 mx-auto mb-3" />
-            <div className="text-2xl font-bold text-lime-400">+{sessionData.xpEarned}</div>
-            <div className="text-sm text-gray-400">XP Earned</div>
+          <div className="bg-white border border-slate-200 shadow-sm p-6 rounded-lg text-center">
+            <Zap className="w-8 h-8 text-blue-700 mx-auto mb-3" />
+            <div className="text-2xl font-bold text-slate-900">+{sessionData.xpEarned}</div>
+            <div className="text-sm text-slate-500">XP Earned</div>
           </div>
-          {/* <div className="bg-neutral-900/90 p-6 rounded-xl text-center">
-            <TrendingUp className="w-8 h-8 text-lime-400 mx-auto mb-3" />
-            <div className="text-2xl font-bold text-lime-400">{sessionData.streak}</div>
-            <div className="text-sm text-gray-400">Streak</div>
+          {/* <div className="bg-white border border-slate-200 shadow-sm p-6 rounded-lg text-center">
+            <TrendingUp className="w-8 h-8 text-blue-700 mx-auto mb-3" />
+            <div className="text-2xl font-bold text-slate-900">{sessionData.streak}</div>
+            <div className="text-sm text-slate-500">Streak</div>
           </div> */}
         </motion.div>
 
         {/* Performance Breakdown */}
         <motion.div
-          className="glass-panel p-8 rounded-2xl mb-8"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          className="bg-white border border-slate-200 shadow-sm p-8 rounded-lg mb-8"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
         >
-          <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
-            <Target className="w-6 h-6 text-lime-400" />
+          <h2 className="rule-title text-xl font-bold text-slate-900 mb-6 flex items-center gap-3">
+            <Target className="w-5 h-5 text-blue-700" />
             Performance Breakdown
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
             <div className="text-center">
-              <div className="text-3xl font-bold text-lime-400 mb-2">{sessionData.correctAnswers}</div>
-              <div className="text-sm text-gray-400">Correct Answers</div>
+              <div className="text-3xl font-bold text-emerald-600 mb-2">{sessionData.correctAnswers}</div>
+              <div className="text-sm text-slate-500">Correct Answers</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-red-400 mb-2">{sessionData.questionsAnswered - sessionData.correctAnswers}</div>
-              <div className="text-sm text-gray-400">Incorrect Answers</div>
+              <div className="text-3xl font-bold text-red-600 mb-2">{sessionData.questionsAnswered - sessionData.correctAnswers}</div>
+              <div className="text-sm text-slate-500">Incorrect Answers</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-gray-400 mb-2">{sessionData.questionsAnswered}</div>
-              <div className="text-sm text-gray-400">Total Questions</div>
+              <div className="text-3xl font-bold text-slate-900 mb-2">{sessionData.questionsAnswered}</div>
+              <div className="text-sm text-slate-500">Total Questions</div>
             </div>
           </div>
 
-          <div className="w-full bg-gray-700 rounded-full h-4 mb-4">
+          <div className="w-full bg-slate-200 rounded-full h-3 mb-4">
             <div 
-              className="bg-lime-500 h-4 rounded-full transition-all duration-1000"
+              className="bg-blue-700 h-3 rounded-full"
               style={{ width: `${sessionData.accuracy}%` }}
             />
           </div>
-          <div className="text-center text-sm text-gray-400">
+          <div className="text-center text-sm text-slate-500">
             Accuracy: {sessionData.accuracy}%
           </div>
         </motion.div>
@@ -218,21 +215,21 @@ const Result: React.FC<ResultProps> = (props) => {
         {/* Mistakes Review */}
         {sessionData.mistakes.length > 0 && (
           <motion.div
-            className="glass-panel p-8 rounded-2xl mb-8"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            className="bg-white border border-slate-200 shadow-sm p-8 rounded-lg mb-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
           >
-            <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
-              <TrendingUp className="w-6 h-6 text-red-400" />
+            <h2 className="rule-title text-xl font-bold text-slate-900 mb-6 flex items-center gap-3">
+              <TrendingUp className="w-5 h-5 text-red-600" />
               Areas for Improvement
             </h2>
             <div className="space-y-4">
               {sessionData.mistakes.map((mistake, index) => (
-                <div key={index} className="p-4 bg-red-500/10 border border-red-500/30 rounded-lg">
-                  <div className="font-semibold text-red-400 mb-2">{mistake.question}</div>
-                  <div className="text-sm text-gray-300 mb-1">Concept: {mistake.concept}</div>
-                  <div className="text-xs text-gray-400">Topic: {mistake.topic}</div>
+                <div key={index} className="p-4 bg-red-50 border border-red-600 rounded-md">
+                  <div className="font-semibold text-red-600 mb-2">{mistake.question}</div>
+                  <div className="text-sm text-slate-600 mb-1">Concept: {mistake.concept}</div>
+                  <div className="text-xs text-slate-500">Topic: {mistake.topic}</div>
                 </div>
               ))}
             </div>
@@ -242,33 +239,33 @@ const Result: React.FC<ResultProps> = (props) => {
         {/* Question Review */}
         {questionResults.length > 0 && (
           <motion.div
-            className="glass-panel p-8 rounded-2xl mb-8"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            className="bg-white border border-slate-200 shadow-sm p-8 rounded-lg mb-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
           >
-            <h2 className="text-2xl font-bold text-lime-500 mb-6">Question Review</h2>
+            <h2 className="rule-title text-xl font-bold text-slate-900 mb-6">Question Review</h2>
             <div className="space-y-6">
               {questionResults.map((q, index) => (
-                <div key={q.id} className="bg-neutral-900/50 border border-neutral-800 p-6 rounded-2xl">
+                <div key={q.id} className="bg-white border border-slate-200 p-6 rounded-lg">
                   <div className="flex justify-between items-center mb-2">
                     <h3 className="text-lg font-semibold">
                       Question {index + 1}
                     </h3>
                     <button
-                      className="ml-2 p-2 rounded-lg transition-all group hover:cursor-pointer hover:bg-lime-400/10"
+                      className="ml-2 p-2 rounded-lg transition-all group hover:cursor-pointer hover:bg-blue-50"
                       onClick={() => handleToggleSave(q.id, q)}
                       disabled={saving[q.id]}
                       aria-label={savedQuestions[q.id] ? 'Unsave' : 'Save'}
                     >
                       <Bookmark className={`w-5 h-5 transition-all duration-200 ${
                         savedQuestions[q.id] 
-                          ? 'text-lime-500 fill-lime-400' 
-                          : 'text-white group-hover:text-lime-600'
+                          ? 'text-blue-700 fill-blue-700' 
+                          : 'text-slate-500 group-hover:text-blue-700'
                       }`} />
                     </button>
                   </div>
-                  <QuestionText text={q.text} className="mb-4 text-gray-300" />
+                  <QuestionText text={q.text} className="mb-4 text-slate-600" />
                   <div className="space-y-3 mb-4">
                     {q.options.map((option, idx) => {
                       const isCorrect = option === q.correctAnswer;
@@ -276,12 +273,12 @@ const Result: React.FC<ResultProps> = (props) => {
                       return (
                         <div
                           key={idx}
-                          className={`p-3 rounded-lg border-2 ${
+                          className={`p-3 rounded-md border ${
                             isCorrect
-                              ? 'border-lime-500 bg-lime-500/20'
+                              ? 'border-emerald-600 bg-emerald-50'
                               : isUserChoice && !isCorrect
-                              ? 'border-red-500 bg-red-500/20'
-                              : 'border-neutral-600'
+                              ? 'border-red-600 bg-red-50'
+                              : 'border-slate-300 bg-white'
                           }`}
                         >
                           <div className="flex items-center justify-between">
@@ -293,10 +290,10 @@ const Result: React.FC<ResultProps> = (props) => {
                             </div>
                             <div className="flex gap-2">
                               {isCorrect && (
-                                <span className="text-lime-400 text-sm">✓ Correct</span>
+                                <span className="text-emerald-600 text-sm">✓ Correct</span>
                               )}
                               {isUserChoice && (
-                                <span className="text-blue-400 text-sm">Your Answer</span>
+                                <span className="text-blue-700 text-sm">Your Answer</span>
                               )}
                             </div>
                           </div>
@@ -313,27 +310,27 @@ const Result: React.FC<ResultProps> = (props) => {
         {/* Action Buttons */}
         <motion.div
           className="flex flex-col md:flex-row gap-4 justify-center"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
         >
           <Link
             href="/battle"
-            className="flex items-center justify-center gap-3 px-8 py-4 bg-lime-500 hover:bg-lime-400 text-black rounded-xl font-bold transition-all lime-glow-strong"
+            className="flex items-center justify-center gap-3 px-8 py-3 bg-blue-700 hover:bg-blue-800 text-white rounded-md font-semibold transition-colors"
           >
-            <Swords className="w-6 h-6" />
+            <Handshake className="w-6 h-6" />
             Challenge a Friend
           </Link>
           {/* <Link
             href="/practice"
-            className="flex items-center justify-center gap-3 px-8 py-4 bg-gray-600 hover:bg-gray-500 rounded-xl font-bold transition-all"
+            className="flex items-center justify-center gap-3 px-8 py-3 bg-white border border-slate-300 hover:bg-slate-50 text-slate-900 rounded-md font-semibold transition-colors"
           >
             <Target className="w-6 h-6" />
             Practice Again
           </Link> */}
           <Link
             href="/dashboard"
-            className="flex items-center justify-center gap-3 px-8 py-4 bg-gray-600 hover:bg-gray-500 rounded-xl font-bold transition-all"
+            className="flex items-center justify-center gap-3 px-8 py-3 bg-white border border-slate-300 hover:bg-slate-50 text-slate-900 rounded-md font-semibold transition-colors"
           >
             <Home className="w-6 h-6" />
             Home

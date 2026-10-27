@@ -7,7 +7,7 @@ import {
   ArrowLeft,
   Share2,
   Target,
-  Swords,
+  Handshake,
   Code,
   Award,
   LogOut,
@@ -19,14 +19,7 @@ import UserService, {
   UserStats,
 } from "../../../services/userService";
 import QuestionPreviewModal from "@/components/QuestionPreviewModal";
-import { Space_Grotesk } from "next/font/google";
-import { Avatar } from "@/components/ui/avatar";
-import Image from "next/image";
 import ProfileSkeleton from "./ProfileSkeleton";
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-space",
-});
 const ProfilePage: React.FC = () => {
   const { username: usernameParam } = useParams();
   const router = useRouter();
@@ -150,7 +143,7 @@ const ProfilePage: React.FC = () => {
   if (error) {
     return (
       <div className="min-h-screen p-6 flex items-center justify-center">
-        <div className="text-red-400 text-lg">{error}</div>
+        <div className="text-red-600 text-lg">{error}</div>
       </div>
     );
   }
@@ -159,7 +152,7 @@ const ProfilePage: React.FC = () => {
   if (!userData) {
     return (
       <div className="min-h-screen p-6 flex items-center justify-center">
-        <div className="text-white text-lg">No profile data found</div>
+        <div className="text-slate-600 text-lg">No profile data found</div>
       </div>
     );
   }
@@ -278,33 +271,48 @@ const ProfilePage: React.FC = () => {
     });
   };
 
+  const sectionTitle = (label: string, title: string, icon?: React.ReactNode) => (
+    <div className="mb-5">
+      <div className="section-label mb-1">{label}</div>
+      <h3 className="text-xl font-semibold text-slate-900 rule-title flex items-center gap-2">
+        {icon}
+        {title}
+      </h3>
+    </div>
+  );
+
+  const tabClass = (active: boolean) =>
+    `flex items-center gap-2 px-4 py-2 rounded-md text-sm font-semibold transition-colors border hover:cursor-pointer ${
+      active
+        ? "bg-blue-700 text-white border-blue-700"
+        : "bg-white text-slate-600 border-slate-200 hover:bg-slate-50"
+    }`;
+
+  const thClass =
+    "px-4 py-2 text-left text-xs font-semibold uppercase tracking-wider text-slate-500";
+  const tdClass = "px-4 py-3 text-sm text-slate-600";
+
   return (
-    <div className="min-h-screen p-6 bg-neutral-950">
+    <div className="min-h-screen p-6 bg-white">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <div
-          className="flex items-center justify-between mb-8"
-          // initial={{ opacity: 0, y: -30 }}
-          // animate={{ opacity: 1, y: 0 }}
-          // transition={{ duration: 0.6 }}
-        >
+        <div className="flex items-center justify-between mb-8 pb-4 border-b border-slate-200">
           <div className="flex items-center gap-4 ">
             <Link
               href="/dashboard"
-              className="p-3 rounded-xl group hover:bg-lime-500 border border-lime-500 transition-all"
+              className="p-3 rounded-md group hover:bg-blue-700 border border-blue-700 transition-colors"
             >
-              <ArrowLeft className="w-6 h-6 text-lime-500 group-hover:text-white" />
+              <ArrowLeft className="w-5 h-5 text-blue-700 group-hover:text-white" />
             </Link>
             <div>
-              <h1
-                className={`text-4xl font-bold text-lime-400 ${spaceGrotesk.className}`}
-              >
+              <div className="section-label mb-1">Student Profile</div>
+              <h1 className="text-3xl font-semibold text-slate-900">
                 {isOwnProfile
                   ? "Your Profile"
                   : `${profileData.username}'s profile`}
               </h1>
-              <p className="text-gray-400 code-font">
-                {"> Player statistics and achievements"}
+              <p className="text-slate-500 text-sm">
+                Player statistics and achievements
               </p>
             </div>
           </div>
@@ -312,11 +320,11 @@ const ProfilePage: React.FC = () => {
           <div className="flex items-center gap-3">
             <button
               onClick={copyProfileLink}
-              className="flex items-center gap-2 px-4 py-2 bg-gray-600 hover:cursor-pointer hover:bg-gray-500 rounded-lg font-semibold transition-all text-white"
+              className="flex items-center gap-2 px-4 py-2 bg-white border border-slate-300 hover:cursor-pointer hover:bg-slate-50 rounded-md text-sm font-semibold transition-colors text-slate-700"
             >
               {showCopySuccess ? (
                 <>
-                  <span className="text-lime-400">✓</span>
+                  <span className="text-emerald-600">✓</span>
                   Copied!
                 </>
               ) : (
@@ -331,212 +339,109 @@ const ProfilePage: React.FC = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Left Column - Profile Info */}
-          <div className="lg:col-span-1 space-y-6 sticky top-8 h-fit z-5">
-            {/* Profile Card */}
-            <div
-              className="p-10 rounded-2xl text-center bg-neutral-900/50 shadow-sm shadow-black"
-              // initial={{ opacity: 0, x: -30 }}
-              // animate={{ opacity: 1, x: 0 }}
-              // transition={{ duration: 0.6, delay: 0.1 }}
-            >
-              <div className="w-24 h-24 bg-lime-500 rounded-full flex items-center justify-center mx-auto mb-4 p-0.5">
-                <Avatar className="w-full h-full">
-                  <Image
-                    src={profileData?.profilePic}
-                    alt={`${profileData.username}'s avatar`}
-                    className="w-full h-full object-cover"
-                    width={400}
-                    height={400}
-                  />
-                </Avatar>
-              </div>
-              <h2
-                className={`text-2xl font-bold mb-2 text-white ${spaceGrotesk.className}`}
-              >
-                @{profileData.username}
-              </h2>
-
-              {/* Tier Badge */}
-              {profileData.tierName && (
-                <div
-                  className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-semibold mb-4"
-                  style={{
-                    backgroundColor: `${profileData.tierColor}20`,
-                    border: `1px solid ${profileData.tierColor}50`,
-                    color: profileData.tierColor,
-                  }}
-                >
-                  <span>{profileData.tierEmoji}</span>
-                  <span>{profileData.tierName}</span>
-                  {profileData.isAtMilestone && (
-                    <span className="text-yellow-400">👑</span>
-                  )}
-                </div>
-              )}
-
-              <div className="flex items-center justify-center gap-8 mt-6 pt-6 border-t border-neutral-700 ">
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-lime-400">
-                    {profileData.level}
-                  </div>
-                  <div className="text-xs text-gray-400">Level</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-lime-400">
-                    {profileData.xp}
-                  </div>
-                  <div className="text-xs text-gray-400">XP</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-lime-400">
-                    {profileData.winRate}%
-                  </div>
-                  <div className="text-xs text-gray-400">Win Rate</div>
-                </div>
-              </div>
-            </div>
-
+          <div className="lg:col-span-1 space-y-6 lg:sticky lg:top-8 h-fit">
             {/* Quick Stats */}
-            <div className="px-6 py-8 rounded-2xl  bg-neutral-900/50 shadow-sm shadow-black">
-              <h3 className="text-lg font-bold mb-4 text-white">Quick Stats</h3>
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-gray-400">Total Battles</span>
-                  <span className="font-semibold text-white">
-                    {profileData.totalBattles}
-                  </span>
+            <div className="px-6 py-6 rounded-lg bg-white border border-slate-200 shadow-sm">
+              {sectionTitle("Table 1", "Quick Stats")}
+              <dl>
+                <div className="flex items-center justify-between py-2 border-b border-slate-100">
+                  <dt className="text-sm text-slate-500">Total Challenges</dt>
+                  <dd className="font-semibold text-slate-900">{profileData.totalBattles}</dd>
                 </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-gray-400">Current Streak</span>
-                  <span className="font-semibold text-lime-400">
-                    {profileData.streak} days
-                  </span>
+                <div className="flex items-center justify-between py-2 border-b border-slate-100">
+                  <dt className="text-sm text-slate-500">Current Streak</dt>
+                  <dd className="font-semibold text-blue-700">{profileData.streak} days</dd>
                 </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-gray-400">Accuracy</span>
-                  <span className="font-semibold text-white">
-                    {profileData.accuracy}%
-                  </span>
+                <div className="flex items-center justify-between py-2 border-b border-slate-100">
+                  <dt className="text-sm text-slate-500">Accuracy</dt>
+                  <dd className="font-semibold text-slate-900">{profileData.accuracy}%</dd>
                 </div>
-
-                <div className="flex items-center justify-between">
-                  <span className="text-gray-400">Member Since</span>
-                  <span className="font-semibold text-white">
-                    {profileData.joinDate}
-                  </span>
+                <div className="flex items-center justify-between py-2">
+                  <dt className="text-sm text-slate-500">Member Since</dt>
+                  <dd className="font-semibold text-slate-900">{profileData.joinDate}</dd>
                 </div>
-              </div>
+              </dl>
             </div>
           </div>
 
           {/* Right Column - Detailed Stats */}
-          <div className="lg:col-span-2 space-y-6 bg-neutral-950 z-20">
+          <div className="lg:col-span-2 space-y-6">
             {/* Badges */}
-            <div
-              className="p-8 rounded-2xl  bg-neutral-900/50 shadow-sm shadow-black"
-              // initial={{ opacity: 0, y: 30 }}
-              // animate={{ opacity: 1, y: 0 }}
-              // transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <h3
-                className={`text-2xl font-bold mb-6 flex items-center gap-3 text-white ${spaceGrotesk.className}`}
-              >
-                <Award className="w-6 h-6 text-lime-400" />
-                Achievements
-              </h3>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {profileData.badges.map((badge, index) => (
-                  <div
-                    key={index}
-                    className={`p-4 rounded-xl text-center group transition-all duration-300 border
-                      ${
-                        badge.unlocked
-                          ? "bg-gradient-to-br from-lime-500/30 to-lime-500/20 border-lime-500/50 shadow-lime-500/10 hover:border-lime-500 shadow-lg hover:shadow-lime-400/35"
-                          : "bg-neutral-800/50 border-neutral-700 opacity-70 hover:opacity-90"
-                      }
-                    `}
-                  >
-                    <div
-                      className={`text-3xl mb-2 transition-all ${
-                        badge.unlocked ? "filter-none" : "grayscale"
-                      }`}
-                    >
-                      {badge.icon}
-                    </div>
-                    <div
-                      className={`font-semibold text-sm mb-1 ${
-                        badge.unlocked ? "text-lime-100" : "text-gray-500"
-                      }`}
-                    >
-                      {badge.name}
-                    </div>
-                    <div
-                      className={`text-xs ${
-                        badge.unlocked ? "text-lime-200/80" : "text-gray-600"
-                      }`}
-                    >
-                      {badge.description}
-                    </div>
-                    {badge.unlocked ? (
-                      <div className="mt-2 text-xs text-lime-400 font-semibold">
-                        ✓ Unlocked
-                      </div>
-                    ) : (
-                      <div className="mt-2 text-xs text-gray-500">
-                        Progress: {badge.progress}/{badge.goal}
-                      </div>
-                    )}
-                  </div>
-                ))}
+            <div className="p-6 rounded-lg bg-white border border-slate-200 shadow-sm">
+              {sectionTitle(
+                "Achievements",
+                "Achievements Record",
+                <Award className="w-5 h-5 text-blue-700" />
+              )}
+              <div className="overflow-x-auto border border-slate-200 rounded-md">
+                <table className="w-full">
+                  <thead className="bg-slate-50 border-b border-slate-200">
+                    <tr>
+                      <th className={thClass}>Achievement</th>
+                      <th className={thClass}>Description</th>
+                      <th className={thClass}>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-100">
+                    {profileData.badges.map((badge, index) => (
+                      <tr key={index} className={badge.unlocked ? "" : "opacity-80"}>
+                        <td className="px-4 py-3 text-sm font-semibold text-slate-900">
+                          <span className="inline-flex items-center gap-2">
+                            <span
+                              className={`w-8 h-8 rounded-md flex items-center justify-center text-lg ${
+                                badge.unlocked ? "bg-blue-50" : "bg-slate-100 grayscale"
+                              }`}
+                            >
+                              {badge.icon}
+                            </span>
+                            {badge.name}
+                          </span>
+                        </td>
+                        <td className={tdClass}>{badge.description}</td>
+                        <td className="px-4 py-3 text-sm whitespace-nowrap">
+                          {badge.unlocked ? (
+                            <span className="text-emerald-600 font-semibold">
+                              ✓ Unlocked
+                            </span>
+                          ) : (
+                            <span className="text-slate-500">
+                              Progress: {badge.progress}/{badge.goal}
+                            </span>
+                          )}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
+              <p className="mt-2 text-xs text-slate-500">Table 2. Achievements and progress.</p>
             </div>
 
             {/* Activity History with Tabs */}
-            <div
-              className=" p-8 rounded-2xl  bg-neutral-900/50 shadow-sm shadow-black"
-              // initial={{ opacity: 0, y: 30 }}
-              // animate={{ opacity: 1, y: 0 }}
-              // transition={{ duration: 0.6, delay: 0.4 }}
-            >
-              <h3
-                className={`text-2xl font-bold mb-6 text-white ${spaceGrotesk.className}`}
-              >
-                Activity History
-              </h3>
+            <div className="p-6 rounded-lg bg-white border border-slate-200 shadow-sm">
+              {sectionTitle("Activity", "Activity History")}
 
               {/* Tabs */}
-              <div className="flex gap-4 mb-6">
+              <div className="flex flex-wrap gap-3 mb-6">
                 <button
                   onClick={() => setActiveTab("battles")}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-lg font-semibold transition-all ${
-                    activeTab === "battles"
-                      ? "bg-lime-500 text-black"
-                      : "bg-neutral-700 hover:bg-neutral-600 hover:cursor-pointer"
-                  }`}
+                  className={tabClass(activeTab === "battles")}
                 >
-                  <Swords className="w-4 h-4" />
-                  Battle History
+                  <Handshake className="w-4 h-4" />
+                  Challenge History
                 </button>
                 {isOwnProfile && (
                   <>
                     <button
                       onClick={() => setActiveTab("practice")}
-                      className={`flex items-center gap-2 px-4 py-2 rounded-lg font-semibold transition-all ${
-                        activeTab === "practice"
-                          ? "bg-lime-500 text-black"
-                          : "bg-neutral-700 hover:bg-neutral-600 hover:cursor-pointer"
-                      }`}
+                      className={tabClass(activeTab === "practice")}
                     >
                       <Target className="w-4 h-4" />
                       Practice History
                     </button>
                     <button
                       onClick={() => setActiveTab("saved")}
-                      className={`flex items-center gap-2 px-4 py-2 rounded-lg font-semibold transition-all ${
-                        activeTab === "saved"
-                          ? "bg-lime-500 text-black"
-                          : "bg-neutral-700 hover:bg-neutral-600 hover:cursor-pointer"
-                      }`}
+                      className={tabClass(activeTab === "saved")}
                     >
                       <Code className="w-4 h-4" />
                       Saved Questions
@@ -546,110 +451,104 @@ const ProfilePage: React.FC = () => {
               </div>
 
               {/* Tab Content */}
-              <div className="space-y-3">
+              <div>
                 {activeTab === "battles" && (
                   <>
                     {profileData.recentBattles.length ? (
-                      profileData.recentBattles.map((battle, index) => {
-                        const accuracy = Math.round((battle.score / 5) * 100);
-                        return (
-                          <div
-                            key={index}
-                            className="p-4 bg-black/30 rounded-lg"
-                          >
-                            <div className="flex items-center justify-between mb-2">
-                              <div className="flex items-center gap-3">
-                                <div
-                                  className={`w-3 h-3 rounded-full ${
-                                    battle.result === "win"
-                                      ? "bg-lime-400"
-                                      : "bg-red-400"
-                                  }`}
-                                ></div>
-                                <span className="font-semibold text-white">
-                                  vs {battle.opponent}
-                                </span>
-                                <span className="text-sm text-gray-400">
-                                  {battle.date}
-                                </span>
-                              </div>
-                              <span className="text-lime-400 font-semibold">
-                                +{battle.xp} XP
-                              </span>
-                            </div>
-                            <div className="flex items-center gap-6 text-sm text-gray-400">
-                              <span
-                                className={`font-semibold ${
-                                  battle.result === "win"
-                                    ? "text-lime-400"
-                                    : "text-red-400"
-                                }`}
-                              >
-                                {battle.result.toUpperCase()}
-                              </span>
-                              <span className="text-gray-300">
-                                Score: {battle.score}/5
-                              </span>
-                              <span className="text-gray-300">
-                                Accuracy: {accuracy}%
-                              </span>
-                            </div>
-                          </div>
-                        );
-                      })
+                      <div className="overflow-x-auto border border-slate-200 rounded-md">
+                        <table className="w-full">
+                          <thead className="bg-slate-50 border-b border-slate-200">
+                            <tr>
+                              <th className={thClass}>Peer</th>
+                              <th className={thClass}>Date</th>
+                              <th className={thClass}>Result</th>
+                              <th className={thClass}>Score</th>
+                              <th className={thClass}>Accuracy</th>
+                              <th className={thClass}>XP</th>
+                            </tr>
+                          </thead>
+                          <tbody className="divide-y divide-slate-100">
+                            {profileData.recentBattles.map((battle, index) => {
+                              const accuracy = Math.round((battle.score / 5) * 100);
+                              return (
+                                <tr key={index}>
+                                  <td className="px-4 py-3 text-sm font-semibold text-slate-900">
+                                    Peer: {battle.opponent}
+                                  </td>
+                                  <td className={tdClass}>{battle.date}</td>
+                                  <td
+                                    className={`px-4 py-3 text-sm font-semibold ${
+                                      battle.result === "win"
+                                        ? "text-emerald-600"
+                                        : "text-red-600"
+                                    }`}
+                                  >
+                                    {battle.result.toUpperCase()}
+                                  </td>
+                                  <td className={tdClass}>{battle.score}/5</td>
+                                  <td className={tdClass}>{accuracy}%</td>
+                                  <td className="px-4 py-3 text-sm font-semibold text-blue-700">
+                                    +{battle.xp} XP
+                                  </td>
+                                </tr>
+                              );
+                            })}
+                          </tbody>
+                        </table>
+                      </div>
                     ) : (
-                      <div className="text-neutral-400 text-sm">
-                        No battle history available.
+                      <div className="text-slate-500 text-sm">
+                        No challenge history available.
                       </div>
                     )}
                   </>
                 )}
 
                 {activeTab === "practice" && isOwnProfile && (
-                  <>
-                    {profileData.practiceHistory.map((session) => (
-                      <div
-                        key={session.id}
-                        className="p-4 bg-black/30 rounded-lg"
-                      >
-                        <div className="flex items-center justify-between mb-2">
-                          <div className="flex items-center gap-3">
-                            <div className="w-3 h-3 bg-lime-400 rounded-full"></div>
-                            <span className="font-semibold text-white">
+                  <div className="overflow-x-auto border border-slate-200 rounded-md">
+                    <table className="w-full">
+                      <thead className="bg-slate-50 border-b border-slate-200">
+                        <tr>
+                          <th className={thClass}>Category</th>
+                          <th className={thClass}>Date</th>
+                          <th className={thClass}>Score</th>
+                          <th className={thClass}>Accuracy</th>
+                          <th className={thClass}>XP</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-slate-100">
+                        {profileData.practiceHistory.map((session) => (
+                          <tr key={session.id}>
+                            <td className="px-4 py-3 text-sm font-semibold text-slate-900">
                               {session.category}
-                            </span>
-                            <span className="text-sm text-gray-400">
-                              {session.date}
-                            </span>
-                          </div>
-                          <span className="text-lime-400 font-semibold">
-                            +{session.xp} XP
-                          </span>
-                        </div>
-                        <div className="flex items-center gap-6 text-sm text-gray-400">
-                          <span className="text-gray-300">
-                            Score: {session.score}/{session.total}
-                          </span>
-                          <span className="text-gray-300">
-                            Accuracy:{" "}
-                            {Math.round((session.score / session.total) * 100)}%
-                          </span>
-                        </div>
-                      </div>
-                    ))}
-                  </>
+                            </td>
+                            <td className={tdClass}>{session.date}</td>
+                            <td className={tdClass}>
+                              {session.score}/{session.total}
+                            </td>
+                            <td className={tdClass}>
+                              {Math.round((session.score / session.total) * 100)}%
+                            </td>
+                            <td className="px-4 py-3 text-sm font-semibold text-blue-700">
+                              +{session.xp} XP
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
                 )}
 
                 {activeTab === "saved" && isOwnProfile && (
-                  <>
+                  <div className="space-y-3">
                     {profileData.savedQuestions.map((question) => (
                       <div
                         key={question.id}
                         onClick={() => openPreview(question)}
-                        className="bg-neutral-900/50 border border-neutral-800 p-6 rounded-2xl mb-6 relative transition-all duration-200 hover:border-lime-600 hover:bg-lime-500/10 hover:cursor-pointer"
+                        className="bg-white border border-slate-200 p-5 rounded-md relative transition-colors hover:border-blue-700 hover:bg-blue-50 hover:cursor-pointer"
                       >
                         <button
-                          className="absolute top-4 right-4 p-2 rounded-lg text-red-400 hover:bg-red-500/40 transition-all"
+                          className="absolute top-3 right-3 p-2 rounded-md text-red-600 hover:bg-red-50 transition-colors"
                           title="Unsave"
                           onClick={async (e) => {
                             e.stopPropagation();
@@ -675,29 +574,29 @@ const ProfilePage: React.FC = () => {
                         >
                           <Trash2 className="w-5 h-5" />
                         </button>
-                        <div className="mb-2 text-gray-300 font-semibold">
+                        <div className="mb-2 pr-10 text-slate-900 font-semibold">
                           {question.title?.split("\n")[0]}
                         </div>
-                        <div className="mt-2 text-xs text-gray-400">
+                        <div className="mt-2 text-xs text-slate-500">
                           Difficulty:{" "}
                           <span
                             className={`font-semibold ${
                               question.difficulty === "Easy"
-                                ? "text-green-400"
+                                ? "text-emerald-600"
                                 : question.difficulty === "Medium"
-                                ? "text-yellow-400"
-                                : "text-red-400"
+                                ? "text-amber-600"
+                                : "text-red-600"
                             }`}
                           >
                             {question.difficulty}
                           </span>
                         </div>
-                        <div className="mt-2 text-xs text-gray-400">
+                        <div className="mt-1 text-xs text-slate-500">
                           Category: {question.category}
                         </div>
                       </div>
                     ))}
-                  </>
+                  </div>
                 )}
               </div>
             </div>
@@ -706,15 +605,10 @@ const ProfilePage: React.FC = () => {
 
         {/* Logout Button (bottom of page, only for own profile) */}
         {isOwnProfile && (
-          <div
-            className="mt-8 pt-8 border-t border-gray-800 text-center"
-            // initial={{ opacity: 0, scale: 0.8 }}
-            // animate={{ opacity: 1, scale: 1 }}
-            // transition={{ duration: 0.6, delay: 0.5 }}
-          >
+          <div className="mt-8 pt-8 border-t border-slate-200 text-center">
             <button
               onClick={handleLogout}
-              className="flex items-center gap-2 px-4 py-2 bg-gray-800 hover:bg-red-600 text-gray-400 hover:text-white hover:cursor-pointer rounded-lg text-sm font-medium transition-all mx-auto"
+              className="flex items-center gap-2 px-4 py-2 bg-white border border-slate-300 hover:bg-red-600 hover:border-red-600 text-slate-600 hover:text-white hover:cursor-pointer rounded-md text-sm font-medium transition-colors mx-auto"
             >
               <LogOut className="w-4 h-4" />
               Logout

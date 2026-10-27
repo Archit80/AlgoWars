@@ -2,11 +2,7 @@
 
 import { useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
-// WebGL background: loaded after the page renders, not part of the initial bundle
-import { LazyOrb as Orb } from "@/components/LazyComponents";
 import Header from "../landing-components/Header";
-import { Space_Grotesk } from "next/font/google";
-const spaceGrotesk = Space_Grotesk({ subsets: ["latin"] });
 import Image from "next/image";
 
 export default function LoginPage() {
@@ -72,16 +68,14 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="h-screen bg-zinc-950 flex items-center justify-center text-white px-4 overflow-x-hidden w-screen">
+    <div className="min-h-screen bg-slate-50 paper-grid flex items-center justify-center text-slate-900 px-4 pt-16 overflow-x-hidden w-full">
       <Header />
-      <div className="absolute h-full overflow-hidden pt-6 inset-0 z-0">
-        <Orb hoverIntensity={1.2} hue={145} rotateOnHover={true} />
-      </div>
-      <div className="max-w-md w-full z-5 bg-zinc-900/20 backdrop-blur-xs rounded-lg shadow-xl p-8 border-2 border-zinc-800">
-        <h2
-          className={`text-3xl font-bold text-center mb-6 ${spaceGrotesk.className}`}
-        >
-          {isSignup ? "Create an Account" : "Enter the Arena"}
+      <div className="max-w-md w-full relative z-10 bg-white rounded-lg shadow-sm p-8 border border-slate-200">
+        <p className="section-label text-center mb-1">
+          {isSignup ? "Registration" : "Authentication"}
+        </p>
+        <h2 className="text-3xl font-bold text-center text-slate-900 mb-6 pb-3 border-b border-slate-200">
+          {isSignup ? "Create an Account" : "Sign In"}
         </h2>
         <form
           onSubmit={isSignup ? handleSignup : handleLogin}
@@ -90,7 +84,7 @@ export default function LoginPage() {
           <input
             type="email"
             placeholder="Email"
-            className="w-full px-4 py-2 rounded bg-zinc-950/20  focus:border-zinc-700 border border-zinc-700 "
+            className="w-full px-4 py-2 rounded-md bg-white border border-slate-300 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-blue-700 focus:ring-2 focus:ring-blue-100"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -99,16 +93,16 @@ export default function LoginPage() {
             <input
               type="password"
               placeholder="Password"
-              className="w-full px-4 py-2 rounded bg-zinc-950/20 border border-zinc-700  focus:border-0"
+              className="w-full px-4 py-2 rounded-md bg-white border border-slate-300 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-blue-700 focus:ring-2 focus:ring-blue-100"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
           )}
 
-          {error && <p className="text-red-500 text-sm">{error}</p>}
+          {error && <p className="text-red-600 text-sm">{error}</p>}
           {message && (
-            <p className="text-green-500 text-sm">
+            <p className="text-emerald-600 text-sm">
               {message.includes("inbox") ? (
                 <>
                   {message.replace("inbox", "")}
@@ -116,7 +110,7 @@ export default function LoginPage() {
                     href="https://gmail.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="underline text-green-400 hover:text-green-300 hover:cursor-pointer"
+                    className="underline text-blue-700 hover:text-blue-800 hover:cursor-pointer"
                   >
                     inbox
                   </a>
@@ -131,7 +125,7 @@ export default function LoginPage() {
           {!showForgot ? (
             <button
               type="submit"
-              className={`w-full py-2 rounded font-semibold hover:cursor-pointer bg-lime-600 hover:scale-97 transition-transform duration-200`}
+              className="w-full py-2 rounded-md font-semibold text-white hover:cursor-pointer bg-blue-700 hover:bg-blue-800 transition-colors duration-200 disabled:opacity-60"
               disabled={loading}
             >
               {loading
@@ -144,13 +138,13 @@ export default function LoginPage() {
             </button>
           ) : (
             <>
-              <p className="text-sm text-center">
+              <p className="text-sm text-center text-slate-600">
                 Login without password using a magic login link.
               </p>
               <button
                 type="button"
                 onClick={handleForgotPassword}
-                className="w-full py-2 bg-lime-500 hover:bg-lime-600 rounded font-semibold hover:cursor-pointer"
+                className="w-full py-2 bg-blue-700 hover:bg-blue-800 text-white rounded-md font-semibold hover:cursor-pointer"
                 disabled={loading}
               >
                 {loading ? "Sending..." : "Send Magic Link"}
@@ -161,12 +155,12 @@ export default function LoginPage() {
 
         {/* Google OAuth Button - always visible */}
         <div className="mt-2">
-          <div className="text-center mb-2">OR</div>
+          <div className="text-center text-xs uppercase tracking-widest text-slate-500 mb-2">or</div>
 
           <button
             type="button"
             onClick={handleGoogleLogin}
-            className="w-full py-2 bg-white text-zinc-900 rounded font-semibold flex items-center justify-center gap-2 border border-zinc-700 hover:bg-zinc-300 transition-all duration-200 hover:cursor-pointer hover:scale-98"
+            className="w-full py-2 bg-white text-slate-900 rounded-md font-semibold flex items-center justify-center gap-2 border border-slate-300 hover:bg-slate-50 transition-colors duration-200 hover:cursor-pointer"
             disabled={loading}
           >
             <Image src="/google.svg" alt="Google Logo" width={20} height={20} />
@@ -178,7 +172,7 @@ export default function LoginPage() {
           {!showForgot && (
             <>
               <button
-                className="text-zinc-400 hover:text-white underline hover:cursor-pointer"
+                className="text-slate-500 hover:text-blue-700 underline hover:cursor-pointer"
                 onClick={() => setIsSignup((prev) => !prev)}
               >
                 {isSignup
@@ -186,7 +180,7 @@ export default function LoginPage() {
                   : "Don't have an account? Sign Up"}
               </button>
               <button
-                className="text-zinc-400 hover:text-white underline hover:cursor-pointer"
+                className="text-slate-500 hover:text-blue-700 underline hover:cursor-pointer"
                 onClick={() => setShowForgot(true)}
               >
                 Forgot Password?
@@ -195,7 +189,7 @@ export default function LoginPage() {
           )}
           {showForgot && (
             <button
-              className="text-zinc-400 hover:text-white underline hover:cursor-pointer"
+              className="text-slate-500 hover:text-blue-700 underline hover:cursor-pointer"
               onClick={() => setShowForgot(false)}
             >
               Go back
